@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Ubuntu } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-const ubuntu = Ubuntu({ subsets: ["latin"], weight: "400" });
+const intInter = Inter({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,10 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn("font-sans relative", ubuntu.className)}>
-        <main className="flex flex-col min-h-screen">
+      <body className={cn("font-sans relative", intInter.className)}>
+        <div className="flex flex-col min-h-screen">
           {children}
-        </main>
+        </div>
       </body>
     </html>
   );
