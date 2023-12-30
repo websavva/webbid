@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div className='flex flex-col space-y-10 max-w-screen-xl mx-auto py-10 items-center'>
       <section className='flex flex-col items-center space-y-5 text-center w-3/4'>
-        <h1 className='text-6xl leading-[1.3]'>
+        <h1 className='text-6xl leading-[1.3] text-gray-900'>
           <span className='font-bold'>Your marketplace for high-quality</span>
 
           <strong className='inline-block pl-2 text-primary'>

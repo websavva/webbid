@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 
-const intInter = Inter({ subsets: ["latin"], weight: "400" });
+const intInter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
