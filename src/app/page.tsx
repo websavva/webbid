@@ -1,4 +1,29 @@
+import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
+
+import { Perk, type PerkProps } from './perk';
+
+const perks: PerkProps[] = [
+  {
+    title: 'Instant Delivery',
+    Icon: ArrowDownToLine,
+    description:
+      'Get your assets delivered to your email in seconds and download them right away.',
+  },
+  {
+    title: 'Guaranteed Quality',
+    Icon: CheckCircle,
+    description:
+      'Every asset on our platform is verified by our team to ensure our highest quality standards. Not happy? We offer a 30-day refund guarantee.',
+  },
+  {
+    title: 'For the Planet',
+    Icon: Leaf,
+    description:
+      "We've pledged 1% of sales to the preservation and restoration of the natural environment.",
+  },
+];
 
 export default function Home() {
   return (
