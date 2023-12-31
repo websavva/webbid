@@ -1,5 +1,6 @@
 import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 
+import { Container } from '@/components/ui/container';
 import { Button } from '@/components/ui/button';
 
 import { Perk, type PerkProps } from './perk';
@@ -27,28 +28,38 @@ const perks: PerkProps[] = [
 
 export default function Home() {
   return (
-    <div className='flex flex-col space-y-10 max-w-screen-xl mx-auto py-10 items-center'>
-      <section className='flex flex-col items-center space-y-5 text-center w-3/4'>
-        <h1 className='text-6xl leading-[1.3] text-gray-900'>
-          <span className='font-bold'>Your marketplace for high-quality</span>
+    <div>
+      <section className='flex justify-center py-14'>
+        <Container className='flex flex-col items-center space-y-5 text-center'>
+          <h1 className='text-6xl leading-[1.3] text-gray-900'>
+            <span className='font-bold'>Your marketplace for high-quality</span>
 
-          <strong className='inline-block pl-2 text-primary'>
-            digital assets
-          </strong>
-        </h1>
+            <strong className='inline-block pl-2 text-primary'>
+              digital assets
+            </strong>
+          </h1>
 
-        <p className='text-gray-500 text-xl leading-normal w-2/3 mt-8'>
-          Welcome to DigitalMonkey. Every asset on our platform is verified by
-          our team to ensure our highest quality standards
-        </p>
+          <p className='text-gray-500 text-xl leading-normal w-2/3 mt-8'>
+            Welcome to DigitalMonkey. Every asset on our platform is verified by
+            our team to ensure our highest quality standards
+          </p>
 
-        <div className='flex items-center space-x-5 pt-6'>
-          <Button className='text-lg'>Browse trending</Button>
+          <div className='flex items-center space-x-5 pt-6'>
+            <Button className='text-lg'>Browse trending</Button>
 
-          <Button className='text-lg' variant='ghost'>
-            Our quality promise &rarr;
-          </Button>
-        </div>
+            <Button className='text-lg' variant='ghost'>
+              Our quality promise &rarr;
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      <section className='py-16 bg-slate-100 border-t-2 border-slate-200 flex justify-center'>
+        <Container className='flex justify-between'>
+          {perks.map((props) => (
+            <Perk key={props.title} {...props} className='text-center w-3/12' />
+          ))}
+        </Container>
       </section>
     </div>
   );
