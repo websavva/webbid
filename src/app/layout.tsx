@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={cn('font-sans relative', intInter.className)}>
         <div className='flex flex-col min-h-screen'>
-          <NavBar />
+          <NavBar className='w-full'/>
           {children}
         </div>
       </body>
