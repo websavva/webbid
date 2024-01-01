@@ -18,7 +18,6 @@ export function Logo({ className, ...attrs }: LogoProps) {
       />
       <path
         d='M415.98,372.91V43.07C415.98,19.28,396.7,0,372.91,0H43.07C19.28,0,0,19.28,0,43.07V372.91C0,396.7,19.28,415.98,43.07,415.98H372.91c23.79,0,43.07-19.28,43.07-43.07Z'
-        className='fill-gray-700'
         className='fill-primary'
       />
     </svg>
