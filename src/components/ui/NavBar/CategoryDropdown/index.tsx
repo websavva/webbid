@@ -36,14 +36,14 @@ export function NavBarCategoryDropdown({
 
         <ChevronDown
           className={cn('ml-2 transition-transform w-4 h-4', {
-            'rotate-90': isActive,
+            'rotate-180': isActive,
           })}
         />
       </Button>
 
-      { isActive && <div className='sticky bg-white top-0'>
+      { isActive && <div className='bg-white w-full absolute left-0 top-[120px] animate-in duration-500 fade-in-0 slide-in-from-bottom-8'>
         <Container>
-            <ul>
+            <ul className='grid grid-cols-3'>
             {category.featuredItems.map(({ imageSrc, name, href }) => {
                 return (
                 <li key={name}>
