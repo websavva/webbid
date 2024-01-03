@@ -1,9 +1,11 @@
 import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 
+import { useRouter } from 'next/router';
+
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { Perk, type PerkProps } from '@/components/ui/Perk';
 
-import { Perk, type PerkProps } from './perk';
 const perks: PerkProps[] = [
   {
     title: 'Instant Delivery',

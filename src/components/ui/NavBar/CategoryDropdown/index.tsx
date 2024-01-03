@@ -44,7 +44,7 @@ export function NavBarCategoryDropdown({
       </Button>
 
       {isActive && (
-        <div className='bg-white w-full absolute left-0 top-[80px] py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center'>
+        <div className='bg-white w-full absolute left-0 top-[80px] py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
           <Container>
             <ul className='grid grid-cols-3 gap-10'>
               {category.featuredItems.map(({ imageSrc, name, href }) => {
@@ -56,7 +56,7 @@ export function NavBarCategoryDropdown({
                       objectFit='cover'
                       width={500}
                       height={500}
-                      className='rounded-lg'
+                      className='rounded-lg max-h-72 object-cover'
                     />
 
                     <Link href={href} className='mt-5 flex flex-col'>
