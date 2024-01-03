@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button';
 
 import type { ProductCategory } from '@/config/product-categories';
 import { cn } from '@/lib/utils';
-import { Container } from '../../Container';
+import { Container } from '@/components/ui/Container';
 
 export interface NavBarCategoryDropdownProps
   extends HTMLAttributes<HTMLDivElement> {
