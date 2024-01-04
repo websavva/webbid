@@ -1,23 +1,25 @@
 'use client';
 
-import { type HTMLAttributes } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { DefineProps } from '@/types';
 import { Button } from '@/components/ui/Button';
 
 import type { ProductCategory } from '@/config/product-categories';
 import { cn } from '@/lib/utils';
 import { Container } from '@/components/ui/Container';
 
-export interface NavBarCategoryDropdownProps
-  extends HTMLAttributes<HTMLDivElement> {
-  category: ProductCategory;
-  isActive: boolean;
+export type NavBarCategoryDropdownProps = DefineProps<
+  {
+    category: ProductCategory;
+    isActive: boolean;
 
-  onToggle: (isActive: boolean) => any;
-}
+    onToggle: (isActive: boolean) => any;
+  },
+  HTMLDivElement
+>;
 
 export function NavBarCategoryDropdown({
   isActive,
@@ -44,7 +46,7 @@ export function NavBarCategoryDropdown({
       </Button>
 
       {isActive && (
-        <div className='bg-white w-full absolute left-0 top-[80px] py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
+        <div className='bg-white w-full absolute left-0 top-20 py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
           <Container>
             <ul className='grid grid-cols-3 gap-10'>
               {category.featuredItems.map(({ imageSrc, name, href }) => {

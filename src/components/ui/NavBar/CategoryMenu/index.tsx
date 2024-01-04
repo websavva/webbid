@@ -1,15 +1,15 @@
 'use client';
 
-import { type HTMLAttributes, useState } from 'react';
+import { useState } from 'react';
 
 import { PRODUCT_CATEGORIES } from '@/config/product-categories';
 import { cn } from '@/lib/utils';
 import { useClickOutside } from '@/hooks/use-click-outside';
+import { DefineProps } from '@/types';
 
 import { NavBarCategoryDropdown } from './Dropdown';
 
-export interface NavBarCategoryMenuProps
-  extends HTMLAttributes<HTMLDivElement> {}
+export type NavBarCategoryMenuProps = DefineProps<{}, HTMLDivElement>;
 
 export function NavBarCategoryMenu({
   className,
@@ -17,8 +17,8 @@ export function NavBarCategoryMenu({
 }: NavBarCategoryMenuProps) {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
 
-  const { elementRef } = useClickOutside<HTMLDivElement>(() =>
-    setActiveCategoryId(null)
+  const { elementRef } = useClickOutside<HTMLDivElement>(
+    () => activeCategoryId && setActiveCategoryId(null)
   );
 
   return (
