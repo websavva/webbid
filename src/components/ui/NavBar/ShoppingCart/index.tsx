@@ -59,15 +59,18 @@ export function ShoppingCart({}: ShoppingCartProps) {
 
         {itemsCount === 0 && (
           <>
-            <div className='my-8 text-center flex flex-col items-center text-slate-500'>
+            <div className='mt-8 mb-2 text-center flex flex-col items-center text-slate-500'>
               <ShoppingBasketIcon className='w-14 h-14 mb-5' />
-
-              <span className='text-xl mb-3'>Cart is empty</span>
             </div>
 
             <SheetFooter>
               <SheetClose asChild>
-                <Link href='/catalog' className='mx-auto text-blue-500'>Go to catalog</Link>
+                <Link
+                  href='/catalog'
+                  className='mx-auto hover:underline text-lg text-blue-500'
+                >
+                  Go to catalog
+                </Link>
               </SheetClose>
             </SheetFooter>
           </>
