@@ -1,1 +1,0 @@
-import createNextApp from 'next';

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "tsup --watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -21,7 +21,8 @@
     "tailwindcss-animate": "^1.0.7",
     "express": "^4.18.2",
     "payload": "^2.8.1",
-    "std-env": "^3.7.0"
+    "std-env": "^3.7.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -33,6 +34,7 @@
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "tsup": "^8.0.1"
   }
 }
