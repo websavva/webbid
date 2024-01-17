@@ -4,7 +4,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const filteredEnv = Object.fromEntries(
-  ['PORT'].map((name) => [`process.env.${name}`, process.env[name]!])
+  [
+    'PORT',
+    'NEXT_PUBLIC_SERVER_URL',
+    'POSTGRES_DB',
+    'POSTGRES_PORT',
+    'POSTGRES_USER',
+    'POSTGRES_PASSWORD',
+  ].map((name) => [`process.env.${name}`, JSON.stringify(process.env[name]!)])
 );
 
 export default defineConfig((options) => {

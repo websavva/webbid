@@ -1,10 +1,14 @@
 import express from 'express';
 
+import { CMS } from './cms';
 import { nextApp } from './next';
 import { ctx } from './context';
 
 async function start() {
   const app = express();
+
+  // initializing payload cms
+  await CMS.init(app);
 
   // initializing next application
   const nextAppRequestHandler = nextApp.getRequestHandler();
