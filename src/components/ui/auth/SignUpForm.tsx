@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, type FormEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -22,9 +22,16 @@ export function SignUpForm({ className }: SignUpFormAttributes) {
     resolver: zodResolver(SignUpUserDtoSchema),
   });
 
+  const onSubmit = handleSubmit(() => {});
+
   return (
-    <form className={cn('flex flex-col space-y-6', className)}>
+    <form
+      className={cn('flex flex-col space-y-6', className)}
+      onSubmit={onSubmit}
+    >
       <Input control={control} name='email' placeholder='Email' />
+
+      <Input control={control} name='password' type='password' placeholder='Password' />
 
       <Button className='text-base' type='submit'>
         Sign Up

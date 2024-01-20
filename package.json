@@ -28,7 +28,8 @@
     "@payloadcms/bundler-webpack": "^1.0.6",
     "react-hook-form": "^7.49.3",
     "@hookform/resolvers": "^3.3.4",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "react-animate-height": "^3.2.3"
   },
   "devDependencies": {
     "@types/node": "^20",
