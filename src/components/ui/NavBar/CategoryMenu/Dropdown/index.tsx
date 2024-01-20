@@ -8,7 +8,7 @@ import { DefineProps } from '@/types';
 import { Button } from '@/components/ui/Button';
 
 import type { ProductCategory } from '@/config/product-categories';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import { Container } from '@/components/ui/Container';
 
 export type NavBarCategoryDropdownProps = DefineProps<

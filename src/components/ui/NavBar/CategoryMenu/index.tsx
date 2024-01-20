@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import { PRODUCT_CATEGORIES } from '@/config/product-categories';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { DefineProps } from '@/types';
 

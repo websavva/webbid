@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import Link from 'next/link';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import { DefineProps } from '@/types';
 import { Button } from '@/components/ui/Button';
 
@@ -48,7 +48,7 @@ export function NavBarUserMenu({ className, ...attrs }: NavBarUserMenuProps) {
     <div className={cn('flex items-center', className)} {...attrs}>
       {userMenuItems.map(userMenuItem => <>
         {userMenuItem}
-        
+
         <span className='h-6 w-[2px] bg-gray-300 mx-4 last:mr-0'/>
       </>)}
     </div>

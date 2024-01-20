@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 export function Container({
   className,
