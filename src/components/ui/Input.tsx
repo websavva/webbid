@@ -2,10 +2,11 @@
 
 import * as React from 'react';
 import { type UseControllerProps, useController } from 'react-hook-form';
-import TransitionHeight from 'react-animate-height'
 
 import { mergeRefs } from '@/lib/utils/merge-refs';
 import { cn } from '@/lib/utils/cn';
+
+import { TransitionHeight } from './TransitionHeight';
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
   UseControllerProps;
@@ -17,9 +18,7 @@ const Input = React.forwardRef(
   ) => {
     const {
       field,
-      fieldState: { invalid, error: {
-        message: errorMessage
-      } = {} },
+      fieldState: { invalid, error: { message: errorMessage } = {} },
     } = useController(props);
 
     return (
@@ -37,11 +36,10 @@ const Input = React.forwardRef(
           {...field}
           ref={mergeRefs([ref, field.ref])}
         />
-        <TransitionHeight
-          height={errorMessage ? 'auto' : 0}
-          duration={150}
-        >
-          <div className='text-xs text-red-500 pt-2'>{errorMessage}</div>
+        <TransitionHeight in={invalid}>
+          <div className='text-xs text-red-500 mt-2 transition-all'>
+            {errorMessage}
+          </div>
         </TransitionHeight>
       </div>
     );
