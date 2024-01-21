@@ -6,3 +6,6 @@
 - Payload CMS
 - tRPC
 - PostgresSQL
+- ShadCN
+- Tailwind CSS
+- Tsup
