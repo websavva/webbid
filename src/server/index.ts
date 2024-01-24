@@ -18,7 +18,7 @@ async function start() {
     createContext,
   });
 
-  app.use('/trpc', trpcMiddleware);
+  app.use('/api/trpc', trpcMiddleware);
 
   // initializing next application
   const nextAppRequestHandler = nextApp.getRequestHandler();
