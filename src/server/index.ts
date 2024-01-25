@@ -1,6 +1,7 @@
 import express from 'express';
 import { createExpressMiddleware } from '@trpc/server/adapters/express'
 
+import './env';
 import { CMS } from './cms';
 import { nextApp } from './next';
 import { ctx } from './context';

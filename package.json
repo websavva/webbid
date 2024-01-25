@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "payload:build-config": "tsup --config=payload.tsup.config.ts",
     "dev": "tsup --watch",
     "build": "next build",
     "start": "next start",
