@@ -16,11 +16,11 @@ const filteredEnv = Object.fromEntries(
 
 export default defineConfig((options) => {
   return {
-    entry: ['./src/server/index.ts'],
+    entry: ['./src/server/index.ts', './payload.config.ts'],
     outDir: 'dist',
     format: 'cjs',
     define: filteredEnv,
     watch: options.watch,
-    onSuccess: options.watch ? 'node dist/index.js' : undefined,
+    onSuccess: options.watch ? 'PAYLOAD_CONFIG_PATH=dist/payload.config.js node dist/index.js' : undefined,
   };
 });
