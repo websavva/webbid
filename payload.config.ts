@@ -1,3 +1,5 @@
+import path from 'path';
+
 import { buildConfig } from 'payload/config';
 
 import { postgresAdapter } from '@payloadcms/db-postgres';
@@ -26,4 +28,11 @@ export default buildConfig({
       password: process.env.POSTGRES_PASSWORD,
     },
   }),
+
+  typescript: {
+    outputFile: path.resolve(
+      __dirname,
+      '../src/server/cms/collections/types.ts'
+    ),
+  },
 });

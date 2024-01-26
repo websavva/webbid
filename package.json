@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "payload:build-config": "tsup --config=payload.tsup.config.ts",
-    "payload:types": "pnpm payload:build-config && PAYLOAD_CONFIG_PATH=dist/payload.config.js PAYLOAD_TS_OUTPUT_PATH=./src/server/cms/collections/types.ts payload generate:types",
+    "payload:types": "pnpm payload:build-config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload generate:types",
     "dev": "pnpm payload:build-config && tsup --watch",
     "build": "next build",
     "start": "next start",

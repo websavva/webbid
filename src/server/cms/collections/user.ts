@@ -5,6 +5,11 @@ export const User: CollectionConfig = {
 
   auth: true,
 
+  access: {
+    read: () => true,
+    create: () => true,
+  },
+
   fields: [
     {
       type: 'select',
