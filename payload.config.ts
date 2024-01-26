@@ -7,8 +7,7 @@ import { webpackBundler as webpackBundlerAdapter } from '@payloadcms/bundler-web
 import './src/server/env';
 import { collections } from './src/server/cms/collections';
 
-/** @type {import('payload/config').Config} */
-const payloadConfig = {
+export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
 
   collections,
@@ -27,6 +26,4 @@ const payloadConfig = {
       password: process.env.POSTGRES_PASSWORD,
     },
   }),
-};
-
-module.exports = buildConfig(payloadConfig);
+});
