@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "payload:config": "tsup --config=payload.tsup.config.ts",
+    "payload:config": "jiti scripts/build-payload-config.ts",
     "payload:types": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload generate:types",
-    "dev": "pnpm payload:config && tsup --watch",
+    "dev": "pnpm payload:config && jiti scripts/build --watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -34,7 +34,8 @@
     "react-transition-group": "^4.4.5",
     "@trpc/server": "^10.45.0",
     "@trpc/client": "^10.45.0",
-    "nodemailer": "^6.9.8"
+    "nodemailer": "^6.9.8",
+    "mjml": "^4.14.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -49,6 +50,8 @@
     "typescript": "^5",
     "tsup": "^8.0.1",
     "@types/react-transition-group": "^4.4.10",
-    "@types/nodemailer": "^6.4.14"
+    "@types/nodemailer": "^6.4.14",
+    "jiti": "^1.21.0",
+    "@types/mjml": "^4.7.4"
   }
 }
