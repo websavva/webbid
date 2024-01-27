@@ -1,9 +1,15 @@
-import type { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload/types';
 
 export const User: CollectionConfig = {
   slug: 'users',
 
-  auth: true,
+  auth: {
+    verify: {
+      generateEmailHTML({ user }) {
+        return `<p>${user.email}</p>`;
+      },
+    },
+  },
 
   access: {
     read: () => true,
@@ -19,13 +25,13 @@ export const User: CollectionConfig = {
       options: [
         {
           label: 'Admin',
-          value: 'admin'
+          value: 'admin',
         },
         {
           label: 'user',
-          value: 'user'
+          value: 'user',
         },
-      ]
-    }
-  ]
-}
+      ],
+    },
+  ],
+};

@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { forwardRef, useRef } from 'react';
 import { type UseControllerProps, useController } from 'react-hook-form';
 
 import { mergeRefs } from '@/lib/utils/merge-refs';
@@ -11,7 +11,7 @@ import { TransitionHeight } from './TransitionHeight';
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
   UseControllerProps;
 
-const Input = React.forwardRef(
+const Input = forwardRef(
   (
     { className, type, ...props }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>
@@ -19,7 +19,12 @@ const Input = React.forwardRef(
     const {
       field,
       fieldState: { invalid, error: { message: errorMessage } = {} },
+      formState: {
+        isSubmitting,
+      }
     } = useController(props);
+
+    const errorElementRef = useRef<HTMLDivElement>(null)
 
     return (
       <div>
@@ -32,12 +37,13 @@ const Input = React.forwardRef(
               'border-red-500': invalid,
             }
           )}
+          disabled={isSubmitting}
           {...props}
           {...field}
           ref={mergeRefs([ref, field.ref])}
         />
-        <TransitionHeight in={invalid}>
-          <div className='text-xs text-red-500 mt-2 transition-all'>
+        <TransitionHeight in={invalid} nodeRef={errorElementRef}>
+          <div ref={errorElementRef} className='text-xs text-red-500 mt-2 transition-all'>
             {errorMessage}
           </div>
         </TransitionHeight>

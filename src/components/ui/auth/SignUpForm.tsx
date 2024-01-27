@@ -5,16 +5,21 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { cn } from '@/lib/utils/cn';
-import { type SignUpUserDto, SignUpUserDtoSchema } from '@/server/dtos/auth';
+import { type SignUpUserDto, SignUpUserDtoSchema } from '#server/dtos/auth';
 import { trpcClient } from '@/lib/trpc';
 
 import { Input } from '../Input';
 import { Button } from '../Button';
+import { wait } from '@/lib/utils/wait';
 
 export interface SignUpFormAttributes extends HTMLAttributes<HTMLFormElement> {}
 
 export function SignUpForm({ className }: SignUpFormAttributes) {
-  const { control, reset, handleSubmit } = useForm<SignUpUserDto>({
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<SignUpUserDto>({
     defaultValues: {
       email: '',
       password: '',
@@ -41,7 +46,7 @@ export function SignUpForm({ className }: SignUpFormAttributes) {
         placeholder='Password'
       />
 
-      <Button className='text-base' type='submit'>
+      <Button className='text-base' type='submit' disabled={isSubmitting}>
         Sign Up
       </Button>
     </form>

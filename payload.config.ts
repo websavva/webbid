@@ -6,8 +6,8 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { slateEditor as slateEditorAdapter } from '@payloadcms/richtext-slate';
 import { webpackBundler as webpackBundlerAdapter } from '@payloadcms/bundler-webpack';
 
-import './src/server/env';
-import { collections } from './src/server/cms/collections';
+import '#server/env';
+import { collections } from '#server/cms/collections';
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
