@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, type FormEvent } from 'react';
+import { HTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -10,7 +10,6 @@ import { trpcClient } from '@/lib/trpc';
 
 import { Input } from '../Input';
 import { Button } from '../Button';
-import { wait } from '@/lib/utils/wait';
 
 export interface SignUpFormAttributes extends HTMLAttributes<HTMLFormElement> {}
 
