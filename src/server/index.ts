@@ -25,6 +25,9 @@ async function start() {
   // initializing trcp
   const trpcMiddleware = createExpressMiddleware({
     router: appRouter,
+    batching: {
+      enabled: false
+    },
     createContext,
   });
 

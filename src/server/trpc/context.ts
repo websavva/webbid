@@ -5,6 +5,7 @@ export const createContext = ({
   req,
   res,
 }: CreateExpressContextOptions) => ({
-  foo: true,
-}); // no context
+  req,
+  res
+});
 
