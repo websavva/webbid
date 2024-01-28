@@ -1,10 +1,10 @@
 import type { Options } from 'tsup';
 
-import { MjmlLoaderPlugin } from './plugins/mjml-loader';
+import { JsxRuntimAutoImportPlugin } from './plugins/jsx-runtime-auto-import';
 
 export const baseTsupConfig: Options = {
   outDir: 'dist',
   format: 'cjs',
 
-  esbuildPlugins: [MjmlLoaderPlugin],
+  esbuildPlugins: [JsxRuntimAutoImportPlugin],
 };
