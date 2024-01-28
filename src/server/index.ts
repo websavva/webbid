@@ -1,5 +1,7 @@
+import path from 'path';
+
 import express from 'express';
-import { createExpressMiddleware } from '@trpc/server/adapters/express'
+import { createExpressMiddleware } from '@trpc/server/adapters/express';
 
 import './env';
 import { CMS } from './cms';
@@ -7,11 +9,18 @@ import { nextApp } from './next';
 import { ctx } from './context';
 import { appRouter, createContext } from './trpc';
 
+const resolvePath = (...paths: string[]) => path.resolve(__dirname, ...paths);
+
 async function start() {
   const app = express();
 
   // initializing payload cms
   await CMS.init(app);
+
+  // initializing public directory
+  const publicDirSrc = resolvePath('./public');
+
+  app.use(express.static(publicDirSrc));
 
   // initializing trcp
   const trpcMiddleware = createExpressMiddleware({

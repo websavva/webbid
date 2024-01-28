@@ -1,15 +1,26 @@
 import { build } from 'tsup';
+import { copy } from 'fs-extra'
 
 import { baseTsupConfig } from './utils/tsup/base-config';
-import { parseArgs } from './utils/parse-args';
+import { CommandArgs, runCommand } from './utils/run-command'
 
-const { watch: isWatchMode } = parseArgs();
+interface BuildCommandArgs {
+  watch: boolean;
+};
 
-build({
-  ...baseTsupConfig,
-  outDir: 'dist',
-  format: 'cjs',
-  entry: ['./src/server/index.ts'],
-  watch: isWatchMode,
-  onSuccess: isWatchMode ? 'node dist/index.js' : undefined,
-});
+runCommand<BuildCommandArgs>(async(options) => {
+  const isWatchMode = Boolean(options.watch);
+
+  await copy('./src/server/public', './dist/public');
+
+  await build({
+    ...baseTsupConfig,
+    outDir: 'dist',
+    format: 'cjs',
+    entry: ['./src/server/index.ts'],
+
+    watch: isWatchMode,
+    onSuccess: isWatchMode ? 'node dist/index.js' : undefined,
+  });
+
+})

@@ -1,17 +1,17 @@
 import { router, publicProcedure } from '#server/trpc/helpers';
-import { SignUpUserDtoSchema } from '#server/dtos/auth';
+import { UserCredentialsDtoSchema } from '#server/dtos/auth';
 import { CMS } from '#server/cms';
 import { TRPCError } from '@trpc/server';
 
 export const authRouter = router({
   signUp: publicProcedure
-    .input(SignUpUserDtoSchema)
-    .mutation(async ({ input: signUpUserDto }) => {
+    .input(UserCredentialsDtoSchema)
+    .mutation(async ({ input: userCredentialsDto }) => {
       const { totalDocs: existingUsersCount } = await CMS.client.find({
         collection: 'users',
         where: {
           email: {
-            equals: signUpUserDto.email,
+            equals: userCredentialsDto.email,
           },
         },
         limit: 1,
@@ -26,13 +26,22 @@ export const authRouter = router({
       const signedUpUser = await await CMS.client.create({
         collection: 'users',
         data: {
-          ...signUpUserDto,
-          role: 'user',
+          ...userCredentialsDto,
+          role: 'user' as const,
         },
       });
 
       return {
         user: signedUpUser,
       };
+    }),
+
+  login: publicProcedure
+    .input(UserCredentialsDtoSchema)
+    .mutation(async ({ input: userCredentialsDto }) => {
+      return CMS.client.login({
+        collection: 'users',
+        data: userCredentialsDto,
+      });
     }),
 });

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { cn } from '@/lib/utils/cn';
-import { type SignUpUserDto, SignUpUserDtoSchema } from '#server/dtos/auth';
+import { type UserCredentialsDto, UserCredentialsDtoSchema } from '#server/dtos/auth';
 import { trpcClient } from '@/lib/trpc';
 
 import { Input } from '../Input';
@@ -18,17 +18,17 @@ export function SignUpForm({ className }: SignUpFormAttributes) {
     control,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<SignUpUserDto>({
+  } = useForm<UserCredentialsDto>({
     defaultValues: {
       email: '',
       password: '',
     },
 
-    resolver: zodResolver(SignUpUserDtoSchema),
+    resolver: zodResolver(UserCredentialsDtoSchema),
   });
 
-  const onSubmit = handleSubmit(async (signUpUserDto) => {
-    await trpcClient.auth.signUp.mutate(signUpUserDto);
+  const onSubmit = handleSubmit(async (userCredentialsDto) => {
+    await trpcClient.auth.signUp.mutate(userCredentialsDto);
   });
 
   return (
