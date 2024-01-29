@@ -1,6 +1,10 @@
-import * as React from 'react';
+'use client';
+
+import { useRef, forwardRef, type ButtonHTMLAttributes } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import { Loader2Icon } from 'lucide-react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { Transition, type TransitionStatus } from 'react-transition-group';
 
 import { cn } from '@/lib/utils/cn';
 
@@ -34,13 +38,20 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   pending?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const PENDING_TRANSITION_CLASSES: Record<TransitionStatus, string> = {
+  entered: 'w-[1em] ml-2',
+  entering: 'w-[1em] ml-2',
+  exiting: 'w-0 ml-0',
+  exited: 'w-0 ml-0',
+};
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
@@ -60,22 +71,24 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled: props.disabled || pending,
     };
 
+    const loaderRef = useRef<any>(null);
+
     if (asChild) {
       return <Slot {...componentProps}>{children}</Slot>;
     } else {
       return (
         <button {...componentProps}>
           {children}
-          {
-            <span
-              className={cn(
-                'w-0 mt-[1px] opacity-0 ml-0 animate-spin transition-[width,margin-left] rounded-full h-[1em] border-[1.5px] border-[currentColor] border-b-transparent',
-                {
-                  'w-[1em] ml-2 opacity-1': pending,
-                }
+            <Transition nodeRef={loaderRef} in={pending} timeout={200}>
+              {(state) => (
+                <Loader2Icon
+                  ref={loaderRef}
+                  className={
+                    cn('w-0 transition-all animate-spin', PENDING_TRANSITION_CLASSES[state])
+                  }
+                />
               )}
-            />
-          }
+            </Transition>
         </button>
       );
     }

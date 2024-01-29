@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@/lib/utils/cn';
 import { type UserCredentialsDto, UserCredentialsDtoSchema } from '#server/dtos/auth';
 import { trpcClient } from '@/lib/trpc';
+import { wait } from '@/lib/utils/wait';
 
 import { Input } from '../Input';
 import { Button } from '../Button';
@@ -45,7 +46,7 @@ export function SignUpForm({ className }: SignUpFormAttributes) {
         placeholder='Password'
       />
 
-      <Button className='text-base' type='submit' disabled={isSubmitting} pending>
+      <Button className='text-base' type='submit' pending={isSubmitting}>
         Sign Up
       </Button>
     </form>

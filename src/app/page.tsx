@@ -29,7 +29,7 @@ const perks: PerkProps[] = [
 
 export default function Home() {
   return (
-    <div>
+    <>
       <section className='flex justify-center py-20'>
         <Container className='flex flex-col items-center space-y-5 text-center'>
           <h1 className='text-6xl leading-[1.3] text-gray-900'>
@@ -62,6 +62,6 @@ export default function Home() {
           ))}
         </Container>
       </section>
-    </div>
+    </>
   );
 }
