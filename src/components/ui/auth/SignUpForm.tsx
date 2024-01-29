@@ -45,7 +45,7 @@ export function SignUpForm({ className }: SignUpFormAttributes) {
         placeholder='Password'
       />
 
-      <Button className='text-base' type='submit' disabled={isSubmitting}>
+      <Button className='text-base' type='submit' disabled={isSubmitting} pending>
         Sign Up
       </Button>
     </form>
