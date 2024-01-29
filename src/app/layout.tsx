@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 
 import { NavBar } from '@/components/ui/NavBar';
 import { cn } from '@/lib/utils/cn';
+import { UserContextProvider } from '@/contexts/user/Provider';
+import { fetchMe } from '@/contexts/user/fetch'
 
 import './globals.css';
 
@@ -20,18 +22,22 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const initialUser = await fetchMe();
+
   return (
     <html lang='en'>
       <body className={cn('font-sans relative', intInter.className)}>
         <div className='flex flex-col min-h-screen'>
-          <NavBar className='w-full' />
+          <UserContextProvider initialUser={initialUser}>
+            <NavBar className='w-full' />
 
-          <main>{children}</main>
+            <main>{children}</main>
+          </UserContextProvider>
         </div>
       </body>
     </html>

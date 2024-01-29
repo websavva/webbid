@@ -1,7 +1,5 @@
 import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 
-import { useRouter } from 'next/router';
-
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Perk, type PerkProps } from '@/components/ui/Perk';
@@ -27,7 +25,7 @@ const perks: PerkProps[] = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <section className='flex justify-center py-20'>
