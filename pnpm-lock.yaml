@@ -71,6 +71,9 @@ dependencies:
   react-transition-group:
     specifier: ^4.4.5
     version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+  redaxios:
+    specifier: ^0.5.1
+    version: 0.5.1
   std-env:
     specifier: ^3.7.0
     version: 3.7.0
@@ -9084,6 +9087,10 @@ packages:
     engines: {node: '>= 0.10'}
     dependencies:
       resolve: 1.22.8
+    dev: false
+
+  /redaxios@0.5.1:
+    resolution: {integrity: sha512-FSD2AmfdbkYwl7KDExYQlVvIrFz6Yd83pGfaGjBzM9F6rpq8g652Q4Yq5QD4c+nf4g2AgeElv1y+8ajUPiOYMg==}
     dev: false
 
   /reflect.getprototypeof@1.0.4:

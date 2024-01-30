@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { headers } from 'next/headers';
 
 import { NavBar } from '@/components/ui/NavBar';
 import { cn } from '@/lib/utils/cn';
-import { UserContextProvider } from '@/contexts/user/Provider';
-import { fetchMe } from '@/contexts/user/fetch'
+import { loadAppContext } from '@/contexts/app/load';
+import { AppContextProvider } from '@/contexts/app/Provider';
 
 import './globals.css';
+import { requestHeaders } from '@/lib/utils/request-headers';
 
 const intInter = Inter({ subsets: ['latin'] });
 
@@ -27,17 +29,17 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const initialUser = await fetchMe();
+  const initialAppContextValue = await loadAppContext(requestHeaders());
 
   return (
     <html lang='en'>
       <body className={cn('font-sans relative', intInter.className)}>
         <div className='flex flex-col min-h-screen'>
-          <UserContextProvider initialUser={initialUser}>
+          <AppContextProvider initialValue={initialAppContextValue}>
             <NavBar className='w-full' />
 
             <main>{children}</main>
-          </UserContextProvider>
+          </AppContextProvider>
         </div>
       </body>
     </html>

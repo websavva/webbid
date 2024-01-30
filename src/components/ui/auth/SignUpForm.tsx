@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@/lib/utils/cn';
 import { type UserCredentialsDto, UserCredentialsDtoSchema } from '#server/dtos/auth';
 import { trpcClient } from '@/lib/trpc';
-import { wait } from '@/lib/utils/wait';
+import { useAuth } from '@/hooks/use-auth';
 
 import { Input } from '../Input';
 import { Button } from '../Button';
@@ -27,6 +27,11 @@ export function SignUpForm({ className }: SignUpFormAttributes) {
 
     resolver: zodResolver(UserCredentialsDtoSchema),
   });
+
+  const {
+    user
+  } = useAuth();
+
 
   const onSubmit = handleSubmit(async (userCredentialsDto) => {
     await trpcClient.auth.signUp.mutate(userCredentialsDto);
