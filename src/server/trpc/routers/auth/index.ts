@@ -38,10 +38,11 @@ export const authRouter = router({
 
   login: publicProcedure
     .input(UserCredentialsDtoSchema)
-    .mutation(async ({ input: userCredentialsDto }) => {
+    .mutation(async ({ input: userCredentialsDto, ctx: { res } }) => {
       return CMS.client.login({
         collection: 'users',
         data: userCredentialsDto,
+        res,
       });
     }),
 });
