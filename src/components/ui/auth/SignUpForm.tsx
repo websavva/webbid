@@ -1,59 +1,21 @@
 'use client';
 
-import { HTMLAttributes } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import { cn } from '@/lib/utils/cn';
-import { type UserCredentialsDto, UserCredentialsDtoSchema } from '#server/dtos/auth';
 import { trpcClient } from '@/lib/trpc';
-import { useAuth } from '@/hooks/use-auth';
+import { DefineProps } from '@/types';
+import type { UserCredentialsDto } from '#server/dtos/auth';
 
-import { Input } from '../Input';
-import { Button } from '../Button';
+import { AuthForm } from './AuthForm';
 
-export interface SignUpFormAttributes extends HTMLAttributes<HTMLFormElement> {}
-
-export function SignUpForm({ className }: SignUpFormAttributes) {
-  const {
-    control,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm<UserCredentialsDto>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-
-    resolver: zodResolver(UserCredentialsDtoSchema),
-  });
-
-  const {
-    user
-  } = useAuth();
-
-
-  const onSubmit = handleSubmit(async (userCredentialsDto) => {
-    await trpcClient.auth.signUp.mutate(userCredentialsDto);
-  });
+export function SignUpForm({ className }: DefineProps<{}>) {
+  const onSubmit = async (userCredentials: UserCredentialsDto) => {
+    await trpcClient.auth.signUp.mutate(userCredentials);
+  };
 
   return (
-    <form
-      className={cn('flex flex-col space-y-6', className)}
+    <AuthForm
+      submitButtonText='Sign up'
       onSubmit={onSubmit}
-    >
-      <Input control={control} name='email' placeholder='Email' />
-
-      <Input
-        control={control}
-        name='password'
-        type='password'
-        placeholder='Password'
-      />
-
-      <Button className='text-base' type='submit' pending={isSubmitting}>
-        Sign Up
-      </Button>
-    </form>
+      className={className}
+    />
   );
 }

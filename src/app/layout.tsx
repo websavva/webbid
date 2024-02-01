@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { headers } from 'next/headers';
 
 import { NavBar } from '@/components/ui/NavBar';
 import { cn } from '@/lib/utils/cn';
 import { loadAppContext } from '@/contexts/app/load';
 import { AppContextProvider } from '@/contexts/app/Provider';
+import { Toaster } from '@/components/ui/Toaster';
 
 import './globals.css';
 import { requestHeaders } from '@/lib/utils/request-headers';
@@ -41,6 +41,8 @@ export default async function RootLayout({
             <main>{children}</main>
           </AppContextProvider>
         </div>
+
+        <Toaster />
       </body>
     </html>
   );
