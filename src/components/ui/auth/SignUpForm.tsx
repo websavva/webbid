@@ -2,30 +2,36 @@
 
 import { toast } from 'sonner';
 import flatry from 'await-to-js';
+import { withQuery } from 'ufo';
 
 import { trpcClient } from '@/lib/trpc';
 import { DefineProps } from '@/types';
+import { useRouter } from 'next/navigation';
 import type { UserCredentialsDto } from '#server/dtos/auth';
 
 import { AuthForm } from './AuthForm';
 import { cn } from '@/lib/utils/cn';
 
 export function SignUpForm({ className }: DefineProps<{}>) {
+  const router = useRouter();
+
   const onSubmit = async (userCredentials: UserCredentialsDto) => {
     const [err, { user = null } = {}] = await flatry(
       trpcClient.auth.signUp.mutate(userCredentials)
     );
 
     if (err)
-      return toast.error(err.message, {
-        duration: 20e3,
+      return toast.warning(err.message, {
+        closeButton: true,
       });
 
     const { email } = user!;
 
-    console.log({
-      email,
-    });
+    await router.push(
+      withQuery('/sign-up/verify', {
+        email,
+      })
+    );
   };
 
   return (
