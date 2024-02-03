@@ -6,3 +6,9 @@ export const UserCredentialsDtoSchema = z.object({
 });
 
 export type UserCredentialsDto = z.infer<typeof UserCredentialsDtoSchema>;
+
+export const ConfirmationTokenDtoSchema = z.object({
+  token: z.string(),
+});
+
+export type ConfirmationTokenDto = z.infer<typeof ConfirmationTokenDtoSchema>;

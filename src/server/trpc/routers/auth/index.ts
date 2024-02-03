@@ -1,5 +1,8 @@
 import { router, publicProcedure } from '#server/trpc/helpers';
-import { UserCredentialsDtoSchema } from '#server/dtos/auth';
+import {
+  ConfirmationTokenDtoSchema,
+  UserCredentialsDtoSchema,
+} from '#server/dtos/auth';
 import { CMS } from '#server/cms';
 import { TRPCError } from '@trpc/server';
 
@@ -43,6 +46,15 @@ export const authRouter = router({
         collection: 'users',
         data: userCredentialsDto,
         res,
+      });
+    }),
+
+  confirmSignUp: publicProcedure
+    .input(ConfirmationTokenDtoSchema)
+    .mutation(async ({ input: { token } }) => {
+      return CMS.client.verifyEmail({
+        collection: 'users',
+        token,
       });
     }),
 });
