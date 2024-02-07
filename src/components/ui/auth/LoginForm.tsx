@@ -11,12 +11,12 @@ import type { UserCredentialsDto } from '#server/dtos/auth';
 
 import { AuthForm } from './AuthForm';
 
-export function SignUpForm({ className }: DefineProps<{}>) {
+export function LoginForm({ className }: DefineProps<{}>) {
   const router = useRouter();
 
   const onSubmit = async (userCredentials: UserCredentialsDto) => {
     const [err, { user = null } = {}] = await flatry(
-      trpcClient.auth.signUp.mutate(userCredentials)
+      trpcClient.auth.login.mutate(userCredentials)
     );
 
     if (err)
@@ -24,18 +24,12 @@ export function SignUpForm({ className }: DefineProps<{}>) {
         closeButton: true,
       });
 
-    const { email } = user!;
-
-    await router.push(
-      withQuery('/sign-up/verify', {
-        email,
-      })
-    );
+    await router.push('/');
   };
 
   return (
     <AuthForm
-      submitButtonText='Sign up'
+      submitButtonText='Login'
       onSubmit={onSubmit}
       className={className}
     />
