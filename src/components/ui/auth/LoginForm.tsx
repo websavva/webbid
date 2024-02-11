@@ -2,7 +2,7 @@
 
 import { toast } from 'sonner';
 import flatry from 'await-to-js';
-import { withQuery } from 'ufo';
+import { useAuth } from '@/hooks/use-auth';
 
 import { trpcClient } from '@/lib/trpc';
 import { DefineProps } from '@/types';
@@ -13,11 +13,10 @@ import { AuthForm } from './AuthForm';
 
 export function LoginForm({ className }: DefineProps<{}>) {
   const router = useRouter();
+  const { login } = useAuth();
 
   const onSubmit = async (userCredentials: UserCredentialsDto) => {
-    const [err, { user = null } = {}] = await flatry(
-      trpcClient.auth.login.mutate(userCredentials)
-    );
+    const [err] = await flatry(login(userCredentials));
 
     if (err)
       return toast.error(err.message, {

@@ -6,6 +6,8 @@ import { loadAuthContext } from './load';
 import { AuthContext, type AuthInfo, getDefaultAuthInfo } from './context';
 import { GetMeResponse } from '@/lib/payload/auth';
 import { payloadApi } from '@/lib/payload';
+import { trpcClient } from '@/lib/trpc';
+import { UserCredentialsDto } from '@/server/dtos/auth';
 
 export interface AuthContextProviderProps extends PropsWithChildren {
   initialValue?: AuthInfo;
@@ -31,12 +33,26 @@ export const AuthContextProvider = ({
     setAuthInfo(getDefaultAuthInfo());
   };
 
+  const login = async (
+    userCredentials: UserCredentialsDto,
+    headers?: Headers
+  ) => {
+    const authInfo = await trpcClient.auth.login.mutate(userCredentials, {
+      context: {
+        headers
+      }
+    });
+
+    setAuthInfo(authInfo as unknown as AuthInfo);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         ...authInfo,
         refresh,
         logout,
+        login,
       }}
     >
       {children}
