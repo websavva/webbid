@@ -14,20 +14,22 @@ export const AUTH_LINKS = [
 ];
 
 export function GuestMenu() {
-  const isGuest = true;
-
   return (
     <>
       {AUTH_LINKS.map(({ label, href }) => (
-        <Button
-          key={href}
-          variant='ghost'
-          asChild
-          size='sm'
-          className='text-base'
-        >
-          <Link href={href}>{label}</Link>
-        </Button>
+        <>
+          <Button
+            key={href}
+            variant='ghost'
+            asChild
+            size='sm'
+            className='text-base'
+          >
+            <Link href={href}>{label}</Link>
+          </Button>
+
+          <span className='w-[2px] h-6 bg-gray-200 mx-5' />
+        </>
       ))}
     </>
   );
