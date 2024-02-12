@@ -10,7 +10,7 @@ export default function SignUpPage() {
       <div className='flex flex-col items-center'>
         <Logo className='w-28' />
 
-        <h1 className='mt-10 font-semibold text-4xl'>Log In</h1>
+        <h1 className='mt-10 font-semibold text-4xl'>Sign In</h1>
 
         <Link
           href='/sign-up'

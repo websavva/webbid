@@ -15,9 +15,9 @@ export function NavBarRightMenu({ className, ...attrs }: NavBarUserMenuProps) {
 
   return (
     <div className={cn('flex items-center', className)} {...attrs}>
-      {isGuest ? <GuestMenu /> : <UserMenu />}
+      {isGuest ? <GuestMenu /> : <UserMenu className='mr-2'/>}
 
-      <span className='w-[2px] h-6 bg-gray-200 mx-5' />
+      <span className='w-[2px] h-6 bg-gray-200 mx-2' />
 
       <ShoppingCart />
     </div>

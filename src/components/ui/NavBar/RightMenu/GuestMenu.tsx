@@ -16,7 +16,7 @@ export const AUTH_LINKS = [
 export function GuestMenu() {
   return (
     <>
-      {AUTH_LINKS.map(({ label, href }) => (
+      {AUTH_LINKS.map(({ label, href }, index, { length }) => (
         <>
           <Button
             key={href}
@@ -28,7 +28,9 @@ export function GuestMenu() {
             <Link href={href}>{label}</Link>
           </Button>
 
-          <span className='w-[2px] h-6 bg-gray-200 mx-5' />
+          {index + 1 !== length && (
+            <span className='w-[2px] h-6 bg-gray-200 mx-3' />
+          )}
         </>
       ))}
     </>

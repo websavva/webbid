@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { LogOut, User, MenuSquare } from 'lucide-react';
 
 import { useAuth } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils/cn';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +15,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 
-export function UserMenu() {
+export function UserMenu({
+  className
+}: {
+  className?: string
+}) {
   const { user, isAdmin } = useAuth();
 
   const { email } = user!;
@@ -26,8 +31,8 @@ export function UserMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className='flex items-center space-x-3'>
-          <span className='size-8 text-base rounded-full bg-blue-500 text-white font-bold flex items-center justify-center'>
+        <button className={cn('flex items-center space-x-3 outline-none', className)}>
+          <span className='size-9 text-base shrink-0 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center'>
             {avatarCharacter}
           </span>
 
@@ -39,7 +44,7 @@ export function UserMenu() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href='/profile' className='fllex items-center'>
+            <Link href='/profile' className='flex items-center cursor-pointer'>
               <User className='mr-2 h-4 w-4' />
 
               <span>Profile</span>
@@ -47,7 +52,7 @@ export function UserMenu() {
           </DropdownMenuItem>
           {isAdmin && (
             <DropdownMenuItem asChild>
-              <Link href='/admin' className='fllex items-center'>
+              <Link href='/admin' className='flex items-center cursor-pointer'>
                 <MenuSquare className='mr-2 h-4 w-4' />
 
                 <span>Admin Dashboard</span>
@@ -57,7 +62,7 @@ export function UserMenu() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href='/logout' className='flex items-center'>
+          <Link href='/logout' className='flex items-center cursor-pointer'>
             <LogOut className='mr-2 h-4 w-4' />
             <span>Log out</span>
           </Link>

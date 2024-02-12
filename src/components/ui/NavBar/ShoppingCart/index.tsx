@@ -27,7 +27,7 @@ export function ShoppingCart({}: ShoppingCartProps) {
         <Button
           variant='ghost'
           size='icon'
-          className='flex items-center w-auto'
+          className='flex items-center w-auto px-2'
         >
           <ShoppingBagIcon className='w-5 h-5 cursor-pointer shrink-0 mr-2' />
 
