@@ -3,7 +3,7 @@ import { DefineProps } from '@/types';
 import { Logo } from '../Logo';
 import { Container } from '../Container';
 import { NavBarCategoryMenu } from './CategoryMenu';
-import { NavBarUserMenu } from './UserMenu';
+import { NavBarRightMenu } from './RightMenu';
 
 export type NavBarProps = DefineProps<{}, HTMLElement>;
 
@@ -19,8 +19,8 @@ export function NavBar({ className, ...attrs }: NavBarProps) {
 
           <NavBarCategoryMenu />
         </div>
-        
-        <NavBarUserMenu />
+
+        <NavBarRightMenu />
       </Container>
     </nav>
   );
