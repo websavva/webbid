@@ -15,11 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 
-export function UserMenu({
-  className
-}: {
-  className?: string
-}) {
+export function UserMenu({ className }: { className?: string }) {
   const { user, isAdmin } = useAuth();
 
   const { email } = user!;
@@ -31,7 +27,9 @@ export function UserMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className={cn('flex items-center space-x-3 outline-none', className)}>
+        <button
+          className={cn('flex items-center space-x-3 outline-none', className)}
+        >
           <span className='size-9 text-base shrink-0 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center'>
             {avatarCharacter}
           </span>
@@ -39,6 +37,7 @@ export function UserMenu({
           <span>{login}</span>
         </button>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent className='w-56'>
         <DropdownMenuLabel>My account</DropdownMenuLabel>
         <DropdownMenuSeparator />
