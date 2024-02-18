@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/Button';
@@ -17,9 +18,8 @@ export function GuestMenu() {
   return (
     <>
       {AUTH_LINKS.map(({ label, href }, index, { length }) => (
-        <>
+        <Fragment key={href}>
           <Button
-            key={href}
             variant='ghost'
             asChild
             size='sm'
@@ -31,7 +31,7 @@ export function GuestMenu() {
           {index + 1 !== length && (
             <span className='w-[2px] h-6 bg-gray-200 mx-3' />
           )}
-        </>
+        </Fragment>
       ))}
     </>
   );
