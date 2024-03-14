@@ -16,7 +16,7 @@ export default function SignUpVerifyPage({
       </h1>
 
       <p className='mt-5 text-base text-gray-500 text-center'>
-        We've sent a verification link to{' '}
+        We&apos;ve sent a verification link to{' '}
         <strong className='font-bold'>{email || 'your email'}</strong>
       </p>
     </div>

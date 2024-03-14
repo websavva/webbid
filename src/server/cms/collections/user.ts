@@ -1,18 +1,17 @@
 import type { CollectionConfig } from 'payload/types';
 
 import { SignUpConfirmationTemplate } from '#server/mail/templates';
+import { Role } from '@/consts/roles';
 
 export const User: CollectionConfig = {
   slug: 'users',
 
   auth: {
     verify: {
-      generateEmailHTML({ user: {
-        email
-      }, token }) {
+      generateEmailHTML({ user: { email }, token }) {
         return SignUpConfirmationTemplate({
           email,
-          token
+          token,
         }).html;
       },
     },
@@ -29,16 +28,10 @@ export const User: CollectionConfig = {
       name: 'role',
       defaultValue: 'user',
       required: true,
-      options: [
-        {
-          label: 'Admin',
-          value: 'admin',
-        },
-        {
-          label: 'user',
-          value: 'user',
-        },
-      ],
+      options: Object.entries(Role).map(([label, value]) => ({
+        label,
+        value,
+      })),
     },
   ],
 };
