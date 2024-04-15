@@ -2,7 +2,7 @@ import { build } from 'tsup';
 import { copy } from 'fs-extra'
 
 import { baseTsupConfig } from './utils/tsup/base-config';
-import { CommandArgs, runCommand } from './utils/run-command'
+import { runCommand } from './utils/run-command'
 
 interface BuildCommandArgs {
   watch: boolean;

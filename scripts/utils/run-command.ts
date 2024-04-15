@@ -1,9 +1,6 @@
 import { parseArgs } from './parse-args';
 
-export interface CommandArgs {
-  [key: string]: true | string | undefined;
-}
-export const runCommand = <Options extends CommandArgs = {}>(
+export const runCommand = <Options = {}>(
   execute: (options: Options) => Promise<any>
 ) => {
   const options = parseArgs() as Options;
