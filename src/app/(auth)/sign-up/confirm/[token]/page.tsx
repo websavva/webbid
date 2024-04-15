@@ -1,7 +1,7 @@
 'use client';
 
 import { Loader2Icon, AlertCircleIcon, MailCheckIcon } from 'lucide-react';
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 import flatry from 'await-to-js';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
@@ -9,15 +9,14 @@ import { useRouter } from 'next/navigation';
 import type { PagePropsWithParams } from '@/types/page-props';
 import { Button } from '@/components/ui/Button';
 import { trpcClient } from '@/lib/trpc';
-import { useAuth } from '@/hooks/use-auth';
+import { wait } from '@/lib/utils/wait';
 
-export default function SignUpVerifyPage({
+export default function SignUpConfirmPage({
   params: { token },
 }: PagePropsWithParams<{
   token: string;
 }>) {
   const router = useRouter();
-  const { refresh } = useAuth();
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -42,9 +41,10 @@ export default function SignUpVerifyPage({
 
       setError(null);
 
-      await refresh();
+      // forcing delay for decoration only
+      await wait(1e3);
 
-      await router.push('/');
+      await router.push('/login');
     } finally {
       setIsLoading(false);
     }
@@ -54,10 +54,8 @@ export default function SignUpVerifyPage({
     onConfirmAccount();
   }, []);
 
-  let content: ReactNode;
-
   if (isLoading) {
-    content = (
+    return (
       <>
         <Loader2Icon className='size-44 animate-spin stroke-1 text-slate-600' />
 
@@ -65,7 +63,7 @@ export default function SignUpVerifyPage({
       </>
     );
   } else if (error) {
-    content = (
+    return (
       <>
         <AlertCircleIcon className='size-44 text-red-400 stroke-1' />
 
@@ -81,7 +79,7 @@ export default function SignUpVerifyPage({
       </>
     );
   } else {
-    content = (
+    return (
       <>
         <MailCheckIcon className='size-44 stroke-1 text-primary' />
 
@@ -98,10 +96,4 @@ export default function SignUpVerifyPage({
       </>
     );
   }
-
-  return (
-    <div className='py-20 flex flex-col items-center'>
-      {content}
-    </div>
-  );
 }

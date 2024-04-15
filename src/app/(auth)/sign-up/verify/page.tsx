@@ -5,10 +5,10 @@ import { EmailEnvelopeIcon } from '@/components/ui/icons/EmailEnvelope';
 export default function SignUpVerifyPage({
   searchParams: { email: rawEmail },
 }: PagePropsWithSearchParams<'email'>) {
-  const email = rawEmail ? toArray(rawEmail)[0] : '';
+  const [email] = toArray(rawEmail);
 
   return (
-    <div className='flex flex-col items-center py-20'>
+    <>
       <EmailEnvelopeIcon className='w-52 h-52' />
 
       <h1 className='mt-10 text-3xl text-gray-600 font-bold'>
@@ -19,6 +19,6 @@ export default function SignUpVerifyPage({
         We&apos;ve sent a verification link to{' '}
         <strong className='font-bold'>{email || 'your email'}</strong>
       </p>
-    </div>
+    </>
   );
 }
