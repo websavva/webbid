@@ -5,7 +5,7 @@ import { baseTsupConfig } from './utils/tsup/base-config';
 import { runCommand } from './utils/run-command'
 
 interface BuildCommandArgs {
-  watch: boolean;
+  watch: string;
 };
 
 runCommand<BuildCommandArgs>(async(options) => {
