@@ -1,9 +1,12 @@
 import type { PropsWithChildren } from 'react';
 
+import { Container } from '@/components/ui/Container';
+
 export default function AuthLayout({ children }: PropsWithChildren) {
+
   return (
-    <div className='py-20 flex flex-col items-center max-w-screen-xl mx-auto'>
+    <Container className='py-20 flex flex-col items-center mx-auto'>
       {children}
-    </div>
+    </Container>
   );
 }
