@@ -10,13 +10,13 @@ dependencies:
     version: 3.3.4(react-hook-form@7.49.3)
   '@payloadcms/bundler-webpack':
     specifier: ^1.0.6
-    version: 1.0.6(@swc/core@1.3.76)(esbuild@0.18.20)(payload@2.8.1)
+    version: 1.0.6(@swc/core@1.3.76)(esbuild@0.18.20)(payload@2.12.1)
   '@payloadcms/db-postgres':
     specifier: ^0.4.0
-    version: 0.4.0(@types/react@18.2.45)(payload@2.8.1)(react@18.2.0)
+    version: 0.4.0(@types/react@18.2.45)(payload@2.12.1)(react@18.2.0)
   '@payloadcms/richtext-slate':
     specifier: ^1.3.1
-    version: 1.3.1(payload@2.8.1)(react-dom@18.2.0)
+    version: 1.3.1(payload@2.12.1)(react-dom@18.2.0)
   '@radix-ui/react-dialog':
     specifier: ^1.0.5
     version: 1.0.5(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
@@ -66,8 +66,8 @@ dependencies:
     specifier: ^6.9.8
     version: 6.9.8
   payload:
-    specifier: ^2.8.1
-    version: 2.8.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
+    specifier: ^2.12.1
+    version: 2.12.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
   react:
     specifier: ^18
     version: 18.2.0
@@ -1508,13 +1508,6 @@ packages:
       '@floating-ui/utils': 0.2.1
     dev: false
 
-  /@floating-ui/dom@1.5.4:
-    resolution: {integrity: sha512-jByEsHIY+eEdCjnTVu+E3ephzTOzkQ8hgUfGwos+bg7NlH33Zc5uO+QHz1mrQUOgIKKDD1RtS201P9NvAfq3XQ==}
-    dependencies:
-      '@floating-ui/core': 1.5.3
-      '@floating-ui/utils': 0.2.1
-    dev: false
-
   /@floating-ui/dom@1.6.3:
     resolution: {integrity: sha512-RnDthu3mzPlQ31Ss/BTwQ1zjzIhr3lk1gZB1OC56h/1vEtaXkESrOqL5fQVMfXpwGtRwX+YsZBdyHtJMQnkArw==}
     dependencies:
@@ -1891,7 +1884,7 @@ packages:
     resolution: {integrity: sha512-XuySG1E38YScSJoMlqovLru4KTUNSjgVTIjyh7qMX6aNN5HY5Ct5LhRJdxO79JtTzKfzV/bnWpz+zquYrISsvw==}
     dev: false
 
-  /@payloadcms/bundler-webpack@1.0.6(@swc/core@1.3.76)(esbuild@0.18.20)(payload@2.8.1):
+  /@payloadcms/bundler-webpack@1.0.6(@swc/core@1.3.76)(esbuild@0.18.20)(payload@2.12.1):
     resolution: {integrity: sha512-hKnRqF2IhYCqNwb8FjKNnjR9fKCXVK2PJgPu3R89dvFhvMnwkbkbj86LMCC4dLmQ9RXmmh/drw4Q5acQ/Xec8g==}
     peerDependencies:
       payload: ^2.0.0
@@ -1906,7 +1899,7 @@ packages:
       md5: 2.3.0
       mini-css-extract-plugin: 1.6.2(webpack@5.89.0)
       path-browserify: 1.0.1
-      payload: 2.8.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
+      payload: 2.12.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
       postcss: 8.4.31
       postcss-loader: 6.2.1(postcss@8.4.31)(webpack@5.89.0)
       postcss-preset-env: 9.0.0(postcss@8.4.31)
@@ -1943,7 +1936,7 @@ packages:
       - webpack-dev-server
     dev: false
 
-  /@payloadcms/db-postgres@0.4.0(@types/react@18.2.45)(payload@2.8.1)(react@18.2.0):
+  /@payloadcms/db-postgres@0.4.0(@types/react@18.2.45)(payload@2.12.1)(react@18.2.0):
     resolution: {integrity: sha512-nmj6t2PH1psFRKeAj8+jEwGjJpcR4MuGyneuvvurWeNZKkfuwCQ6ydpHH4jVBVQBJxtvIn8pZTle7h73KhBURQ==}
     peerDependencies:
       payload: ^2.0.0
@@ -1952,7 +1945,7 @@ packages:
       console-table-printer: 2.11.2
       drizzle-kit: 0.20.5-608ae62
       drizzle-orm: 0.29.3(@libsql/client@0.3.6)(@types/react@18.2.45)(pg@8.11.3)(react@18.2.0)
-      payload: 2.8.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
+      payload: 2.12.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
       pg: 8.11.3
       prompts: 2.4.2
       to-snake-case: 1.0.0
@@ -1985,7 +1978,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@payloadcms/richtext-slate@1.3.1(payload@2.8.1)(react-dom@18.2.0):
+  /@payloadcms/richtext-slate@1.3.1(payload@2.12.1)(react-dom@18.2.0):
     resolution: {integrity: sha512-DwHDn0F7PTGP1WGLQmpNRUdfhwHQwOFpBzXuQtIqlykkj5AAsZrLmfjQabTHPOzKZdLkMRrxhYOGERi4F1T5Hw==}
     peerDependencies:
       payload: ^2.3.0
@@ -1993,7 +1986,7 @@ packages:
       '@faceless-ui/modal': 2.0.1(react-dom@18.2.0)(react@18.2.0)
       i18next: 22.5.1
       is-hotkey: 0.2.0
-      payload: 2.8.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
+      payload: 2.12.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0)
       react: 18.2.0
       react-i18next: 11.18.6(i18next@22.5.1)(react-dom@18.2.0)(react@18.2.0)
       slate: 0.91.4
@@ -2857,12 +2850,30 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: false
 
+  /@swc/core-darwin-arm64@1.3.107:
+    resolution: {integrity: sha512-47tD/5vSXWxPd0j/ZllyQUg4bqalbQTsmqSw0J4dDdS82MWqCAwUErUrAZPRjBkjNQ6Kmrf5rpCWaGTtPw+ngw==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /@swc/core-darwin-arm64@1.3.76:
     resolution: {integrity: sha512-ovviEhZ/1E81Z9OGrO0ivLWk4VCa3I3ZzM+cd3gugglRRwVwtlIaoIYqY5S3KiCAupDd1+UCl5X7Vbio7a/V8g==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
+    optional: true
+
+  /@swc/core-darwin-x64@1.3.107:
+    resolution: {integrity: sha512-hwiLJ2ulNkBGAh1m1eTfeY1417OAYbRGcb/iGsJ+LuVLvKAhU/itzsl535CvcwAlt2LayeCFfcI8gdeOLeZa9A==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
     optional: true
 
   /@swc/core-darwin-x64@1.3.76:
@@ -2873,12 +2884,30 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@swc/core-linux-arm-gnueabihf@1.3.107:
+    resolution: {integrity: sha512-I2wzcC0KXqh0OwymCmYwNRgZ9nxX7DWnOOStJXV3pS0uB83TXAkmqd7wvMBuIl9qu4Hfomi9aDM7IlEEn9tumQ==}
+    engines: {node: '>=10'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /@swc/core-linux-arm-gnueabihf@1.3.76:
     resolution: {integrity: sha512-apgzpGWy1AwoMF4urAAASsAjE7rEzZFIF+p6utuxhS7cNHzE0AyEVDYJbo+pzBdlZ8orBdzzsHtFwoEgKOjebA==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
     requiresBuild: true
+    optional: true
+
+  /@swc/core-linux-arm64-gnu@1.3.107:
+    resolution: {integrity: sha512-HWgnn7JORYlOYnGsdunpSF8A+BCZKPLzLtEUA27/M/ZuANcMZabKL9Zurt7XQXq888uJFAt98Gy+59PU90aHKg==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
     optional: true
 
   /@swc/core-linux-arm64-gnu@1.3.76:
@@ -2889,12 +2918,30 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@swc/core-linux-arm64-musl@1.3.107:
+    resolution: {integrity: sha512-vfPF74cWfAm8hyhS8yvYI94ucMHIo8xIYU+oFOW9uvDlGQRgnUf/6DEVbLyt/3yfX5723Ln57U8uiMALbX5Pyw==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /@swc/core-linux-arm64-musl@1.3.76:
     resolution: {integrity: sha512-Is3bpq7F2qtlnkzEeOD6HIZJPpOmu3q6c82lKww90Q0NnrlSluVMozTHJgwVoFZyizH7uLnk0LuNcEAWLnmJIw==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
+    optional: true
+
+  /@swc/core-linux-x64-gnu@1.3.107:
+    resolution: {integrity: sha512-uBVNhIg0ip8rH9OnOsCARUFZ3Mq3tbPHxtmWk9uAa5u8jQwGWeBx5+nTHpDOVd3YxKb6+5xDEI/edeeLpha/9g==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
     optional: true
 
   /@swc/core-linux-x64-gnu@1.3.76:
@@ -2905,12 +2952,30 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@swc/core-linux-x64-musl@1.3.107:
+    resolution: {integrity: sha512-mvACkUvzSIB12q1H5JtabWATbk3AG+pQgXEN95AmEX2ZA5gbP9+B+mijsg7Sd/3tboHr7ZHLz/q3SHTvdFJrEw==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /@swc/core-linux-x64-musl@1.3.76:
     resolution: {integrity: sha512-a671g4tW8kyFeuICsgq4uB9ukQfiIyXJT4V6YSnmqhCTz5mazWuDxZ5wKnx/1g5nXTl+U5cWH2TZaCJatp4GKA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
+    optional: true
+
+  /@swc/core-win32-arm64-msvc@1.3.107:
+    resolution: {integrity: sha512-J3P14Ngy/1qtapzbguEH41kY109t6DFxfbK4Ntz9dOWNuVY3o9/RTB841ctnJk0ZHEG+BjfCJjsD2n8H5HcaOA==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
     optional: true
 
   /@swc/core-win32-arm64-msvc@1.3.76:
@@ -2921,12 +2986,30 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@swc/core-win32-ia32-msvc@1.3.107:
+    resolution: {integrity: sha512-ZBUtgyjTHlz8TPJh7kfwwwFma+ktr6OccB1oXC8fMSopD0AxVnQasgun3l3099wIsAB9eEsJDQ/3lDkOLs1gBA==}
+    engines: {node: '>=10'}
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /@swc/core-win32-ia32-msvc@1.3.76:
     resolution: {integrity: sha512-5CqwAykpGBJ3PqGLOlWGLGIPpBAG1IwWVDUfro3hhjQ7XJxV5Z1aQf5V5OJ90HJVtrEAVx2xx59UV/Dh081LOg==}
     engines: {node: '>=10'}
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
+    optional: true
+
+  /@swc/core-win32-x64-msvc@1.3.107:
+    resolution: {integrity: sha512-Eyzo2XRqWOxqhE1gk9h7LWmUf4Bp4Xn2Ttb0ayAXFp6YSTxQIThXcT9kipXZqcpxcmDwoq8iWbbf2P8XL743EA==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
     optional: true
 
   /@swc/core-win32-x64-msvc@1.3.76:
@@ -2936,6 +3019,31 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@swc/core@1.3.107:
+    resolution: {integrity: sha512-zKhqDyFcTsyLIYK1iEmavljZnf4CCor5pF52UzLAz4B6Nu/4GLU+2LQVAf+oRHjusG39PTPjd2AlRT3f3QWfsQ==}
+    engines: {node: '>=10'}
+    requiresBuild: true
+    peerDependencies:
+      '@swc/helpers': ^0.5.0
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
+    dependencies:
+      '@swc/counter': 0.1.3
+      '@swc/types': 0.1.6
+    optionalDependencies:
+      '@swc/core-darwin-arm64': 1.3.107
+      '@swc/core-darwin-x64': 1.3.107
+      '@swc/core-linux-arm-gnueabihf': 1.3.107
+      '@swc/core-linux-arm64-gnu': 1.3.107
+      '@swc/core-linux-arm64-musl': 1.3.107
+      '@swc/core-linux-x64-gnu': 1.3.107
+      '@swc/core-linux-x64-musl': 1.3.107
+      '@swc/core-win32-arm64-msvc': 1.3.107
+      '@swc/core-win32-ia32-msvc': 1.3.107
+      '@swc/core-win32-x64-msvc': 1.3.107
+    dev: false
 
   /@swc/core@1.3.76:
     resolution: {integrity: sha512-aYYTA2aVYkwJAZepQXtPnkUthhOfn8qd6rsh+lrJxonFrjmpI7RHt2tMDVTXP6XDX7fvnvrVtT1bwZfmBFPh0Q==}
@@ -2958,22 +3066,32 @@ packages:
       '@swc/core-win32-ia32-msvc': 1.3.76
       '@swc/core-win32-x64-msvc': 1.3.76
 
+  /@swc/counter@0.1.3:
+    resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
+    dev: false
+
   /@swc/helpers@0.5.2:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
     dev: false
 
-  /@swc/register@0.1.10(@swc/core@1.3.76):
+  /@swc/register@0.1.10(@swc/core@1.3.107):
     resolution: {integrity: sha512-6STwH/q4dc3pitXLVkV7sP0Hiy+zBsU2wOF1aXpXR95pnH3RYHKIsDC+gvesfyB7jxNT9OOZgcqOp9RPxVTx9A==}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1.0.46
     dependencies:
-      '@swc/core': 1.3.76
+      '@swc/core': 1.3.107
       lodash.clonedeep: 4.5.0
       pirates: 4.0.6
       source-map-support: 0.5.21
+    dev: false
+
+  /@swc/types@0.1.6:
+    resolution: {integrity: sha512-/JLo/l2JsT/LRd80C3HfbmVpxOAJ11FO2RCEslFrgzLltoP9j8XIbsyDcfCt2WWyX+CM96rBoNM+IToAkFOugg==}
+    dependencies:
+      '@swc/counter': 0.1.3
     dev: false
 
   /@tokenizer/token@0.3.0:
@@ -7148,10 +7266,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /micro-memoize@4.1.2:
-    resolution: {integrity: sha512-+HzcV2H+rbSJzApgkj0NdTakkC+bnyeiUxgT6/m7mjcz1CmM22KYFKp+EVj1sWe4UYcnriJr5uqHQD/gMHLD+g==}
-    dev: false
-
   /micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
@@ -7798,8 +7912,8 @@ packages:
     resolution: {integrity: sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==}
     dev: false
 
-  /payload@2.8.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0):
-    resolution: {integrity: sha512-g+FbNWmmx4b/4I9fLxXbx5cKNPCwWJBDTH2SoLqCooAsX5r/NS78Ae5KcWwRH+xVdoiMXG2vQ9Li4npJ+ckJlQ==}
+  /payload@2.12.1(@types/react@18.2.45)(esbuild@0.18.20)(typescript@5.3.3)(webpack@5.89.0):
+    resolution: {integrity: sha512-7RaOfCMM56coFMZW6DsN7bWdB7VdekphzMMmiyFvOEs5GWxvzES3rFjAYqP0udRTA2w1Vmh6vYsI8nfLgn8DAQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
@@ -7810,8 +7924,8 @@ packages:
       '@faceless-ui/scroll-info': 1.3.0(react-dom@18.2.0)(react@18.2.0)
       '@faceless-ui/window-info': 2.1.1(react-dom@18.2.0)(react@18.2.0)
       '@monaco-editor/react': 4.5.1(monaco-editor@0.38.0)(react-dom@18.2.0)(react@18.2.0)
-      '@swc/core': 1.3.76
-      '@swc/register': 0.1.10(@swc/core@1.3.76)
+      '@swc/core': 1.3.107
+      '@swc/register': 0.1.10(@swc/core@1.3.107)
       body-parser: 1.20.2
       body-scroll-lock: 4.0.0-beta.0
       bson-objectid: 2.0.4
@@ -7852,7 +7966,6 @@ packages:
       jwt-decode: 3.1.2
       md5: 2.3.0
       method-override: 3.0.0
-      micro-memoize: 4.1.2
       minimist: 1.2.8
       mkdirp: 1.0.4
       monaco-editor: 0.38.0
@@ -7887,8 +8000,8 @@ packages:
       scheduler: 0.23.0
       scmp: 2.1.0
       sharp: 0.32.6
-      swc-loader: 0.2.3(@swc/core@1.3.76)(webpack@5.89.0)
-      terser-webpack-plugin: 5.3.9(@swc/core@1.3.76)(esbuild@0.18.20)(webpack@5.89.0)
+      swc-loader: 0.2.3(@swc/core@1.3.107)(webpack@5.89.0)
+      terser-webpack-plugin: 5.3.9(@swc/core@1.3.107)(esbuild@0.18.20)(webpack@5.89.0)
       ts-essentials: 7.0.3(typescript@5.3.3)
       use-context-selector: 1.4.1(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)
       uuid: 9.0.1
@@ -9239,7 +9352,7 @@ packages:
       '@babel/runtime': 7.23.6
       '@emotion/cache': 11.11.0
       '@emotion/react': 11.11.3(@types/react@18.2.45)(react@18.2.0)
-      '@floating-ui/dom': 1.5.4
+      '@floating-ui/dom': 1.6.3
       '@types/react-transition-group': 4.4.10
       memoize-one: 6.0.0
       prop-types: 15.8.1
@@ -10159,6 +10272,16 @@ packages:
       picocolors: 1.0.0
     dev: false
 
+  /swc-loader@0.2.3(@swc/core@1.3.107)(webpack@5.89.0):
+    resolution: {integrity: sha512-D1p6XXURfSPleZZA/Lipb3A8pZ17fP4NObZvFCDjK/OKljroqDpPmsBdTraWhVBqUNpcWBQY1imWdoPScRlQ7A==}
+    peerDependencies:
+      '@swc/core': ^1.2.147
+      webpack: '>=2'
+    dependencies:
+      '@swc/core': 1.3.107
+      webpack: 5.89.0(@swc/core@1.3.76)(esbuild@0.18.20)(webpack-cli@4.10.0)
+    dev: false
+
   /swc-loader@0.2.3(@swc/core@1.3.76)(webpack@5.89.0):
     resolution: {integrity: sha512-D1p6XXURfSPleZZA/Lipb3A8pZ17fP4NObZvFCDjK/OKljroqDpPmsBdTraWhVBqUNpcWBQY1imWdoPScRlQ7A==}
     peerDependencies:
@@ -10293,7 +10416,7 @@ packages:
       webpack: 5.89.0(@swc/core@1.3.76)(esbuild@0.18.20)(webpack-cli@4.10.0)
     dev: false
 
-  /terser-webpack-plugin@5.3.9(@swc/core@1.3.76)(esbuild@0.18.20)(webpack@5.89.0):
+  /terser-webpack-plugin@5.3.9(@swc/core@1.3.107)(esbuild@0.18.20)(webpack@5.89.0):
     resolution: {integrity: sha512-ZuXsqE07EcggTWQjXUj+Aot/OMcD0bMKGgF63f7UxYcu5/AJF53aIpK1YoP5xR9l6s/Hy2b+t1AM0bLNPRuhwA==}
     engines: {node: '>= 10.13.0'}
     peerDependencies:
@@ -10310,7 +10433,7 @@ packages:
         optional: true
     dependencies:
       '@jridgewell/trace-mapping': 0.3.20
-      '@swc/core': 1.3.76
+      '@swc/core': 1.3.107
       esbuild: 0.18.20
       jest-worker: 27.5.1
       schema-utils: 3.3.0
