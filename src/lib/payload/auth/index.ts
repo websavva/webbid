@@ -16,5 +16,5 @@ export const authModule = {
     httpClient.get<GetMeResponse>('users/me', options),
 
   logout: (options?: Options) =>
-    httpClient.get<boolean>('users/logout', options),
+    httpClient.post<boolean>('users/logout', options),
 };
