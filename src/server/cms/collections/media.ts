@@ -2,17 +2,20 @@ import { join } from 'path';
 
 import type { CollectionConfig, Access } from 'payload/types';
 
-import { Role } from '@/consts/roles';
+import { isAdmin, mergeCollectionAccesses } from '../access';
 
-const isAdminOrHasAccessToImages: Access = ({ req: { user } }) => {
-  if (!user || user.role !== Role.Admin) return false;
-
+const hasAccessToImages: Access = ({ req: { user } }) => {
   return {
     user: {
       equals: user.id,
     },
   };
 };
+
+const isAdminOrHasAccessToImages = mergeCollectionAccesses(
+  isAdmin,
+  hasAccessToImages
+);
 
 export const Media: CollectionConfig = {
   slug: 'media',
