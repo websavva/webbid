@@ -11,6 +11,8 @@ export interface Config {
     users: User;
     media: Media;
     products: Product;
+    orders: Order;
+    productFiles: ProductFile;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -89,6 +91,7 @@ export interface Product {
   description?: string | null;
   price: number;
   category: 'ui_kits' | 'icons';
+  productFile: number | ProductFile;
   approvedForSale?: ('pending' | 'denied' | 'approved') | null;
   priceId?: string | null;
   stripeId?: string | null;
@@ -96,6 +99,34 @@ export interface Product {
     image: number | Media;
     id?: string | null;
   }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productFiles".
+ */
+export interface ProductFile {
+  id: number;
+  user?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  _isPaid: boolean;
+  user: number | User;
+  products: (number | Product)[];
   updatedAt: string;
   createdAt: string;
 }

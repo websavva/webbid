@@ -1,18 +1,17 @@
 import { User } from '#server/cms/collections/types';
 
-import { BeforeChangeHook } from 'payload/dist/collections/config/types'
-import { Access, CollectionConfig } from 'payload/types'
+import { BeforeChangeHook } from 'payload/dist/collections/config/types';
+import { Access, CollectionConfig } from 'payload/types';
+
+import { isAdmin, mergeCollectionAccesses } from '../access';
 
 const addUser: BeforeChangeHook = ({ req, data }) => {
-  const user = req.user as User | null
-  return { ...data, user: user?.id }
-}
+  const user = req.user as User | null;
+  return { ...data, user: user?.id };
+};
 
 const isOwnerOrPurchased: Access = async ({ req }) => {
-  const user = req.user as User | null
-
-  if (user?.role === 'admin') return true
-  if (!user) return false
+  const user = req.user as User;
 
   const { docs: products } = await req.payload.find({
     collection: 'products',
@@ -22,11 +21,9 @@ const isOwnerOrPurchased: Access = async ({ req }) => {
         equals: user.id,
       },
     },
-  })
+  });
 
-  const ownProductFileIds = products
-    .map((prod) => prod.productFiles)
-    .flat()
+  const ownProductFileIds = products.map((prod) => prod.productFile).flat();
 
   const { docs: orders } = await req.payload.find({
     collection: 'orders',
@@ -36,33 +33,30 @@ const isOwnerOrPurchased: Access = async ({ req }) => {
         equals: user.id,
       },
     },
-  })
+  });
 
   const purchasedProductFileIds = orders
     .map((order) => {
       return order.products.map((product) => {
-        if (typeof product === 'string')
+        if (typeof product === 'number')
           return req.payload.logger.error(
             'Search depth is not sufficient to find purchased file IDs'
-          )
+          );
 
-        return typeof product.product_file === 'string'
-          ? product.product_file
-          : product.product_file.id
-      })
+        return typeof product.productFile === 'number'
+          ? product.productFile
+          : product.productFile.id;
+      });
     })
     .filter(Boolean)
-    .flat()
+    .flat();
 
   return {
     id: {
-      in: [
-        ...ownProductFileIds,
-        ...purchasedProductFileIds,
-      ],
+      in: [...ownProductFileIds, ...purchasedProductFileIds],
     },
-  }
-}
+  };
+};
 
 export const ProductFiles: CollectionConfig = {
   slug: 'productFiles',
@@ -73,18 +67,14 @@ export const ProductFiles: CollectionConfig = {
     beforeChange: [addUser],
   },
   access: {
-    read: isOwnerOrPurchased,
+    read: mergeCollectionAccesses(isAdmin, isOwnerOrPurchased),
     update: ({ req }) => req.user.role === 'admin',
     delete: ({ req }) => req.user.role === 'admin',
   },
   upload: {
     staticURL: '/product_files',
     staticDir: 'product_files',
-    mimeTypes: [
-      'image/*',
-      'font/*',
-      'application/postscript',
-    ],
+    mimeTypes: ['image/*', 'font/*', 'application/postscript'],
   },
   fields: [
     {
@@ -98,4 +88,4 @@ export const ProductFiles: CollectionConfig = {
       required: true,
     },
   ],
-}
+};
