@@ -16,10 +16,10 @@ export const productsRouter = router({
         formatSortParams
       )
     )
-    .query(async ({ input: query }) => {
+    .query(({ input: query }) => {
       const { page, limit, category, sort } = query;
 
-      const w = await CMS.client.find({
+      return CMS.client.find({
         collection: 'products',
         where: {
           category: {
