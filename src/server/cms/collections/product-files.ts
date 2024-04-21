@@ -1,14 +1,9 @@
 import { User } from '#server/cms/collections/types';
 
-import { BeforeChangeHook } from 'payload/dist/collections/config/types';
 import { Access, CollectionConfig } from 'payload/types';
 
+import { addUser } from '../hooks';
 import { isAdmin, mergeCollectionAccesses } from '../access';
-
-const addUser: BeforeChangeHook = ({ req, data }) => {
-  const user = req.user as User | null;
-  return { ...data, user: user?.id };
-};
 
 const isOwnerOrPurchased: Access = async ({ req }) => {
   const user = req.user as User;
@@ -68,8 +63,8 @@ export const ProductFiles: CollectionConfig = {
   },
   access: {
     read: mergeCollectionAccesses(isAdmin, isOwnerOrPurchased),
-    update: ({ req }) => req.user.role === 'admin',
-    delete: ({ req }) => req.user.role === 'admin',
+    update: isAdmin,
+    delete: isAdmin,
   },
   upload: {
     staticURL: '/product_files',

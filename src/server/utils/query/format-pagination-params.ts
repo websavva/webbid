@@ -4,8 +4,11 @@ export const formatPaginationParams = <Q extends PaginationQuery>({
   perPage: limit,
   ...otherQueryParams
 }: Q) => {
+  const isPaginationEnabled = limit !== null;
+
   return {
     ...otherQueryParams,
-    limit,
+    limit: isPaginationEnabled ? limit : undefined,
+    pagination: isPaginationEnabled,
   };
 };

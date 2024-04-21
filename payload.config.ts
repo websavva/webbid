@@ -27,6 +27,8 @@ export default buildConfig({
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
     },
+
+    migrationDir: path.resolve(__dirname, '../src/server/migrations')
   }),
 
   typescript: {

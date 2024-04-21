@@ -1,11 +1,16 @@
-import type { CollectionConfig, FieldAccess } from 'payload/types';
+import type { CollectionConfig } from 'payload/types';
 
-import { PRODUCT_CATEGORIES } from '@/config/product-categories';
 import { ProductStatus } from '@/consts/product-status';
-import { isAdmin } from '../access';
 
-export const Product: CollectionConfig = {
+import { isAdmin } from '../access';
+import { addUser } from '../hooks';
+
+export const Products: CollectionConfig = {
   slug: 'products',
+
+  hooks: {
+    beforeChange: [addUser],
+  },
 
   fields: [
     {
@@ -40,16 +45,14 @@ export const Product: CollectionConfig = {
     {
       name: 'category',
       label: 'Category',
-      type: 'select',
-      options: PRODUCT_CATEGORIES.map(({ label, id: value }) => ({
-        label,
-        value,
-      })),
+      type: 'relationship',
+      relationTo: 'productCategories',
       required: true,
+      hasMany: false,
     },
     {
       name: 'productFile',
-      label: 'Product file',
+      label: 'Product File',
       type: 'relationship',
       required: true,
       relationTo: 'productFiles',

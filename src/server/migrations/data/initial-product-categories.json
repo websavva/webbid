@@ -1,0 +1,44 @@
+[
+  {
+    "label": "UI Kits",
+    "id": "ui_kits",
+    "features": [
+      {
+        "name": "Editor picks",
+        "href": "/products?category=ui_kits",
+        "externalImageUrl": "/nav/ui-kits/mixed.jpg"
+      },
+      {
+        "name": "New Arrivals",
+        "href": "/products?ategory=ui_kits&sort=desc",
+        "externalImageUrl": "/nav/ui-kits/blue.jpg"
+      },
+      {
+        "name": "Bestsellers",
+        "href": "/products?category=ui_kits",
+        "externalImageUrl": "/nav/ui-kits/purple.jpg"
+      }
+    ]
+  },
+  {
+    "label": "Icons",
+    "id": "icons",
+    "features": [
+      {
+        "name": "Favorite Icon Picks",
+        "href": "/products?category=icons",
+        "externalImageUrl": "/nav/icons/picks.jpg"
+      },
+      {
+        "name": "New Arrivals",
+        "href": "/products?category=icons&sort=desc",
+        "externalImageUrl": "/nav/icons/new.jpg"
+      },
+      {
+        "name": "Bestselling Icons",
+        "href": "/products?category=icons",
+        "externalImageUrl": "/nav/icons/bestsellers.jpg"
+      }
+    ]
+  }
+]

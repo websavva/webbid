@@ -2,7 +2,8 @@ import { join } from 'path';
 
 import type { CollectionConfig, Access } from 'payload/types';
 
-import { isAdmin, mergeCollectionAccesses } from '../access';
+import { isAdmin, isAuthenticated, mergeCollectionAccesses } from '../access';
+import { addUser } from '../hooks';
 
 const hasAccessToImages: Access = ({ req: { user } }) => {
   return {
@@ -21,18 +22,11 @@ export const Media: CollectionConfig = {
   slug: 'media',
 
   hooks: {
-    beforeChange: [
-      ({ req, data }) => {
-        return {
-          ...data,
-          user: req.user.id,
-        };
-      },
-    ],
+    beforeChange: [addUser],
   },
 
   access: {
-    create: isAdminOrHasAccessToImages,
+    create: isAuthenticated,
     update: isAdminOrHasAccessToImages,
     delete: isAdminOrHasAccessToImages,
     read: () => true,
@@ -71,6 +65,9 @@ export const Media: CollectionConfig = {
       type: 'relationship',
       hasMany: false,
       relationTo: 'users',
+      admin: {
+        condition: () => false,
+      },
     },
   ],
 };

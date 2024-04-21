@@ -13,6 +13,8 @@ export interface Config {
     products: Product;
     orders: Order;
     productFiles: ProductFile;
+    productCategoryFeatures: ProductCategoryFeature;
+    productCategories: ProductCategory;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -90,7 +92,7 @@ export interface Product {
   name: string;
   description?: string | null;
   price: number;
-  category: 'ui_kits' | 'icons';
+  category: number | ProductCategory;
   productFile: number | ProductFile;
   approvedForSale?: ('pending' | 'denied' | 'approved') | null;
   priceId?: string | null;
@@ -99,6 +101,17 @@ export interface Product {
     image: number | Media;
     id?: string | null;
   }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productCategories".
+ */
+export interface ProductCategory {
+  id: number;
+  name: string;
+  label: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -127,6 +140,20 @@ export interface Order {
   _isPaid: boolean;
   user: number | User;
   products: (number | Product)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productCategoryFeatures".
+ */
+export interface ProductCategoryFeature {
+  id: number;
+  name: string;
+  href: string;
+  category: number | ProductCategory;
+  externalImageUrl?: string | null;
+  image?: number | Media | null;
   updatedAt: string;
   createdAt: string;
 }

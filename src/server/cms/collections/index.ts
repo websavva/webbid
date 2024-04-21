@@ -1,12 +1,25 @@
-export * from './user';
+export * from './users';
 export * from './media';
-export * from './product';
+export * from './products';
 export * from './orders';
+export * from './product-files';
+export * from './product-categories';
+export * from './product-category-features';
 
-import { User } from './user';
+import { Users } from './users';
 import { Media } from './media';
-import { Product } from './product';
+import { Products } from './products';
 import { Orders } from './orders';
 import { ProductFiles } from './product-files';
+import { ProductCategories } from './product-categories';
+import { ProductCategoryFeatures } from './product-category-features';
 
-export const collections = [User, Media, Product, Orders, ProductFiles];
+export const collections = [
+  Users,
+  Media,
+  Products,
+  Orders,
+  ProductFiles,
+  ProductCategoryFeatures,
+  ProductCategories,
+];

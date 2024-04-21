@@ -3,7 +3,7 @@ import type { CollectionConfig } from 'payload/types';
 import { SignUpConfirmationTemplate } from '#server/mail/templates';
 import { Role } from '@/consts/roles';
 
-export const User: CollectionConfig = {
+export const Users: CollectionConfig = {
   slug: 'users',
 
   auth: {

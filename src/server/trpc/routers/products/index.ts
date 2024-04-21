@@ -10,8 +10,7 @@ import {
 } from '@/server/utils/query';
 import { ProductStatus } from '@/consts/product-status';
 
-export const pipe = <R>(...fns: Array<(a: R) => R>) =>
-  fns.reduce((prevFn, nextFn) => (value) => nextFn(prevFn(value)));
+import { productCategoriesRouter } from './categories';
 
 export const productsRouter = router({
   getProducts: publicProcedure
@@ -21,7 +20,7 @@ export const productsRouter = router({
         .default({})
     )
     .query(({ input: query }) => {
-      const { page, limit, sort, ...whereParams } = query;
+      const { page, limit, sort, pagination, ...whereParams } = query;
 
       const where = {
         ...toWhereEquals(whereParams),
@@ -40,4 +39,6 @@ export const productsRouter = router({
         depth: 1,
       });
     }),
+
+  categories: productCategoriesRouter,
 });

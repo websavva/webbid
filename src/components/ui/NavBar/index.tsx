@@ -4,10 +4,16 @@ import { Logo } from '../Logo';
 import { Container } from '../Container';
 import { NavBarCategoryMenu } from './CategoryMenu';
 import { NavBarRightMenu } from './RightMenu';
+import { trpcClient } from '@/lib/trpc';
 
 export type NavBarProps = DefineProps<{}, HTMLElement>;
 
-export function NavBar({ className, ...attrs }: NavBarProps) {
+export async function NavBar({ className, ...attrs }: NavBarProps) {
+  const { docs: categories } =
+    await trpcClient.products.categories.getCategories.query({
+      perPage: 3,
+    });
+
   return (
     <nav
       className='flex justify-center sticky h-20 top-0 bg-white w-full z-40'
@@ -17,7 +23,7 @@ export function NavBar({ className, ...attrs }: NavBarProps) {
         <div className='flex items-center'>
           <Logo className='w-10 h-10 mr-8' />
 
-          <NavBarCategoryMenu />
+          <NavBarCategoryMenu categories={categories} />
         </div>
 
         <NavBarRightMenu />
