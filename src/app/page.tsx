@@ -3,7 +3,6 @@ import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Perk, type PerkProps } from '@/components/ui/Perk';
-import { ImageSlider } from '@/components/ImageSlider';
 
 const perks: PerkProps[] = [
   {
@@ -27,12 +26,6 @@ const perks: PerkProps[] = [
 ];
 
 export default async function Home() {
-  const imageUrls = [
-    '/nav/icons/picks.jpg',
-    '/nav/icons/new.jpg',
-    '/nav/icons/bestsellers.jpg',
-  ];
-
   return (
     <>
       <section className='flex justify-center py-20'>
@@ -57,8 +50,6 @@ export default async function Home() {
               Our quality promise &rarr;
             </Button>
           </div>
-
-          <ImageSlider imageUrls={imageUrls} className='max-w-80' />
         </Container>
       </section>
 
