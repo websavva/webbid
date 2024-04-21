@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 import type { GetMeResponse } from '@/lib/payload/auth';
-import type { UserCredentialsDto } from '@/server/dtos/auth';
+import type { UserCredentialsDto } from '#server/dtos/auth';
 
 export type AuthInfo = GetMeResponse;
 

@@ -1,8 +1,8 @@
-import { GetProductCategoriesQuerySchema } from '@/server/dtos/products/categories';
+import { GetProductCategoriesQuerySchema } from '#server/dtos/products/categories';
 import { router, publicProcedure } from '../../helpers';
-import { formatPaginationParams, formatSortParams } from '@/server/utils/query';
-import { CMS } from '@/server/cms';
-import { GetProductCategoryFeaturesSchema } from '@/server/dtos/products/categories/features';
+import { formatPaginationParams, formatSortParams } from '#server/utils/query';
+import { CMS } from '#server/cms';
+import { GetProductCategoryFeaturesSchema } from '#server/dtos/products/categories/features';
 
 export const productCategoriesRouter = router({
   getCategories: publicProcedure

@@ -1,13 +1,13 @@
 import { router, publicProcedure } from '#server/trpc/helpers';
 import { CMS } from '#server/cms';
 
-import { GetProductsQuerySchema } from '@/server/dtos/products';
+import { GetProductsQuerySchema } from '#server/dtos/products';
 
 import {
   formatPaginationParams,
   formatSortParams,
   toWhereEquals,
-} from '@/server/utils/query';
+} from '#server/utils/query';
 import { ProductStatus } from '@/consts/product-status';
 
 import { productCategoriesRouter } from './categories';

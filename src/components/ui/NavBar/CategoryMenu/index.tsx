@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { DefineProps } from '@/types';
-import type { ProductCategory } from '@/server/cms/collections/types';
+import type { ProductCategory } from '#server/cms/collections/types';
 
 import { NavBarCategoryDropdown } from './Dropdown';
 

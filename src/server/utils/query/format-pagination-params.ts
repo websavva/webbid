@@ -1,4 +1,4 @@
-import type { PaginationQuery } from '@/server/dtos/pagination';
+import type { PaginationQuery } from '#server/dtos/pagination';
 
 export const formatPaginationParams = <Q extends PaginationQuery>({
   perPage: limit,

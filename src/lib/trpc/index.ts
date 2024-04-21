@@ -1,6 +1,6 @@
 import { createTRPCProxyClient, httpLink } from '@trpc/client';
 
-import type { AppRouter } from '@/server/trpc/types';
+import type { AppRouter } from '#server/trpc/types';
 
 export const trpcClient = createTRPCProxyClient<AppRouter>({
   links: [

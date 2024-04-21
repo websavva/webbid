@@ -7,7 +7,7 @@ import { AuthContext, type AuthInfo, getDefaultAuthInfo } from './context';
 import { GetMeResponse } from '@/lib/payload/auth';
 import { payloadApi } from '@/lib/payload';
 import { trpcClient } from '@/lib/trpc';
-import { UserCredentialsDto } from '@/server/dtos/auth';
+import { UserCredentialsDto } from '#server/dtos/auth';
 
 export interface AuthContextProviderProps extends PropsWithChildren {
   initialValue?: AuthInfo;
