@@ -1,6 +1,7 @@
 import { Access, CollectionConfig } from 'payload/types';
 
 import { isAdmin } from '../access';
+import { addUser } from '../hooks';
 
 const isOwner: Access = (ctx) => {
   if (isAdmin(ctx)) return true;
@@ -18,6 +19,11 @@ export const Orders: CollectionConfig = {
     useAsTitle: 'Your Orders',
     description: 'A summary of all your orders on DigitalMarketplace.',
   },
+
+  hooks: {
+    beforeChange: [addUser],
+  },
+
   access: {
     read: isOwner,
     update: isAdmin,
