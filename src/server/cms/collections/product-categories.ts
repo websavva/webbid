@@ -9,6 +9,11 @@ export const ProductCategories: CollectionConfig = {
     update: isAdmin,
     delete: isAdmin,
   },
+
+  admin: {
+    useAsTitle: 'label',
+  },
+
   fields: [
     {
       name: 'name',

@@ -3,6 +3,7 @@ import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Perk, type PerkProps } from '@/components/ui/Perk';
+import { ProductReels } from '@/components/ProductReels';
 
 const perks: PerkProps[] = [
   {
@@ -58,6 +59,16 @@ export default async function Home() {
           {perks.map((props) => (
             <Perk key={props.title} {...props} className='text-center w-3/12' />
           ))}
+        </Container>
+      </section>
+
+      <section className='py-16 border-t-2 flex justify-center'>
+        <Container className='w-full'>
+          <div className='text-2xl text-gray-800 font-bold mb-8'>
+            Brand New
+          </div>
+
+          <ProductReels title='Brand New' className='gap-20'/>
         </Container>
       </section>
     </>

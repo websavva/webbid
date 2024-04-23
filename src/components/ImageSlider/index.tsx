@@ -1,5 +1,7 @@
 'use client';
+
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
@@ -63,12 +65,15 @@ export const ImageSlider = ({
       <div className='w-full flex transition-transform' style={viewStyle}>
         {imageUrls.map((imageUrl, index) => {
           return (
-            <img
-              key={`${imageUrl}${index}`}
-              src={imageUrl}
-              alt=''
-              className='w-full h-auto'
-            />
+            <div key={`${imageUrl}${index}`} className='w-full flex-[0_0_100%]'>
+              <Image
+                src={imageUrl}
+                alt=''
+                width={1e3}
+                height={1e3}
+                className='size-full object-cover'
+              />
+            </div>
           );
         })}
       </div>
