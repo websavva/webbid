@@ -5,6 +5,7 @@ import { Container } from '../Container';
 import { NavBarCategoryMenu } from './CategoryMenu';
 import { NavBarRightMenu } from './RightMenu';
 import { trpcClient } from '@/lib/trpc';
+import Link from 'next/link';
 
 export type NavBarProps = DefineProps<{}, HTMLElement>;
 
@@ -21,7 +22,9 @@ export async function NavBar({ className, ...attrs }: NavBarProps) {
     >
       <Container className='flex justify-between items-center border-b-2 border-gray-100 w-full'>
         <div className='flex items-center'>
-          <Logo className='w-10 h-10 mr-8' />
+          <Link href='/' className='mr-8'>
+            <Logo className='w-10 h-10' />
+          </Link>
 
           <NavBarCategoryMenu categories={categories} />
         </div>

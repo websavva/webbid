@@ -18,7 +18,7 @@ export const ProductCardSkeleton = ({ className }: DefineProps<{}>) => {
     <div className={cn(className)}>
       <Skeleton className='h-44 mb-6 w-full' />
 
-      <Skeleton className='w-full h-5 mb-2'/>
+      <Skeleton className='w-full h-5 mb-2' />
 
       <Skeleton className='w-1/2 h-5 mb-2' />
 
@@ -61,7 +61,9 @@ export const ProductCard = ({
         <ImageSlider imageUrls={imageUrls} className='h-72 mb-6' />
       )}
 
-      <div className='mb-2 text-xl font-semibold'>{name}</div>
+      <Link href={`/products/${id}`} className='mb-2 text-xl font-semibold'>
+        {name}
+      </Link>
 
       {categoryLabel && (
         <div className='text-gray-500 font-medium text-base mb-2'>
