@@ -101,6 +101,7 @@ export interface Product {
     image: number | Media;
     id?: string | null;
   }[];
+  imageUrls: string[];
   updatedAt: string;
   createdAt: string;
 }

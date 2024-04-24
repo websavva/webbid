@@ -32,10 +32,12 @@ export default async function ProductPage({
 
 
   return (
-    <Container className='py-12 mx-auto'>
-      <Breadcrumbs items={breadcrumbItems} className='text-gray-600' />
+    <Container className='py-12 mx-auto grid grid-cols-[repeat(2,1fr)] gap-14'>
+      <div>
+        <Breadcrumbs items={breadcrumbItems} className='text-gray-600' />
 
-      <h1 className='mt-6 text-3xl font-bold'>{title}</h1>
+        <h1 className='mt-6 text-3xl font-bold'>{title}</h1>
+      </div>
     </Container>
   );
 }

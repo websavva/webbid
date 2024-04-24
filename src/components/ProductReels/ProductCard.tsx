@@ -40,18 +40,8 @@ export const ProductCard = ({
     price,
     category,
 
-    images,
+    imageUrls,
   } = product;
-
-  const imageUrls = images
-    .map(({ image }) => {
-      if (typeof image === 'object' && image.url) {
-        return image.url!;
-      } else {
-        return null;
-      }
-    })
-    .filter(Boolean) as string[];
 
   const categoryLabel = typeof category === 'object' && category?.label;
 

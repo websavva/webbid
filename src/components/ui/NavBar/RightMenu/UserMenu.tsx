@@ -43,7 +43,7 @@ export function UserMenu({ className }: { className?: string }) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href='/profile' className='flex items-center cursor-pointer'>
+            <Link href='/profile' className='flex items-center cursor-pointer w-full'>
               <User className='mr-2 h-4 w-4' />
 
               <span>Profile</span>
@@ -51,7 +51,7 @@ export function UserMenu({ className }: { className?: string }) {
           </DropdownMenuItem>
           {isAdmin && (
             <DropdownMenuItem asChild>
-              <Link href='/admin' className='flex items-center cursor-pointer'>
+              <Link href='/admin' className='flex items-center cursor-pointer w-full'>
                 <MenuSquare className='mr-2 h-4 w-4' />
 
                 <span>Admin Dashboard</span>
@@ -61,7 +61,7 @@ export function UserMenu({ className }: { className?: string }) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href='/logout' className='flex items-center cursor-pointer'>
+          <Link href='/logout' className='flex items-center cursor-pointer w-full'>
             <LogOut className='mr-2 h-4 w-4' />
             <span>Log out</span>
           </Link>

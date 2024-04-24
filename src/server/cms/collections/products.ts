@@ -1,15 +1,36 @@
 import type { CollectionConfig } from 'payload/types';
+import type { AfterReadHook } from 'payload/dist/collections/config/types';
 
 import { ProductStatus } from '@/consts/product-status';
+import type { Product } from './types';
 
 import { isAdmin } from '../access';
 import { addUser } from '../hooks';
+
+const addImageUrls: AfterReadHook<Product> = ({ doc: product }) => {
+  const imageUrls = product.images
+    .map(({ image }) => {
+      if (typeof image === 'object' && image.url) {
+        return image.url!;
+      } else {
+        return null;
+      }
+    })
+    .filter(Boolean) as string[];
+
+  return {
+    ...product,
+    imageUrls,
+  };
+};
 
 export const Products: CollectionConfig = {
   slug: 'products',
 
   hooks: {
     beforeChange: [addUser],
+
+    afterRead: [addImageUrls],
   },
 
   fields: [
