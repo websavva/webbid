@@ -51,7 +51,7 @@ export const ProductCard = ({
         <ImageSlider imageUrls={imageUrls} className='h-72 mb-6' />
       )}
 
-      <Link href={`/products/${id}`} className='mb-2 text-xl font-semibold'>
+      <Link href={`/products/${id}`} className='mb-2 text-xl font-semibold line-clamp-1'>
         {name}
       </Link>
 

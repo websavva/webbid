@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Where } from 'payload/types';
 
 import { router, publicProcedure } from '#server/trpc/helpers';
 import { CMS } from '#server/cms';
@@ -7,7 +8,6 @@ import { GetProductsQuerySchema } from '#server/dtos/products';
 import {
   formatPaginationParams,
   formatSortParams,
-  toWhereEquals,
 } from '#server/utils/query';
 import { ProductStatus } from '@/consts/product-status';
 
@@ -21,15 +21,19 @@ export const productsRouter = router({
         .default({})
     )
     .query(({ input: query }) => {
-      const { page, limit, sort, pagination, ...whereParams } = query;
+      const { page, limit, sort, pagination, category } = query;
 
-      const where = {
-        ...toWhereEquals(whereParams),
-
+      const where: Where = {
         approvedForSale: {
           equals: ProductStatus.Approved,
         },
       };
+
+      if (category) {
+        where['category.name'] = {
+          equals: category,
+        };
+      }
 
       return CMS.client.find({
         collection: 'products',
@@ -37,6 +41,7 @@ export const productsRouter = router({
         page,
         limit,
         sort,
+        pagination,
         depth: 1,
       });
     }),

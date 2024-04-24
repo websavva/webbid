@@ -7,11 +7,16 @@ import { ProductCard, ProductCardSkeleton } from './ProductCard';
 
 export type ProductReelsProps = DefineProps<{
   count?: number;
+  category?: string;
 }>;
 
-const ProductList = async ({ count = 3 }: Pick<ProductReelsProps, 'count'>) => {
+const ProductList = async ({
+  count = 3,
+  category,
+}: Pick<ProductReelsProps, 'count' | 'category'>) => {
   const { docs: products } = await trpcClient.products.getProducts.query({
     perPage: count,
+    category,
   });
 
   return products.map((product) => (
@@ -30,6 +35,7 @@ const ProductListSkeleton = ({
 export const ProductReels = ({
   title,
   count = 3,
+  category,
   className,
   ...attrs
 }: ProductReelsProps) => {
@@ -47,7 +53,7 @@ export const ProductReels = ({
       style={style}
     >
       <Suspense fallback={<ProductListSkeleton count={count} />}>
-        <ProductList count={count} />
+        <ProductList count={count} category={category} />
       </Suspense>
     </div>
   );
