@@ -62,10 +62,10 @@ export const ImageSlider = ({
         className
       )}
     >
-      <div className='w-full flex transition-transform' style={viewStyle}>
+      <div className='size-full flex transition-transform' style={viewStyle}>
         {imageUrls.map((imageUrl, index) => {
           return (
-            <div key={`${imageUrl}${index}`} className='w-full flex-[0_0_100%]'>
+            <div key={`${imageUrl}${index}`} className='size-full flex-[0_0_100%]'>
               <Image
                 src={imageUrl}
                 alt=''

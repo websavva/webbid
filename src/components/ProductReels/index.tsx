@@ -32,7 +32,7 @@ const ProductList = async ({
     except,
   });
 
-  if (!products.length) {
+  if (products.length) {
     const style = {
       '--column-counts': count,
     } as CSSProperties;
