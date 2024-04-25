@@ -5,10 +5,7 @@ import { router, publicProcedure } from '#server/trpc/helpers';
 import { CMS } from '#server/cms';
 import { GetProductsQuerySchema } from '#server/dtos/products';
 
-import {
-  formatPaginationParams,
-  formatSortParams,
-} from '#server/utils/query';
+import { formatPaginationParams, formatSortParams } from '#server/utils/query';
 import { ProductStatus } from '@/consts/product-status';
 
 import { productCategoriesRouter } from './categories';
@@ -21,7 +18,7 @@ export const productsRouter = router({
         .default({})
     )
     .query(({ input: query }) => {
-      const { page, limit, sort, pagination, category } = query;
+      const { page, limit, sort, pagination, category, except } = query;
 
       const where: Where = {
         approvedForSale: {
@@ -32,6 +29,12 @@ export const productsRouter = router({
       if (category) {
         where['category.name'] = {
           equals: category,
+        };
+      }
+
+      if (except?.length) {
+        where['id'] = {
+          not_in: except,
         };
       }
 

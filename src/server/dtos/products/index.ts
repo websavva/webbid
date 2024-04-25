@@ -9,6 +9,7 @@ export const GetProductsQuerySchema = PaginationQuerySchema.merge(
   getSortQuerySchema(SORTABLE_FIELDS)
 ).extend({
   category: z.string().optional(),
+  except: z.array(z.number()).optional(),
 });
 
 export type GetProductsQuery = z.infer<typeof GetProductsQuerySchema>;
