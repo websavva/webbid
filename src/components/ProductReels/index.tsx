@@ -1,27 +1,61 @@
-import { CSSProperties, Suspense } from 'react';
+import { CSSProperties, ReactNode, Suspense, FunctionComponent } from 'react';
 
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
 import { cn } from '@/lib/utils/cn';
+import type { GetProductsQuery } from '@/server/dtos/products';
+
 import { ProductCard, ProductCardSkeleton } from './ProductCard';
 
-export type ProductReelsProps = DefineProps<{
-  count?: number;
-  category?: string;
-}>;
+export type ProductReelsProps = DefineProps<
+  {
+    count?: number;
+    EmptyPlaceholder?: FunctionComponent<void>;
+  } & Pick<GetProductsQuery, 'category' | 'except'>
+>;
+
+export const DefaultEmptyPlaceholder = () => (
+  <div className='text-gray-500'>No products were found...</div>
+);
 
 const ProductList = async ({
   count = 3,
   category,
-}: Pick<ProductReelsProps, 'count' | 'category'>) => {
+  except,
+  EmptyPlaceholder = DefaultEmptyPlaceholder,
+  className,
+  ...attrs
+}: ProductReelsProps) => {
   const { docs: products } = await trpcClient.products.getProducts.query({
     perPage: count,
     category,
+    except,
   });
 
-  return products.map((product) => (
-    <ProductCard key={product.id} product={product} />
-  ));
+  if (!products.length) {
+    const style = {
+      '--column-counts': count,
+    } as CSSProperties;
+
+    return (
+      <>
+        <div
+          {...attrs}
+          className={cn(
+            'grid grid-cols-[repeat(var(--column-counts),_1fr)] gap-8',
+            className
+          )}
+          style={style}
+        >
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </>
+    );
+  } else {
+    return <>{EmptyPlaceholder()}</>;
+  }
 };
 
 const ProductListSkeleton = ({
@@ -33,28 +67,21 @@ const ProductListSkeleton = ({
 };
 
 export const ProductReels = ({
-  title,
   count = 3,
   category,
-  className,
+  except,
+  EmptyPlaceholder,
   ...attrs
 }: ProductReelsProps) => {
-  const style = {
-    '--column-counts': count,
-  } as CSSProperties;
-
   return (
-    <div
-      {...attrs}
-      className={cn(
-        'grid grid-cols-[repeat(var(--column-counts),_1fr)] gap-8',
-        className
-      )}
-      style={style}
-    >
-      <Suspense fallback={<ProductListSkeleton count={count} />}>
-        <ProductList count={count} category={category} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<ProductListSkeleton count={count} />}>
+      <ProductList
+        {...attrs}
+        count={count}
+        category={category}
+        EmptyPlaceholder={EmptyPlaceholder}
+        except={except}
+      />
+    </Suspense>
   );
 };

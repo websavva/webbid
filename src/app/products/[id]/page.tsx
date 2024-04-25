@@ -22,15 +22,21 @@ const breadcrumbItems: BreadcrumbItem[] = [
   },
 ];
 
+const ProductReelsEmptyPlaceholder = () => (
+  <div className='text-gray-500 text-sm font-medium'>No similar products were found...</div>
+);
+
 export default async function ProductPage({
-  params: { id: productId },
+  params: { id: rawProductId },
 }: PagePropsWithParams<{
   id: string;
 }>) {
-  // id validation
-  if (isNaN(+productId)) notFound();
+  const productId = +rawProductId;
 
-  const product = await trpcClient.products.getProductById.query(+productId);
+  // id validation
+  if (isNaN(productId)) notFound();
+
+  const product = await trpcClient.products.getProductById.query(productId);
 
   if (!product) notFound();
 
@@ -91,7 +97,7 @@ export default async function ProductPage({
       </section>
 
       <section className='mt-28'>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center mb-12'>
           <div>
             <h2 className='capitalize mb-3 font-bold text-2xl'>
               Similar {similarProductsLabel}
@@ -112,7 +118,13 @@ export default async function ProductPage({
           </Link>
         </div>
 
-        <ProductReels count={4} category={categoryName} className='mt-12 gap-16'/>
+        <ProductReels
+          count={4}
+          category={categoryName}
+          except={[productId]}
+          EmptyPlaceholder={ProductReelsEmptyPlaceholder}
+          className='gap-16'
+        />
       </section>
     </Container>
   );
