@@ -1,6 +1,7 @@
 'use client';
 
 import { ShoppingBagIcon, ShoppingBasketIcon } from 'lucide-react';
+import Link from 'next/link';
 
 import type { DefineProps } from '@/types';
 import {
@@ -14,12 +15,14 @@ import {
 } from '@/components/ui/Sheet';
 import { Button } from '@/components/ui/Button';
 import { formatPrice } from '@/lib/formatters';
-import Link from 'next/link';
+import { useCart } from '@/hooks/use-cart';
 
 export type ShoppingCartProps = DefineProps<{}>;
 
 export function ShoppingCart({}: ShoppingCartProps) {
-  const itemsCount = 0;
+  const {
+    items: { length: itemsCount },
+  } = useCart();
 
   return (
     <Sheet>
@@ -31,13 +34,13 @@ export function ShoppingCart({}: ShoppingCartProps) {
         >
           <ShoppingBagIcon className='w-5 h-5 cursor-pointer shrink-0 mr-2' />
 
-          <span>0</span>
+          <span>{itemsCount}</span>
         </Button>
       </SheetTrigger>
 
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Cart (0)</SheetTitle>
+          <SheetTitle>{`Cart (${itemsCount})`}</SheetTitle>
         </SheetHeader>
 
         {itemsCount > 0 && (

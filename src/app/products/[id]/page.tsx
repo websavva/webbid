@@ -11,6 +11,7 @@ import { Container } from '@/components/ui/Container';
 import { formatPrice } from '@/lib/formatters';
 import { Button } from '@/components/ui/Button';
 import { ProductReels } from '@/components/ProductReels';
+import { CartButton } from '@/components/cart-button';
 
 const breadcrumbItems: BreadcrumbItem[] = [
   {
@@ -23,7 +24,9 @@ const breadcrumbItems: BreadcrumbItem[] = [
 ];
 
 const ProductReelsEmptyPlaceholder = () => (
-  <div className='text-gray-500 text-sm font-medium'>No similar products were found...</div>
+  <div className='text-gray-500 text-sm font-medium'>
+    No similar products were found...
+  </div>
 );
 
 export default async function ProductPage({
@@ -85,7 +88,7 @@ export default async function ProductPage({
             {description || 'No description yet...'}
           </p>
 
-          <Button className='w-full mt-16'>Add to Cart</Button>
+          <CartButton product={product} className='w-full mt-16' />
 
           <div className='flex items-center justify-center mt-8 text-sm text-gray-500'>
             <ShieldIcon className='mr-2' />
