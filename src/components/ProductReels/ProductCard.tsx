@@ -38,12 +38,10 @@ export const ProductCard = ({
     id,
     name,
     price,
-    category,
+    categoryLabel,
 
     imageUrls,
   } = product;
-
-  const categoryLabel = typeof category === 'object' && category?.label;
 
   return (
     <div {...attrs} className={cn('', className)}>

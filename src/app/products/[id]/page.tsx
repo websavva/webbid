@@ -43,15 +43,21 @@ export default async function ProductPage({
 
   if (!product) notFound();
 
-  const { name: title, price, category, description, imageUrls } = product;
+  const {
+    name: title,
+    price,
+    category,
+    description,
+    imageUrls,
+    categoryLabel,
+  } = product;
 
-  let categoryLabel: string | undefined;
   let similarProductsLabel: string;
   let similarProductsHref = '/products';
   let categoryName: string | undefined;
 
   if (typeof category === 'object') {
-    ({ label: categoryLabel, name: categoryName } = category);
+    ({ name: categoryName } = category);
 
     similarProductsLabel = categoryLabel || 'Products';
     similarProductsHref += `?category=${categoryName}`;

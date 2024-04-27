@@ -24,13 +24,44 @@ const addImageUrls: AfterReadHook<Product> = ({ doc: product }) => {
   };
 };
 
+const addCategoryLabel: AfterReadHook<Product> = async ({
+  doc: product,
+  req,
+}) => {
+  const { category } = product;
+
+  let categoryLabel: string = '';
+
+  if (typeof category === 'number') {
+    const foundCategory = await req.payload
+      .findByID({
+        collection: 'productCategories',
+        id: category,
+      })
+      .catch(() => {
+        console.warn(
+          `[Products]: Product Category with id "${category}" was not found in addCategoryLabel hook`
+        );
+      });
+
+    if (foundCategory) categoryLabel = foundCategory.label;
+  } else {
+    categoryLabel = category.label;
+  }
+
+  return {
+    ...product,
+    categoryLabel,
+  };
+};
+
 export const Products: CollectionConfig = {
   slug: 'products',
 
   hooks: {
     beforeChange: [addUser],
 
-    afterRead: [addImageUrls],
+    afterRead: [addImageUrls, addCategoryLabel],
   },
 
   fields: [

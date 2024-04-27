@@ -101,9 +101,12 @@ export interface Product {
     image: number | Media;
     id?: string | null;
   }[];
-  imageUrls: string[];
   updatedAt: string;
   createdAt: string;
+
+  // virtual fields
+  imageUrls: string[];
+  categoryLabel: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -192,7 +195,6 @@ export interface PayloadMigration {
   updatedAt: string;
   createdAt: string;
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
