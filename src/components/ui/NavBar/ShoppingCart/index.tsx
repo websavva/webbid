@@ -16,13 +16,22 @@ import {
 import { Button } from '@/components/ui/Button';
 import { formatPrice } from '@/lib/formatters';
 import { useCart } from '@/hooks/use-cart';
+import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
 
 export type ShoppingCartProps = DefineProps<{}>;
 
 export function ShoppingCart({}: ShoppingCartProps) {
   const {
+    items,
     items: { length: itemsCount },
   } = useCart();
+
+  const {
+    totalPrice,
+    fee,
+
+    totalPriceWithFee,
+  } = calculatOrderSum(items);
 
   return (
     <Sheet>

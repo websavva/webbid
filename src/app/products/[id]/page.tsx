@@ -9,9 +9,8 @@ import { BreadcrumbItem, Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ImageSlider } from '@/components/ImageSlider';
 import { Container } from '@/components/ui/Container';
 import { formatPrice } from '@/lib/formatters';
-import { Button } from '@/components/ui/Button';
 import { ProductReels } from '@/components/ProductReels';
-import { CartButton } from '@/components/cart-button';
+import { CartButton } from '@/components/CartButton';
 
 const breadcrumbItems: BreadcrumbItem[] = [
   {
