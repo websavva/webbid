@@ -6,20 +6,20 @@ const PURCHASE_FEE_PERCENTAGE =
 const roundPrice = (price: number) => +price.toFixed(2);
 
 export const calculatOrderSum = (products: Product[]) => {
-  const totalPrice = roundPrice(
-    products.reduce((totalPrice, { price }) => {
-      return totalPrice + price;
+  const subTotalPrice = roundPrice(
+    products.reduce((subTotalPrice, { price }) => {
+      return subTotalPrice + price;
     }, 0)
   );
 
-  const fee = roundPrice(PURCHASE_FEE_PERCENTAGE * totalPrice);
+  const fee = roundPrice(PURCHASE_FEE_PERCENTAGE * subTotalPrice);
 
-  const totalPriceWithFee = roundPrice(totalPrice + fee);
+  const totalPrice = roundPrice(subTotalPrice + fee);
 
   return {
-    totalPrice,
+    subTotalPrice,
     fee,
 
-    totalPriceWithFee,
+    totalPrice,
   };
 };
