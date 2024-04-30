@@ -35,29 +35,36 @@ export const CartItem = ({
   } = item;
 
   return (
-    <div {...attrs} className={cn('', className)}>
+    <div {...attrs} className={cn('flex items-start', className)}>
       {thumbnailUrl && (
         <Image
           src={thumbnailUrl}
           alt=''
           width={8e2}
           height={8e2}
-          className='w-auto h-auto min-h-28'
+          className='size-32 object-cover mr-5 rounded-lg'
         />
       )}
 
-      <div>
-        <div>{name}</div>
+      <div className='flex-1'>
+        <div className='font-bold'>{name}</div>
 
-        {categoryLabel && <div>{categoryLabel}</div>}
+        {categoryLabel && (
+          <div className='text-gray-600 text-sm mt-2 font-medium'>
+            {categoryLabel}
+          </div>
+        )}
 
-        <Button size='sm' variant='ghost' onClick={onRemove}>
-          Remove
-          <XIcon />
-        </Button>
+        <button className='flex items-center mt-3 text-sm font-semibold text-gray-500' onClick={onRemove}>
+          <span>
+            Remove
+          </span>
+
+          <XIcon className='size-[1em] ml-1' />
+        </button>
       </div>
 
-      <div>{formatPrice(price)}</div>
+      <div className='ml-2'>{formatPrice(price)}</div>
     </div>
   );
 };

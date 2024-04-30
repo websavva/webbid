@@ -14,7 +14,6 @@ import {
   SheetClose,
 } from '@/components/ui/Sheet';
 import { Button } from '@/components/ui/Button';
-import { formatPrice } from '@/lib/formatters';
 import { useCart } from '@/hooks/use-cart';
 
 import { Cart } from '@/components/Cart';
@@ -42,7 +41,7 @@ export function ShoppingCart({}: ShoppingCartProps) {
         </Button>
       </SheetTrigger>
 
-      <SheetContent>
+      <SheetContent className='sm:max-w-xl'>
         <Cart />
       </SheetContent>
     </Sheet>

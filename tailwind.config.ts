@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 
+import plugin from 'tailwindcss/plugin';
+
 const config = {
   darkMode: ['class'],
   content: [
@@ -72,7 +74,29 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    plugin(function ({ matchUtilities }) {
+      matchUtilities(
+        {
+          'css-var': (value) => {
+            const { groups: { varDeclaration = '' } = {} } =
+              value.match(/var\((?<varDeclaration>.+)\)/) || {};
+
+            const [variarbleName = '', variableValue = ''] =
+              varDeclaration.split('=');
+
+            return {
+              [variarbleName]: variableValue.replace(/_/g, ' '),
+            };
+          },
+        },
+        {
+          type: 'any',
+        }
+      );
+    }),
+  ],
 } satisfies Config;
 
 export default config;
