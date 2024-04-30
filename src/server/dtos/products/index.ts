@@ -10,6 +10,7 @@ export const GetProductsQuerySchema = PaginationQuerySchema.merge(
 ).extend({
   category: z.string().optional(),
   except: z.array(z.number()).optional(),
+  include: z.array(z.number()).optional(),
 });
 
 export type GetProductsQuery = z.infer<typeof GetProductsQuerySchema>;

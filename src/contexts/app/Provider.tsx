@@ -1,6 +1,7 @@
 import { type PropsWithChildren } from 'react';
 
 import { AuthContextProvider } from '../auth/Provider';
+import { CartStoreHydrationProvider } from '../cart/Provider';
 import { AppContext } from './load';
 
 export const AppContextProvider = ({
@@ -11,7 +12,7 @@ export const AppContextProvider = ({
 
   return (
     <AuthContextProvider initialValue={authContextValue}>
-      {children}
+      <CartStoreHydrationProvider>{children}</CartStoreHydrationProvider>
     </AuthContextProvider>
   );
 };

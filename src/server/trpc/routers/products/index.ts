@@ -18,7 +18,8 @@ export const productsRouter = router({
         .default({})
     )
     .query(({ input: query }) => {
-      const { page, limit, sort, pagination, category, except } = query;
+      const { page, limit, sort, pagination, category, except, include } =
+        query;
 
       const where: Where = {
         approvedForSale: {
@@ -32,7 +33,11 @@ export const productsRouter = router({
         };
       }
 
-      if (except?.length) {
+      if (include?.length) {
+        where['id'] = {
+          in: include,
+        };
+      } else if (except?.length) {
         where['id'] = {
           not_in: except,
         };

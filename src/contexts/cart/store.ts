@@ -3,12 +3,16 @@ import { persist } from 'zustand/middleware';
 
 import type { Product } from '#server/cms/collections/types';
 
-import { useClientStore } from './use-client-store';
-
 export interface CartStore {
   items: Product[];
+  _isHydrated: boolean;
+
+  setIsHydrated: (isHydrated: boolean) => void;
+
   addItem: (item: Product) => void;
   removeItem: (id: Product['id']) => void;
+
+  setItems: (id: Product[]) => void;
 
   clear: () => void;
 }
@@ -16,19 +20,32 @@ export interface CartStore {
 export const getDefaultCartStore = (): CartStore => {
   return {
     items: [],
+    _isHydrated: false,
+
+    setIsHydrated: () => {},
 
     addItem: () => {},
 
     removeItem: () => {},
 
+    setItems: () => {},
+
     clear: () => {},
   };
 };
 
-const useCartStore = create(
+export const useCartStore = create(
   persist<CartStore>(
     (set) => ({
       items: [],
+
+      _isHydrated: false,
+
+      setIsHydrated: (isHydrated: boolean) => {
+        set({
+          _isHydrated: isHydrated,
+        });
+      },
 
       addItem: (item) => {
         set((state) => {
@@ -44,6 +61,12 @@ const useCartStore = create(
         });
       },
 
+      setItems: (items: Product[]) => {
+        set({
+          items,
+        });
+      },
+
       clear: () => {
         set(() => {
           return {
@@ -55,9 +78,12 @@ const useCartStore = create(
     {
       version: 1,
       name: 'cart-storage',
+
+      skipHydration: true,
+
+      onRehydrateStorage: () => (state) => {
+        state?.setIsHydrated(true);
+      },
     }
   )
 );
-
-export const useCart = () =>
-  useClientStore(useCartStore, getDefaultCartStore(), (state) => state);

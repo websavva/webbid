@@ -52,7 +52,7 @@ export const CartSummary = ({
   ];
 
   return (
-    <div {...attrs} className={cn('p-3 rounded-lg bg-gray-100', className)}>
+    <div {...attrs} className={cn('p-5 rounded-xl bg-gray-100', className)}>
       <div className='font-bold mb-6'>Order Summary</div>
 
       {billSections.map((billSectionItems, index, { length }) => {

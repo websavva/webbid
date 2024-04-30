@@ -14,18 +14,14 @@ import {
   SheetClose,
 } from '@/components/ui/Sheet';
 import { Button } from '@/components/ui/Button';
-import { useCart } from '@/hooks/use-cart';
+import { useCartStore } from '@/hooks/use-cart-store';
 
 import { Cart } from '@/components/Cart';
 
 export type ShoppingCartProps = DefineProps<{}>;
 
 export function ShoppingCart({}: ShoppingCartProps) {
-  const {
-    items: { length: itemsCount },
-  } = useCart();
-
-
+  const itemsCount = useCartStore((state) => state.items.length);
 
   return (
     <Sheet>
