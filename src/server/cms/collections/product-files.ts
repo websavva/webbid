@@ -1,6 +1,8 @@
-import { User } from '#server/cms/collections/types';
+import { join } from 'path';
 
-import { Access, CollectionConfig } from 'payload/types';
+import type { Access, CollectionConfig } from 'payload/types';
+
+import { User } from '#server/cms/collections/types';
 
 import { addUser } from '../hooks';
 import { isAdmin, mergeCollectionAccesses } from '../access';
@@ -68,7 +70,7 @@ export const ProductFiles: CollectionConfig = {
   },
   upload: {
     staticURL: '/product_files',
-    staticDir: 'product_files',
+    staticDir: join(process.cwd(), 'product_files'),
     mimeTypes: ['image/*', 'font/*', 'application/postscript'],
   },
   fields: [

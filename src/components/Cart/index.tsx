@@ -8,6 +8,7 @@ import flatry from 'await-to-js';
 import { useCartStore } from '@/hooks/use-cart-store';
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
+import { useApi } from '@/hooks/use-api';
 
 import { CartCompositionIcon } from '../ui/icons/CartCompositionIcon';
 import { Button } from '../ui/Button';
@@ -35,6 +36,23 @@ export const Cart = ({
 
     _isHydrated: isCartStoreLoaded,
   } = useCartStore();
+
+  const { pending, makeApiCall: createOrder } = useApi(
+    () => {
+      return trpcClient.orders.createOrder.mutate(items.map(({ id }) => id));
+    },
+    {
+      onSuccess(url) {
+        window.location.replace(url);
+      },
+
+      onError(err) {
+        toast.error(err.message || 'Order creation has failed ! Try again.', {
+          dismissible: true,
+        });
+      },
+    }
+  );
 
   const [isSynchronized, setIsSynchronized] = useState(false);
 
@@ -68,6 +86,12 @@ export const Cart = ({
 
   const listClassName = 'space-y-6 max-h-[28rem] overflow-auto';
 
+  async function onSubmit() {
+    if (pending) return;
+
+    await createOrder();
+  }
+
   return (
     <div {...attrs}>
       <div className='font-bold text-[1.2em] mb-8'>
@@ -100,11 +124,21 @@ export const Cart = ({
 
           <CartSummary items={items} />
 
-          <Button asChild>
-            <Link href='/cart' className='w-full mt-5'>
-              Continue to Checkout
-            </Link>
-          </Button>
+          {isPage ? (
+            <Button
+              className='w-full mt-5'
+              pending={pending}
+              onClick={onSubmit}
+            >
+              Checkout
+            </Button>
+          ) : (
+            <Button asChild>
+              <Link href='/cart' className='w-full mt-5'>
+                Continue to Checkout
+              </Link>
+            </Button>
+          )}
         </>
       )}
 

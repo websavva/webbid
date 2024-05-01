@@ -9,7 +9,7 @@ import { TRPCError } from '@trpc/server';
 export const authRouter = router({
   signUp: publicProcedure
     .input(UserCredentialsDtoSchema)
-    .mutation(async ({ input: userCredentialsDto }) => {
+    .mutation(async ({ input: userCredentialsDto, ctx: { req } }) => {
       const { totalDocs: existingUsersCount } = await CMS.client.find({
         collection: 'users',
         where: {
@@ -18,6 +18,8 @@ export const authRouter = router({
           },
         },
         limit: 1,
+
+        req,
       });
 
       if (existingUsersCount > 0)
@@ -26,12 +28,14 @@ export const authRouter = router({
           message: 'Invalid user credentials were provided',
         });
 
-      const signedUpUser = await await CMS.client.create({
+      const signedUpUser = await CMS.client.create({
         collection: 'users',
         data: {
           ...userCredentialsDto,
           role: 'user' as const,
         },
+
+        req,
       });
 
       return {
@@ -41,20 +45,24 @@ export const authRouter = router({
 
   login: publicProcedure
     .input(UserCredentialsDtoSchema)
-    .mutation(async ({ input: userCredentialsDto, ctx: { res } }) => {
+    .mutation(async ({ input: userCredentialsDto, ctx: { res, req } }) => {
       return CMS.client.login({
         collection: 'users',
         data: userCredentialsDto,
+
+        req,
         res,
       });
     }),
 
   confirmSignUp: publicProcedure
     .input(ConfirmationTokenDtoSchema)
-    .mutation(async ({ input: { token } }) => {
+    .mutation(async ({ input: { token }, ctx: { req } }) => {
       return CMS.client.verifyEmail({
         collection: 'users',
         token,
+
+        req,
       });
     }),
 });

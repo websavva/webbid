@@ -1,65 +1,17 @@
 import type { CollectionConfig } from 'payload/types';
-import type { AfterReadHook } from 'payload/dist/collections/config/types';
 
 import { ProductStatus } from '@/consts/product-status';
-import type { Product } from './types';
 
-import { isAdmin } from '../access';
-import { addUser } from '../hooks';
+import { isAdmin } from '../../access';
+import { addUser } from '../../hooks';
 
-const addImageUrls: AfterReadHook<Product> = ({ doc: product }) => {
-  const imageUrls = product.images
-    .map(({ image }) => {
-      if (typeof image === 'object' && image.url) {
-        return image.url!;
-      } else {
-        return null;
-      }
-    })
-    .filter(Boolean) as string[];
-
-  return {
-    ...product,
-    imageUrls,
-  };
-};
-
-const addCategoryLabel: AfterReadHook<Product> = async ({
-  doc: product,
-  req,
-}) => {
-  const { category } = product;
-
-  let categoryLabel: string = '';
-
-  if (typeof category === 'number') {
-    const foundCategory = await req.payload
-      .findByID({
-        collection: 'productCategories',
-        id: category,
-      })
-      .catch(() => {
-        console.warn(
-          `[Products]: Product Category with id "${category}" was not found in addCategoryLabel hook`
-        );
-      });
-
-    if (foundCategory) categoryLabel = foundCategory.label;
-  } else {
-    categoryLabel = category.label;
-  }
-
-  return {
-    ...product,
-    categoryLabel,
-  };
-};
+import { addImageUrls, addCategoryLabel, addStripeData } from './hooks';
 
 export const Products: CollectionConfig = {
   slug: 'products',
 
   hooks: {
-    beforeChange: [addUser],
+    beforeChange: [addUser, addStripeData],
 
     afterRead: [addImageUrls, addCategoryLabel],
   },

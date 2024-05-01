@@ -1,9 +1,9 @@
 import { router } from './helpers';
 
-import { authRouter } from './routers';
-import { productsRouter } from './routers/products';
+import { authRouter, productsRouter, ordersRouter } from './routers';
 
 export const appRouter = router({
   auth: authRouter,
   products: productsRouter,
+  orders: ordersRouter,
 });

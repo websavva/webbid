@@ -2,7 +2,7 @@
 
 import type { Product } from '#server/cms/collections/types';
 
-import { useCart } from '@/hooks/use-cart';
+import { useCartStore } from '@/hooks/use-cart-store';
 
 import { Button, type ButtonProps } from '../ui/Button';
 
@@ -21,7 +21,7 @@ export const CartButton = ({
     addItem,
 
     removeItem,
-  } = useCart();
+  } = useCartStore();
 
   const isProductAdded = items.some(({ id }) => product.id === id);
 

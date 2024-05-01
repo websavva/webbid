@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer, useRef } from 'react';
 import flatry from 'await-to-js';
 
 export enum UseApiStatus {
@@ -8,7 +8,7 @@ export enum UseApiStatus {
   Initial = 'initial',
 }
 
-export type UseApiState<Args extends any[], ResponseData> = {
+export type UseApiReturnValue<Args extends any[], ResponseData> = {
   makeApiCall: (...args: Args) => Promise<void>;
   reset: () => void;
 } & (
@@ -54,64 +54,130 @@ export type UseApiState<Args extends any[], ResponseData> = {
     }
 );
 
+export interface UseApiState<ResponseData> {
+  status: UseApiStatus;
+  error: Error | null;
+  data: ResponseData | undefined;
+  pending: boolean;
+}
+
+export type ReducerAction<ResponseData> =
+  | {
+      type: UseApiStatus.Initial | UseApiStatus.Pending;
+    }
+  | {
+      type: UseApiStatus.Error;
+      payload: Error;
+    }
+  | {
+      type: UseApiStatus.Success;
+      payload: ResponseData;
+    };
+
+export const DEFAULT_STATE = {
+  status: UseApiStatus.Initial,
+  error: null,
+  data: undefined,
+
+  pending: false,
+};
+
 export const useApi = <Args extends any[], ResponseData>(
-  handler: (...args: Args) => Promise<ResponseData>
+  handler: (...args: Args) => Promise<ResponseData>,
+  {
+    onSuccess,
+    onError,
+  }: {
+    onSuccess?: (data: ResponseData) => any;
+    onError?: (error: Error) => any;
+  } = {}
 ) => {
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-  const [status, setStatus] = useState(UseApiStatus.Initial);
-  const [data, setData] = useState<ResponseData>();
+  const [apiState, dispatch] = useReducer(
+    (
+      prevState: UseApiState<ResponseData>,
+      action: ReducerAction<ResponseData>
+    ) => {
+      switch (action.type) {
+        case UseApiStatus.Success:
+          return {
+            ...DEFAULT_STATE,
+
+            status: UseApiStatus.Success,
+            data: action.payload,
+          };
+
+        case UseApiStatus.Error:
+          return {
+            ...DEFAULT_STATE,
+
+            status: UseApiStatus.Error,
+            error: action.payload,
+          };
+
+        case UseApiStatus.Pending:
+          return {
+            ...DEFAULT_STATE,
+
+            status: UseApiStatus.Pending,
+            pending: true,
+          };
+
+        default:
+        case UseApiStatus.Initial:
+          return {
+            ...DEFAULT_STATE,
+          };
+      }
+    },
+    {
+      ...DEFAULT_STATE,
+    }
+  );
 
   const reset = () => {
-    setData(undefined);
-    setStatus(UseApiStatus.Initial);
-    setError(null);
-    setPending(false);
+    dispatch({
+      type: UseApiStatus.Initial,
+    });
   };
 
   const makeApiCall = async (...args: Args) => {
     reset();
 
-    setPending(true);
-    setStatus(UseApiStatus.Pending);
+    dispatch({
+      type: UseApiStatus.Pending,
+    });
 
     const [err, responseData] = await flatry(handler(...args));
 
-    setPending(false);
-
     if (err) {
-      setError(err);
+      await onError?.(err);
 
-
-      setStatus(UseApiStatus.Error);
+      dispatch({
+        type: UseApiStatus.Error,
+        payload: err,
+      });
     } else {
-      setData(responseData);
+      await onSuccess?.(responseData);
 
-      setStatus(UseApiStatus.Success);
+      dispatch({
+        type: UseApiStatus.Success,
+        payload: responseData,
+      });
     }
-
   };
-
-  // console.log({
-  //   status
-  // });
-
 
   const statusFlags = Object.fromEntries(
     Object.entries(UseApiStatus).map(([statusName, statusId]) => {
-      return [`is${statusName}`, status === statusId];
+      return [`is${statusName}`, apiState.status === statusId];
     })
   );
 
   return {
-    data,
-    pending,
-    status,
-    error,
+    ...apiState,
 
     makeApiCall,
     reset,
 
     ...statusFlags,
-  } as UseApiState<Args, ResponseData>;
+  } as UseApiReturnValue<Args, ResponseData>;
 };

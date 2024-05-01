@@ -11,6 +11,10 @@ export const ctx = {
       PASSWORD: process.env.SMTP_PASSWORD!,
       FROM_ADDRESS: process.env.SMTP_FROM_ADDRESS!,
       FROM_NAME: process.env.SMTP_FROM_NAME!,
-    }
+    },
+
+    STRIPE: {
+      API_KEY: process.env.STRIPE_API_SECRET_KEY!,
+    },
   },
 };

@@ -17,13 +17,21 @@ export const productsRouter = router({
         .transform(formatSortParams)
         .default({})
     )
-    .query(({ input: query }) => {
+    .query(({ input: query, ctx: { req } }) => {
       const { page, limit, sort, pagination, category, except, include } =
         query;
 
       const where: Where = {
         approvedForSale: {
           equals: ProductStatus.Approved,
+        },
+
+        stripeId: {
+          exists: true,
+        },
+
+        priceId: {
+          exists: true,
         },
       };
 
@@ -51,6 +59,8 @@ export const productsRouter = router({
         sort,
         pagination,
         depth: 1,
+
+        req,
       });
     }),
 
@@ -65,6 +75,8 @@ export const productsRouter = router({
           },
         },
         depth: 1,
+
+        req,
       });
 
       if (!product) return null;

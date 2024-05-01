@@ -12,7 +12,7 @@ export const calculatOrderSum = (products: Product[]) => {
     }, 0)
   );
 
-  const fee = roundPrice(PURCHASE_FEE_PERCENTAGE * subTotalPrice);
+  const fee = roundPrice(PURCHASE_FEE_PERCENTAGE * 1e-2 * subTotalPrice);
 
   const totalPrice = roundPrice(subTotalPrice + fee);
 

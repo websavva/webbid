@@ -15,10 +15,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
         },
       });
 
-      console.log({
-        categoryId
-      });
-
 
       await Promise.all(
         features.map(({ name, externalImageUrl, href }) => {

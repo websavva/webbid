@@ -11,7 +11,7 @@ export const productCategoriesRouter = router({
         formatPaginationParams
       ).transform(formatSortParams)
     )
-    .query(({ input: { limit, pagination, page, sort } }) => {
+    .query(({ input: { limit, pagination, page, sort }, ctx: { req } }) => {
       return CMS.client.find({
         collection: 'productCategories',
         depth: 2,
@@ -19,24 +19,30 @@ export const productCategoriesRouter = router({
         page,
         pagination,
         sort,
+
+        req,
       });
     }),
 
   getCategoryFeatures: publicProcedure
     .input(GetProductCategoryFeaturesSchema.transform(formatPaginationParams))
-    .query(async ({ input: { categoryId, ...paginationParams } }) => {
-      return CMS.client.find({
-        collection: 'productCategoryFeatures',
+    .query(
+      async ({ input: { categoryId, ...paginationParams }, ctx: { req } }) => {
+        return CMS.client.find({
+          collection: 'productCategoryFeatures',
 
-        where: {
-          category: {
-            equals: categoryId,
+          where: {
+            category: {
+              equals: categoryId,
+            },
           },
-        },
 
-        sort: '-createdAt',
+          sort: '-createdAt',
 
-        ...paginationParams,
-      });
-    }),
+          ...paginationParams,
+
+          req,
+        });
+      }
+    ),
 });

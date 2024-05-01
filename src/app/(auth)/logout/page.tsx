@@ -17,15 +17,17 @@ export default function LogoutPage() {
     isError,
 
     makeApiCall: triggerLogout,
-  } = useApi(async () => {
-    // delay for decoration purposes only (workaround)
-    await wait(1e3);
+  } = useApi(
+    async () => {
+      // delay for decoration purposes only (workaround)
+      await wait(1e3);
 
-    await logout();
-
-
-    await router.push('/');
-  });
+      return logout();
+    },
+    {
+      onSuccess: () => router.push('/'),
+    }
+  );
 
   useEffect(() => {
     triggerLogout();
