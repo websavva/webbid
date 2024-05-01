@@ -18,6 +18,7 @@ export const trpcClient = createTRPCProxyClient<AppRouter>({
       fetch(url, options) {
         return fetch(url, {
           ...options,
+          cache: 'no-cache',
           credentials: 'include',
         });
       },
