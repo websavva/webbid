@@ -13,9 +13,8 @@ import { CartCompositionIcon } from '../ui/icons/CartCompositionIcon';
 import { Button } from '../ui/Button';
 import { Separator } from '../ui/Separator';
 
-import { CartItem } from './CartItem';
+import { CartItem, CartItemSkeleton } from './CartItem';
 import { CartSummary } from './CartSummary';
-import { wait } from '@/lib/utils/wait';
 
 export type CartProps = DefineProps<{
   isPage?: boolean;
@@ -33,6 +32,7 @@ export const Cart = ({
     items,
 
     items: { length: itemsCount },
+
     _isHydrated: isCartStoreLoaded,
   } = useCartStore();
 
@@ -66,17 +66,25 @@ export const Cart = ({
 
   const isCartLoaded = isCartStoreLoaded && isSynchronized;
 
+  const listClassName = 'space-y-6 max-h-[28rem] overflow-auto';
+
   return (
     <div {...attrs}>
       <div className='font-bold text-[1.2em] mb-8'>
         Shopping Cart {isCartLoaded && `(${itemsCount})`}
       </div>
 
-      {!isCartLoaded && <div>Loading...</div>}
+      {!isCartLoaded && (
+        <div className={listClassName}>
+          {[...new Array(3).keys()].map((_, index) => {
+            return <CartItemSkeleton key={index} />;
+          })}
+        </div>
+      )}
 
       {isCartLoaded && itemsCount > 0 && (
         <>
-          <div className='space-y-6 max-h-[25rem] overflow-auto'>
+          <div className={listClassName}>
             {items.map((item) => {
               return (
                 <CartItem

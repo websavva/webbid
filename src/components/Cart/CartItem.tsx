@@ -7,14 +7,30 @@ import type { Product } from '#server/cms/collections/types';
 import { cn } from '@/lib/utils/cn';
 import { DefineProps } from '@/types';
 
-import { Button } from '../ui/Button';
 import { formatPrice } from '@/lib/formatters';
+import { Skeleton } from '../ui/Skeleton';
 
 export type CartItemProps = DefineProps<{
   item: Product;
 
   onRemove: () => any;
 }>;
+
+export const CartItemSkeleton = ({ className, ...attrs }: DefineProps<{}>) => {
+  return (
+    <div {...attrs} className={cn('w-full h-32 flex items-start', className)}>
+      <Skeleton className='size-32 mr-5' />
+
+      <div className='flex-1'>
+        <Skeleton className='h-4 w-full mb-3' />
+
+        <Skeleton className='h-4 w-2/4 mb-4' />
+
+        <Skeleton className='h-4 w-1/4' />
+      </div>
+    </div>
+  );
+};
 
 export const CartItem = ({
   item,
@@ -55,10 +71,11 @@ export const CartItem = ({
           </div>
         )}
 
-        <button className='flex items-center mt-3 text-sm font-semibold text-gray-500' onClick={onRemove}>
-          <span>
-            Remove
-          </span>
+        <button
+          className='flex items-center mt-3 text-sm font-semibold text-gray-500'
+          onClick={onRemove}
+        >
+          <span>Remove</span>
 
           <XIcon className='size-[1em] ml-1' />
         </button>
