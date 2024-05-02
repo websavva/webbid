@@ -9,6 +9,7 @@ import { useCartStore } from '@/hooks/use-cart-store';
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
 import { useApi } from '@/hooks/use-api';
+import { useAuth } from '@/hooks/use-auth';
 
 import { CartCompositionIcon } from '../ui/icons/CartCompositionIcon';
 import { Button } from '../ui/Button';
@@ -26,6 +27,8 @@ export const Cart = ({
 
   ...attrs
 }: CartProps = {}) => {
+  const { isGuest } = useAuth();
+
   const {
     setItems,
     removeItem,
@@ -124,21 +127,19 @@ export const Cart = ({
 
           <CartSummary items={items} />
 
-          {isPage ? (
-            <Button
-              className='w-full mt-5'
-              pending={pending}
-              onClick={onSubmit}
-            >
-              Checkout
-            </Button>
-          ) : (
-            <Button asChild>
-              <Link href='/cart' className='w-full mt-5'>
-                Continue to Checkout
-              </Link>
-            </Button>
-          )}
+          <div className='flex *:w-full mt-7'>
+            {isPage && !isGuest ? (
+              <Button pending={pending} onClick={onSubmit}>
+                Checkout
+              </Button>
+            ) : (
+              <Button asChild>
+                <Link href={isPage && isGuest ? '/login' : '/cart'}>
+                  {!isPage && 'Continue to '} Checkout
+                </Link>
+              </Button>
+            )}
+          </div>
         </>
       )}
 
