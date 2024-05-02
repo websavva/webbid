@@ -10,6 +10,7 @@ import { privateProcedure, router } from '../../helpers';
 import { stripeApi } from '@/server/stripe';
 import { ctx } from '@/server/context';
 import { TRPCError } from '@trpc/server';
+import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
 
 const cancelSessionStripeUrl = `${ctx.env.BASE_URL}/cart`;
 
@@ -54,6 +55,20 @@ export const ordersRouter = router({
             price: priceId!,
           };
         });
+
+      const { fee } = calculatOrderSum(productsToBeBought);
+
+      // addition of service fee
+      stripeBillItems.push({
+        quantity: 1,
+        price_data: {
+          product_data: {
+            name: `Service fee (${ctx.env.STRIPE.SERVICE_FEE_PERCENTAGE}%)`,
+          },
+          currency: 'USD',
+          unit_amount: Math.round(fee * 100),
+        },
+      });
 
       const order = await CMS.client.create({
         collection: 'orders',
