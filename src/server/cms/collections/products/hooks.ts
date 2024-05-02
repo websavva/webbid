@@ -3,7 +3,7 @@ import type {
   BeforeChangeHook,
 } from 'payload/dist/collections/config/types';
 
-import { stripeApi } from '#server/stripe';
+import { stripeApi } from '#server/stripe/api';
 
 import type { Product } from '../types';
 

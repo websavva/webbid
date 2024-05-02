@@ -7,7 +7,7 @@ import { CMS } from '#server/cms';
 import { ProductStatus } from '@/consts/product-status';
 
 import { privateProcedure, router } from '../../helpers';
-import { stripeApi } from '@/server/stripe';
+import { stripeApi } from '@/server/stripe/api';
 import { ctx } from '@/server/context';
 import { TRPCError } from '@trpc/server';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';

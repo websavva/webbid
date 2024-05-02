@@ -1,6 +1,8 @@
 import path from 'path';
 
 import express from 'express';
+import bodyParser from 'body-parser';
+
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
 
 import './env';
@@ -8,11 +10,21 @@ import { CMS } from './cms';
 import { nextApp } from './next';
 import { ctx } from './context';
 import { appRouter, createContext } from './trpc';
+import { stripeWebhookHandler } from './stripe/webhook';
 
 const resolvePath = (...paths: string[]) => path.resolve(__dirname, ...paths);
 
 async function start() {
   const app = express();
+
+   // setup of Stripe Webhook to register successful payments
+   app.post(
+    '/api/webhooks/stripe',
+    bodyParser.raw({
+      type: 'application/json',
+    }),
+    stripeWebhookHandler
+  );
 
   // initializing payload cms
   await CMS.init(app);
@@ -22,11 +34,11 @@ async function start() {
 
   app.use(express.static(publicDirSrc));
 
-  // initializing trcp
+  // initializing trpc
   const trpcMiddleware = createExpressMiddleware({
     router: appRouter,
     batching: {
-      enabled: false
+      enabled: false,
     },
     createContext,
   });
