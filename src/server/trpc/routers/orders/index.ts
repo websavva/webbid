@@ -11,13 +11,14 @@ import { stripeApi } from '@/server/stripe/api';
 import { ctx } from '@/server/context';
 import { TRPCError } from '@trpc/server';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
+import { Order } from '@/server/cms/collections/types';
 
 const cancelSessionStripeUrl = `${ctx.env.BASE_URL}/cart`;
 
 export const ordersRouter = router({
   createOrder: privateProcedure
     .input(
-      z.array(z.number()).min(1, {
+      z.array(z.number()).nonempty({
         message: 'No products were provided !',
       })
     )
@@ -118,4 +119,39 @@ export const ordersRouter = router({
 
       return stripeSession.url;
     }),
+
+  getOrder: privateProcedure
+    .input(
+      z.object({
+        orderId: z.number(),
+        pick: z
+          .array(z.string())
+          .optional()
+          .transform((pick) => pick as Array<keyof Order>),
+      })
+    )
+    .query(
+      async ({
+        input: { orderId, pick },
+
+        ctx: { req },
+      }) => {
+        const [err, order] = await flatry(
+          CMS.client.findByID({
+            collection: 'orders',
+            id: orderId,
+            depth: 2,
+            req,
+          })
+        );
+
+        if (err) throw new TRPCError({ code: 'NOT_FOUND' });
+
+        if (pick?.length) return order;
+
+        return Object.fromEntries(
+          pick.map((fieldName) => [fieldName, order[fieldName]])
+        );
+      }
+    ),
 });
