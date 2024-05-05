@@ -18,7 +18,7 @@ const cancelSessionStripeUrl = `${ctx.env.BASE_URL}/cart`;
 export const ordersRouter = router({
   createOrder: privateProcedure
     .input(
-      z.array(z.number()).nonempty({
+      z.array(z.number()).min(1, {
         message: 'No products were provided !',
       })
     )
@@ -147,11 +147,11 @@ export const ordersRouter = router({
 
         if (err) throw new TRPCError({ code: 'NOT_FOUND' });
 
-        if (pick?.length) return order;
+        if (!pick?.length) return order;
 
         return Object.fromEntries(
           pick.map((fieldName) => [fieldName, order[fieldName]])
-        ) as Partial<Order>;
+        ) as unknown as  Order;
       }
     ),
 });

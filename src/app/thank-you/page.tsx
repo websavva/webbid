@@ -8,6 +8,7 @@ import { PagePropsWithSearchParams } from '@/types/page-props';
 import { SuccessfulPaymentIcon } from '@/components/ui/icons/SuccessfulPaymentIcon';
 import { Container } from '@/components/ui/Container';
 import { Order } from '@/server/cms/collections/types';
+import { OrderInfo } from '@/components/OrderInfo';
 
 export default async function ThankYoutPage({
   searchParams,
@@ -16,14 +17,23 @@ export default async function ThankYoutPage({
 
   if (!orderId) notFound();
 
+  const headers = requestHeaders();
+
   // auth middleware
-  const { user } = await loadAuthContext(requestHeaders());
+  const { user } = await loadAuthContext(headers);
 
   if (!user) return redirect('/login');
 
-  const order = await trpcClient.orders.getOrder.query({
-    orderId,
-  });
+  const order = await trpcClient.orders.getOrder.query(
+    {
+      orderId,
+    },
+    {
+      context: {
+        headers,
+      },
+    }
+  );
 
   // const order = {
   //   user: {
@@ -35,7 +45,7 @@ export default async function ThankYoutPage({
 
   return (
     <Container className='mx-auto py-16 flex items-start justify-between'>
-      <div>
+      <div className='flex-1'>
         <div className='text-blue-600 font-bold mb-5'>Order successful</div>
 
         <h1 className='text-4xl font-bold'>Thanks for ordering</h1>
@@ -59,6 +69,8 @@ export default async function ThankYoutPage({
             </>
           )}
         </p>
+
+        <OrderInfo order={order} className='mt-12'/>
       </div>
 
       <SuccessfulPaymentIcon className='flex-[0_0_40%]' />

@@ -15,8 +15,8 @@ import { CartCompositionIcon } from '../ui/icons/CartCompositionIcon';
 import { Button } from '../ui/Button';
 import { Separator } from '../ui/Separator';
 
-import { CartItem, CartItemSkeleton } from './CartItem';
-import { CartSummary } from './CartSummary';
+import { ProductCard, ProductCardSkeleton } from '../ProductCard';
+import { OrderBill } from '../OrderBill';
 
 export type CartProps = DefineProps<{
   isPage?: boolean;
@@ -104,7 +104,7 @@ export const Cart = ({
       {!isCartLoaded && (
         <div className={listClassName}>
           {[...new Array(3).keys()].map((_, index) => {
-            return <CartItemSkeleton key={index} />;
+            return <ProductCardSkeleton key={index} />;
           })}
         </div>
       )}
@@ -114,9 +114,10 @@ export const Cart = ({
           <div className={listClassName}>
             {items.map((item) => {
               return (
-                <CartItem
+                <ProductCard
                   key={item.id}
-                  item={item}
+                  product={item}
+                  canBeRemoved
                   onRemove={() => removeItem(item.id)}
                 />
               );
@@ -125,7 +126,7 @@ export const Cart = ({
 
           <Separator className='my-5' />
 
-          <CartSummary items={items} />
+          <OrderBill products={items} />
 
           <div className='flex *:w-full mt-7'>
             {isPage && !isGuest ? (
