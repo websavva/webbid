@@ -151,7 +151,7 @@ export const ordersRouter = router({
 
         return Object.fromEntries(
           pick.map((fieldName) => [fieldName, order[fieldName]])
-        );
+        ) as Partial<Order>;
       }
     ),
 });
