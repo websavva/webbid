@@ -70,7 +70,7 @@ export default async function ThankYoutPage({
           )}
         </p>
 
-        <OrderInfo order={order} className='mt-12'/>
+        <OrderInfo order={order} watchStatus={!order._isPaid} className='mt-12'/>
       </div>
 
       <SuccessfulPaymentIcon className='flex-[0_0_40%]' />

@@ -1,7 +1,13 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
 import type { Product } from '#server/cms/collections/types';
 
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
+import { trpcClient } from '@/lib/trpc';
 
 import { Separator } from '../ui/Separator';
 import { ProductCard } from '../ProductCard';
@@ -9,9 +15,16 @@ import { OrderBill } from '../OrderBill';
 
 export type OrderInfo = DefineProps<{
   order: import('#server/cms/collections/types').Order;
+
+  watchStatus?: boolean;
 }>;
 
-export const OrderInfo = ({ order, className, ...attrs }: OrderInfo) => {
+export const OrderInfo = ({
+  order,
+  watchStatus,
+  className,
+  ...attrs
+}: OrderInfo) => {
   const {
     id,
 
@@ -24,6 +37,37 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfo) => {
   const normalizedProducts = products.filter(
     (product) => product && typeof product !== 'number'
   ) as Product[];
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!watchStatus) return;
+
+    let timeoutId: number | undefined;
+
+    async function updateOrderStatus() {
+      await trpcClient.orders.getOrder
+        .query({
+          orderId: id,
+
+          pick: ['_isPaid'],
+        })
+        .then(async ({ _isPaid: isPaid }) => {
+          if (isPaid) router.refresh();
+        })
+        .catch((err) => {
+          console.error({ err });
+        });
+
+      timeoutId = setTimeout(updateOrderStatus, 5e3) as unknown as number;
+    }
+
+    timeoutId = setTimeout(updateOrderStatus, 5e3) as unknown as number;
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [watchStatus, router, id]);
 
   return (
     <div {...attrs} className={cn('flex flex-col', className)}>
@@ -48,8 +92,6 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfo) => {
       <Separator className='my-8' />
 
       <OrderBill products={normalizedProducts} />
-
-      <div></div>
 
       <div className='mt-12 flex justify-between max-w-[500px]'>
         <div>
