@@ -1,8 +1,10 @@
+import type { Product } from '#server/cms/collections/types';
+
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
+
 import { Separator } from '../ui/Separator';
 import { ProductCard } from '../ProductCard';
-import { Product } from '#server/cms/collections/types';
 import { OrderBill } from '../OrderBill';
 
 export type OrderInfo = DefineProps<{
