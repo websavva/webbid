@@ -16,6 +16,8 @@ export const ctx = {
     STRIPE: {
       SERVICE_FEE_PERCENTAGE: +process.env.NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE!,
       API_KEY: process.env.STRIPE_API_SECRET_KEY!,
+      STRIPE_ORDER_SESSION_VALIDITY_DURATION:
+        +process.env.STRIPE_ORDER_SESSION_VALIDITY_DURATION!,
     },
   },
 };

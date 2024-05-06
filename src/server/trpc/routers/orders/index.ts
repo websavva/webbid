@@ -94,6 +94,9 @@ export const ordersRouter = router({
             userId: user.id,
             orderId: order.id,
           },
+          expires_at:
+            Math.round(Date.now() / 1e3 +
+            ctx.env.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60),
           cancel_url: cancelSessionStripeUrl,
         })
       );
@@ -110,6 +113,8 @@ export const ordersRouter = router({
 
           req,
         });
+
+        console.error(stripeErr);
 
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -151,7 +156,7 @@ export const ordersRouter = router({
 
         return Object.fromEntries(
           pick.map((fieldName) => [fieldName, order[fieldName]])
-        ) as unknown as  Order;
+        ) as unknown as Order;
       }
     ),
 });

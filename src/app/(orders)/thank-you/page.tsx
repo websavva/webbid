@@ -1,4 +1,5 @@
 import { notFound, redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
 import { loadAuthContext } from '@/contexts/auth/load';
 import { trpcClient } from '@/lib/trpc';
@@ -7,8 +8,7 @@ import { toArray } from '@/lib/utils/to-array';
 import { PagePropsWithSearchParams } from '@/types/page-props';
 import { SuccessfulPaymentIcon } from '@/components/ui/icons/SuccessfulPaymentIcon';
 import { Container } from '@/components/ui/Container';
-import { Order } from '@/server/cms/collections/types';
-import { OrderInfo } from '@/components/OrderInfo';
+import { OrderIntro } from '@/components/OrderIntro';
 
 export default async function ThankYoutPage({
   searchParams,
@@ -17,10 +17,10 @@ export default async function ThankYoutPage({
 
   if (!orderId) notFound();
 
-  const headers = requestHeaders();
+  const filteredHeaders = requestHeaders();
 
   // auth middleware
-  const { user } = await loadAuthContext(headers);
+  const { user } = await loadAuthContext(filteredHeaders);
 
   if (!user) return redirect('/login');
 
@@ -30,18 +30,14 @@ export default async function ThankYoutPage({
     },
     {
       context: {
-        headers,
+        headers: filteredHeaders,
       },
     }
   );
 
-  // const order = {
-  //   user: {
-  //     email: 'picture32well@gmail.com',
-  //   },
-
-  //   _isPaid: false,
-  // } as Order;
+  const didUserComeFromStripe = /stripe\.com/.test(
+    headers().get('referer') || ''
+  );
 
   return (
     <Container className='mx-auto py-16 flex items-start justify-between'>
@@ -70,7 +66,12 @@ export default async function ThankYoutPage({
           )}
         </p>
 
-        <OrderInfo order={order} watchStatus={!order._isPaid} className='mt-12'/>
+        <OrderIntro
+          order={order}
+          watchStatus={!order._isPaid}
+          shouldEmptyOutCartCartOnMount={didUserComeFromStripe}
+          className='mt-12'
+        />
       </div>
 
       <SuccessfulPaymentIcon className='flex-[0_0_40%]' />

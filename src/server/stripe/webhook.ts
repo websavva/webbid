@@ -81,7 +81,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
     }
 
     try {
-      const paidOrder = await CMS.client.update({
+      await CMS.client.update({
         collection: 'orders',
         data: {
           _isPaid: true,

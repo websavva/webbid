@@ -14,7 +14,7 @@ export interface CartStore {
 
   setItems: (id: Product[]) => void;
 
-  clear: () => void;
+  emptyOut: () => void;
 }
 
 export const getDefaultCartStore = (): CartStore => {
@@ -30,7 +30,7 @@ export const getDefaultCartStore = (): CartStore => {
 
     setItems: () => {},
 
-    clear: () => {},
+    emptyOut: () => {},
   };
 };
 
@@ -67,7 +67,7 @@ export const useCartStore = create(
         });
       },
 
-      clear: () => {
+      emptyOut: () => {
         set(() => {
           return {
             items: [],
