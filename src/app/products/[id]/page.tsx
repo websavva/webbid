@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { CheckIcon, ShieldIcon, ArrowRight } from 'lucide-react';
+import { CheckIcon, ShieldIcon } from 'lucide-react';
 
 import { trpcClient } from '@/lib/trpc';
 import type { PagePropsWithParams } from '@/types/page-props';
@@ -11,6 +10,7 @@ import { Container } from '@/components/ui/Container';
 import { formatPrice } from '@/lib/formatters';
 import { ProductReels } from '@/components/ProductReels';
 import { CartButton } from '@/components/CartButton';
+import { ArrowLink } from '@/components/ui/ArrowLink';
 
 const breadcrumbItems: BreadcrumbItem[] = [
   {
@@ -117,13 +117,7 @@ export default async function ProductPage({
             </span>
           </div>
 
-          <Link
-            href={similarProductsHref}
-            className='font-semibold text-blue-700 flex text-sm items-center group'
-          >
-            Shop the collection
-            <ArrowRight className='ml-2 size-[1em] transition-transform group-hover:translate-x-1' />
-          </Link>
+          <ArrowLink href={similarProductsHref}>Shop the collection</ArrowLink>
         </div>
 
         <ProductReels

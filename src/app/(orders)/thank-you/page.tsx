@@ -1,4 +1,5 @@
 import { notFound, redirect } from 'next/navigation';
+import { ArrowRightIcon } from 'lucide-react';
 import { headers } from 'next/headers';
 
 import { loadAuthContext } from '@/contexts/auth/load';
@@ -8,6 +9,7 @@ import { toArray } from '@/lib/utils/to-array';
 import { PagePropsWithSearchParams } from '@/types/page-props';
 import { SuccessfulPaymentIcon } from '@/components/ui/icons/SuccessfulPaymentIcon';
 import { Container } from '@/components/ui/Container';
+import { ArrowLink } from '@/components/ui/ArrowLink';
 import { OrderIntro } from '@/components/OrderIntro';
 
 export default async function ThankYoutPage({
@@ -72,6 +74,10 @@ export default async function ThankYoutPage({
           shouldEmptyOutCartCartOnMount={didUserComeFromStripe}
           className='mt-12'
         />
+
+        <ArrowLink href='/products' className='mt-8 text-base justify-end'>
+          Continue Shopping
+        </ArrowLink>
       </div>
 
       <SuccessfulPaymentIcon className='flex-[0_0_40%]' />
