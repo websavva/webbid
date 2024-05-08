@@ -1,76 +1,78 @@
 'use client';
+import { useRouter, useParams } from 'next/navigation';
 
 import type { DefineProps } from '@/types';
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/Select';
+import type { ProductsForm } from './config';
+import { ProductsSortSelect, type ProductsSortBaseOption } from './SortSelect';
+import { ProductsCategorySelect } from './CategorySelect';
+import { cn } from '@/lib/utils/cn';
+import { withQuery } from 'ufo';
 
-import {
-  ProductsFormSchema,
-  type ProductsForm,
-  PRODUCTS_SORT_OPTIONS,
-} from './config';
-
-export type ProductsSearchFormProps = DefineProps<
-  {
-    form: ProductsForm;
-    pending?: boolean;
-    onSubmit: (form: ProductsForm) => any;
-  },
-  HTMLFormElement
->;
+export type ProductsSearchFormProps = Omit<
+  DefineProps<
+    {
+      form: ProductsForm;
+      pending?: boolean;
+    },
+    HTMLFormElement
+  >,
+  'onSubmit'
+> & {
+  onSubmit?: (form: ProductsForm) => any;
+};
 
 export const ProductsSearchForm = ({
   form,
   pending,
   onSubmit,
+
+  className,
+  ...attrs
 }: ProductsSearchFormProps) => {
-  const activeSortOption = PRODUCTS_SORT_OPTIONS.find(
-    ({ fieldName: sortBy, dir: sortDir }) => {
-      return form.sortBy === sortBy && form.sortDir === sortDir;
-    }
-  )!;
+  const router = useRouter();
+  const query = useParams();
 
-  const onSortChange = (id: string) => {
-    const { fieldName: sortBy, dir: sortDir } = PRODUCTS_SORT_OPTIONS.find(
-      (option) => option.id
-    )!;
+  const submitForm = (form: ProductsForm) => {
+    if (onSubmit) return onSubmit(form);
 
+    const updatedHref = withQuery('/products', form);
+
+    router.push(updatedHref);
+  };
+
+  const onSortChange = (sortOption: ProductsSortBaseOption) => {
     const newForm = {
       ...form,
-      sortBy,
-      sortDir,
+      ...sortOption,
     };
 
-    onSubmit(newForm);
+    submitForm(newForm);
+  };
+
+  const onCategoryChange = (category?: string) => {
+    const newForm = {
+      ...form,
+      category,
+    };
+
+    submitForm(newForm);
   };
 
   return (
-    <form>
-      <Select onValueChange={onSortChange} value={String(activeSortOption.id)}>
-        <SelectTrigger>
-          <SelectValue placeholder='Sorting'>
-            {activeSortOption.label}
-          </SelectValue>
-        </SelectTrigger>
+    <form {...attrs} className={cn('flex items-center space-x-5', className)}>
+      <ProductsSortSelect
+        sortBy={form.sortBy}
+        sortDir={form.sortDir}
+        disabled={pending}
+        onChange={onSortChange}
+      />
 
-        <SelectContent>
-          {PRODUCTS_SORT_OPTIONS.map(({ label, fieldName, dir }) => {
-            const id = [fieldName, dir].join('-');
-
-            return (
-              <SelectItem key={id} value={id}>
-                {label}
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
+      <ProductsCategorySelect
+        category={form.category}
+        disabled={pending}
+        onChange={onCategoryChange}
+      />
     </form>
   );
 };

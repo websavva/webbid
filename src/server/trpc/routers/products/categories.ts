@@ -9,7 +9,7 @@ export const productCategoriesRouter = router({
     .input(
       GetProductCategoriesQuerySchema.transform(
         formatPaginationParams
-      ).transform(formatSortParams)
+      ).transform(formatSortParams).default({})
     )
     .query(({ input: { limit, pagination, page, sort }, ctx: { req } }) => {
       return CMS.client.find({

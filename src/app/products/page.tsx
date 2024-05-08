@@ -1,28 +1,29 @@
-import { z } from 'zod';
-import { defu } from 'defu';
+
+import type { PagePropsWithSearchParams } from '@/types/page-props';
+import { ProductsSearchForm } from '@/components/ProductsSearchForm';
+import { Container } from '@/components/ui/Container';
+import { ProductReels } from '@/components/ProductReels';
 
 import {
-  type GetProductsQuery,
-  GetProductsQuerySchema,
-} from '#server/dtos/products';
-import type { PagePropsWithSearchParams } from '@/types/page-props';
+  type ProductsPageSearchParams,
+  ProductsPageSearchParamsSchema,
+} from './config';
 
-const ProductsPageFormSchema = GetProductsQuerySchema.pick({
-  category: true,
-  page: true,
-  sortDir: true,
-  sortBy: true,
-}).partial().transform((query) => defu(query, {
-  page: 1,
-  sortD
-}));
+export default function ProductsPage({
+  searchParams: query,
+}: PagePropsWithSearchParams<keyof ProductsPageSearchParams>) {
 
-type ProductsPageForm = z.infer<typeof ProductsPageFormSchema>;
+  const {
+    page,
 
-type ProductsPageProps = PagePropsWithSearchParams<keyof ProductsPageForm>
+    ...form
+  } = ProductsPageSearchParamsSchema.parse(query);
 
-export default async function ProductsPage({
-  searchParams: query
-}: ProductsPageProps) {
-  const form =
+  return (
+    <Container className='mx-auto py-20'>
+      <ProductsSearchForm form={form} />
+
+      <ProductReels className='mt-16'/>
+    </Container>
+  );
 }
