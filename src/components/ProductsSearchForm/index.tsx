@@ -1,13 +1,14 @@
 'use client';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { withQuery } from 'ufo';
 
 import type { DefineProps } from '@/types';
+import { cn } from '@/lib/utils/cn';
+import { transformFormToQuery } from '@/lib/utils/transform-from-to-query';
 
-import type { ProductsForm } from './config';
+import { defaultForm, type ProductsForm } from './config';
 import { ProductsSortSelect, type ProductsSortBaseOption } from './SortSelect';
 import { ProductsCategorySelect } from './CategorySelect';
-import { cn } from '@/lib/utils/cn';
-import { withQuery } from 'ufo';
 
 export type ProductsSearchFormProps = Omit<
   DefineProps<
@@ -31,12 +32,13 @@ export const ProductsSearchForm = ({
   ...attrs
 }: ProductsSearchFormProps) => {
   const router = useRouter();
-  const query = useParams();
 
   const submitForm = (form: ProductsForm) => {
     if (onSubmit) return onSubmit(form);
 
-    const updatedHref = withQuery('/products', form);
+    const query = transformFormToQuery(form, defaultForm);
+
+    const updatedHref = withQuery('/products', query);
 
     router.push(updatedHref);
   };

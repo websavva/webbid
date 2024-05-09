@@ -2,10 +2,7 @@ import { z } from 'zod';
 
 import {
   GetProductsQuerySchema,
-  type GetProductsSortableFieldName,
 } from '#server/dtos/products';
-
-import { SortDir } from '@/consts/sort-dir';
 
 export const ProductsFormSchema = GetProductsQuerySchema.pick({
   category: true,
@@ -14,3 +11,5 @@ export const ProductsFormSchema = GetProductsQuerySchema.pick({
 });
 
 export type ProductsForm = z.infer<typeof ProductsFormSchema>;
+
+export const defaultForm = ProductsFormSchema.parse({});

@@ -1,15 +1,18 @@
+import { z } from 'zod';
+
 import { GetProductCategoriesQuerySchema } from '#server/dtos/products/categories';
 import { router, publicProcedure } from '../../helpers';
 import { formatPaginationParams, formatSortParams } from '#server/utils/query';
 import { CMS } from '#server/cms';
 import { GetProductCategoryFeaturesSchema } from '#server/dtos/products/categories/features';
+import { TRPCError } from '@trpc/server';
 
 export const productCategoriesRouter = router({
   getCategories: publicProcedure
     .input(
-      GetProductCategoriesQuerySchema.transform(
-        formatPaginationParams
-      ).transform(formatSortParams).default({})
+      GetProductCategoriesQuerySchema.transform(formatPaginationParams)
+        .transform(formatSortParams)
+        .default({})
     )
     .query(({ input: { limit, pagination, page, sort }, ctx: { req } }) => {
       return CMS.client.find({
@@ -45,4 +48,26 @@ export const productCategoriesRouter = router({
         });
       }
     ),
+
+  getCategoryByName: publicProcedure
+    .input(z.string())
+    .query(async ({ input: categoryName }) => {
+      const {
+        docs: { 0: category = null },
+      } = await CMS.client.find({
+        collection: 'productCategories',
+        where: {
+          name: {
+            equals: categoryName,
+          },
+        },
+      });
+
+      if (!category)
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+        });
+
+      return category;
+    }),
 });

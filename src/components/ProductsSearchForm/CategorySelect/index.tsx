@@ -31,6 +31,9 @@ export type ProductsCategorySelectProps =
       onChange: (category?: string) => any;
     };
 
+const EMPTY_VALUE = 'empty';
+const PLACEHOLDER = 'All Categories';
+
 export const ProductsCategorySelect = ({
   category,
   disabled,
@@ -68,17 +71,25 @@ export const ProductsCategorySelect = ({
     return name === category;
   });
 
+  const onValueChange = (category: string) => {
+    onChange(category === EMPTY_VALUE ? undefined : category);
+  };
+
   return (
-    <Select onValueChange={onChange} value={category}>
+    <Select onValueChange={onValueChange} value={category || EMPTY_VALUE}>
       <SelectTrigger
         {...attrs}
         disabled={derivedDisabled}
         className={cn('', className)}
       >
-        <SelectValue placeholder='Select Category'>{activeCategory?.label || 'Category'}</SelectValue>
+        <SelectValue>{activeCategory?.label || PLACEHOLDER}</SelectValue>
       </SelectTrigger>
 
       <SelectContent>
+        <SelectItem key={EMPTY_VALUE} value={EMPTY_VALUE}>
+          {PLACEHOLDER}
+        </SelectItem>
+
         {allCategories.map(({ label, name }) => {
           return (
             <SelectItem key={name} value={name}>

@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, Suspense, FunctionComponent } from 'react';
+import { CSSProperties, Suspense, FunctionComponent } from 'react';
 
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
@@ -11,46 +11,70 @@ export type ProductReelsProps = DefineProps<
   {
     count?: number;
     EmptyPlaceholder?: FunctionComponent<void>;
-  } & Pick<GetProductsQuery, 'category' | 'except'>
+  } & Partial<
+    Pick<GetProductsQuery, 'category' | 'except' | 'sortBy' | 'sortDir'>
+  >
 >;
 
 export const DefaultEmptyPlaceholder = () => (
   <div className='text-gray-500'>No products were found...</div>
 );
 
+const ProductGrid = ({
+  count,
+  className,
+  children,
+
+  ...attrs
+}: DefineProps<{ count: number }>) => {
+  const style = {
+    '--column-counts': count,
+  } as CSSProperties;
+
+  return (
+    <>
+      <div
+        {...attrs}
+        className={cn(
+          'grid grid-cols-[repeat(var(--column-counts),_1fr)] gap-8',
+          className
+        )}
+        style={style}
+      >
+        {children}
+      </div>
+    </>
+  );
+};
+
 const ProductList = async ({
   count = 3,
   category,
+  sortBy,
+  sortDir,
   except,
   EmptyPlaceholder = DefaultEmptyPlaceholder,
-  className,
   ...attrs
 }: ProductReelsProps) => {
   const { docs: products } = await trpcClient.products.getProducts.query({
     perPage: count,
+
     category,
+
+    sortBy,
+    sortDir,
+
     except,
   });
 
   if (products.length) {
-    const style = {
-      '--column-counts': count,
-    } as CSSProperties;
-
     return (
       <>
-        <div
-          {...attrs}
-          className={cn(
-            'grid grid-cols-[repeat(var(--column-counts),_1fr)] gap-8',
-            className
-          )}
-          style={style}
-        >
+        <ProductGrid {...attrs} count={count}>
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </div>
+        </ProductGrid>
       </>
     );
   } else {
@@ -69,16 +93,26 @@ const ProductListSkeleton = ({
 export const ProductReels = ({
   count = 3,
   category,
+  sortDir,
+  sortBy,
   except,
   EmptyPlaceholder,
   ...attrs
 }: ProductReelsProps) => {
   return (
-    <Suspense fallback={<ProductListSkeleton count={count} />}>
+    <Suspense
+      fallback={
+        <ProductGrid {...attrs} count={count}>
+          <ProductListSkeleton count={count} />
+        </ProductGrid>
+      }
+    >
       <ProductList
         {...attrs}
         count={count}
         category={category}
+        sortBy={sortBy}
+        sortDir={sortDir}
         EmptyPlaceholder={EmptyPlaceholder}
         except={except}
       />
