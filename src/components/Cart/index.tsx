@@ -69,7 +69,7 @@ export const Cart = ({
     }
 
     async function syncCart() {
-      const [err, { docs: products = [] } = {}] = await flatry(
+      const [err, { products = [] } = {}] = await flatry(
         trpcClient.products.getProducts.query({
           perPage: null,
           include: items.map(({ id }) => id),

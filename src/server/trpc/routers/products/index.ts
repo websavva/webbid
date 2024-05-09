@@ -7,6 +7,7 @@ import { GetProductsQuerySchema } from '#server/dtos/products';
 
 import { formatPaginationParams, formatSortParams } from '#server/utils/query';
 import { ProductStatus } from '@/consts/product-status';
+import { formatPaginationMeta } from '#server/utils/format-pagination-meta';
 
 import { productCategoriesRouter } from './categories';
 
@@ -17,7 +18,7 @@ export const productsRouter = router({
         .transform(formatSortParams)
         .default({})
     )
-    .query(({ input: query, ctx: { req } }) => {
+    .query(async ({ input: query, ctx: { req } }) => {
       const { page, limit, sort, pagination, category, except, include } =
         query;
 
@@ -51,7 +52,7 @@ export const productsRouter = router({
         };
       }
 
-      return CMS.client.find({
+      const paginatedProducts = await CMS.client.find({
         collection: 'products',
         where,
         page,
@@ -62,6 +63,14 @@ export const productsRouter = router({
 
         req,
       });
+
+      return {
+        products: paginatedProducts.docs,
+
+        paginationMeta: pagination
+          ? formatPaginationMeta(paginatedProducts)
+          : null,
+      };
     }),
 
   getProductById: publicProcedure

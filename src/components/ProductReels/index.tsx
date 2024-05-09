@@ -7,10 +7,13 @@ import type { GetProductsQuery } from '@/server/dtos/products';
 
 import { ProductCard, ProductCardSkeleton } from './ProductCard';
 
+export * from './ProductCard';
+
 export type ProductReelsProps = DefineProps<
   {
     count?: number;
     EmptyPlaceholder?: FunctionComponent<void>;
+    isPaginationEnabled?: boolean;
   } & Partial<
     Pick<GetProductsQuery, 'category' | 'except' | 'sortBy' | 'sortDir'>
   >
@@ -20,7 +23,7 @@ export const DefaultEmptyPlaceholder = () => (
   <div className='text-gray-500'>No products were found...</div>
 );
 
-const ProductGrid = ({
+export const ProductGrid = ({
   count,
   className,
   children,
@@ -56,7 +59,7 @@ const ProductList = async ({
   EmptyPlaceholder = DefaultEmptyPlaceholder,
   ...attrs
 }: ProductReelsProps) => {
-  const { docs: products } = await trpcClient.products.getProducts.query({
+  const { products } = await trpcClient.products.getProducts.query({
     perPage: count,
 
     category,
@@ -97,6 +100,7 @@ export const ProductReels = ({
   sortBy,
   except,
   EmptyPlaceholder,
+  isPaginationEnabled,
   ...attrs
 }: ProductReelsProps) => {
   return (
@@ -115,6 +119,7 @@ export const ProductReels = ({
         sortDir={sortDir}
         EmptyPlaceholder={EmptyPlaceholder}
         except={except}
+        isPaginationEnabled={isPaginationEnabled}
       />
     </Suspense>
   );
