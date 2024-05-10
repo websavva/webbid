@@ -10,7 +10,7 @@
       },
       {
         "name": "New Arrivals",
-        "href": "/products?ategory=ui_kits&sort=desc",
+        "href": "/products?category=ui_kits&sort=desc",
         "externalImageUrl": "/nav/ui-kits/blue.jpg"
       },
       {

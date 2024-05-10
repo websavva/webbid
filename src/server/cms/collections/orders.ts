@@ -1,7 +1,11 @@
 import { Access, CollectionConfig } from 'payload/types';
+import type { AfterReadHook } from 'payload/dist/collections/config/types';
 
-import { isAdmin } from '../access';
+import { OrderStatus } from '@/consts/order-status';
+
+import { isAdmin, mergeCollectionAccesses } from '../access';
 import { addUser } from '../hooks';
+import type { Order } from './types';
 
 const isOwner: Access = (ctx) => {
   if (isAdmin(ctx)) return true;
@@ -13,8 +17,25 @@ const isOwner: Access = (ctx) => {
   };
 };
 
+const addStatusFlags: AfterReadHook<Order> = ({ doc: order }) => {
+  const isSuccess = order.status === OrderStatus.Success;
+  const isPaid = isSuccess;
+  const isCanceled = order.status === OrderStatus.Canceled;
+  const isProcessing = order.status === OrderStatus.Processing;
+
+  return {
+    ...order,
+
+    isSuccess,
+    isPaid,
+    isCanceled,
+    isProcessing,
+  };
+};
+
 export const Orders: CollectionConfig = {
   slug: 'orders',
+
   admin: {
     useAsTitle: 'Your Orders',
     description: 'A summary of all your orders on DigitalMarketplace.',
@@ -22,18 +43,20 @@ export const Orders: CollectionConfig = {
 
   hooks: {
     beforeChange: [addUser],
+    afterRead: [addStatusFlags],
   },
 
   access: {
-    read: isOwner,
+    read: mergeCollectionAccesses(isAdmin, isOwner),
     update: isAdmin,
     delete: isAdmin,
     create: isAdmin,
   },
+
   fields: [
     {
-      name: '_isPaid',
-      type: 'checkbox',
+      name: 'status',
+      type: 'select',
       access: {
         read: isAdmin,
         create: () => false,
@@ -42,6 +65,14 @@ export const Orders: CollectionConfig = {
       admin: {
         hidden: true,
       },
+
+      options: Object.entries(OrderStatus).map(([label, value]) => ({
+        label,
+        value,
+      })),
+
+      defaultValue: OrderStatus.Processing,
+
       required: true,
     },
     {

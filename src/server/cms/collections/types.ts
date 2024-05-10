@@ -141,11 +141,17 @@ export interface ProductFile {
  */
 export interface Order {
   id: number;
-  _isPaid: boolean;
+  status: 'processing' | 'canceled' | 'success';
   user: number | User;
   products: (number | Product)[];
   updatedAt: string;
   createdAt: string;
+
+  // virtual fields
+  isSuccess: boolean;
+  isPaid: boolean;
+  isCanceled: boolean;
+  isProcessing: boolean;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

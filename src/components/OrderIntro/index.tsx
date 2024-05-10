@@ -23,7 +23,7 @@ export const OrderIntro = ({
   const { emptyOut: emptyOutCart } = useCartStore();
 
   const {
-    order: { id: orderId, _isPaid: isOrderPaid },
+    order: { id: orderId, isPaid: isOrderPaid },
   } = orderInfoProps;
 
   useEffect(() => {
@@ -36,9 +36,9 @@ export const OrderIntro = ({
         .query({
           orderId,
 
-          pick: ['_isPaid'],
+          pick: ['isPaid'],
         })
-        .then(async ({ _isPaid: isPaid }) => {
+        .then(async ({ isPaid }) => {
           if (isPaid) router.refresh();
         })
         .catch((err) => {

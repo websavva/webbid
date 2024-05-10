@@ -18,7 +18,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
     id,
 
     products,
-    _isPaid: isPaid,
+    isPaid,
 
     user,
   } = order;

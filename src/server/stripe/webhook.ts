@@ -7,6 +7,7 @@ import type { User } from '#server/cms/collections/types';
 import { stripeApi } from './api';
 import { ctx } from '../context';
 import { CMS } from '../cms';
+import { OrderStatus } from '@/consts/order-status';
 
 export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
   const req = _req as PayloadRequest<User>;
@@ -74,7 +75,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
 
     if (!order) {
       return res.status(404).json({ error: 'No such order exists.' });
-    } else if (order._isPaid) {
+    } else if (order.isPaid) {
       return res.status(400).json({
         error: 'Order has been paid already !',
       });
@@ -84,13 +85,13 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
       await CMS.client.update({
         collection: 'orders',
         data: {
-          _isPaid: true,
+          status: OrderStatus.Success,
         },
 
         id: +orderId,
 
         req,
-      })
+      });
 
       // TODO sending email
       const text = `You have successfully paid order "${orderId}"`;

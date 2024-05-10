@@ -49,7 +49,7 @@ export default async function ThankYoutPage({
         <h1 className='text-4xl font-bold'>Thanks for ordering</h1>
 
         <p className='mt-5 text-base text-muted-foreground max-w-[500px] leading-relaxed'>
-          {order._isPaid ? (
+          {order.isPaid ? (
             <>
               Your order was processed and your assets are available to download
               below. We&apos;ve sent your receipt and order details to{' '}
@@ -70,7 +70,7 @@ export default async function ThankYoutPage({
 
         <OrderIntro
           order={order}
-          watchStatus={!order._isPaid}
+          watchStatus={!order.isPaid}
           shouldEmptyOutCartCartOnMount={didUserComeFromStripe}
           className='mt-12'
         />

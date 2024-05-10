@@ -12,6 +12,7 @@ import { ctx } from '@/server/context';
 import { TRPCError } from '@trpc/server';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
 import { Order } from '@/server/cms/collections/types';
+import { OrderStatus } from '@/consts/order-status';
 
 const cancelSessionStripeUrl = `${ctx.env.BASE_URL}/cart`;
 
@@ -73,8 +74,9 @@ export const ordersRouter = router({
 
       const order = await CMS.client.create({
         collection: 'orders',
+        // @ts-ignore
         data: {
-          _isPaid: false,
+          status: OrderStatus.Processing,
           user: user.id,
           products: productsToBeBought.map(({ id }) => id),
         },

@@ -1,6 +1,5 @@
 import type { PagePropsWithSearchParams } from '@/types/page-props';
 import { ProductsSearchForm } from '@/components/ProductsSearchForm';
-import { Container } from '@/components/ui/Container';
 import { ProductGrid, ProductCard } from '@/components/ProductReels';
 import { Pagination } from '@/components/ui/Pagination';
 import { trpcClient } from '@/lib/trpc';
@@ -41,7 +40,7 @@ export default async function ProductsPage({
       <ProductsSearchForm form={form} className='w-2/4' />
       {products.length > 0 ? (
         <div className='mt-20'>
-          <ProductGrid count={3}>
+          <ProductGrid count={3} className='gap-x-20 gap-y-16'>
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
