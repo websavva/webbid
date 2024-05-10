@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils/cn';
 import { useClickOutside } from '@/hooks/use-click-outside';
 import { DefineProps } from '@/types';
+import { useOnFullPathUpdate } from '@/hooks/use-full-path';
+
 import type { ProductCategory } from '#server/cms/collections/types';
 
 import { NavBarCategoryDropdown } from './Dropdown';
@@ -26,6 +28,10 @@ export function NavBarCategoryMenu({
   const { elementRef } = useClickOutside<HTMLDivElement>(
     () => activeCategoryId && setActiveCategoryId(null)
   );
+
+  useOnFullPathUpdate(() => {
+    setActiveCategoryId(null);
+  });
 
   return (
     <div

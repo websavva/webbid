@@ -1,4 +1,6 @@
-import { useReducer, useRef } from 'react';
+'use client';
+
+import { useReducer } from 'react';
 import flatry from 'await-to-js';
 
 export enum UseApiStatus {

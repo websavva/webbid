@@ -3,12 +3,13 @@ import { ProductsSearchForm } from '@/components/ProductsSearchForm';
 import { Container } from '@/components/ui/Container';
 import { ProductGrid, ProductCard } from '@/components/ProductReels';
 import { Pagination } from '@/components/ui/Pagination';
+import { trpcClient } from '@/lib/trpc';
 
 import {
   type ProductsPageSearchParams,
   ProductsPageSearchParamsSchema,
+  PRODUCTS_PER_PAGE,
 } from './config';
-import { trpcClient } from '@/lib/trpc';
 
 export default async function ProductsPage({
   searchParams: query,
@@ -22,7 +23,7 @@ export default async function ProductsPage({
   const [{ products, paginationMeta }, category] = await Promise.all([
     trpcClient.products.getProducts.query({
       page,
-      perPage: 8,
+      perPage: PRODUCTS_PER_PAGE,
       ...form,
     }),
     Promise.resolve(
@@ -35,11 +36,9 @@ export default async function ProductsPage({
   const title = category?.label || 'Products';
 
   return (
-    <Container className='mx-auto py-16'>
+    <div>
       <h1 className='mb-8 font-bold text-3xl text-gray-800'>{title}</h1>
-
       <ProductsSearchForm form={form} className='w-2/4' />
-
       {products.length > 0 ? (
         <div className='mt-20'>
           <ProductGrid count={3}>
@@ -61,6 +60,6 @@ export default async function ProductsPage({
           No products were found ...
         </span>
       )}
-    </Container>
+    </div>
   );
 }

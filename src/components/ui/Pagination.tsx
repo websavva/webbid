@@ -2,7 +2,13 @@
 
 import * as React from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  MoreHorizontal,
+} from 'lucide-react';
 import { withQuery } from 'ufo';
 
 import { cn } from '@/lib/utils/cn';
@@ -52,33 +58,31 @@ const PaginationItem = ({
 };
 
 const PaginationPrevious = ({
-  className,
+  isDoubled,
   ...props
-}: React.ComponentProps<typeof PaginationItem>) => (
-  <PaginationItem
-    aria-label='Go to previous page'
-    size='default'
-    className={cn('pl-2.5', className)}
-    {...props}
-  >
-    <ChevronLeft className='h-4 w-4' />
-  </PaginationItem>
-);
+}: React.ComponentProps<typeof PaginationItem> & { isDoubled?: boolean }) => {
+  const Icon = isDoubled ? ChevronsLeft : ChevronLeft;
+
+  return (
+    <PaginationItem aria-label='Go to previous page' {...props}>
+      <Icon className='h-4 w-4' />
+    </PaginationItem>
+  );
+};
 PaginationPrevious.displayName = 'PaginationPrevious';
 
 const PaginationNext = ({
-  className,
+  isDoubled,
   ...props
-}: React.ComponentProps<typeof PaginationItem>) => (
-  <PaginationItem
-    aria-label='Go to next page'
-    size='default'
-    className={cn('pr-2.5', className)}
-    {...props}
-  >
-    <ChevronRight className='h-4 w-4' />
-  </PaginationItem>
-);
+}: React.ComponentProps<typeof PaginationItem> & { isDoubled?: boolean }) => {
+  const Icon = isDoubled ? ChevronsRight : ChevronRight;
+
+  return (
+    <PaginationItem aria-label='Go to next page' {...props}>
+      <Icon className='h-4 w-4' />
+    </PaginationItem>
+  );
+};
 PaginationNext.displayName = 'PaginationNext';
 
 const PaginationEllipsis = ({
@@ -168,6 +172,37 @@ const Pagination = ({
 
               case PaginationItemType.Ellipsis:
                 return <PaginationEllipsis key={`ellipsis-${index}`} />;
+
+              case PaginationItemType.First:
+                return (
+                  <PaginationPrevious
+                    disabled={disabled}
+                    onClick={onActivate}
+                    isDoubled
+                  />
+                );
+
+              case PaginationItemType.Last:
+                return (
+                  <PaginationNext
+                    disabled={disabled}
+                    onClick={onActivate}
+                    isDoubled
+                  />
+                );
+
+              case PaginationItemType.Previous:
+                return (
+                  <PaginationPrevious
+                    disabled={disabled}
+                    onClick={onActivate}
+                  />
+                );
+
+              case PaginationItemType.Next:
+                return (
+                  <PaginationNext disabled={disabled} onClick={onActivate} />
+                );
             }
           }
         )}

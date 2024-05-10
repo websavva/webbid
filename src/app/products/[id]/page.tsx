@@ -65,7 +65,7 @@ export default async function ProductPage({
   }
 
   return (
-    <Container className='py-16 mx-auto'>
+    <div>
       <section className='grid grid-cols-[repeat(2,1fr)] gap-14'>
         <div>
           <Breadcrumbs items={breadcrumbItems} className='text-gray-600' />
@@ -128,6 +128,6 @@ export default async function ProductPage({
           className='gap-16'
         />
       </section>
-    </Container>
+    </div>
   );
 }

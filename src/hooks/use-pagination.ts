@@ -1,3 +1,5 @@
+'use client';
+
 import type { PaginationMeta } from '@/server/utils/format-pagination-meta';
 
 export interface UsePaginationOptions
