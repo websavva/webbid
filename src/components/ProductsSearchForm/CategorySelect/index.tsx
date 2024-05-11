@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/Select';
 
-import type { ProductCategory } from '@/server/cms/collections/types';
+import type { ProductCategory } from '#server/cms/collections/types';
 import { toast } from 'sonner';
 
 export type ProductsCategorySelectProps =

@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 
-import { LogOut, User, MenuSquare } from 'lucide-react';
+import { LogOut, User, MenuSquare, ReceiptIcon } from 'lucide-react';
 
 import { useAuth } from '@/hooks/use-auth';
 import { cn } from '@/lib/utils/cn';
@@ -40,18 +40,38 @@ export function UserMenu({ className }: { className?: string }) {
 
       <DropdownMenuContent className='w-56'>
         <DropdownMenuLabel>My account</DropdownMenuLabel>
+
         <DropdownMenuSeparator />
+
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href='/profile' className='flex items-center cursor-pointer w-full'>
+            <Link
+              href='/profile'
+              className='flex items-center cursor-pointer w-full'
+            >
               <User className='mr-2 h-4 w-4' />
 
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
+
+          <DropdownMenuItem asChild>
+            <Link
+              href='/orders'
+              className='flex items-center cursor-pointer w-full'
+            >
+              <ReceiptIcon className='mr-2 h-4 w-4' />
+
+              <span>Orders</span>
+            </Link>
+          </DropdownMenuItem>
+
           {isAdmin && (
             <DropdownMenuItem asChild>
-              <Link href='/admin' className='flex items-center cursor-pointer w-full'>
+              <Link
+                href='/'
+                className='flex items-center cursor-pointer w-full'
+              >
                 <MenuSquare className='mr-2 h-4 w-4' />
 
                 <span>Admin Dashboard</span>
@@ -59,9 +79,14 @@ export function UserMenu({ className }: { className?: string }) {
             </DropdownMenuItem>
           )}
         </DropdownMenuGroup>
+
         <DropdownMenuSeparator />
+
         <DropdownMenuItem>
-          <Link href='/logout' className='flex items-center cursor-pointer w-full'>
+          <Link
+            href='/logout'
+            className='flex items-center cursor-pointer w-full'
+          >
             <LogOut className='mr-2 h-4 w-4' />
             <span>Log out</span>
           </Link>

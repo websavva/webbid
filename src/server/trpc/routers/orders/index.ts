@@ -1,18 +1,22 @@
 import { z } from 'zod';
 import type Stripe from 'stripe';
 import flatry from 'await-to-js';
+import { TRPCError } from '@trpc/server';
 
 import { CMS } from '#server/cms';
+import { stripeApi } from '#server/stripe/api';
+import { ctx } from '#server/context';
+import { Order } from '#server/cms/collections/types';
+import { GetOrdersQuerySchema } from '#server/dtos/orders';
+import { formatPaginationParams, formatSortParams } from '#server/utils/query';
 
+import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
+import { OrderStatus } from '@/consts/order-status';
 import { ProductStatus } from '@/consts/product-status';
 
 import { privateProcedure, router } from '../../helpers';
-import { stripeApi } from '@/server/stripe/api';
-import { ctx } from '@/server/context';
-import { TRPCError } from '@trpc/server';
-import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
-import { Order } from '@/server/cms/collections/types';
-import { OrderStatus } from '@/consts/order-status';
+import { Where } from 'payload/types';
+import { formatPaginationMeta } from '@/server/utils/format-pagination-meta';
 
 const cancelSessionStripeUrl = `${ctx.env.BASE_URL}/cart`;
 
@@ -96,9 +100,10 @@ export const ordersRouter = router({
             userId: user.id,
             orderId: order.id,
           },
-          expires_at:
-            Math.round(Date.now() / 1e3 +
-            ctx.env.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60),
+          expires_at: Math.round(
+            Date.now() / 1e3 +
+              ctx.env.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60
+          ),
           cancel_url: cancelSessionStripeUrl,
         })
       );
@@ -159,6 +164,59 @@ export const ordersRouter = router({
         return Object.fromEntries(
           pick.map((fieldName) => [fieldName, order[fieldName]])
         ) as unknown as Order;
+      }
+    ),
+
+  getOrders: privateProcedure
+    .input(
+      GetOrdersQuerySchema.transform(formatPaginationParams).transform(
+        formatSortParams
+      )
+    )
+    .query(
+      async ({
+        input: {
+          pagination,
+          limit,
+          page,
+
+          sort,
+          status,
+        },
+
+        ctx: { user },
+      }) => {
+        const where: Where = {
+          user: {
+            equals: user.id,
+          },
+        };
+
+        if (status) {
+          where.status = {
+            equals: status,
+          };
+        }
+
+        const paginatedOrders = await CMS.client.find({
+          collection: 'orders',
+
+          where,
+
+          sort,
+
+          pagination,
+          page,
+          limit,
+        });
+
+        const { docs: orders } = paginatedOrders;
+
+        return {
+          orders,
+
+          paginationMeta: formatPaginationMeta(paginatedOrders),
+        };
       }
     ),
 });

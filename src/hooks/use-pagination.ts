@@ -1,6 +1,6 @@
 'use client';
 
-import type { PaginationMeta } from '@/server/utils/format-pagination-meta';
+import type { PaginationMeta } from '#server/utils/format-pagination-meta';
 
 export interface UsePaginationOptions
   extends Pick<PaginationMeta, 'page' | 'pagesCount'> {

@@ -3,7 +3,7 @@ import { CSSProperties, Suspense, FunctionComponent } from 'react';
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
 import { cn } from '@/lib/utils/cn';
-import type { GetProductsQuery } from '@/server/dtos/products';
+import type { GetProductsQuery } from '#server/dtos/products';
 
 import { ProductCard, ProductCardSkeleton } from './ProductCard';
 
