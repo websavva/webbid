@@ -5,9 +5,11 @@ import { withQuery } from 'ufo';
 import type { DefineProps } from '@/types';
 import { cn } from '@/lib/utils/cn';
 import { transformFormToQuery } from '@/lib/utils/transform-from-to-query';
+import { useExtendedRouter } from '@/hooks/use-extended-router';
 
 import { defaultForm, type ProductsForm } from './config';
-import { ProductsSortSelect, type ProductsSortBaseOption } from './SortSelect';
+import { ProductsSortSelect } from './SortSelect';
+import { type ProductsBaseSortOption } from './SortSelect/config';
 import { ProductsCategorySelect } from './CategorySelect';
 
 export type ProductsSearchFormProps = Omit<
@@ -31,7 +33,7 @@ export const ProductsSearchForm = ({
   className,
   ...attrs
 }: ProductsSearchFormProps) => {
-  const router = useRouter();
+  const { router, pending: isRouteUpdating } = useExtendedRouter();
 
   const submitForm = (form: ProductsForm) => {
     if (onSubmit) return onSubmit(form);
@@ -43,7 +45,7 @@ export const ProductsSearchForm = ({
     router.push(updatedHref);
   };
 
-  const onSortChange = (sortOption: ProductsSortBaseOption) => {
+  const onSortChange = (sortOption: ProductsBaseSortOption) => {
     const newForm = {
       ...form,
       ...sortOption,
@@ -61,18 +63,20 @@ export const ProductsSearchForm = ({
     submitForm(newForm);
   };
 
+  const derivedPending = pending || isRouteUpdating;
+
   return (
     <form {...attrs} className={cn('flex items-center space-x-5', className)}>
       <ProductsSortSelect
         sortBy={form.sortBy}
         sortDir={form.sortDir}
-        disabled={pending}
+        disabled={derivedPending}
         onChange={onSortChange}
       />
 
       <ProductsCategorySelect
         category={form.category}
-        disabled={pending}
+        disabled={derivedPending}
         onChange={onCategoryChange}
       />
     </form>

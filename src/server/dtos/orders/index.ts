@@ -9,9 +9,7 @@ export const SORTABLE_FIELDS = ['createdAt'] as const;
 
 export type GetOrdersSortableFieldName = (typeof SORTABLE_FIELDS)[number];
 
-export const GetOrdersQuerySchema = PaginationQuerySchema.merge(
-  getSortQuerySchema(SORTABLE_FIELDS, 'createdAt')
-).extend({
+export const GetOrdersQuerySchema = PaginationQuerySchema.extend({
   status: z.nativeEnum(OrderStatus).optional(),
 });
 

@@ -1,27 +1,24 @@
 'use client';
 
 import type { DefineProps } from '@/types';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/Select';
+import { Select } from '@/components/ui/Select';
 
-import { PRODUCTS_SORT_OPTIONS, type ProductsSortBaseOption } from './config';
-import { cn } from '@/lib/utils/cn';
+import {
+  PRODUCTS_SORT_OPTIONS,
+  type ProductsSortOption,
+  type ProductsBaseSortOption,
+} from './config';
 
 export type ProductsSortSelectProps = Omit<
   DefineProps<
-    ProductsSortBaseOption & {
+    ProductsSortOption & {
       disabled?: boolean;
     },
     HTMLButtonElement
   >,
   'onChange'
 > & {
-  onChange: (option: ProductsSortBaseOption) => any;
+  onChange: (option: ProductsBaseSortOption) => any;
 };
 
 export * from './config';
@@ -29,11 +26,9 @@ export * from './config';
 export const ProductsSortSelect = ({
   sortBy,
   sortDir,
-  disabled,
 
   onChange,
 
-  className,
   ...attrs
 }: ProductsSortSelectProps) => {
   const activeSortOption = PRODUCTS_SORT_OPTIONS.find((option) => {
@@ -52,22 +47,11 @@ export const ProductsSortSelect = ({
   };
 
   return (
-    <Select onValueChange={onSortChange} value={String(activeSortOption.id)}>
-      <SelectTrigger {...attrs} className={cn('', className)}>
-        <SelectValue placeholder='Sorting'>
-          {activeSortOption.label}
-        </SelectValue>
-      </SelectTrigger>
-
-      <SelectContent>
-        {PRODUCTS_SORT_OPTIONS.map(({ label, id }) => {
-          return (
-            <SelectItem key={id} value={id}>
-              {label}
-            </SelectItem>
-          );
-        })}
-      </SelectContent>
-    </Select>
+    <Select
+      {...attrs}
+      value={activeSortOption.id}
+      onChange={onSortChange}
+      options={PRODUCTS_SORT_OPTIONS}
+    />
   );
 };

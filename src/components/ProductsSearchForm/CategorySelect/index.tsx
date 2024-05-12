@@ -6,13 +6,7 @@ import flatry from 'await-to-js';
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/Select';
+import { Select } from '@/components/ui/Select';
 
 import type { ProductCategory } from '#server/cms/collections/types';
 import { toast } from 'sonner';
@@ -30,9 +24,6 @@ export type ProductsCategorySelectProps =
     > & {
       onChange: (category?: string) => any;
     };
-
-const EMPTY_VALUE = 'empty';
-const PLACEHOLDER = 'All Categories';
 
 export const ProductsCategorySelect = ({
   category,
@@ -67,37 +58,23 @@ export const ProductsCategorySelect = ({
 
   const derivedDisabled = !allCategories.length || disabled;
 
-  const activeCategory = allCategories.find(({ name }) => {
-    return name === category;
-  });
-
-  const onValueChange = (category: string) => {
-    onChange(category === EMPTY_VALUE ? undefined : category);
+  const onCategoryChange = (category: string | undefined) => {
+    onChange(category);
   };
 
+  const options = allCategories.map(({ label, name: id }) => ({
+    id,
+    label,
+  }));
+
   return (
-    <Select onValueChange={onValueChange} value={category || EMPTY_VALUE}>
-      <SelectTrigger
-        {...attrs}
-        disabled={derivedDisabled}
-        className={cn('', className)}
-      >
-        <SelectValue>{activeCategory?.label || PLACEHOLDER}</SelectValue>
-      </SelectTrigger>
-
-      <SelectContent>
-        <SelectItem key={EMPTY_VALUE} value={EMPTY_VALUE}>
-          {PLACEHOLDER}
-        </SelectItem>
-
-        {allCategories.map(({ label, name }) => {
-          return (
-            <SelectItem key={name} value={name}>
-              {label}
-            </SelectItem>
-          );
-        })}
-      </SelectContent>
-    </Select>
+    <Select
+      value={category}
+      onChange={onCategoryChange}
+      disabled={derivedDisabled}
+      options={options}
+      canBeEmpty
+      emptyLabel='All Categories'
+    />
   );
 };

@@ -3,6 +3,8 @@ import { type PropsWithChildren } from 'react';
 import { AuthContextProvider } from '../auth/Provider';
 import { CartStoreHydrationProvider } from '../cart/Provider';
 import { AppContext } from './load';
+import { ExtendedRouterContextProvider } from '../extended-router/Provider';
+
 
 export const AppContextProvider = ({
   initialValue,
@@ -11,8 +13,10 @@ export const AppContextProvider = ({
   const { authContextValue } = initialValue;
 
   return (
-    <AuthContextProvider initialValue={authContextValue}>
-      <CartStoreHydrationProvider>{children}</CartStoreHydrationProvider>
-    </AuthContextProvider>
+    <ExtendedRouterContextProvider>
+      <AuthContextProvider initialValue={authContextValue}>
+        <CartStoreHydrationProvider>{children}</CartStoreHydrationProvider>
+      </AuthContextProvider>
+    </ExtendedRouterContextProvider>
   );
 };

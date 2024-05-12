@@ -1,16 +1,15 @@
 import type { GetProductsSortableFieldName } from '#server/dtos/products';
 
 import { SortDir } from '@/consts/sort-dir';
+import type { SelectOption } from '@/components/ui/Select';
 
-export interface ProductsSortBaseOption {
+export interface ProductsBaseSortOption {
   sortBy: GetProductsSortableFieldName;
   sortDir: SortDir;
 }
-
-export interface ProductsSortOption extends ProductsSortBaseOption {
-  id: string;
-  label: string;
-}
+export interface ProductsSortOption
+  extends SelectOption,
+    ProductsBaseSortOption {}
 
 export const PRODUCTS_SORT_OPTIONS = [
   {

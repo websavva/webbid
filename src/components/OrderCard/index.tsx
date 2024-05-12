@@ -43,7 +43,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
       href={`/orders/${id}`}
       {...attrs}
       className={cn(
-        'flex p-5 rounded-2xl border shadow-sm border-slate-300',
+        'flex p-5 rounded-2xl transition duration-300 border shadow-sm border-slate-300',
         className
       )}
     >
