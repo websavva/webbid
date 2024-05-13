@@ -12,3 +12,11 @@ export const ConfirmationTokenDtoSchema = z.object({
 });
 
 export type ConfirmationTokenDto = z.infer<typeof ConfirmationTokenDtoSchema>;
+
+export const ResetPasswordDtoSchema = UserCredentialsDtoSchema.pick({
+  password: true,
+}).extend({
+  token: z.string().min(1),
+});
+
+export type ResetPasswordDto = z.infer<typeof ResetPasswordDtoSchema>;

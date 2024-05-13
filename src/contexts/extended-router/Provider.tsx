@@ -1,6 +1,7 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation';
+import { withQuery } from 'ufo';
+import { usePathname, useRouter } from 'next/navigation';
 import { PropsWithChildren, useState, useTransition } from 'react';
 
 import { type ExtendedRouter, ExtendedRouterContext } from './context';
@@ -8,6 +9,7 @@ import { type ExtendedRouter, ExtendedRouterContext } from './context';
 export const ExtendedRouterContextProvider = ({
   children,
 }: PropsWithChildren) => {
+  const pathname = usePathname();
   const router = useRouter();
 
   const [pending, startTransition] = useTransition();
@@ -24,6 +26,12 @@ export const ExtendedRouterContextProvider = ({
     replace: (...args: Parameters<ExtendedRouter['replace']>) => {
       return startTransition(() => {
         return router.replace(...args);
+      });
+    },
+
+    pushQuery: (query) => {
+      return startTransition(() => {
+        return router.push(withQuery(pathname, query));
       });
     },
   };

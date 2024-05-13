@@ -19,5 +19,10 @@ export const ctx = {
       STRIPE_ORDER_SESSION_VALIDITY_DURATION:
         +process.env.STRIPE_ORDER_SESSION_VALIDITY_DURATION!,
     },
+
+    AUTH: {
+      FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION:
+        +process.env.AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION!,
+    },
   },
 };

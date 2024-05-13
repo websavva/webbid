@@ -168,11 +168,7 @@ export const ordersRouter = router({
     ),
 
   getOrders: privateProcedure
-    .input(
-      GetOrdersQuerySchema.transform(formatPaginationParams).transform(
-        formatSortParams
-      )
-    )
+    .input(GetOrdersQuerySchema.transform(formatPaginationParams))
     .query(
       async ({
         input: {
@@ -180,7 +176,6 @@ export const ordersRouter = router({
           limit,
           page,
 
-          sort,
           status,
         },
 
@@ -203,7 +198,7 @@ export const ordersRouter = router({
 
           where,
 
-          sort,
+          sort: '-createdAt',
 
           pagination,
           page,

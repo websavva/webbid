@@ -1,10 +1,14 @@
+import { z } from 'zod';
+import { TRPCError } from '@trpc/server';
+
 import { router, publicProcedure } from '#server/trpc/helpers';
 import {
   ConfirmationTokenDtoSchema,
+  ResetPasswordDtoSchema,
   UserCredentialsDtoSchema,
 } from '#server/dtos/auth';
 import { CMS } from '#server/cms';
-import { TRPCError } from '@trpc/server';
+import { ctx } from '@/server/context';
 
 export const authRouter = router({
   signUp: publicProcedure
@@ -65,4 +69,50 @@ export const authRouter = router({
         req,
       });
     }),
+
+  requestPasswordReset: publicProcedure.input(z.string().email()).mutation(
+    async ({
+      input: email,
+
+      ctx: { req },
+    }) => {
+      const expiredAt =
+        Date.now() + ctx.env.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION;
+
+      await CMS.client.forgotPassword({
+        collection: 'users',
+
+        req,
+
+        data: {
+          email,
+        },
+
+        expiration: expiredAt,
+      });
+
+      return true;
+    }
+  ),
+
+  resetPassword: publicProcedure.input(ResetPasswordDtoSchema).mutation(
+    async ({
+      input: { token, password },
+
+      ctx: { req },
+    }) => {
+      return CMS.client.resetPassword({
+        collection: 'users',
+
+        req,
+
+        data: {
+          token,
+          password,
+        },
+
+        overrideAccess: true,
+      });
+    }
+  ),
 });

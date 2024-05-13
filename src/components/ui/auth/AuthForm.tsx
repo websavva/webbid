@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -17,41 +17,57 @@ export interface AuthFormAttributes
   extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   onSubmit: (userCredentials: UserCredentialsDto) => any;
   submitButtonText: string;
+  selectedFields?: Array<keyof UserCredentialsDto>;
 }
 
 export function AuthForm({
   className,
   onSubmit: onSuccessValidation,
   submitButtonText,
+  selectedFields = ['email', 'password'],
 }: AuthFormAttributes) {
+  const defaultValues = Object.fromEntries(
+    selectedFields.map((fieldName) => [fieldName, ''])
+  ) as UserCredentialsDto;
+
+  const resolverPickMap = Object.fromEntries(
+    selectedFields.map((fieldName) => [fieldName, true])
+  ) as Record<keyof UserCredentialsDto, true>;
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<UserCredentialsDto>({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues,
 
-    resolver: zodResolver(UserCredentialsDtoSchema),
+    resolver: zodResolver(UserCredentialsDtoSchema.pick(resolverPickMap)),
   });
 
   const onSubmit = handleSubmit(onSuccessValidation);
 
-  return (
-    <form
-      className={cn('flex flex-col space-y-6', className)}
-      onSubmit={onSubmit}
-    >
-      <Input control={control} name='email' placeholder='Email' />
+  const AuthInputs: Record<keyof UserCredentialsDto, () => ReactNode> = {
+    email: () => <Input control={control} name='email' placeholder='Email' />,
 
+    password: () => (
       <Input
         control={control}
         name='password'
         type='password'
         placeholder='Password'
       />
+    ),
+  };
+
+  const selectedAuthInputs = Object.entries(AuthInputs)
+    .filter(([fieldName]) => selectedFields.includes(fieldName as any))
+    .map(([fieldName, AuthInput]) => <AuthInput key={fieldName} />);
+
+  return (
+    <form
+      className={cn('flex flex-col space-y-6', className)}
+      onSubmit={onSubmit}
+    >
+      {selectedAuthInputs}
 
       <Button className='text-base' type='submit' pending={isSubmitting}>
         {submitButtonText}
