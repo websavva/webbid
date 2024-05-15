@@ -5,8 +5,8 @@ export default function SignUpPage() {
   return (
     <AuthFormFrame
       heading='Sign In'
-      linkText="Don't have an account ? Sign up"
-      linkHref='/sign-up'
+      linkText='Forgot Password ? Click to reset'
+      linkHref='/password-reset'
     >
       <LoginForm />
     </AuthFormFrame>

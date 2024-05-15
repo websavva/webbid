@@ -70,30 +70,38 @@ export const authRouter = router({
       });
     }),
 
-  requestPasswordReset: publicProcedure.input(z.string().email()).mutation(
-    async ({
-      input: email,
+  requestPasswordReset: publicProcedure
+    .input(
+      z.object({
+        email: z.string().email(),
+      })
+    )
+    .mutation(
+      async ({
+        input: { email },
 
-      ctx: { req },
-    }) => {
-      const expiredAt =
-        Date.now() + ctx.env.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION;
+        ctx: { req },
+      }) => {
+        const expiredAt =
+          Date.now() + ctx.env.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION;
 
-      await CMS.client.forgotPassword({
-        collection: 'users',
+        await CMS.client.forgotPassword({
+          collection: 'users',
 
-        req,
+          req,
 
-        data: {
+          data: {
+            email,
+          },
+
+          expiration: expiredAt,
+        });
+
+        return {
           email,
-        },
-
-        expiration: expiredAt,
-      });
-
-      return true;
-    }
-  ),
+        };
+      }
+    ),
 
   resetPassword: publicProcedure.input(ResetPasswordDtoSchema).mutation(
     async ({

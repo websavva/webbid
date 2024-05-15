@@ -1,7 +1,9 @@
 import type { CollectionConfig } from 'payload/types';
 
-import { SignUpConfirmationTemplate } from '#server/mail/templates';
 import { Role } from '@/consts/roles';
+
+import { SignUpConfirmationTemplate } from '#server/mail/templates';
+import { ctx } from '#server/context';
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -13,6 +15,12 @@ export const Users: CollectionConfig = {
           email,
           token,
         }).html;
+      },
+    },
+
+    forgotPassword: {
+      generateEmailHTML(payload) {
+        return `${ctx.env.BASE_URL}/password-reset/${payload!.token}`;
       },
     },
   },
