@@ -8,6 +8,7 @@ import { trpcClient } from '@/lib/trpc';
 import type { DefineProps } from '@/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
 
+import { SentEmailIcon } from '../icons/SentEmailIcon';
 import { AuthForm } from './AuthForm';
 
 export type ConfirmPasswordResetFormProps = DefineProps<{}>
@@ -28,7 +29,7 @@ export const ConfirmPasswordResetForm = () => {
     }
   );
 
-  if (true || isSuccess)
+  if (isSuccess)
     return (
       <div className='flex flex-col items-center'>
         <SentEmailIcon className='size-[500px]' />
