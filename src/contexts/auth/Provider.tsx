@@ -39,8 +39,8 @@ export const AuthContextProvider = ({
   ) => {
     const authInfo = await trpcClient.auth.login.mutate(userCredentials, {
       context: {
-        headers
-      }
+        headers,
+      },
     });
 
     setAuthInfo(authInfo as unknown as AuthInfo);
@@ -53,6 +53,7 @@ export const AuthContextProvider = ({
         refresh,
         logout,
         login,
+        setAuthInfo,
       }}
     >
       {children}

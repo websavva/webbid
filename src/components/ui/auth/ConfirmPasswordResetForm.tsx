@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { useApi } from '@/hooks/use-api';
@@ -10,14 +10,21 @@ import type { UserCredentialsDto } from '#server/dtos/auth';
 
 import { SentEmailIcon } from '../icons/SentEmailIcon';
 import { AuthForm } from './AuthForm';
+import { useAuth } from '@/hooks/use-auth';
 
-export type ConfirmPasswordResetFormProps = DefineProps<{}>
-export const ConfirmPasswordResetForm = () => {
-  const [email, setEmail] = useState<string | null>(null);
+export type ConfirmPasswordResetFormProps = DefineProps<{
+  token: string;
+}>;
+
+export const ConfirmPasswordResetForm = ({
+  token,
+}: ConfirmPasswordResetFormProps) => {
+  const router = useRouter();
+  const { setAuthInfo } = useAuth();
 
   const { isSuccess, makeApiCall } = useApi(
-    ({ email }: UserCredentialsDto) => {
-      return trpcClient.auth.requestPasswordReset.mutate({ email });
+    ({ password }: UserCredentialsDto) => {
+      return trpcClient.auth.resetPassword.mutate({ password, token });
     },
     {
       onError: (err) =>
@@ -25,7 +32,11 @@ export const ConfirmPasswordResetForm = () => {
           dismissible: true,
         }),
 
-      onSuccess: ({ email }) => setEmail(email),
+      onSuccess: (authInfo) => {
+        setAuthInfo(authInfo as any);
+
+        router.push('/profile');
+      },
     }
   );
 
@@ -46,16 +57,10 @@ export const ConfirmPasswordResetForm = () => {
     );
 
   return (
-    <AuthFormFrame
-      linkHref='/sign-up'
-      linkText="Don't have an account ? Sign Up"
-      heading='Password Reset'
-    >
-      <AuthForm
-        submitButtonText='Submit'
-        selectedFields={['email']}
-        onSubmit={makeApiCall}
-      />
-    </AuthFormFrame>
+    <AuthForm
+      submitButtonText='Submit'
+      selectedFields={['password']}
+      onSubmit={makeApiCall}
+    />
   );
 };

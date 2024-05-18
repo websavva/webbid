@@ -12,6 +12,7 @@ export type AuthContextValue = AuthInfo & {
     userCredentials: UserCredentialsDto,
     headers?: Headers
   ) => Promise<void>;
+  setAuthInfo: (authInfo: AuthInfo) => void;
 };
 
 export const getDefaultAuthInfo = (): AuthInfo => ({
@@ -25,4 +26,5 @@ export const AuthContext = createContext<AuthContextValue>({
   refresh: async () => {},
   logout: async () => {},
   login: async () => {},
+  setAuthInfo: () => {},
 });
