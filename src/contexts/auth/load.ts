@@ -1,7 +1,7 @@
 import { trpcClient } from '@/lib/trpc';
 import { TRPCClientError } from '@trpc/client';
 
-export const loadAuthContext = (headers?: Headers) => {
+export const loadAuthContext = (headers?: Headers | Record<string, any>) => {
   return trpcClient.auth.getMe
     .query(undefined, {
       context: {

@@ -1,7 +1,11 @@
 import { AuthFormFrame } from '@/components/AuthFormFrame';
 import { LoginForm } from '@/components/ui/auth/LoginForm';
+import { guest } from '@/guards/guest';
+import { applyGuards } from '@/lib/utils/guards';
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  await applyGuards(guest);
+
   return (
     <AuthFormFrame
       heading='Sign In'

@@ -11,10 +11,14 @@ import {
   OrdersPageSearchParamsSchema,
   ORDERS_PER_PAGE,
 } from './config';
+import { applyGuards } from '@/lib/utils/guards';
+import { auth } from '@/guards/auth';
 
 export default async function OrdersPage({
   searchParams,
 }: PagePropsWithSearchParams<keyof OrdersPageSearchParams>) {
+  await applyGuards(auth);
+
   const query = OrdersPageSearchParamsSchema.parse(searchParams);
 
   const {

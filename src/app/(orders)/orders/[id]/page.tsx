@@ -1,11 +1,12 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 
-import { loadAuthContext } from '@/contexts/auth/load';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { PagePropsWithParams } from '@/types/page-props';
 import { Container } from '@/components/ui/Container';
 import { OrderIntro } from '@/components/OrderIntro';
+import { applyGuards } from '@/lib/utils/guards';
+import { auth } from '@/guards/auth';
 
 export default async function ThankYoutPage({
   params,
@@ -14,12 +15,9 @@ export default async function ThankYoutPage({
 
   if (!orderId) notFound();
 
+  await applyGuards(auth);
+
   const filteredHeaders = requestHeaders();
-
-  // auth middleware
-  const { user } = await loadAuthContext(filteredHeaders);
-
-  if (!user) return redirect('/login');
 
   const order = await trpcClient.orders.getOrder.query(
     {

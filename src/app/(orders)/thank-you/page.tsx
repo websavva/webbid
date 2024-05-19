@@ -1,8 +1,8 @@
-import { notFound, redirect } from 'next/navigation';
-import { ArrowRightIcon } from 'lucide-react';
+import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 
-import { loadAuthContext } from '@/contexts/auth/load';
+import { applyGuards } from '@/lib/utils/guards';
+import { auth } from '@/guards/auth';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { toArray } from '@/lib/utils/to-array';
@@ -19,12 +19,9 @@ export default async function ThankYoutPage({
 
   if (!orderId) notFound();
 
+  await applyGuards(auth);
+
   const filteredHeaders = requestHeaders();
-
-  // auth middleware
-  const { user } = await loadAuthContext(filteredHeaders);
-
-  if (!user) return redirect('/login');
 
   const order = await trpcClient.orders.getOrder.query(
     {

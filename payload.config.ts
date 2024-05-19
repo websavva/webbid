@@ -18,6 +18,8 @@ export default buildConfig({
     bundler: webpackBundlerAdapter(),
   },
 
+  cookiePrefix: 'digital-marketplace',
+
   editor: slateEditorAdapter({}),
 
   db: postgresAdapter({
@@ -28,7 +30,7 @@ export default buildConfig({
       password: process.env.POSTGRES_PASSWORD,
     },
 
-    migrationDir: path.resolve(__dirname, '../src/server/migrations')
+    migrationDir: path.resolve(__dirname, '../src/server/migrations'),
   }),
 
   typescript: {
