@@ -7,10 +7,11 @@ import { useApi } from '@/hooks/use-api';
 import { trpcClient } from '@/lib/trpc';
 import type { DefineProps } from '@/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
+import { PasswordSecurityIcon } from '@/components/ui/icons/PasswordSecurityIcon';
 
-import { SentEmailIcon } from '../icons/SentEmailIcon';
 import { AuthForm } from './AuthForm';
 import { useAuth } from '@/hooks/use-auth';
+import { cn } from '@/lib/utils/cn';
 
 export type ConfirmPasswordResetFormProps = DefineProps<{
   token: string;
@@ -18,11 +19,13 @@ export type ConfirmPasswordResetFormProps = DefineProps<{
 
 export const ConfirmPasswordResetForm = ({
   token,
+  className,
+  ...attrs
 }: ConfirmPasswordResetFormProps) => {
   const router = useRouter();
   const { setAuthInfo } = useAuth();
 
-  const { isSuccess, makeApiCall } = useApi(
+  const { makeApiCall } = useApi(
     ({ password }: UserCredentialsDto) => {
       return trpcClient.auth.resetPassword.mutate({ password, token });
     },
@@ -35,32 +38,23 @@ export const ConfirmPasswordResetForm = ({
       onSuccess: (authInfo) => {
         setAuthInfo(authInfo as any);
 
-        router.push('/profile');
+        toast.success('Your password has changed successfully !');
+
+        router.push('/');
       },
     }
   );
 
-  if (isSuccess)
-    return (
-      <div className='flex flex-col items-center'>
-        <SentEmailIcon className='size-[500px]' />
-
-        <div className='mt-5 font-semibold text-lg w-3/5 leading-relaxed text-center text-gray-700'>
-          Letter with password reset instruction was sent{' '}
-          {email && (
-            <span>
-              to your email <span className='text-primary'>{email}</span>{' '}
-            </span>
-          )}
-        </div>
-      </div>
-    );
-
   return (
-    <AuthForm
-      submitButtonText='Submit'
-      selectedFields={['password']}
-      onSubmit={makeApiCall}
-    />
+    <div {...attrs} className={cn('', className)}>
+      <PasswordSecurityIcon className='mb-10 mx-auto' />
+
+      <AuthForm
+        submitButtonText='Save Password'
+        selectedFields={['password']}
+        onSubmit={makeApiCall}
+        className={className}
+      />
+    </div>
   );
 };

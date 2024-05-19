@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -11,6 +11,7 @@ import {
 } from '#server/dtos/auth';
 
 import { Input } from '../Input';
+import { PasswordInput } from '../PasswordInput';
 import { Button } from '../Button';
 
 export interface AuthFormAttributes
@@ -45,16 +46,13 @@ export function AuthForm({
 
   const onSubmit = handleSubmit(onSuccessValidation);
 
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const AuthInputs: Record<keyof UserCredentialsDto, () => ReactNode> = {
     email: () => <Input control={control} name='email' placeholder='Email' />,
 
     password: () => (
-      <Input
-        control={control}
-        name='password'
-        type='password'
-        placeholder='Password'
-      />
+      <PasswordInput control={control} name='password' placeholder='Password' />
     ),
   };
 

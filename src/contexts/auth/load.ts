@@ -1,11 +1,20 @@
-import type { RequestHeaders} from 'redaxios';
+import { trpcClient } from '@/lib/trpc';
+import { TRPCClientError } from '@trpc/client';
 
-import { payloadApi } from '@/lib/payload';
-
-export const loadAuthContext = (headers?: RequestHeaders) => {
-  return payloadApi.auth
-    .getMe({
-      headers,
+export const loadAuthContext = (headers?: Headers) => {
+  return trpcClient.auth.getMe
+    .query(undefined, {
+      context: {
+        headers,
+      },
     })
-    .then((res) => res.data);
+    .catch((err) => {
+      if (err instanceof TRPCClientError && err.data.code === 'UNAUTHORIZED') {
+        return {
+          user: null,
+        };
+      }
+
+      throw err;
+    });
 };

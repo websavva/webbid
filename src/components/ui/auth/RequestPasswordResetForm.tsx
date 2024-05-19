@@ -29,7 +29,7 @@ export const RequestPasswordResetForm = () => {
     }
   );
 
-  if (true || isSuccess)
+  if (isSuccess)
     return (
       <div className='flex flex-col items-center'>
         <SentEmailIcon className='size-[500px]' />

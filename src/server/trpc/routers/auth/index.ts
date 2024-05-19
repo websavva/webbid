@@ -1,7 +1,12 @@
 import { z } from 'zod';
 import { TRPCError } from '@trpc/server';
+import type { CookieOptions } from 'express';
 
-import { router, publicProcedure } from '#server/trpc/helpers';
+import {
+  router,
+  publicProcedure,
+  privateProcedure,
+} from '#server/trpc/helpers';
 import {
   ConfirmationTokenDtoSchema,
   ResetPasswordDtoSchema,
@@ -9,6 +14,7 @@ import {
 } from '#server/dtos/auth';
 import { CMS } from '#server/cms';
 import { ctx } from '@/server/context';
+import { User } from '@/server/cms/collections/types';
 
 export const authRouter = router({
   signUp: publicProcedure
@@ -83,7 +89,8 @@ export const authRouter = router({
         ctx: { req },
       }) => {
         const expiredAt =
-          Date.now() + ctx.env.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION;
+          Date.now() +
+          ctx.env.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION * 60 * 1e3;
 
         await CMS.client.forgotPassword({
           collection: 'users',
@@ -105,22 +112,78 @@ export const authRouter = router({
 
   resetPassword: publicProcedure.input(ResetPasswordDtoSchema).mutation(
     async ({
-      input: { token, password },
+      input: { token, password: newPassword },
 
-      ctx: { req },
+      ctx: { req, res },
     }) => {
-      return CMS.client.resetPassword({
+      const { user } = await CMS.client.resetPassword({
         collection: 'users',
 
         req,
 
         data: {
           token,
-          password,
+          password: newPassword,
         },
 
         overrideAccess: true,
       });
+
+      const { email } = user as unknown as User;
+
+      return CMS.client.login({
+        collection: 'users',
+        data: {
+          email,
+          password: newPassword,
+        },
+
+        req,
+        res,
+      });
     }
   ),
+
+  getMe: privateProcedure.query(async ({ ctx: { user, req } }) => {
+    return CMS.client
+      .findByID({
+        id: user.id,
+        collection: 'users',
+        depth: 1,
+        overrideAccess: false,
+        req,
+        showHiddenFields: false,
+      })
+      .then((user) => ({ user }))
+      .catch((err) => {
+        console.error('[getMe]: ', err);
+
+        return {
+          user: null,
+        };
+      });
+  }),
+
+  logout: privateProcedure.mutation(async ({ ctx: { res } }) => {
+    const {
+      users: {
+        config: { auth: collectionAuthConfig },
+      },
+    } = CMS.client.collections;
+
+    const cookieOptions: CookieOptions = {
+      domain: undefined,
+      httpOnly: true,
+      path: '/',
+      sameSite: collectionAuthConfig.cookies.sameSite,
+      secure: collectionAuthConfig.cookies.secure,
+    };
+
+    if (collectionAuthConfig.cookies.domain)
+      cookieOptions.domain = collectionAuthConfig.cookies.domain;
+
+    res.clearCookie(`${CMS.client.config.cookiePrefix}-token`, cookieOptions);
+
+    return true;
+  }),
 });

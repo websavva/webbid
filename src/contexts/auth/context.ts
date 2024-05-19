@@ -1,9 +1,11 @@
 import { createContext } from 'react';
 
-import type { GetMeResponse } from '@/lib/payload/auth';
+import type { User } from '#server/cms/collections/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
 
-export type AuthInfo = GetMeResponse;
+export type AuthInfo = {
+  user: User | null;
+};
 
 export type AuthContextValue = AuthInfo & {
   refresh: () => Promise<void>;
@@ -17,8 +19,6 @@ export type AuthContextValue = AuthInfo & {
 
 export const getDefaultAuthInfo = (): AuthInfo => ({
   user: null,
-  exp: undefined,
-  token: undefined,
 });
 
 export const AuthContext = createContext<AuthContextValue>({

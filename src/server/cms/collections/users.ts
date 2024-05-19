@@ -9,6 +9,8 @@ export const Users: CollectionConfig = {
   slug: 'users',
 
   auth: {
+    maxLoginAttempts: 5,
+
     verify: {
       generateEmailHTML({ user: { email }, token }) {
         return SignUpConfirmationTemplate({

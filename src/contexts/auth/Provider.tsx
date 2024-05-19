@@ -4,8 +4,6 @@ import { type PropsWithChildren, useState } from 'react';
 
 import { loadAuthContext } from './load';
 import { AuthContext, type AuthInfo, getDefaultAuthInfo } from './context';
-import { GetMeResponse } from '@/lib/payload/auth';
-import { payloadApi } from '@/lib/payload';
 import { trpcClient } from '@/lib/trpc';
 import { UserCredentialsDto } from '#server/dtos/auth';
 
@@ -17,18 +15,18 @@ export const AuthContextProvider = ({
   initialValue: initialAuthInfo,
   children,
 }: AuthContextProviderProps) => {
-  const [authInfo, setAuthInfo] = useState<GetMeResponse>(
+  const [authInfo, setAuthInfo] = useState<AuthInfo>(
     initialAuthInfo || getDefaultAuthInfo()
   );
 
   const refresh = async (headers?: Headers) => {
-    const updatedUser = await loadAuthContext(headers);
+    const updatedAuthInfo = await loadAuthContext(headers);
 
-    setAuthInfo(updatedUser);
+    setAuthInfo(updatedAuthInfo);
   };
 
   const logout = async (headers?: Headers) => {
-    await payloadApi.auth.logout({ headers });
+    await trpcClient.auth.logout.mutate(undefined, { context: { headers } });
 
     setAuthInfo(getDefaultAuthInfo());
   };
@@ -37,13 +35,15 @@ export const AuthContextProvider = ({
     userCredentials: UserCredentialsDto,
     headers?: Headers
   ) => {
-    const authInfo = await trpcClient.auth.login.mutate(userCredentials, {
+    const { user } = await trpcClient.auth.login.mutate(userCredentials, {
       context: {
         headers,
       },
     });
 
-    setAuthInfo(authInfo as unknown as AuthInfo);
+    const authInfo = { user } as unknown as AuthInfo;
+
+    setAuthInfo(authInfo);
   };
 
   return (
