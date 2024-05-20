@@ -5,6 +5,7 @@ import { LogOut, User, MenuSquare, ReceiptIcon } from 'lucide-react';
 
 import { useAuth } from '@/hooks/use-auth';
 import { cn } from '@/lib/utils/cn';
+import { UserAvatar } from '@/components/ui/UserAvatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,8 +21,6 @@ export function UserMenu({ className }: { className?: string }) {
 
   const { email } = user!;
 
-  const avatarCharacter = email[0].toUpperCase();
-
   const login = email.split('@')[0];
 
   return (
@@ -30,9 +29,7 @@ export function UserMenu({ className }: { className?: string }) {
         <button
           className={cn('flex items-center space-x-3 outline-none', className)}
         >
-          <span className='size-9 text-base shrink-0 rounded-full bg-blue-500 text-white font-bold flex items-center justify-center'>
-            {avatarCharacter}
-          </span>
+          <UserAvatar email={email} className='size-9 text-base shrink-0' />
 
           <span>{login}</span>
         </button>
