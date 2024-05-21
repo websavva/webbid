@@ -18,7 +18,7 @@ export const Footer = ({ className, ...attrs }: FooterProps) => {
         <Logo className='size-8' />
 
         <span className='ml-7 pl-5 py-2 border-l border-l-gray-400'>
-          &copy; All Rights Reserved {currentYear}
+          &copy; Digital Marketplace, {currentYear}
         </span>
       </Container>
     </footer>
