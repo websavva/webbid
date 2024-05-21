@@ -9,7 +9,6 @@ import {
   ProductsPageSearchParamsSchema,
   PRODUCTS_PER_PAGE,
 } from './config';
-import { wait } from '@/lib/utils/wait';
 
 export default async function ProductsPage({
   searchParams: query,
