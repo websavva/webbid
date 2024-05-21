@@ -11,6 +11,7 @@ import {
   ConfirmationTokenDtoSchema,
   ResetPasswordDtoSchema,
   UserCredentialsDtoSchema,
+  ChangePasswordDtoSchema,
 } from '#server/dtos/auth';
 import { CMS } from '#server/cms';
 import { ctx } from '@/server/context';
@@ -186,4 +187,54 @@ export const authRouter = router({
 
     return true;
   }),
+
+  changePassword: privateProcedure
+    .input(ChangePasswordDtoSchema)
+    .mutation(
+      async ({ input: { password, newPassword }, ctx: { user, req, res } }) => {
+        await CMS.client.login({
+          collection: 'users',
+          data: {
+            email: user.email,
+            password: password,
+          },
+
+          req,
+        });
+
+        const token = await CMS.client.forgotPassword({
+          collection: 'users',
+          disableEmail: true,
+          data: {
+            email: user.email,
+          },
+          req,
+        });
+
+        await CMS.client.resetPassword({
+          collection: 'users',
+          overrideAccess: true,
+          data: {
+            token,
+            password: newPassword,
+          },
+
+          req,
+        });
+
+        const { user: updatedUser } = await CMS.client.login({
+          collection: 'users',
+          data: {
+            email: user.email,
+            password: newPassword,
+          },
+          req,
+          res,
+        });
+
+        return {
+          user: updatedUser,
+        };
+      }
+    ),
 });

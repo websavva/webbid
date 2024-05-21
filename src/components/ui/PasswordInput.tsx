@@ -17,22 +17,19 @@ const PasswordInput = forwardRef(
     const PasswordInputIcon = isPasswordVisible ? EyeOffIcon : EyeIcon;
 
     return (
-      <div className='relative'>
-        <Input
-          placeholder='Password'
-          {...props}
-          type={isPasswordVisible ? 'text' : 'password'}
-          ref={ref}
-          className={cn('pr-10', className)}
-        />
-
-        {
+      <Input
+        placeholder='Password'
+        {...props}
+        type={isPasswordVisible ? 'text' : 'password'}
+        ref={ref}
+        Icon={
           <PasswordInputIcon
-            className='cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 size-[1.2em]'
+            className='cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 size-[1.1em]'
             onClick={() => setIsPasswordVisible((isVisible) => !isVisible)}
           />
         }
-      </div>
+        className={cn('pr-10', className)}
+      />
     );
   }
 );
