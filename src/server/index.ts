@@ -5,20 +5,21 @@ import bodyParser from 'body-parser';
 
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
 
-import './env';
+import './load-env';
 import { CMS } from './cms';
 import { nextApp } from './next';
 import { ctx } from './context';
 import { appRouter, createContext } from './trpc';
 import { stripeWebhookHandler } from './stripe/webhook';
+import { TasksManager } from './jobs/jobs-manager';
 
 const resolvePath = (...paths: string[]) => path.resolve(__dirname, ...paths);
 
 async function start() {
   const app = express();
 
-   // setup of Stripe Webhook to register successful payments
-   app.post(
+  // setup of Stripe Webhook to register successful payments
+  app.post(
     '/api/webhooks/stripe',
     bodyParser.raw({
       type: 'application/json',
@@ -44,6 +45,9 @@ async function start() {
   });
 
   app.use('/api/trpc', trpcMiddleware);
+
+  // starting all scheduled jobs
+  TasksManager.init();
 
   // initializing next application
   const nextAppRequestHandler = nextApp.getRequestHandler();

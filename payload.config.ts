@@ -6,7 +6,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { slateEditor as slateEditorAdapter } from '@payloadcms/richtext-slate';
 import { webpackBundler as webpackBundlerAdapter } from '@payloadcms/bundler-webpack';
 
-import '#server/env';
+import '#server/load-env';
 import { collections } from '#server/cms/collections';
 
 export default buildConfig({
