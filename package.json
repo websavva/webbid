@@ -10,9 +10,10 @@
     "migrate:status": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:status",
     "migrate:down": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:down",
     "dev": "pnpm payload:config && jiti scripts/build --watch",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "pnpm payload:config && jiti scripts/build --watch",
+    "start": "node dist/index.js",
+    "lint": "next lint",
+    "email-templates:dev": "jiti scripts/start-email-templates-dev-server.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

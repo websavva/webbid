@@ -1,8 +1,11 @@
-import { Html, Body, Link } from '@react-email/components';
-import { joinURL, createURL } from 'ufo';
+import { joinURL } from 'ufo';
 
-import { defineEmailTemplate } from './define-email-template';
+import { defineEmailTemplate } from './utils/define-email-template';
 import { ctx } from '#server/context';
+
+import { Layout } from './components/Layout';
+import { Button } from './components/Button';
+import { Text } from './components/Text';
 
 export interface SignUpConfirmationTemplateProps {
   email: string;
@@ -14,14 +17,15 @@ export const SignUpConfirmationTemplate = defineEmailTemplate(
     const url = joinURL(ctx.env.BASE_URL!, '/sign-up/confirm', token);
 
     return (
-      <Html>
-        <Body>
-          <span>{email}</span>
-          <Link href={url}>
-            Confirm account
-          </Link>
-        </Body>
-      </Html>
+      <Layout previewText='Email Confirmations'>
+        <Text>{email}</Text>
+
+        <Button href={url}>Confirm Email</Button>
+      </Layout>
     );
+  },
+  {
+    email: 'admin@example.com',
+    token: 'asd129ds14213',
   }
 );
