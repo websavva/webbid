@@ -2,7 +2,6 @@ import { build } from 'tsup';
 
 import { baseTsupConfig } from './utils/tsup/base-config';
 import { runCommand } from './utils/run-command';
-import { clearDistDir } from './utils/clear-dist-dir';
 
 interface BuildCommandArgs {
   watch: string;
@@ -10,8 +9,6 @@ interface BuildCommandArgs {
 
 runCommand<BuildCommandArgs>(async (options) => {
   const isWatchMode = Boolean(options.watch);
-
-  await clearDistDir();
 
   await build({
     ...baseTsupConfig,

@@ -10,13 +10,17 @@ export const ButtonContainer = defineEmailComponent(Section, {
 
 export const Button = defineEmailComponent(BaseButton, {
   style: {
-    backgroundColor: '#5F51E8',
-    borderRadius: '3px',
+    backgroundColor: 'rgb(37, 99, 235)',
+    borderRadius: '5px',
     color: '#fff',
-    fontSize: '16px',
+    fontSize: '15px',
+    fontWeight: '500',
     textDecoration: 'none',
     textAlign: 'center',
     display: 'block',
     padding: '12px',
+    lineHeight: 1,
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
   },
 });

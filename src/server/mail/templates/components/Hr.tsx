@@ -5,6 +5,6 @@ import { defineEmailComponent } from '../utils';
 export const Hr = defineEmailComponent(BaseHr, {
   style: {
     borderColor: '#cccccc',
-    margin: '20px 0',
+    margin: 0,
   },
 });

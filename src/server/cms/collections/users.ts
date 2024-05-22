@@ -12,9 +12,8 @@ export const Users: CollectionConfig = {
     maxLoginAttempts: 5,
 
     verify: {
-      generateEmailHTML({ user: { email }, token }) {
+      generateEmailHTML({ user, token }) {
         return SignUpConfirmationTemplate({
-          email,
           token,
         }).html;
       },

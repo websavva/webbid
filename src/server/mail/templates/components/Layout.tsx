@@ -6,11 +6,11 @@ import {
   Preview,
   Section,
 } from '@react-email/components';
+import { PropsWithChildren } from 'react';
 
 import { Text } from './Text';
-import { Hr } from './Hr';
 import { Logo } from './Logo';
-import { PropsWithChildren } from 'react';
+import { Link } from './Link';
 
 export type LayoutProps = PropsWithChildren<{
   previewText: string;
@@ -23,32 +23,36 @@ export const Layout = ({ previewText, children }: LayoutProps) => (
     </Head>
 
     <Preview>{previewText}</Preview>
-    <Body
-      style={{
-        backgroundColor: '#ffffff',
-        fontFamily:
-          '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
-      }}
-    >
+    <Body style={{ backgroundColor: '#fff', color: '#212121' }}>
       <Container
-        style={{
-          margin: '0 auto',
-          padding: '20px 0 48px',
-        }}
+        style={{ padding: '20px', margin: '0 auto', backgroundColor: '#eee' }}
       >
-        <Logo width='50' height='auto' />
+        <Section style={{ backgroundColor: '#fff' }}>
+          <Section
+            style={{
+              backgroundColor: '#252f3d',
+              display: 'flex',
+              padding: '20px 0',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Logo width='75' height='auto' />
+          </Section>
 
-        {children}
-        <Hr />
+          {children}
+        </Section>
 
-        {/* Footer */}
-        <Text
-          style={{
-            color: '#8898aa',
-            fontSize: '12px',
-          }}
-        >
-          470 Noor Ave STE B #1148, South San Francisco, CA 94080
+        <Text style={{ fontSize: '12px', padding: '0 20px' }}>
+          This message was produced and distributed by Digital Markeplace
+          <br />©{new Date().getFullYear()} All rights reserved.
+          <br />
+          <Link
+            href={process.env.NEXT_PUBLIC_SERVER_URL}
+            style={{ fontSize: 'inherit' }}
+          >
+            DigitalMarkeplace.com
+          </Link>
         </Text>
       </Container>
     </Body>
