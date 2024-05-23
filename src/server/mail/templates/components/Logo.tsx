@@ -1,9 +1,7 @@
 import { Img } from '@react-email/components';
-import { joinURL } from 'ufo';
-
-import { ctx } from '#server/context';
 
 import { defineEmailComponent } from '../utils';
+import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
 
 export const defaultStyle = {
   margin: '0 auto',
@@ -11,6 +9,6 @@ export const defaultStyle = {
 
 export const Logo = defineEmailComponent(Img, {
   style: defaultStyle,
-  src: joinURL(ctx.env.BASE_URL, '/logo.png'),
+  src: toAbsoluteUrl('/logo.png'),
   alt: 'Logo',
 });

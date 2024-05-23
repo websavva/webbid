@@ -2,12 +2,14 @@ import type { RequestHandler } from 'express';
 import type { PayloadRequest } from 'payload/types';
 import type Stripe from 'stripe';
 
+import { OrderStatus } from '@/consts/order-status';
+
 import type { User } from '#server/cms/collections/types';
 
 import { stripeApi } from './api';
-import { ctx } from '../context';
 import { CMS } from '../cms';
-import { OrderStatus } from '@/consts/order-status';
+import { privateEnv } from '../env/private';
+import { publicEnv } from '../env/public';
 
 export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
   const req = _req as PayloadRequest<User>;
@@ -20,8 +22,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
     event = stripeApi.webhooks.constructEvent(
       req.body,
       stripeSignature,
-      // ctx.env.STRIPE.API_KEY
-      'whsec_9754d99131bf8195948d79b0c96ad2f32dc7bb815170eb2d12c5759c5c68ef92'
+      privateEnv.STRIPE.API_KEY,
     );
   } catch (err) {
     return res.status(400).json({
@@ -98,7 +99,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
 
       await CMS.client
         .sendEmail({
-          from: ctx.env.SMTP.FROM_ADDRESS,
+          from: publicEnv.APP_NAME,
           subject: 'Thanks for your order! This is your receipt.',
           to: user.email,
           text,

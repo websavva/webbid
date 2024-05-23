@@ -1,8 +1,10 @@
 import { CronJob } from 'cron';
 
+import { OrderStatus } from '@/consts/order-status';
+
+import { privateEnv } from '../env/private';
 import { CMS } from '../cms';
 import { ctx } from '../context';
-import { OrderStatus } from '@/consts/order-status';
 
 export const staleOrdersRemovalJob = CronJob.from({
   cronTime: '*/1 * * * *',
@@ -22,7 +24,7 @@ export const staleOrdersRemovalJob = CronJob.from({
         createdAt: {
           less_than_equal: new Date(
             Date.now() +
-              ctx.env.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60 * 1e3
+              privateEnv.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60 * 1e3
           ),
         },
       },

@@ -1,7 +1,8 @@
 import type { Express } from 'express';
 import payload from 'payload';
 
-import { ctx } from '#server/context';
+import { privateEnv } from '../env/private';
+import { publicEnv } from '../env/public';
 import { createSMTPransport } from '#server/mail/transport';
 
 export class CMS {
@@ -12,18 +13,14 @@ export class CMS {
 
     const smtpTransport = await createSMTPransport();
 
-    const {
-      SMTP: { FROM_ADDRESS: fromAddress, FROM_NAME: fromName },
-    } = ctx.env;
-
     this.client = await payload.init({
-      secret: process.env.PAYLOAD_SECRET!,
+      secret: privateEnv.PAYLOAD_SECRET,
       express: expressApp,
 
       email: {
         transport: smtpTransport,
-        fromAddress,
-        fromName,
+        fromAddress: publicEnv.SUPPORT_EMAIL,
+        fromName: publicEnv.APP_NAME,
       },
 
       onInit(cmsClient) {

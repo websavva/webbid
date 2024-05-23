@@ -14,8 +14,8 @@ import {
   ChangePasswordDtoSchema,
 } from '#server/dtos/auth';
 import { CMS } from '#server/cms';
-import { ctx } from '@/server/context';
-import { User } from '@/server/cms/collections/types';
+import { privateEnv } from '#server/env/private';
+import { User } from '#server/cms/collections/types';
 
 export const authRouter = router({
   signUp: publicProcedure
@@ -91,7 +91,7 @@ export const authRouter = router({
       }) => {
         const expiredAt =
           Date.now() +
-          ctx.env.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION * 60 * 1e3;
+          privateEnv.AUTH.FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION * 60 * 1e3;
 
         await CMS.client.forgotPassword({
           collection: 'users',

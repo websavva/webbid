@@ -1,6 +1,6 @@
 import type { FC, CSSProperties } from 'react';
 
-export function defineEmailComponent<Props extends { style?: CSSProperties }>(
+export function defineEmailComponent<Props extends Record<string, any>>(
   Component: FC<Props>,
   defaultProps: Props
 ) {

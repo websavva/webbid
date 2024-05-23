@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
           ${templateName}
         </a>
       </li>`
-    )}
+    ).join('\n')}
   </ul>
   `);
 });

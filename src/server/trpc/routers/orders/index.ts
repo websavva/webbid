@@ -5,20 +5,22 @@ import { TRPCError } from '@trpc/server';
 
 import { CMS } from '#server/cms';
 import { stripeApi } from '#server/stripe/api';
-import { ctx } from '#server/context';
 import { Order } from '#server/cms/collections/types';
 import { GetOrdersQuerySchema } from '#server/dtos/orders';
-import { formatPaginationParams, formatSortParams } from '#server/utils/query';
+import { formatPaginationParams } from '#server/utils/query';
 
+import { privateEnv } from '#server/env/private';
+import { publicEnv } from '#server/env/public';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
 import { OrderStatus } from '@/consts/order-status';
 import { ProductStatus } from '@/consts/product-status';
+import { formatPaginationMeta } from '#server/utils/format-pagination-meta';
+import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
 
 import { privateProcedure, router } from '../../helpers';
 import { Where } from 'payload/types';
-import { formatPaginationMeta } from '@/server/utils/format-pagination-meta';
 
-const cancelSessionStripeUrl = `${ctx.env.BASE_URL}/cart`;
+const cancelSessionStripeUrl = toAbsoluteUrl('/cart');
 
 export const ordersRouter = router({
   createOrder: privateProcedure
@@ -69,7 +71,7 @@ export const ordersRouter = router({
         quantity: 1,
         price_data: {
           product_data: {
-            name: `Service fee (${ctx.env.STRIPE.SERVICE_FEE_PERCENTAGE}%)`,
+            name: `Service fee (${privateEnv.STRIPE.SERVICE_FEE_PERCENTAGE}%)`,
           },
           currency: 'USD',
           unit_amount: Math.round(fee * 100),
@@ -88,7 +90,7 @@ export const ordersRouter = router({
         req,
       });
 
-      const successUrl = `${ctx.env.BASE_URL}/thank-you?orderId=${order.id}`;
+      const successUrl = toAbsoluteUrl(`thank-you?orderId=${order.id}`);
 
       const [stripeErr, stripeSession] = await flatry(
         stripeApi.checkout.sessions.create({
@@ -102,7 +104,7 @@ export const ordersRouter = router({
           },
           expires_at: Math.round(
             Date.now() / 1e3 +
-              ctx.env.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60
+              privateEnv.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60
           ),
           cancel_url: cancelSessionStripeUrl,
         })

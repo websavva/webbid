@@ -2,7 +2,10 @@ import type { CollectionConfig } from 'payload/types';
 
 import { Role } from '@/consts/roles';
 
-import { SignUpConfirmationTemplate } from '#server/mail/templates';
+import {
+  SignUpConfirmationTemplate,
+  PasswordResetConfirmation,
+} from '#server/mail/templates';
 import { ctx } from '#server/context';
 
 export const Users: CollectionConfig = {
@@ -12,17 +15,23 @@ export const Users: CollectionConfig = {
     maxLoginAttempts: 5,
 
     verify: {
-      generateEmailHTML({ user, token }) {
+      generateEmailHTML({ token }) {
         return SignUpConfirmationTemplate({
           token,
         }).html;
       },
+
+      generateEmailSubject: () => 'Email Confirmation',
     },
 
     forgotPassword: {
       generateEmailHTML(payload) {
-        return `${ctx.env.BASE_URL}/password-reset/${payload!.token}`;
+        return PasswordResetConfirmation({
+          token: payload?.token!,
+        }).html;
       },
+
+      generateEmailSubject: () => 'Password Reset Confirmation',
     },
   },
 

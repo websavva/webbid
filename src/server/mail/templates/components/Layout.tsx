@@ -8,6 +8,8 @@ import {
 } from '@react-email/components';
 import { PropsWithChildren } from 'react';
 
+import { publicEnv } from '#server/env/public';
+
 import { Text } from './Text';
 import { Logo } from './Logo';
 import { Link } from './Link';
@@ -47,10 +49,7 @@ export const Layout = ({ previewText, children }: LayoutProps) => (
           This message was produced and distributed by Digital Markeplace
           <br />©{new Date().getFullYear()} All rights reserved.
           <br />
-          <Link
-            href={process.env.NEXT_PUBLIC_SERVER_URL}
-            style={{ fontSize: 'inherit' }}
-          >
+          <Link href={publicEnv.BASE_URL} style={{ fontSize: 'inherit' }}>
             DigitalMarkeplace.com
           </Link>
         </Text>

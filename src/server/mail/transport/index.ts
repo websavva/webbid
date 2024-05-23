@@ -1,12 +1,12 @@
 import { createTransport } from 'nodemailer';
 import { isProduction } from 'std-env';
 
-import { ctx } from '#server/context';
+import { privateEnv } from '#server/env/private';
 
 export const createSMTPransport = async () => {
   const {
     SMTP: { PORT: port, HOST: host, USER: user, PASSWORD: password },
-  } = ctx.env;
+  } = privateEnv;
 
   const authOptions = isProduction
     ? {

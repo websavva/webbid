@@ -12,6 +12,7 @@ import { ctx } from './context';
 import { appRouter, createContext } from './trpc';
 import { stripeWebhookHandler } from './stripe/webhook';
 import { TasksManager } from './jobs/jobs-manager';
+import { privateEnv } from './env/private';
 
 const resolvePath = (...paths: string[]) => path.resolve(__dirname, ...paths);
 
@@ -59,8 +60,8 @@ async function start() {
   await nextApp.prepare();
 
   // root server listening
-  app.listen(ctx.env.PORT, () => {
-    console.log(`Server is up and running on port ${ctx.env.PORT}`);
+  app.listen(privateEnv.PORT, () => {
+    console.log(`Server is up and running on port ${privateEnv.PORT}`);
   });
 }
 

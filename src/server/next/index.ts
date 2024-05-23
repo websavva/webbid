@@ -1,9 +1,9 @@
 import createNextApp from 'next';
 import { isProduction } from 'std-env';
 
-import { ctx } from '../context';
+import { privateEnv } from '../env/private';
 
 export const nextApp = createNextApp({
-  port: ctx.env.PORT,
+  port: privateEnv.PORT,
   dev: !isProduction,
 });
