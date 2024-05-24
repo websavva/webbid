@@ -99,7 +99,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
 
       await CMS.client
         .sendEmail({
-          from: publicEnv.APP_NAME,
+          from: publicEnv.COMPANY_NAME,
           subject: 'Thanks for your order! This is your receipt.',
           to: user.email,
           text,

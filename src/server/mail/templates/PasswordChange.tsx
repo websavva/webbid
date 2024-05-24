@@ -1,20 +1,28 @@
+import { Section } from '@react-email/components';
 
 import { defineEmailTemplate } from './utils/define-email-template';
 
 import { Layout } from './components/Layout';
+import { Text } from './components/Text';
+import { Link } from './components/Link';
+import { publicEnv } from '@/server/env/public';
 
-export interface PasswordChangeTemplateProps {
-  email: string;
-}
+export interface PasswordChangeTemplateProps {}
 
-export const PasswordChangeTemplate = defineEmailTemplate(
-  ({ email }: PasswordChangeTemplateProps) => {
-
-    return <Layout previewText='Password changed'>
-
+export const PasswordChangeTemplate = defineEmailTemplate(() => {
+  return (
+    <Layout previewText='Password changed'>
+      <Section style={{
+        padding: '10px 30px'
+      }}>
+        <Text>
+          Your login password has been changed. If you believe this is an error,
+          contact us by this email address{' '}
+          <Link href={`mailto:${publicEnv.SUPPORT_EMAIL}`}>
+            {publicEnv.SUPPORT_EMAIL}
+          </Link>
+        </Text>
+      </Section>
     </Layout>
-  },
-  {
-    email: 'user@example.com',
-  }
-);
+  );
+}, {});

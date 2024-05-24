@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 import { useApi } from '@/hooks/use-api';
 import { trpcClient } from '@/lib/trpc';
-import { UserCredentialsDto } from '@/server/dtos/auth';
+import { UserCredentialsDto } from '#server/dtos/auth';
 import { AuthFormFrame } from '@/components/AuthFormFrame';
 
 import { SentEmailIcon } from '../icons/SentEmailIcon';

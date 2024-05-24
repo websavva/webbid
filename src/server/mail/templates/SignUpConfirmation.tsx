@@ -1,10 +1,9 @@
-import { joinURL } from 'ufo';
 import { randomBytes } from 'crypto';
 
 import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
+import { publicEnv } from '#server/env/public';
 
 import { defineEmailTemplate } from './utils/define-email-template';
-
 import { ConfirmationLayout } from './components/ConfirmationLayout';
 
 export interface SignUpConfirmationTemplateProps {
@@ -13,8 +12,7 @@ export interface SignUpConfirmationTemplateProps {
 
 const STATIC_PROPS = {
   Title: 'Confirm your email address',
-  Intro:
-    "Thanks for starting the new account creation process at DigitalMarketplace. We want to make sure it's really you.Please follow the confirmation link before to continue. If you don't want to create an account, you can ignore this message.",
+  Intro: `Thanks for starting the new account creation process at ${publicEnv.COMPANY_NAME}. We want to make sure it's really you.Please follow the confirmation link before to continue. If you don't want to create an account, you can ignore this message.`,
   previewText: 'Email Confirmation',
   buttonText: 'Confirm email',
 };

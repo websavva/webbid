@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { Section } from '@react-email/components';
 
+import { publicEnv } from '#server/env/public';
+
 import { Layout } from './Layout';
 import { Button } from './Button';
 import { Heading } from './Heading';
@@ -56,8 +58,8 @@ export const ConfirmationLayout = ({
 
       <Section style={{ padding: '25px 35px' }}>
         <Text style={{ margin: 0 }}>
-          DigitalMarketplace will never email you and ask you to disclose or
-          verify your password, credit card, or banking account number.
+          {publicEnv.COMPANY_NAME} will never email you and ask you to disclose
+          or verify your password, credit card, or banking account number.
         </Text>
       </Section>
     </Layout>

@@ -20,7 +20,7 @@ export class CMS {
       email: {
         transport: smtpTransport,
         fromAddress: publicEnv.SUPPORT_EMAIL,
-        fromName: publicEnv.APP_NAME,
+        fromName: publicEnv.COMPANY_NAME,
       },
 
       onInit(cmsClient) {

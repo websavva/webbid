@@ -1,4 +1,4 @@
-import { GetOrdersQuerySchema } from '@/server/dtos/orders';
+import { GetOrdersQuerySchema } from '#server/dtos/orders';
 import { z } from 'zod';
 
 export const OrdersPageSearchParamsSchema = GetOrdersQuerySchema.pick({

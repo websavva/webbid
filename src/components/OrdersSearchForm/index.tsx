@@ -3,7 +3,7 @@
 import { withQuery } from 'ufo';
 import { usePathname, useRouter } from 'next/navigation';
 
-import type { GetOrdersQuery } from '@/server/dtos/orders';
+import type { GetOrdersQuery } from '#server/dtos/orders';
 import { DefineProps } from '@/types';
 import { OrderStatus } from '@/consts/order-status';
 import { transformFormToQuery } from '@/lib/utils/transform-from-to-query';

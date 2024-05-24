@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { render } from '@react-email/components';
 
-export function defineEmailTemplate<P extends Record<string, any> = {}>(
+export function defineEmailTemplate<P extends Record<string, any>>(
   Component: FC<P>,
   previewProps: P
 ) {

@@ -1,6 +1,7 @@
 import { Access, CollectionConfig } from 'payload/types';
 import type { AfterReadHook } from 'payload/dist/collections/config/types';
 
+import { publicEnv } from '#server/env/public';
 import { OrderStatus } from '@/consts/order-status';
 
 import { isAdmin, mergeCollectionAccesses } from '../access';
@@ -38,7 +39,7 @@ export const Orders: CollectionConfig = {
 
   admin: {
     useAsTitle: 'Your Orders',
-    description: 'A summary of all your orders on DigitalMarketplace.',
+    description: `A summary of all your orders on ${publicEnv.COMPANY_NAME}.`,
   },
 
   hooks: {

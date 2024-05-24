@@ -46,11 +46,11 @@ export const Layout = ({ previewText, children }: LayoutProps) => (
         </Section>
 
         <Text style={{ fontSize: '12px', padding: '0 20px' }}>
-          This message was produced and distributed by Digital Markeplace
+          This message was produced and distributed by {publicEnv.COMPANY_NAME}
           <br />©{new Date().getFullYear()} All rights reserved.
           <br />
           <Link href={publicEnv.BASE_URL} style={{ fontSize: 'inherit' }}>
-            DigitalMarkeplace.com
+            {publicEnv.COMPANY_NAME}
           </Link>
         </Text>
       </Container>
