@@ -8,7 +8,7 @@ import { trpcClient } from '@/lib/trpc';
 import { UserCredentialsDto } from '#server/dtos/auth';
 import { AuthFormFrame } from '@/components/AuthFormFrame';
 
-import { SentEmailIcon } from '../icons/SentEmailIcon';
+import { SentEmailIcon } from '../../icons/SentEmailIcon';
 
 import { AuthForm } from './AuthForm';
 

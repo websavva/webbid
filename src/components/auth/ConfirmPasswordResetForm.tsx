@@ -7,7 +7,7 @@ import { useApi } from '@/hooks/use-api';
 import { trpcClient } from '@/lib/trpc';
 import type { DefineProps } from '@/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
-import { PasswordSecurityIcon } from '@/components/ui/icons/PasswordSecurityIcon';
+import { PasswordSecurityIcon } from '@/components/icons/PasswordSecurityIcon';
 
 import { AuthForm } from './AuthForm';
 import { useAuth } from '@/hooks/use-auth';

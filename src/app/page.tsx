@@ -2,7 +2,7 @@ import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { Perk, type PerkProps } from '@/components/ui/Perk';
+import { Perk, type PerkProps } from '@/components/Perk';
 import { ProductReels } from '@/components/ProductReels';
 
 const perks: PerkProps[] = [

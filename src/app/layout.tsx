@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import { NavBar } from '@/components/ui/NavBar';
+import { NavBar } from '@/components/NavBar';
 import { cn } from '@/lib/utils/cn';
 import { loadAppContext } from '@/contexts/app/load';
 import { AppContextProvider } from '@/contexts/app/Provider';

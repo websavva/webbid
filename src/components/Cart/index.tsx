@@ -11,7 +11,7 @@ import { trpcClient } from '@/lib/trpc';
 import { useApi } from '@/hooks/use-api';
 import { useAuth } from '@/hooks/use-auth';
 
-import { CartCompositionIcon } from '../ui/icons/CartCompositionIcon';
+import { CartCompositionIcon } from '../icons/CartCompositionIcon';
 import { Button } from '../ui/Button';
 import { Separator } from '../ui/Separator';
 

@@ -19,7 +19,7 @@ export const Footer = ({ className, ...attrs }: FooterProps) => {
         <Logo className='size-8' />
 
         <span className='ml-7 pl-5 py-2 border-l border-l-gray-400'>
-          &copy; {publicEnv.COMPANY_NAME}, {currentYear}
+          &copy; {publicEnv.COMPANY_NAME} - {currentYear}
         </span>
       </Container>
     </footer>

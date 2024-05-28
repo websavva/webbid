@@ -1,11 +1,12 @@
-import { DefineProps } from '@/types';
+import Link from 'next/link';
 
-import { Logo } from '../Logo';
-import { Container } from '../Container';
+import { DefineProps } from '@/types';
+import { Logo } from '@/components/ui/Logo';
+import { Container } from '@/components/ui/Container';
+import { trpcClient } from '@/lib/trpc';
+
 import { NavBarCategoryMenu } from './CategoryMenu';
 import { NavBarRightMenu } from './RightMenu';
-import { trpcClient } from '@/lib/trpc';
-import Link from 'next/link';
 
 export type NavBarProps = DefineProps<{}, HTMLElement>;
 
