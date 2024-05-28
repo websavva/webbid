@@ -6,7 +6,6 @@ import type { PagePropsWithParams } from '@/types/page-props';
 
 import { BreadcrumbItem, Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { ImageSlider } from '@/components/ImageSlider';
-import { Container } from '@/components/ui/Container';
 import { formatPrice } from '@/lib/formatters';
 import { ProductReels } from '@/components/ProductReels';
 import { CartButton } from '@/components/CartButton';
