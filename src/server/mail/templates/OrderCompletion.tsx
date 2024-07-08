@@ -29,7 +29,7 @@ export const OrderCompletionTemplate = defineEmailTemplate(
 
     const products = _products as Product[];
 
-    const { subTotalPrice, totalPrice, fee } = calculatOrderSum(products);
+    const { totalPrice, fee } = calculatOrderSum(products);
 
     const orderUrl = toAbsoluteUrl('orders', String(id));
 

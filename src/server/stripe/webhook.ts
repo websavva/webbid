@@ -5,6 +5,7 @@ import type Stripe from 'stripe';
 import { OrderStatus } from '@/consts/order-status';
 
 import type { User } from '#server/cms/collections/types';
+import { OrderCompletionTemplate } from '#server/mail/templates';
 
 import { stripeApi } from './api';
 import { CMS } from '../cms';
@@ -22,7 +23,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
     event = stripeApi.webhooks.constructEvent(
       req.body,
       stripeSignature,
-      privateEnv.STRIPE.API_KEY,
+      privateEnv.STRIPE.API_KEY
     );
   } catch (err) {
     return res.status(400).json({
@@ -94,8 +95,9 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
         req,
       });
 
-      // TODO sending email
-      const text = `You have successfully paid order "${orderId}"`;
+      const { html, text } = OrderCompletionTemplate({
+        order,
+      });
 
       await CMS.client
         .sendEmail({
@@ -103,7 +105,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
           subject: 'Thanks for your order! This is your receipt.',
           to: user.email,
           text,
-          html: text,
+          html,
           date: new Date(),
         })
         .catch(() => {
