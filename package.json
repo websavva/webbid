@@ -14,7 +14,7 @@
     "build": "pnpm payload:config && jiti scripts/build --watch",
     "start": "node dist/index.js",
     "lint": "next lint",
-    "email-templates:dev": "jiti scripts/start-email-templates-dev-server.ts"
+    "email:dev": "jiti scripts/start-email-templates-dev-server.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

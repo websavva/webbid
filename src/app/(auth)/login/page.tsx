@@ -1,5 +1,5 @@
 import { AuthFormFrame } from '@/components/AuthFormFrame';
-import { LoginForm } from '@/components/ui/auth/LoginForm';
+import { LoginForm } from '@/components/auth/LoginForm';
 import { guest } from '@/guards/guest';
 import { applyGuards } from '@/lib/utils/guards';
 

@@ -1,5 +1,5 @@
 import { AuthFormFrame } from '@/components/AuthFormFrame';
-import { SignUpForm } from '@/components/ui/auth/SignUpForm';
+import { SignUpForm } from '@/components/auth/SignUpForm';
 
 export default function SignUpPage() {
   return (

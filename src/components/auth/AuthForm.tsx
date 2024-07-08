@@ -10,9 +10,9 @@ import {
   UserCredentialsDtoSchema,
 } from '#server/dtos/auth';
 
-import { Input } from '../Input';
-import { PasswordInput } from '../PasswordInput';
-import { Button } from '../Button';
+import { Input } from '@/components/ui/Input';
+import { PasswordInput } from '@/components/ui/PasswordInput';
+import { Button } from '@/components/ui/Button';
 
 export interface AuthFormAttributes
   extends Omit<HTMLAttributes<HTMLFormElement>, 'onSubmit'> {
