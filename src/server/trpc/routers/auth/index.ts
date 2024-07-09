@@ -16,8 +16,8 @@ import {
 import { CMS } from '#server/cms';
 import { privateEnv } from '#server/env/private';
 import { User } from '#server/cms/collections/types';
-import { publicEnv } from '@/server/env/public';
-import { PasswordChangeTemplate } from '@/server/mail/templates';
+import { publicEnv } from '#server/env/public';
+import { PasswordChangeTemplate } from '#server/mail/templates';
 
 export const authRouter = router({
   signUp: publicProcedure
@@ -145,10 +145,12 @@ export const authRouter = router({
         res,
       });
 
+      const { html, text } = PasswordChangeTemplate();
       await CMS.client
         .sendEmail({
           subject: 'Password Changed',
-          html: PasswordChangeTemplate({}).html,
+          html,
+          text,
         })
         .catch((err) => {
           console.error(`[email]: Password Changed email was not sent ${err}`);

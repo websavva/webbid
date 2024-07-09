@@ -12,9 +12,11 @@ export interface PasswordChangeTemplateProps {}
 export const PasswordChangeTemplate = defineEmailTemplate(() => {
   return (
     <Layout previewText='Password changed'>
-      <Section style={{
-        padding: '10px 30px'
-      }}>
+      <Section
+        style={{
+          padding: '10px 30px',
+        }}
+      >
         <Text>
           Your login password has been changed. If you believe this is an error,
           contact us by this email address{' '}
@@ -25,4 +27,4 @@ export const PasswordChangeTemplate = defineEmailTemplate(() => {
       </Section>
     </Layout>
   );
-}, {});
+});

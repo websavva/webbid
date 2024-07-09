@@ -1,13 +1,14 @@
-import type { FC } from 'react';
+import type { FC, JSX } from 'react';
 import { render } from '@react-email/components';
 
-export function defineEmailTemplate<P extends Record<string, any>>(
-  Component: FC<P>,
-  previewProps: P
-) {
-  const EmailTemplate = (props: P) => {
-    const html = render(<Component {...props} />);
-    const text = render(<Component {...props} />, {
+export function defineEmailTemplate<P>(Component: FC<P>, previewProps?: P) {
+  const EmailTemplate = (props?: P) => {
+    const derivedProps = props || ({} as P & JSX.IntrinsicAttributes);
+
+    const renderedComponent = <Component {...derivedProps} />;
+
+    const html = render(renderedComponent);
+    const text = render(renderedComponent, {
       plainText: true,
     });
 
