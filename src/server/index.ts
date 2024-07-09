@@ -8,7 +8,6 @@ import { createExpressMiddleware } from '@trpc/server/adapters/express';
 import './load-env';
 import { CMS } from './cms';
 import { nextApp } from './next';
-import { ctx } from './context';
 import { appRouter, createContext } from './trpc';
 import { stripeWebhookHandler } from './stripe/webhook';
 import { TasksManager } from './jobs/jobs-manager';

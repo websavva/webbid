@@ -6,7 +6,6 @@ import {
   SignUpConfirmationTemplate,
   PasswordResetConfirmation,
 } from '#server/mail/templates';
-import { ctx } from '#server/context';
 
 export const Users: CollectionConfig = {
   slug: 'users',
