@@ -151,6 +151,7 @@ export const authRouter = router({
           subject: 'Password Changed',
           html,
           text,
+          to: authInfo.user.email,
         })
         .catch((err) => {
           console.error(`[email]: Password Changed email was not sent ${err}`);
