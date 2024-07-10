@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Perk, type PerkProps } from '@/components/Perk';
 import { ProductReels } from '@/components/ProductReels';
+import Link from 'next/link';
 
 const perks: PerkProps[] = [
   {
@@ -45,10 +46,16 @@ export default async function Home() {
           </p>
 
           <div className='flex items-center space-x-5 pt-6'>
-            <Button className='text-lg'>Browse trending</Button>
+            <Button asChild className='text-lg'>
+              <Link href='/products'>
+                Browse trending
+              </Link>
+            </Button>
 
-            <Button className='text-lg' variant='ghost'>
-              Our quality promise &rarr;
+            <Button asChild variant='ghost' className='text-lg'>
+              <Link href='/products'>
+                Our quality promise &rarr;
+              </Link>
             </Button>
           </div>
         </Container>
@@ -64,11 +71,9 @@ export default async function Home() {
 
       <section className='py-16 border-t-2 flex justify-center'>
         <Container className='w-full'>
-          <div className='text-2xl text-gray-800 font-bold mb-8'>
-            Brand New
-          </div>
+          <div className='text-2xl text-gray-800 font-bold mb-8'>Brand New</div>
 
-          <ProductReels title='Brand New' className='gap-20'/>
+          <ProductReels title='Brand New' className='gap-20' />
         </Container>
       </section>
     </>
