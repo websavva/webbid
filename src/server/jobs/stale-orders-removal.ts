@@ -4,7 +4,6 @@ import { OrderStatus } from '@/consts/order-status';
 
 import { privateEnv } from '../env/private';
 import { CMS } from '../cms';
-import { ctx } from '../context';
 
 export const staleOrdersRemovalJob = CronJob.from({
   cronTime: '*/1 * * * *',
