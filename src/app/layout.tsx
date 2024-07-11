@@ -33,7 +33,7 @@ export default async function RootLayout({
   const initialAppContextValue = await loadAppContext(requestHeaders());
 
   return (
-    <html lang='en'>
+    <html lang='en' className='text-[80%] min-[1600px]:text-[100%]'>
       <body className={cn('font-sans relative', intInter.className)}>
         <div className='flex flex-col min-h-screen css-var-[--nav-bar-height=5rem]'>
           <AppContextProvider initialValue={initialAppContextValue}>

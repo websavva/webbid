@@ -32,7 +32,7 @@ export default async function Home() {
     <>
       <section className='flex justify-center py-20'>
         <Container className='flex flex-col items-center space-y-5 text-center sm:css-var-[--css=1rem]'>
-          <h1 className='text-6xl leading-[1.3] text-gray-900'>
+          <h1 className='text-6xl w-3/4 leading-[1.3] text-gray-900'>
             <span className='font-bold'>Your marketplace for high-quality</span>
 
             <strong className='inline-block pl-2 text-primary'>
