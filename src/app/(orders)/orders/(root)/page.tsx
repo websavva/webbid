@@ -1,9 +1,9 @@
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/UI/Container';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { OrderCard } from '@/components/OrderCard';
 import { OrdersSearchForm } from '@/components/OrdersSearchForm';
-import { Pagination } from '@/components/ui/Pagination';
+import { Pagination } from '@/components/UI/Pagination';
 import type { PagePropsWithSearchParams } from '@/types/page-props';
 
 import {

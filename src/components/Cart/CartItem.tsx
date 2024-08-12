@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils/cn';
 import { DefineProps } from '@/types';
 
 import { formatPrice } from '@/lib/formatters';
-import { Skeleton } from '../ui/Skeleton';
+import { Skeleton } from '../UI/Skeleton';
 
 export type CartItemProps = DefineProps<{
   item: Product;

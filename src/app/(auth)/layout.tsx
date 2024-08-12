@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/UI/Container';
 
 export default function AuthLayout({ children }: PropsWithChildren) {
 

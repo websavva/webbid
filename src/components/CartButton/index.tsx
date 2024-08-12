@@ -4,7 +4,7 @@ import type { Product } from '#server/cms/collections/types';
 
 import { useCartStore } from '@/hooks/use-cart-store';
 
-import { Button, type ButtonProps } from '../ui/Button';
+import { Button, type ButtonProps } from '../UI/Button';
 
 export interface CartButtonProps extends ButtonProps {
   product: Product;

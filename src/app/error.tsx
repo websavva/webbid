@@ -1,7 +1,7 @@
 'use client';
 
-import { Container } from '@/components/ui/Container';
-import { ErrorIcon } from '@/components/icons/ErrorIcon';
+import { Container } from '@/components/UI/Container';
+import { ErrorIcon } from '@/components/Icons/ErrorIcon';
 import { TRPCClientError } from '@trpc/client';
 
 interface AppErrorPageProps {

@@ -5,11 +5,11 @@ import { NavBar } from '@/components/NavBar';
 import { cn } from '@/lib/utils/cn';
 import { loadAppContext } from '@/contexts/app/load';
 import { AppContextProvider } from '@/contexts/app/Provider';
-import { Toaster } from '@/components/ui/Toaster';
+import { Toaster } from '@/components/UI/Toaster';
 
 import './globals.css';
 import { requestHeaders } from '@/lib/utils/request-headers';
-import { Footer } from '@/components/ui/Footer';
+import { Footer } from '@/components/UI/Footer';
 
 const intInter = Inter({ subsets: ['latin'] });
 

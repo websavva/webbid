@@ -5,7 +5,7 @@ import { LogOut, User, MenuSquare, ReceiptIcon } from 'lucide-react';
 
 import { useAuth } from '@/hooks/use-auth';
 import { cn } from '@/lib/utils/cn';
-import { UserAvatar } from '@/components/ui/UserAvatar';
+import { UserAvatar } from '@/components/UI/UserAvatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +14,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu';
+} from '@/components/UI/DropdownMenu';
 
 export function UserMenu({ className }: { className?: string }) {
   const { user, isAdmin } = useAuth();

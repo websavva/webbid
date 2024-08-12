@@ -3,11 +3,11 @@
 import { ChevronDown } from 'lucide-react';
 
 import { DefineProps } from '@/types';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/UI/Button';
 
 import type { ProductCategory } from '#server/cms/collections/types';
 import { cn } from '@/lib/utils/cn';
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/UI/Container';
 
 import { NavBarCategoryDropdownFeatures } from './Features';
 

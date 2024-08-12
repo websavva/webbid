@@ -1,7 +1,7 @@
 'use client';
 
 import type { DefineProps } from '@/types';
-import { Select } from '@/components/ui/Select';
+import { Select } from '@/components/UI/Select';
 
 import {
   PRODUCTS_SORT_OPTIONS,

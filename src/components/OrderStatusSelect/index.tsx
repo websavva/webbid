@@ -1,7 +1,7 @@
 'use client';
 
 import { DefineProps } from '@/types';
-import { Select } from '../ui/Select';
+import { Select } from '../UI/Select';
 import { OrderStatus } from '@/consts/order-status';
 import { firstToUpperCase } from '@/lib/utils/first-to-upper-case';
 

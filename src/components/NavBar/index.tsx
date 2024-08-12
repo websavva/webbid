@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import { DefineProps } from '@/types';
-import { Logo } from '@/components/ui/Logo';
-import { Container } from '@/components/ui/Container';
+import { Logo } from '@/components/UI/Logo';
+import { Container } from '@/components/UI/Container';
 import { trpcClient } from '@/lib/trpc';
 
 import { NavBarCategoryMenu } from './CategoryMenu';

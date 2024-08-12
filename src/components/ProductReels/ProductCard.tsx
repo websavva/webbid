@@ -7,7 +7,7 @@ import { formatPrice } from '@/lib/formatters';
 
 import { ImageSlider } from '../ImageSlider';
 import { cn } from '@/lib/utils/cn';
-import { Skeleton } from '../ui/Skeleton';
+import { Skeleton } from '../UI/Skeleton';
 
 export type ProductCardProps = DefineProps<{
   product: Product;

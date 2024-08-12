@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { Skeleton } from '@/components/ui/Skeleton';
+import { Skeleton } from '@/components/UI/Skeleton';
 import { trpcClient } from '@/lib/trpc';
 import type { DefineProps } from '@/types';
 import { cn } from '@/lib/utils/cn';

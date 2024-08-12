@@ -6,7 +6,7 @@ import flatry from 'await-to-js';
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
-import { Select } from '@/components/ui/Select';
+import { Select } from '@/components/UI/Select';
 
 import type { ProductCategory } from '#server/cms/collections/types';
 import { toast } from 'sonner';

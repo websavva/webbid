@@ -9,7 +9,7 @@ import {
   SelectCoreItem,
   SelectCoreTrigger,
   SelectCoreValue,
-} from '@/components/ui/Select/Core';
+} from '@/components/UI/Select/Core';
 
 import { cn } from '@/lib/utils/cn';
 

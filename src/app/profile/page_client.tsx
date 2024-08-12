@@ -1,6 +1,6 @@
 'use client';
 
-import { UserAvatar } from '@/components/ui/UserAvatar';
+import { UserAvatar } from '@/components/UI/UserAvatar';
 import { useAuth } from '@/hooks/use-auth';
 import { formatDate } from '@/lib/formatters/date';
 import { ChangePasswordForm } from '@/components/ChangePasswordForm';

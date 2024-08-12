@@ -12,7 +12,7 @@ import {
 import { withQuery } from 'ufo';
 
 import { cn } from '@/lib/utils/cn';
-import { ButtonProps, Button } from '@/components/ui/Button';
+import { ButtonProps, Button } from '@/components/UI/Button';
 import { DefineProps } from '@/types';
 import {
   type UsePaginationOptions,

@@ -1,7 +1,7 @@
 import type { GetProductsSortableFieldName } from '#server/dtos/products';
 
 import { SortDir } from '@/consts/sort-dir';
-import type { SelectOption } from '@/components/ui/Select';
+import type { SelectOption } from '@/components/UI/Select';
 
 export interface ProductsBaseSortOption {
   sortBy: GetProductsSortableFieldName;

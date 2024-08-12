@@ -7,9 +7,9 @@ import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { toArray } from '@/lib/utils/to-array';
 import { PagePropsWithSearchParams } from '@/types/page-props';
-import { SuccessfulPaymentIcon } from '@/components/icons/SuccessfulPaymentIcon';
-import { Container } from '@/components/ui/Container';
-import { ArrowLink } from '@/components/ui/ArrowLink';
+import { SuccessfulPaymentIcon } from '@/components/Icons/SuccessfulPaymentIcon';
+import { Container } from '@/components/UI/Container';
+import { ArrowLink } from '@/components/UI/ArrowLink';
 import { OrderIntro } from '@/components/OrderIntro';
 
 export default async function ThankYoutPage({

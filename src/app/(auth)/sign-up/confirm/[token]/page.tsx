@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 import type { PagePropsWithParams } from '@/types/page-props';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/UI/Button';
 import { trpcClient } from '@/lib/trpc';
 import { wait } from '@/lib/utils/wait';
 

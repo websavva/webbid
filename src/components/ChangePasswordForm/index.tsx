@@ -10,9 +10,9 @@ import { trpcClient } from '@/lib/trpc';
 import { useAuth } from '@/hooks/use-auth';
 import { useApi } from '@/hooks/use-api';
 
-import { PasswordInput } from '../ui/PasswordInput';
+import { PasswordInput } from '../UI/PasswordInput';
 import { cn } from '@/lib/utils/cn';
-import { Button } from '../ui/Button';
+import { Button } from '../UI/Button';
 import { AuthInfo } from '@/contexts/auth/context';
 import { toast } from 'sonner';
 

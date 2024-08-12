@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { PagePropsWithParams } from '@/types/page-props';
-import { Container } from '@/components/ui/Container';
+import { Container } from '@/components/UI/Container';
 import { OrderIntro } from '@/components/OrderIntro';
 import { applyGuards } from '@/lib/utils/guards';
 import { auth } from '@/guards/auth';

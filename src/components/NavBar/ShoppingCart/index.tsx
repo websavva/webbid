@@ -12,8 +12,8 @@ import {
   SheetTitle,
   SheetFooter,
   SheetClose,
-} from '@/components/ui/Sheet';
-import { Button } from '@/components/ui/Button';
+} from '@/components/UI/Sheet';
+import { Button } from '@/components/UI/Button';
 import { useCartStore } from '@/hooks/use-cart-store';
 
 import { Cart } from '@/components/Cart';

@@ -1,7 +1,7 @@
 import type { PagePropsWithSearchParams } from '@/types/page-props';
 import { ProductsSearchForm } from '@/components/ProductsSearchForm';
 import { ProductGrid, ProductCard } from '@/components/ProductReels';
-import { Pagination } from '@/components/ui/Pagination';
+import { Pagination } from '@/components/UI/Pagination';
 import { trpcClient } from '@/lib/trpc';
 
 import {

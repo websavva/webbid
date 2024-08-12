@@ -1,7 +1,7 @@
 import type { DefineProps } from '@/types';
-import { Logo } from '@/components/ui/Logo';
+import { Logo } from '@/components/UI/Logo';
 
-import { ArrowLink } from '../ui/ArrowLink';
+import { ArrowLink } from '../UI/ArrowLink';
 
 export type AuthFormFrameProps = DefineProps<{
   heading: string;

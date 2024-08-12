@@ -5,7 +5,7 @@ import type { Product } from '#server/cms/collections/types';
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
 
-import { Separator } from '../ui/Separator';
+import { Separator } from '../UI/Separator';
 import { ProductCard } from '../ProductCard';
 import { OrderBill } from '../OrderBill';
 
