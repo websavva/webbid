@@ -3,6 +3,11 @@
   "description": "Digital marketplace build with Next.js and TRPC",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20.x.x",
+    "pnpm": "9.5.0"
+  },
+  "packageManager": "pnpm@9.5.0",
   "scripts": {
     "payload:config": "jiti scripts/build-payload-config.ts",
     "payload:types": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload generate:types",
