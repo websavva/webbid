@@ -5,9 +5,9 @@
   "private": true,
   "engines": {
     "node": "20.x.x",
-    "pnpm": "9.5.0"
+    "pnpm": "9.6.0"
   },
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.6.0",
   "scripts": {
     "payload:config": "jiti scripts/build-payload-config.ts",
     "payload:types": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload generate:types",
