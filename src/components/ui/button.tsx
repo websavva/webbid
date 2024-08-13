@@ -47,10 +47,7 @@ export interface ButtonProps
 
 const PENDING_TRANSITION_CLASSES = defineTransitionClasses({
   entering: 'w-[1em] ml-2',
-  entered: 'w-[1em] ml-2',
   exiting: 'w-0 ml-0',
-  exited: 'w-0 ml-0',
-  unmounted: 'w-0 ml-0',
 });
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
