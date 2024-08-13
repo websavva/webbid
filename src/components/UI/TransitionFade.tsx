@@ -8,14 +8,14 @@ import { defineTransitionClasses } from '@/lib/utils/define-transition-classes';
 export type TransitionFadeProps<K extends string> = Omit<
   DefineProps<
     {
-      key: K;
+      transitionKey: K;
       duration?: number;
     },
     HTMLDivElement
   >,
   'children'
 > & {
-  children: (key: K) => JSX.Element;
+  children: (transitionKey: K) => JSX.Element;
 };
 
 const TRANSITION_CLASSES = defineTransitionClasses({
@@ -24,7 +24,7 @@ const TRANSITION_CLASSES = defineTransitionClasses({
 });
 
 function TransitionFade<K extends string>({
-  key,
+  transitionKey,
   children,
   duration = 3e2,
   className,
@@ -35,7 +35,7 @@ function TransitionFade<K extends string>({
 
   return (
     <SwitchTransition>
-      <Transition nodeRef={nodeRef} key={key} timeout={duration}>
+      <Transition nodeRef={nodeRef} key={transitionKey} timeout={duration}>
         {(state) => {
           return (
             <div
@@ -51,7 +51,7 @@ function TransitionFade<K extends string>({
                 transitionDuration: `${duration}ms`,
               }}
             >
-              {children(key)}
+              {children(transitionKey)}
             </div>
           );
         }}

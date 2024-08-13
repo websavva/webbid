@@ -16,7 +16,7 @@ export default function LogoutClientPage() {
   const { logout } = useAuth();
 
   const {
-    isError,
+    status,
 
     makeApiCall: triggerLogout,
   } = useApi(
@@ -38,7 +38,7 @@ export default function LogoutClientPage() {
   return (
     <TransitionFade
       className='flex flex-col items-center w-full'
-      key={isError ? 'error' : 'pending'}
+      transitionKey={status}
     >
       {(key) =>
         key === 'error' ? (
