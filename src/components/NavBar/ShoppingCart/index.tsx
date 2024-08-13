@@ -1,18 +1,11 @@
 'use client';
 
-import { ShoppingBagIcon, ShoppingBasketIcon } from 'lucide-react';
-import Link from 'next/link';
+import { useState } from 'react';
+import { ShoppingBagIcon } from 'lucide-react';
 
+import { useOnFullPathUpdate } from '@/hooks/use-full-path';
 import type { DefineProps } from '@/types';
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetFooter,
-  SheetClose,
-} from '@/components/UI/Sheet';
+import { Sheet, SheetTrigger, SheetContent } from '@/components/UI/Sheet';
 import { Button } from '@/components/UI/Button';
 import { useCartStore } from '@/hooks/use-cart-store';
 
@@ -23,8 +16,14 @@ export type ShoppingCartProps = DefineProps<{}>;
 export function ShoppingCart({}: ShoppingCartProps) {
   const itemsCount = useCartStore((state) => state.items.length);
 
+  const [isOpened, setIsOpened] = useState(false);
+
+  useOnFullPathUpdate(() => {
+    setIsOpened(false);
+  });
+
   return (
-    <Sheet>
+    <Sheet open={isOpened} onOpenChange={(isOpened) => setIsOpened(isOpened)}>
       <SheetTrigger asChild>
         <Button
           variant='ghost'

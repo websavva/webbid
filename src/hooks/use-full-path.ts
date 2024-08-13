@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useDidUpdateEffect } from './use-did-update-effect';
