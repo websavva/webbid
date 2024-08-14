@@ -62,7 +62,7 @@ export default async function Home() {
       </section>
 
       <section className='py-16 bg-slate-100 border-t-2 border-slate-200 flex justify-center'>
-        <Container className='flex justify-between'>
+        <Container className='flex lg:justify-between flex-col lg:flex-row items-center max-lg:gap-16'>
           {perks.map((props) => (
             <Perk key={props.title} {...props} className='text-center w-3/12' />
           ))}
