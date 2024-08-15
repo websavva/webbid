@@ -44,26 +44,26 @@ export const ProductCard = ({
   } = product;
 
   return (
-    <div {...attrs} className={cn('flex flex-row lg:flex-col', className)}>
+    <div {...attrs} className={cn('flex sm:max-lg:flex-row flex-col', className)}>
       {imageUrls.length && (
-        <ImageSlider imageUrls={imageUrls} className='h-72 mb-6 max-w-80 lg:max-w-none' />
+        <ImageSlider imageUrls={imageUrls} className='h-72 mb-6 sm:max-lg:max-w-80 lg:max-w-none' />
       )}
 
-      <div className='flex-grow ml-12 lg:ml-0'>
+      <div className='flex-grow sm:max-lg:ml-12 lg:ml-0'>
         <Link
           href={`/products/${id}`}
-          className='mb-6 lg:mb-2 text-xl font-semibold line-clamp-1'
+          className='sm:max-lg:mb-6 mb-2 text-xl font-semibold line-clamp-1'
         >
           {name}
         </Link>
 
         {categoryLabel && (
-          <div className='mb-6 lg:mb-2 text-gray-500 font-medium text-xl lg:text-base'>
+          <div className='sm:max-lg:mb-6 mb-2 text-gray-500 font-medium sm:max-lg:text-xl text-base'>
             {categoryLabel}
           </div>
         )}
 
-        <div className='text-xl lg:text-lg font-medium'>{formatPrice(price)}</div>
+        <div className='sm:max-lg:text-xl text-lg font-medium'>{formatPrice(price)}</div>
       </div>
     </div>
   );
