@@ -30,9 +30,9 @@ const perks: PerkProps[] = [
 export default async function Home() {
   return (
     <>
-      <section className='flex justify-center py-20'>
-        <Container className='flex flex-col items-center space-y-5 text-center sm:css-var-[--css=1rem]'>
-          <h1 className='text-6xl w-3/4 leading-[1.3] text-gray-900'>
+      <section className='flex justify-center py-14 sm:py-20'>
+        <Container className='flex flex-col items-center text-center'>
+          <h1 className='text-5xl lg:text-6xl w-3/4 leading-[1.3] text-gray-900'>
             <span className='font-bold'>Your marketplace for high-quality</span>
 
             <strong className='inline-block pl-2 text-primary'>
@@ -40,40 +40,36 @@ export default async function Home() {
             </strong>
           </h1>
 
-          <p className='text-gray-500 text-xl leading-normal w-2/3 mt-8'>
+          <p className='text-gray-500 text-lg lg:text-xl leading-normal w-2/3 mt-8'>
             Welcome to DigitalMonkey. Every asset on our platform is verified by
             our team to ensure our highest quality standards
           </p>
 
-          <div className='flex items-center space-x-5 pt-6'>
+          <div className='flex flex-col lg:flex-row items-center gap-5 mt-12'>
             <Button asChild className='text-lg'>
-              <Link href='/products'>
-                Browse trending
-              </Link>
+              <Link href='/products'>Browse trending</Link>
             </Button>
 
             <Button asChild variant='ghost' className='text-lg'>
-              <Link href='/products'>
-                Our quality promise &rarr;
-              </Link>
+              <Link href='/products'>Our quality promise &rarr;</Link>
             </Button>
           </div>
         </Container>
       </section>
 
       <section className='py-16 bg-slate-100 border-t-2 border-slate-200 flex justify-center'>
-        <Container className='flex lg:justify-between flex-col lg:flex-row items-center max-lg:gap-16'>
+        <Container className='flex lg:justify-between flex-col lg:flex-row gap-16 sm:max-lg:max-w-[60%]'>
           {perks.map((props) => (
-            <Perk key={props.title} {...props} className='text-center w-3/12' />
+            <Perk key={props.title} {...props} className='lg:text-center lg:w-3/12' />
           ))}
         </Container>
       </section>
 
       <section className='py-16 border-t-2 flex justify-center'>
-        <Container className='w-full'>
-          <div className='text-2xl text-gray-800 font-bold mb-8'>Brand New</div>
+        <Container className='sm:max-lg:max-w-[60%] w-full'>
+          <div className='text-2xl text-gray-800 font-bold mb-14 lg:mb-8'>Brand New</div>
 
-          <ProductReels title='Brand New' className='gap-20' />
+          <ProductReels className='gap-20 css-var-[--column-counts=1] lg:css-var-[--column-counts=3]' />
         </Container>
       </section>
     </>

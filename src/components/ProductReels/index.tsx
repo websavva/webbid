@@ -31,7 +31,7 @@ export const ProductGrid = ({
   ...attrs
 }: DefineProps<{ count: number }>) => {
   const style = {
-    '--column-counts': count,
+    '--default--column-counts': count,
   } as CSSProperties;
 
   return (
@@ -39,7 +39,7 @@ export const ProductGrid = ({
       <div
         {...attrs}
         className={cn(
-          'grid grid-cols-[repeat(var(--column-counts),_1fr)] gap-8',
+          'grid grid-cols-[repeat(var(--column-counts,var(--default-column-counts)),_1fr)] gap-8',
           className
         )}
         style={style}
