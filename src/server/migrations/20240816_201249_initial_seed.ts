@@ -1,9 +1,13 @@
-import { readFile } from 'fs-extra';
+import { rm } from 'fs-extra';
 import { join } from 'path';
 
 import { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-postgres';
 
-import type { Media, ProductCategoryFeature } from '../cms/collections/types';
+import type {
+  Media,
+  ProductCategory,
+  ProductCategoryFeature,
+} from '../cms/collections/types';
 
 import initialProductCategories from './data/initial_seed/product-categories/product-categories.json';
 
@@ -65,42 +69,74 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   await Promise.all(
-    initialProductCategories.map(async ({ id: name, features }) => {
+    initialProductCategories.map(async ({ id: name }) => {
+      const { docs: productCategoryFeatures } =
+        await payload.db.find<ProductCategoryFeature>({
+          collection: 'productCategoryFeatures',
+          where: {
+            'category.name': {
+              equals: name,
+            },
+          },
+
+          // @ts-expect-error
+          req,
+        });
+
       await Promise.all(
-        features.map(async ({ name }) => {
-          const productCategoryFeature =
-            await payload.db.findOne<ProductCategoryFeature>({
-              collection: 'productCategoryFeatures',
+        productCategoryFeatures.map(
+          async ({ id: featureId, image: imageId }) => {
+            const image = (await payload.findByID({
+              collection: 'media',
+              id: imageId as number,
+            })) as unknown as Media;
+
+            const allImageFileNames: string[] = [image.filename!];
+
+            if (image.sizes) {
+              const resizedImageFileNames = Object.values(image.sizes!).map(
+                ({ filename }) => filename!,
+              );
+
+              allImageFileNames.push(...resizedImageFileNames);
+            }
+
+            await Promise.all(
+              allImageFileNames.map((fileName) => {
+                const fileFullPath = join(
+                  payload.collections.media.config.upload.staticDir,
+                  fileName,
+                );
+
+                return rm(fileFullPath);
+              }),
+            );
+
+            await payload.db.deleteOne({
+              collection: 'media',
+
               where: {
-                name: {
-                  equals: name,
+                id: {
+                  equals: image.id,
                 },
               },
-              // @ts-expect-error
+
+              // @ts-ignore
               req,
             });
 
-          await payload.delete({
-            collection: 'media',
-
-            where: {
-              id: {
-                equals: (productCategoryFeature!.image as Media).id,
+            await payload.delete({
+              // @ts-ignore
+              req,
+              collection: 'productCategoryFeatures',
+              where: {
+                id: {
+                  equals: featureId,
+                },
               },
-            },
-          });
-
-          await payload.delete({
-            // @ts-ignore
-            req,
-            collection: 'productCategoryFeatures',
-            where: {
-              name: {
-                equals: productCategoryFeature!.name,
-              },
-            },
-          });
-        }),
+            });
+          },
+        ),
       );
 
       await payload.delete({
@@ -121,8 +157,8 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
 
     where: {
       email: {
-        equals: process.env.PAYLOAD_ADMIN_EMAIL!
-      }
+        equals: process.env.PAYLOAD_ADMIN_EMAIL!,
+      },
     },
 
     // @ts-expect-error
