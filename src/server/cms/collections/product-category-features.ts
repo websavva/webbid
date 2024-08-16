@@ -38,12 +38,6 @@ export const ProductCategoryFeatures: CollectionConfig = {
     },
 
     {
-      name: 'externalImageUrl',
-      type: 'text',
-      label: 'External Image URL',
-    },
-
-    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',

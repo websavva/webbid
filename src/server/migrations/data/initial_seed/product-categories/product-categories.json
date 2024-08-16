@@ -6,17 +6,17 @@
       {
         "name": "Editor picks",
         "href": "/products?category=ui_kits",
-        "externalImageUrl": "/nav/ui-kits/mixed.jpg"
+        "image": "ui-kits/mixed.jpg"
       },
       {
         "name": "New Arrivals",
         "href": "/products?category=ui_kits&sort=desc",
-        "externalImageUrl": "/nav/ui-kits/blue.jpg"
+        "image": "ui-kits/blue.jpg"
       },
       {
         "name": "Bestsellers",
         "href": "/products?category=ui_kits",
-        "externalImageUrl": "/nav/ui-kits/purple.jpg"
+        "image": "ui-kits/purple.jpg"
       }
     ]
   },
@@ -27,17 +27,17 @@
       {
         "name": "Favorite Icon Picks",
         "href": "/products?category=icons",
-        "externalImageUrl": "/nav/icons/picks.jpg"
+        "image": "icons/picks.jpg"
       },
       {
         "name": "New Arrivals",
         "href": "/products?category=icons&sort=desc",
-        "externalImageUrl": "/nav/icons/new.jpg"
+        "image": "icons/new.jpg"
       },
       {
         "name": "Bestselling Icons",
         "href": "/products?category=icons",
-        "externalImageUrl": "/nav/icons/bestsellers.jpg"
+        "image": "icons/bestsellers.jpg"
       }
     ]
   }
