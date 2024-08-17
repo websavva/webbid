@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
+import { ChevronDownIcon, XIcon } from 'lucide-react';
 
 import { DefineProps } from '@/types';
 import { Button } from '@/components/UI/Button';
@@ -21,24 +21,23 @@ export type NavBarCategoryDropdownProps = DefineProps<
   HTMLDivElement
 >;
 
-export function NavBarCategoryDropdown({
+export default function NavBarCategoryDropdown({
   isActive,
   category,
   onToggle,
-  className,
   ...attrs
 }: NavBarCategoryDropdownProps) {
   return (
-    <div className={cn(className)} {...attrs}>
+    <div {...attrs}>
       <Button
         variant={isActive ? 'default' : 'ghost'}
         size={'sm'}
-        className='text-base flex items-center'
+        className='text-base flex items-center max-sm:px-0 max-sm:hover:bg-transparent'
         onClick={() => onToggle(!isActive)}
       >
         <span>{category.label}</span>
 
-        <ChevronDown
+        <ChevronDownIcon
           className={cn('ml-2 transition-transform w-4 h-4', {
             'rotate-180': isActive,
           })}
@@ -46,8 +45,15 @@ export function NavBarCategoryDropdown({
       </Button>
 
       {isActive && (
-        <div className='bg-white w-full absolute left-0 top-20 py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
-          <Container>
+        <div className='bg-white w-full fixed overflow-auto max-sm:h-screen left-0 top-0 sm:top-[var(--nav-bar-height,5rem)] py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
+          <button
+            className='block sm:none absolute right-4 top-4'
+            onClick={() => onToggle(false)}
+          >
+            <XIcon className='size-5 text-gray-700' />
+          </button>
+
+          <Container className='pt-5'>
             <NavBarCategoryDropdownFeatures categoryId={category.id} />
           </Container>
         </div>

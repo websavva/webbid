@@ -43,10 +43,8 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
       {features.map(({ name, href, image, externalImageUrl }) => {
         let derivedImageUrl: string | null = null;
 
-        if (image && typeof image === 'object' && image.url) {
-          derivedImageUrl = image?.url;
-        } else if (externalImageUrl) {
-          derivedImageUrl = externalImageUrl;
+        if (image && typeof image === 'object') {
+          derivedImageUrl = image.url!;
         }
 
         return (
@@ -57,7 +55,7 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
                 alt=''
                 width={500}
                 height={500}
-                className='rounded-lg max-h-72 object-cover'
+                className='rounded-lg sm:h-72 object-cover'
               />
             )}
 
@@ -96,7 +94,7 @@ export const NavBarCategoryDropdownFeatures = ({
   }, [categoryId]);
 
   return (
-    <ul className={cn('grid grid-cols-3 gap-10', className)}>
+    <ul className={cn('grid sm:grid-cols-3 gap-10', className)}>
       {isSuccess ? (
         <FeaturesList features={features} />
       ) : (

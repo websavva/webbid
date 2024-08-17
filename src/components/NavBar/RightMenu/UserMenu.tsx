@@ -15,21 +15,35 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/UI/DropdownMenu';
+import { useToggle } from '@/hooks/use-toggle';
+import { useOnFullPathUpdate } from '@/hooks/use-full-path';
 
 export function UserMenu({ className }: { className?: string }) {
   const { user, isAdmin } = useAuth();
+
+  const { value: open, onUpdate: onOpenChange, onDeactivate } = useToggle();
 
   const { email } = user!;
 
   const login = email.split('@')[0];
 
+  useOnFullPathUpdate(() => {
+    onDeactivate();
+  }, [onDeactivate]);
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={onOpenChange}>
       <DropdownMenuTrigger asChild>
         <button
-          className={cn('flex items-center space-x-3 outline-none', className)}
+          className={cn(
+            'flex items-center space-x-2 sm:space-x-3 outline-none',
+            className,
+          )}
         >
-          <UserAvatar email={email} className='size-9 text-base shrink-0' />
+          <UserAvatar
+            email={email}
+            className='size-7 sm:size-9 text-sm sm:text-base shrink-0'
+          />
 
           <span>{login}</span>
         </button>

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { ShoppingBagIcon } from 'lucide-react';
 
 import { useOnFullPathUpdate } from '@/hooks/use-full-path';
@@ -10,25 +9,30 @@ import { Button } from '@/components/UI/Button';
 import { useCartStore } from '@/hooks/use-cart-store';
 
 import { Cart } from '@/components/Cart';
+import { useToggle } from '@/hooks/use-toggle';
 
 export type ShoppingCartProps = DefineProps<{}>;
 
 export function ShoppingCart({}: ShoppingCartProps) {
   const itemsCount = useCartStore((state) => state.items.length);
 
-  const [isOpened, setIsOpened] = useState(false);
+  const {
+    value: open,
+    onUpdate: onOpenChange,
+    onDeactivate
+  } = useToggle()
 
   useOnFullPathUpdate(() => {
-    setIsOpened(false);
-  });
+    onDeactivate()
+  }, [onDeactivate]);
 
   return (
-    <Sheet open={isOpened} onOpenChange={(isOpened) => setIsOpened(isOpened)}>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <Button
           variant='ghost'
           size='icon'
-          className='flex items-center w-auto px-2'
+          className='flex items-center w-max sm:px-2'
         >
           <ShoppingBagIcon className='w-5 h-5 cursor-pointer shrink-0 mr-2' />
 

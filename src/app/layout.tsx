@@ -37,9 +37,9 @@ export default async function RootLayout({
       <body className={cn('font-sans relative', intInter.className)}>
         <div className='flex flex-col min-h-screen css-var-[--nav-bar-height=5rem]'>
           <AppContextProvider initialValue={initialAppContextValue}>
-            <NavBar className='w-full h-[var(--nav-bar-height)]' />
+            <NavBar className='w-full' />
 
-            <main className='min-h-[calc(100vh-var(--nav-bar-height))]'>{children}</main>
+            <main className='min-h-[calc(100vh-var(--nav-bar-height))] pt-[var(--nav-bar-height)]'>{children}</main>
 
             <Footer />
           </AppContextProvider>
