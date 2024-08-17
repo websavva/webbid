@@ -1,4 +1,4 @@
-# Digital Marketplace "ShopStream"
+# Digital Marketplace "WebBid"
 
 > Fairly simple digital marketplace app written with:
 
