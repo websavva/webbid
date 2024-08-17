@@ -66,7 +66,7 @@ export function UserMenu({ className }: { className?: string }) {
           {isAdmin && (
             <DropdownMenuItem asChild>
               <Link
-                href='/'
+                href='/admin'
                 className='flex items-center cursor-pointer w-full'
               >
                 <MenuSquare className='mr-2 h-4 w-4' />

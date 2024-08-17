@@ -1,4 +1,5 @@
 import path from 'path';
+import { defu } from 'defu';
 
 import { buildConfig } from 'payload/config';
 
@@ -9,6 +10,10 @@ import { webpackBundler as webpackBundlerAdapter } from '@payloadcms/bundler-web
 import '#server/load-env';
 import { collections } from '#server/cms/collections';
 
+// this workaround is necessary as it is built-in
+// https://github.com/payloadcms/payload/blob/v2.16.0/packages/bundler-webpack/src/configs/base.ts#L88
+const mockedPackages = ['crypto'];
+
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
 
@@ -16,6 +21,21 @@ export default buildConfig({
 
   admin: {
     bundler: webpackBundlerAdapter(),
+
+    webpack(config) {
+      const alias = Object.fromEntries(
+        mockedPackages.map((packageName) => [
+          packageName,
+          path.resolve(__dirname, `../src/server/cms/mocks/${packageName}.js`),
+        ]),
+      );
+
+      return defu(config, {
+        resolve: {
+          alias,
+        },
+      });
+    },
   },
 
   cookiePrefix: 'digital-marketplace',
@@ -37,7 +57,7 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(
       __dirname,
-      '../src/server/cms/collections/types.ts'
+      '../src/server/cms/collections/types.ts',
     ),
   },
 });
