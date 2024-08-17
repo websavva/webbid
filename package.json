@@ -1,6 +1,6 @@
 {
-  "name": "digital-marketplace",
-  "description": "Digital marketplace build with Next.js and TRPC",
+  "name": "@websavva/webbid",
+  "description": "WebBid, digital marketplace build with Next.js and TRPC",
   "version": "0.1.0",
   "private": true,
   "engines": {
