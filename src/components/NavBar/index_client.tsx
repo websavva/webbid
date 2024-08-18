@@ -41,12 +41,12 @@ export function ClientNavBar({
   return (
     <nav
       className={cn(
-        'flex justify-center fixed min-h-[var(--nav-bar-height,5rem)] top-0 bg-white w-full z-40',
+        'flex justify-center max-sm:border-b-2 border-gray-100 fixed min-h-[var(--nav-bar-height,5rem)] top-0 bg-white w-full z-40',
         className,
       )}
       {...attrs}
     >
-      <Container className='sm:flex flex-col sm:flex-row sm:items-center border-b-2 border-gray-100 w-full relative'>
+      <Container className='sm:flex flex-col sm:flex-row sm:items-center sm:border-b-2 border-gray-100 w-full relative'>
         <div className='flex items-center justify-between h-[var(--nav-bar-height,5rem)] sm:h-auto'>
           <Link href='/' className='mr-8 flex items-center'>
             <Logo className='w-10 h-10' />
@@ -82,7 +82,7 @@ export function ClientNavBar({
             {isGuest ? 'Authentication' : 'User'}
           </span>
 
-          <NavBarRightMenu />
+          <NavBarRightMenu className='max-sm:pb-2' />
         </div>
       </Container>
     </nav>

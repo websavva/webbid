@@ -55,7 +55,7 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
                 alt=''
                 width={500}
                 height={500}
-                className='rounded-lg sm:h-72 object-cover'
+                className='rounded-lg h-48 sm:h-72 object-cover'
               />
             )}
 
