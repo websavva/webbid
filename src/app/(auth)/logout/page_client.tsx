@@ -43,7 +43,7 @@ export default function LogoutClientPage() {
       {(key) =>
         key === 'error' ? (
           <>
-            <Alert variant={'destructive'} className='mb-8 w-1/2'>
+            <Alert variant={'destructive'} className='mb-8 w-full sm:w-1/2'>
               <AlertTitle className='text-2xl'>Error</AlertTitle>
 
               <AlertDescription className='text-base'>
@@ -61,9 +61,9 @@ export default function LogoutClientPage() {
           </>
         ) : (
           <>
-            <Loader2Icon className='size-48 animate-spin text-gray-600 stroke-[1]' />
+            <Loader2Icon className='size-36 sm:size-48 animate-spin text-gray-600 stroke-[1]' />
 
-            <div className='text-gray-700 text-xl text-center mt-12'>
+            <div className='text-gray-700 text-lg sm:text-xl text-center mt-8 sm:mt-12'>
               Logging out...
             </div>
           </>
