@@ -40,7 +40,7 @@ export const addCategoryLabel: AfterReadHook<Product> = async ({
       })
       .catch(() => {
         console.warn(
-          `[Products]: Product Category with id "${category}" was not found in addCategoryLabel hook`
+          `[Products]: Product Category with id "${category}" was not found in addCategoryLabel hook`,
         );
       });
 
