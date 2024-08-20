@@ -11,7 +11,7 @@
   "scripts": {
     "payload:config": "jiti scripts/build-payload-config.ts",
     "payload:types": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload generate:types",
-    "migrate": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate",
+    "migrate:up": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate",
     "migrate:create": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:create",
     "migrate:status": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:status",
     "migrate:down": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:down",
