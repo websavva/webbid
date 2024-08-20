@@ -69,7 +69,7 @@ export default async function Home() {
         <Container className='sm:max-lg:max-w-[60%] w-full'>
           <div className='text-2xl text-gray-800 font-bold mb-14 lg:mb-8'>Brand New</div>
 
-          <ProductReels className='gap-20 css-var-[--column-counts=1] lg:css-var-[--column-counts=3]' />
+          <ProductReels className='gap-10 lg:gap-20 css-var-[--column-counts=1] lg:css-var-[--column-counts=3]' />
         </Container>
       </section>
     </>

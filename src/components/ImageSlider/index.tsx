@@ -84,7 +84,7 @@ export const ImageSlider = ({
             isRight={false}
             onClick={toPrevSlide}
             className={cn(
-              'opacity-0 mr-auto group-hover:opacity-100 transition-all hover:scale-110',
+              'sm:opacity-0 mr-auto group-hover:opacity-100 transition-all hover:scale-110',
               controlClass
             )}
           />
@@ -95,7 +95,7 @@ export const ImageSlider = ({
             isRight
             onClick={toNextSlide}
             className={cn(
-              'opacity-0 ml-auto group-hover:opacity-100 transition-all hover:scale-110',
+              'sm:opacity-0 ml-auto group-hover:opacity-100 transition-all hover:scale-110',
               controlClass
             )}
           />

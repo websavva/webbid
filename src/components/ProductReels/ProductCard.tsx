@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link';
 
 import type { Product } from '#server/cms/collections/types';
@@ -9,9 +11,12 @@ import { ImageSlider } from '../ImageSlider';
 import { cn } from '@/lib/utils/cn';
 import { Skeleton } from '../UI/Skeleton';
 
-export type ProductCardProps = DefineProps<{
-  product: Product;
-}>;
+export type ProductCardProps = DefineProps<
+  {
+    product: Product;
+  },
+  HTMLAnchorElement
+>;
 
 export const ProductCardSkeleton = ({ className }: DefineProps<{}>) => {
   return (
@@ -44,18 +49,26 @@ export const ProductCard = ({
   } = product;
 
   return (
-    <div {...attrs} className={cn('flex sm:max-lg:flex-row flex-col', className)}>
+    <Link
+      {...attrs}
+      href={`/products/${id}`}
+      className={cn('flex sm:max-lg:flex-row flex-col', className)}
+    >
       {imageUrls.length && (
-        <ImageSlider imageUrls={imageUrls} className='h-72 mb-6 sm:max-lg:max-w-80 lg:max-w-none' />
+        <ImageSlider
+          imageUrls={imageUrls}
+          className='h-72 mb-6 sm:max-lg:max-w-80 lg:max-w-none'
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+        />
       )}
 
       <div className='flex-grow sm:max-lg:ml-12 lg:ml-0'>
-        <Link
-          href={`/products/${id}`}
-          className='sm:max-lg:mb-6 mb-2 text-xl font-semibold line-clamp-1'
-        >
+        <div className='sm:max-lg:mb-6 mb-2 text-xl font-semibold line-clamp-1'>
           {name}
-        </Link>
+        </div>
 
         {categoryLabel && (
           <div className='sm:max-lg:mb-6 mb-2 text-gray-500 font-medium sm:max-lg:text-xl text-base'>
@@ -63,8 +76,10 @@ export const ProductCard = ({
           </div>
         )}
 
-        <div className='sm:max-lg:text-xl text-lg font-medium'>{formatPrice(price)}</div>
+        <div className='sm:max-lg:text-xl text-lg font-medium'>
+          {formatPrice(price)}
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
