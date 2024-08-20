@@ -10,7 +10,6 @@ import type { DefineProps } from '@/types';
 import { cn } from '@/lib/utils/cn';
 import { ProductCategoryFeature } from '#server/cms/collections/types';
 import { useApi } from '@/hooks/use-api';
-import { wait } from '@/lib/utils/wait';
 
 export type NavBarCategoryDropdownFeaturesList = DefineProps<{
   features: ProductCategoryFeature[];
@@ -49,20 +48,24 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
 
         return (
           <li key={name} className='animate-in fade-in-0'>
-            {derivedImageUrl && (
-              <Image
-                src={derivedImageUrl}
-                alt=''
-                width={500}
-                height={500}
-                className='rounded-lg h-48 sm:h-72 object-cover'
-              />
-            )}
+            <Link href={href}>
+              {derivedImageUrl && (
+                <Image
+                  src={derivedImageUrl}
+                  alt=''
+                  width={500}
+                  height={500}
+                  className='rounded-lg h-48 sm:h-72 object-cover'
+                />
+              )}
 
-            <Link href={href} className='mt-5 flex flex-col'>
-              <p className='text-gray-800 font-bold text-lg'>{name}</p>
+              <div className='mt-5 flex flex-col'>
+                <p className='text-gray-800 font-bold text-lg'>{name}</p>
 
-              <span className='inline-block mt-2 text-gray-600'>Shop now</span>
+                <span className='inline-block mt-2 text-gray-600'>
+                  Shop now
+                </span>
+              </div>
             </Link>
           </li>
         );

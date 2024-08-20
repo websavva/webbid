@@ -47,7 +47,7 @@ export default function NavBarCategoryDropdown({
       {isActive && (
         <div className='bg-white w-full fixed overflow-auto max-sm:h-screen left-0 top-0 sm:top-[var(--nav-bar-height,5rem)] py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
           <button
-            className='block sm:none absolute right-4 top-4'
+            className='block sm:hidden absolute right-4 top-4'
             onClick={() => onToggle(false)}
           >
             <XIcon className='size-5 text-gray-700' />
