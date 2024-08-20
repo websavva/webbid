@@ -31,7 +31,7 @@ export const ProductGrid = ({
   ...attrs
 }: DefineProps<{ count: number }>) => {
   const style = {
-    '--default--column-counts': count,
+    '--default-column-counts': count,
   } as CSSProperties;
 
   return (

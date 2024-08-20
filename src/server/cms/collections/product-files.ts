@@ -37,7 +37,7 @@ const isOwnerOrPurchased: Access = async ({ req }) => {
       return order.products.map((product) => {
         if (typeof product === 'number')
           return req.payload.logger.error(
-            'Search depth is not sufficient to find purchased file IDs'
+            'Search depth is not sufficient to find purchased file IDs',
           );
 
         return typeof product.productFile === 'number'
@@ -71,7 +71,7 @@ export const ProductFiles: CollectionConfig = {
   upload: {
     staticURL: '/product_files',
     staticDir: join(process.cwd(), 'product_files'),
-    mimeTypes: ['image/*', 'font/*', 'application/postscript'],
+    // mimeTypes: ['image/*', 'font/*', 'application/postscript', 'text/plain'],
   },
   fields: [
     {
