@@ -32,9 +32,9 @@ export const RequestPasswordResetForm = () => {
   if (isSuccess)
     return (
       <div className='flex flex-col items-center'>
-        <SentEmailIcon className='size-[500px]' />
+        <SentEmailIcon className='size-80 sm:size-96 lg:size-[500px]' />
 
-        <div className='mt-5 font-semibold text-lg w-3/5 leading-relaxed text-center text-gray-700'>
+        <div className='mt-5 font-semibold sm:text-lg w-4/5 sm:w-3/5 leading-relaxed text-center text-gray-700'>
           Letter with password reset instruction was sent{' '}
           {email && (
             <span>

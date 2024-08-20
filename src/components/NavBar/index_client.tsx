@@ -65,9 +65,9 @@ export function ClientNavBar({
 
         <div
           className={cn(
-            'flex flex-col mt-3 sm:mt-0 sm:flex-row sm:items-center sm:justify-between sm:flex-1 max-h-0 sm:max-h-none pointer-events-none sm:pointer-events-auto opacity-0 sm:opacity-100 transition-all sm:transition-none',
+            'flex flex-col sm:mt-0 sm:flex-row sm:items-center sm:justify-between sm:flex-1 max-h-0 sm:max-h-none pointer-events-none sm:pointer-events-auto opacity-0 sm:opacity-100 transition-all sm:transition-none',
             {
-              ['max-h-screen opacity-100 pointer-events-auto']:
+              ['max-h-screen opacity-100 pointer-events-auto pt-3']:
                 isMobileMenuOpened,
             },
           )}
