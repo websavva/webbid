@@ -13,12 +13,12 @@ export const Footer = ({ className, ...attrs }: FooterProps) => {
   return (
     <footer
       {...attrs}
-      className={cn('bg-gray-800 py-12 flex text-slate-400', className)}
+      className={cn('bg-gray-800 py-8 sm:py-12 flex text-slate-400', className)}
     >
       <Container className='flex items-center mx-auto justify-center w-full'>
-        <Logo className='size-8' />
+        <Logo className='size-7 sm:size-8' />
 
-        <span className='ml-7 pl-5 py-2 border-l border-l-gray-400'>
+        <span className='ml-4 sm:ml-7 pl-3 sm:pl-5 py-1 sm:py-2 max-sm:text-sm border-l border-l-gray-400'>
           &copy; {publicEnv.COMPANY_NAME} - {currentYear}
         </span>
       </Container>
