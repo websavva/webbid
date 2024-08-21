@@ -59,13 +59,16 @@ export const ImageSlider = ({
       {...attrs}
       className={cn(
         'overflow-hidden relative group rounded-2xl select-none',
-        className
+        className,
       )}
     >
       <div className='size-full flex transition-transform' style={viewStyle}>
         {imageUrls.map((imageUrl, index) => {
           return (
-            <div key={`${imageUrl}${index}`} className='size-full flex-[0_0_100%]'>
+            <div
+              key={`${imageUrl}${index}`}
+              className='size-full flex-[0_0_100%]'
+            >
               <Image
                 src={imageUrl}
                 alt=''
@@ -82,10 +85,15 @@ export const ImageSlider = ({
         {!isFirstSlide && (
           <ImageSliderControl
             isRight={false}
-            onClick={toPrevSlide}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              toPrevSlide();
+            }}
             className={cn(
               'sm:opacity-0 mr-auto group-hover:opacity-100 transition-all hover:scale-110',
-              controlClass
+              controlClass,
             )}
           />
         )}
@@ -93,10 +101,15 @@ export const ImageSlider = ({
         {!isLastSlide && (
           <ImageSliderControl
             isRight
-            onClick={toNextSlide}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              toNextSlide()
+            }}
             className={cn(
               'sm:opacity-0 ml-auto group-hover:opacity-100 transition-all hover:scale-110',
-              controlClass
+              controlClass,
             )}
           />
         )}
@@ -105,7 +118,7 @@ export const ImageSlider = ({
       <ImageSliderPagination
         className={cn(
           'absolute bottom-4 left-1/2 justify-center -translate-x-1/2 w-full',
-          paginationClass
+          paginationClass,
         )}
         dotClass={paginationDotClass}
         slidesCount={slidesCount}

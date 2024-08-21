@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link';
 
 import type { Product } from '#server/cms/collections/types';
@@ -58,10 +56,6 @@ export const ProductCard = ({
         <ImageSlider
           imageUrls={imageUrls}
           className='h-72 mb-6 sm:max-lg:max-w-80 lg:max-w-none'
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
         />
       )}
 

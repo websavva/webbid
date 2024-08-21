@@ -34,9 +34,14 @@ export const ImageSliderPagination = ({
               {
                 'bg-blue-600': isActive,
               },
-              dotClass
+              dotClass,
             )}
-            onClick={() => !isActive && onSlideChange(slideIndex)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              !isActive && onSlideChange(slideIndex);
+            }}
           />
         );
       })}
