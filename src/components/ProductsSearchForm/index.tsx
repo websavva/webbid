@@ -66,7 +66,7 @@ export const ProductsSearchForm = ({
   const derivedPending = pending || isRouteUpdating;
 
   return (
-    <form {...attrs} className={cn('flex items-center space-x-5', className)}>
+    <form {...attrs} className={cn('flex max-lg:flex-col lg:items-center max-lg:space-y-3 lg:space-x-5', className)}>
       <ProductsSortSelect
         sortBy={form.sortBy}
         sortDir={form.sortDir}

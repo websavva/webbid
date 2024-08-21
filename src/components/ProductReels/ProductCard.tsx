@@ -50,22 +50,22 @@ export const ProductCard = ({
     <Link
       {...attrs}
       href={`/products/${id}`}
-      className={cn('flex sm:max-lg:flex-row flex-col', className)}
+      className={cn('flex flex-col', className)}
     >
       {imageUrls.length && (
         <ImageSlider
           imageUrls={imageUrls}
-          className='h-72 mb-6 sm:max-lg:max-w-80 lg:max-w-none'
+          className='h-72 mb-6 lg:max-w-none'
         />
       )}
 
-      <div className='flex-grow sm:max-lg:ml-12 lg:ml-0'>
-        <div className='sm:max-lg:mb-6 mb-2 text-xl font-semibold line-clamp-1'>
+      <div className='flex-grow lg:ml-0'>
+        <div className='mb-2 text-xl font-semibold line-clamp-1'>
           {name}
         </div>
 
         {categoryLabel && (
-          <div className='sm:max-lg:mb-6 mb-2 text-gray-500 font-medium sm:max-lg:text-xl text-base'>
+          <div className='mb-2 text-gray-500 font-medium text-base'>
             {categoryLabel}
           </div>
         )}

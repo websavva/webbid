@@ -39,8 +39,8 @@ export default async function ProductsPage({
       <h1 className='mb-8 font-bold text-3xl text-gray-800'>{title}</h1>
       <ProductsSearchForm form={form} className='w-2/4' />
       {products.length > 0 ? (
-        <div className='mt-20'>
-          <ProductGrid count={3} className='gap-x-20 gap-y-16'>
+        <div className='mt-10 lg:mt-20'>
+          <ProductGrid count={3} className='max-sm:css-var-[--column-counts=1] max-lg:css-var-[--column-counts=2] gap-x-10 lg:gap-x-20 gap-y-10 sm:gap-y-16'>
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

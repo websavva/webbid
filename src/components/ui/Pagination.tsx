@@ -35,6 +35,7 @@ PaginationContent.displayName = 'PaginationContent';
 
 type PaginationItemProps = {
   isActive?: boolean;
+  key?: string;
 } & ButtonProps;
 
 const PaginationItem = ({
@@ -156,7 +157,7 @@ const Pagination = ({
 
               onActivate,
             },
-            index
+            index,
           ) => {
             switch (type) {
               case PaginationItemType.Page:
@@ -176,6 +177,7 @@ const Pagination = ({
               case PaginationItemType.First:
                 return (
                   <PaginationPrevious
+                    key={type as string}
                     disabled={disabled}
                     onClick={onActivate}
                     isDoubled
@@ -185,6 +187,7 @@ const Pagination = ({
               case PaginationItemType.Last:
                 return (
                   <PaginationNext
+                    key={type as string}
                     disabled={disabled}
                     onClick={onActivate}
                     isDoubled
@@ -194,6 +197,7 @@ const Pagination = ({
               case PaginationItemType.Previous:
                 return (
                   <PaginationPrevious
+                    key={type as string}
                     disabled={disabled}
                     onClick={onActivate}
                   />
@@ -201,10 +205,14 @@ const Pagination = ({
 
               case PaginationItemType.Next:
                 return (
-                  <PaginationNext disabled={disabled} onClick={onActivate} />
+                  <PaginationNext
+                    key={type as string}
+                    disabled={disabled}
+                    onClick={onActivate}
+                  />
                 );
             }
-          }
+          },
         )}
       </PaginationContent>
     </nav>
