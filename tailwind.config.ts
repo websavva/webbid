@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 import plugin from 'tailwindcss/plugin';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config = {
   darkMode: ['class'],
@@ -17,11 +18,13 @@ const config = {
         '2xl': '1400px',
       },
     },
-    extend: {
-      screens: {
-        '3xl': '1600px',
-      },
+    screens: {
+      'xs': '475px',
+      ...defaultTheme.screens,
+      '3xl': '1600px',
+    },
 
+    extend: {
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

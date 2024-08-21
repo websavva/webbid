@@ -52,14 +52,14 @@ export default function SignUpConfirmPage({
           case 'success':
             return (
               <>
-                <MailCheckIcon className='size-44 stroke-1 text-primary' />
+                <MailCheckIcon className='size-32 sm:size-44 stroke-1 text-primary' />
 
-                <p className='mt-6 font-light text-lg w-96 text-center'>
+                <p className='mt-6 font-light sm:text-lg xs:w-3/4 sm:w-96 text-center'>
                   Congratulations ! Your account has been confirmed successfully
                   confirmed&nbsp;!
                 </p>
 
-                <p className='mt-5 flex items-center space-x-2 text-gray-500 font-light text-lg'>
+                <p className='mt-5 flex items-center space-x-2 text-gray-500 font-light sm:text-lg'>
                   <span>Redirecting</span>
 
                   <Loader2Icon className='w-[1em] mt-1 animate-spin' />
@@ -69,14 +69,14 @@ export default function SignUpConfirmPage({
           case 'error':
             return (
               <>
-                <AlertCircleIcon className='size-44 text-red-400 stroke-1' />
+                <AlertCircleIcon className='size-32 sm:size-44 text-red-400 stroke-1' />
 
                 <p className='mt-6 font-light text-lg'>
                   Ops, something went wrong..
                 </p>
 
                 <Button
-                  className='text-base mt-10'
+                  className='text-base mt-5 sm:mt-10'
                   variant={'secondary'}
                   onClick={() => onConfirmAccount(token)}
                 >
@@ -87,9 +87,9 @@ export default function SignUpConfirmPage({
           default:
             return (
               <>
-                <Loader2Icon className='size-44 animate-spin stroke-1 text-slate-600' />
+                <Loader2Icon className='size-32 sm:size-44 animate-spin stroke-1 text-slate-600' />
 
-                <p className='mt-6 font-light text-lg'>
+                <p className='mt-6 font-light sm:text-lg'>
                   Confirming your account...
                 </p>
               </>
