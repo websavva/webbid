@@ -65,7 +65,7 @@ export default async function ProductPage({
 
   return (
     <div>
-      <section className='grid grid-cols-[repeat(2,1fr)] gap-14'>
+      <section className='grid grid-cols-1 lg:grid-cols-[repeat(2,1fr)] gap-14'>
         <div>
           <Breadcrumbs items={breadcrumbItems} className='text-gray-600' />
 
@@ -100,11 +100,11 @@ export default async function ProductPage({
           </div>
         </div>
 
-        <ImageSlider imageUrls={imageUrls} className='max-h-[700px]' />
+        <ImageSlider imageUrls={imageUrls} className='max-lg:row-start-1 max-lg:row-end-2 max-h-[400px] lg:max-h-[700px]' />
       </section>
 
-      <section className='mt-28'>
-        <div className='flex justify-between items-center mb-12'>
+      <section className='mt-16 lg:mt-28'>
+        <div className='flex max-sm:flex-col max-sm:space-y-3 sm:justify-between sm:items-center mb-12'>
           <div>
             <h2 className='capitalize mb-3 font-bold text-2xl'>
               Similar {similarProductsLabel}
@@ -124,7 +124,7 @@ export default async function ProductPage({
           category={categoryName}
           except={[productId]}
           EmptyPlaceholder={ProductReelsEmptyPlaceholder}
-          className='gap-16'
+          className='gap-y-10 gap-x-16 grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(17rem,1fr))]'
         />
       </section>
     </div>
