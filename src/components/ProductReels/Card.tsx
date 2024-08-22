@@ -16,7 +16,7 @@ export type ProductCardProps = DefineProps<
   HTMLAnchorElement
 >;
 
-export const ProductCardSkeleton = ({ className }: DefineProps<{}>) => {
+export const ProductReelsCardSkeleton = ({ className }: DefineProps<{}>) => {
   return (
     <div className={cn(className)}>
       <Skeleton className='h-44 mb-6 w-full' />
@@ -32,7 +32,7 @@ export const ProductCardSkeleton = ({ className }: DefineProps<{}>) => {
   );
 };
 
-export const ProductCard = ({
+export const ProductReelsCard = ({
   product,
   className,
   ...attrs
@@ -60,9 +60,7 @@ export const ProductCard = ({
       )}
 
       <div className='flex-grow lg:ml-0'>
-        <div className='mb-2 text-xl font-semibold line-clamp-1'>
-          {name}
-        </div>
+        <div className='mb-2 text-xl font-semibold line-clamp-1'>{name}</div>
 
         {categoryLabel && (
           <div className='mb-2 text-gray-500 font-medium text-base'>

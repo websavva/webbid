@@ -5,9 +5,9 @@ import { trpcClient } from '@/lib/trpc';
 import { cn } from '@/lib/utils/cn';
 import type { GetProductsQuery } from '#server/dtos/products';
 
-import { ProductCard, ProductCardSkeleton } from './ProductCard';
+import { ProductReelsCard, ProductReelsCardSkeleton } from './Card';
 
-export * from './ProductCard';
+export * from './Card';
 
 export type ProductReelsProps = DefineProps<
   {
@@ -23,7 +23,7 @@ export const DefaultEmptyPlaceholder = () => (
   <div className='text-gray-500'>No products were found...</div>
 );
 
-export const ProductGrid = ({
+export const ProductReelsGrid = ({
   count,
   className,
   children,
@@ -40,7 +40,7 @@ export const ProductGrid = ({
         {...attrs}
         className={cn(
           'grid grid-cols-[repeat(var(--column-counts,var(--default-column-counts)),_1fr)] gap-8',
-          className
+          className,
         )}
         style={style}
       >
@@ -73,11 +73,11 @@ const ProductList = async ({
   if (products.length) {
     return (
       <>
-        <ProductGrid {...attrs} count={count}>
+        <ProductReelsGrid {...attrs} count={count}>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductReelsCard key={product.id} product={product} />
           ))}
-        </ProductGrid>
+        </ProductReelsGrid>
       </>
     );
   } else {
@@ -89,7 +89,7 @@ const ProductListSkeleton = ({
   count = 3,
 }: Pick<ProductReelsProps, 'count'>) => {
   return [...new Array(count).keys()].map((key) => (
-    <ProductCardSkeleton key={key} />
+    <ProductReelsCardSkeleton key={key} />
   ));
 };
 
@@ -106,9 +106,9 @@ export const ProductReels = ({
   return (
     <Suspense
       fallback={
-        <ProductGrid {...attrs} count={count}>
+        <ProductReelsGrid {...attrs} count={count}>
           <ProductListSkeleton count={count} />
-        </ProductGrid>
+        </ProductReelsGrid>
       }
     >
       <ProductList

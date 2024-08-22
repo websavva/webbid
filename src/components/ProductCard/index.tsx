@@ -61,19 +61,19 @@ export const ProductCard = ({
   } = product;
 
   return (
-    <div {...attrs} className={cn('flex items-start', className)}>
+    <div {...attrs} className={cn('grid gap-y-4 grid-rows-[auto_auto] sm:grid-rows-1 grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_max-content]', className)}>
       {thumbnailUrl && (
         <Image
           src={thumbnailUrl}
           alt=''
           width={8e2}
           height={8e2}
-          className='size-32 object-cover mr-5 rounded-lg'
+          className='size-32 max-sm:row-start-1 max-sm:row-end-3 object-cover mr-5 rounded-lg'
         />
       )}
 
-      <div className='flex-1'>
-        <div className='font-bold'>{name}</div>
+      <div className='grid'>
+        <div className='font-bold max-w-full text-ellipsis overflow-hidden whitespace-nowrap'>{name}</div>
 
         {categoryLabel && (
           <div className='text-gray-600 text-sm mt-2 font-medium'>
@@ -103,7 +103,7 @@ export const ProductCard = ({
         )}
       </div>
 
-      <div className='ml-2'>{formatPrice(price)}</div>
+      <div className='sm:ml-2'>{formatPrice(price)}</div>
     </div>
   );
 };

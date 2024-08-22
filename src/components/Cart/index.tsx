@@ -87,7 +87,7 @@ export const Cart = ({
 
   const isCartLoaded = isCartStoreLoaded && isSynchronized;
 
-  const listClassName = 'space-y-6 max-h-[28rem] overflow-auto';
+  const listClassName = 'space-y-6 max-h-[28rem] overflow-auto no-scrollbar';
 
   async function onSubmit() {
     if (pending) return;

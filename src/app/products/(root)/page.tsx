@@ -1,6 +1,6 @@
 import type { PagePropsWithSearchParams } from '@/types/page-props';
 import { ProductsSearchForm } from '@/components/ProductsSearchForm';
-import { ProductGrid, ProductCard } from '@/components/ProductReels';
+import { ProductReelsGrid, ProductReelsCard } from '@/components/ProductReels';
 import { Pagination } from '@/components/UI/Pagination';
 import { trpcClient } from '@/lib/trpc';
 
@@ -28,7 +28,7 @@ export default async function ProductsPage({
     Promise.resolve(
       form.category
         ? trpcClient.products.categories.getCategoryByName.query(form.category)
-        : null
+        : null,
     ),
   ]);
 
@@ -37,14 +37,19 @@ export default async function ProductsPage({
   return (
     <div>
       <h1 className='mb-8 font-bold text-3xl text-gray-800'>{title}</h1>
+
       <ProductsSearchForm form={form} className='w-2/4' />
+
       {products.length > 0 ? (
         <div className='mt-10 lg:mt-20'>
-          <ProductGrid count={3} className='max-sm:css-var-[--column-counts=1] max-lg:css-var-[--column-counts=2] gap-x-10 lg:gap-x-20 gap-y-10 sm:gap-y-16'>
+          <ProductReelsGrid
+            count={3}
+            className='max-sm:css-var-[--column-counts=1] max-lg:css-var-[--column-counts=2] gap-x-10 lg:gap-x-20 gap-y-10 sm:gap-y-16'
+          >
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductReelsCard key={product.id} product={product} />
             ))}
-          </ProductGrid>
+          </ProductReelsGrid>
 
           {paginationMeta!.pagesCount > 1 && (
             <Pagination
