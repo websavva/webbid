@@ -9,12 +9,12 @@ export default function ProfileClientPage() {
   const { email, createdAt, updatedAt } = useAuth().user!;
 
   return (
-    <div className='flex w-full justify-center'>
-      <div className='flex flex-col items-center'>
+    <div className='flex justify-center'>
+      <div className='flex flex-col max-md:hidden items-center'>
         <UserAvatar email={email} className='size-36 text-6xl' />
       </div>
 
-      <div className='ml-32 flex-1'>
+      <div className='md:ml-32 flex-1'>
         <div>
           <div className='text-xl mb-2 text-gray-700 font-bold'>Email:</div>
 

@@ -7,7 +7,7 @@ export default async function ProfilePage() {
   await applyGuards(auth);
 
   return (
-    <div className='mx-auto pt-20 max-w-3xl'>
+    <div className='mx-auto w-11/12 md:w-full py-16 max-w-3xl'>
       <ProfileClientPage />
     </div>
   );
