@@ -42,10 +42,10 @@ export default async function OrdersPage({
   );
 
   return (
-    <Container className='mx-auto py-16 px-16'>
+    <Container className='mx-auto py-10 md:py-16 md:px-16'>
       <h1 className='text-3xl font-bold text-gray-800 mb-12'>My Orders</h1>
 
-      <OrdersSearchForm status={status} className='w-1/4' />
+      <OrdersSearchForm status={status} className='xs:w-1/2 md:w-1/4' />
 
       <div className='mt-8'>
         {orders.length > 0 ? (

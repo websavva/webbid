@@ -51,7 +51,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
 
       <OrderBill products={normalizedProducts} />
 
-      <div className='mt-12 flex justify-between max-w-[500px]'>
+      <div className='mt-5 md:mt-12 flex max-md:flex-col md:justify-between max-w-[500px]'>
         <div>
           <div className='mb-1 font-semibold text-lg'>Order Status</div>
 
@@ -61,7 +61,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
         </div>
 
         {user && typeof user === 'object' && (
-          <div>
+          <div className='max-md:mt-5'>
             <div className='mb-1 font-semibold text-lg'>Delivered To</div>
 
             <div className='font-semibold text-muted-foreground'>

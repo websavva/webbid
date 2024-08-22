@@ -25,9 +25,12 @@ const OPTIONS = Object.values(OrderStatus).map((id) => ({
 export const OrderStatusSelect = ({
   status,
   onChange,
+
+  ...attrs
 }: OrderStatusSelectProps) => {
   return (
     <Select
+      {...attrs}
       value={status}
       onChange={onChange}
       options={OPTIONS}

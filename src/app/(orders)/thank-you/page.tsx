@@ -39,8 +39,8 @@ export default async function ThankYoutPage({
   );
 
   return (
-    <Container className='mx-auto py-16 flex items-start justify-between'>
-      <div className='flex-1'>
+    <Container className='mx-auto py-16 flex max-md:flex-col-reverse md:items-start justify-between'>
+      <div className='md:flex-1'>
         <div className='text-blue-600 font-bold mb-5'>Order successful</div>
 
         <h1 className='text-4xl font-bold'>Thanks for ordering</h1>
@@ -77,7 +77,7 @@ export default async function ThankYoutPage({
         </ArrowLink>
       </div>
 
-      <SuccessfulPaymentIcon className='flex-[0_0_40%]' />
+      <SuccessfulPaymentIcon className='max-md:hidden md:flex-[0_0_40%]' />
     </Container>
   );
 }

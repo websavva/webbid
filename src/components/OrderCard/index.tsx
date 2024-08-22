@@ -43,7 +43,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
       href={`/orders/${id}`}
       {...attrs}
       className={cn(
-        'flex p-5 rounded-2xl transition duration-300 border shadow-sm border-slate-300',
+        'flex md:p-5 max-sm:overflow-hidden max-sm:flex-col rounded-2xl transition duration-300 border shadow-sm border-slate-300',
         className
       )}
     >
@@ -53,12 +53,12 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
           alt=''
           width={500}
           height={500}
-          className='object-cover size-44 mr-10'
+          className='object-cover sm:rounded-md max-h-44 sm:size-44 sm:mr-10'
         />
       )}
 
-      <div className='flex-1'>
-        <div className='flex items-center justify-between flex-1'>
+      <div className='max-sm:py-5 max-sm:px-3 flex-1'>
+        <div className='flex max-sm:flex-col max-sm:space-y-3 sm:items-center sm:justify-between flex-1'>
           <div className='text-xl font-semibold text-gray-800'>
             <span>ID: </span>
 
@@ -74,9 +74,9 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
           {formattedCreatedAt}
         </div>
 
-        <OrderStatusBadge status={status as OrderStatus} className='mt-5' />
+        <OrderStatusBadge status={status as OrderStatus} className='mt-3 sm:mt-5' />
 
-        <div className='mt-8 text-primary flex items-center space-x-2'>
+        <div className='mt-5 sm:mt-8 text-primary flex items-center space-x-2'>
           <ExternalLinkIcon className='size-[1em]' />
 
           <span>

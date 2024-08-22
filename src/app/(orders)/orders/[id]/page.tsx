@@ -31,8 +31,8 @@ export default async function ThankYoutPage({
   );
 
   return (
-    <Container className='mx-auto pt-8 pb-16 max-w-4xl'>
-      <OrderIntro order={order} watchStatus={!order.isPaid} className='mt-12' />
+    <Container className='mx-auto py-10 md:py-16 md:max-w-4xl'>
+      <OrderIntro order={order} watchStatus={!order.isPaid} />
     </Container>
   );
 }
