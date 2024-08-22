@@ -31,7 +31,7 @@ export default async function Home() {
   return (
     <>
       <section className='flex justify-center py-14 sm:py-20'>
-        <Container className='flex flex-col items-center text-center'>
+        <Container className='max-xs:max-w-full flex flex-col items-center text-center'>
           <h1 className='text-[2.5rem] sm:text-5xl lg:text-6xl w-3/4 leading-[1.3] text-gray-900'>
             <span className='font-bold'>Your marketplace for high-quality</span>
 
