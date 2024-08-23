@@ -4,7 +4,7 @@ import { AuthContextProvider } from '../auth/Provider';
 import { CartStoreHydrationProvider } from '../cart/Provider';
 import { AppContext } from './load';
 import { ExtendedRouterContextProvider } from '../extended-router/Provider';
-
+import { ScreenMediaQueriesContextProvider } from '../screen-media-queries/Provider';
 
 export const AppContextProvider = ({
   initialValue,
@@ -15,7 +15,11 @@ export const AppContextProvider = ({
   return (
     <ExtendedRouterContextProvider>
       <AuthContextProvider initialValue={authContextValue}>
-        <CartStoreHydrationProvider>{children}</CartStoreHydrationProvider>
+        <CartStoreHydrationProvider>
+          <ScreenMediaQueriesContextProvider>
+            {children}
+          </ScreenMediaQueriesContextProvider>
+        </CartStoreHydrationProvider>
       </AuthContextProvider>
     </ExtendedRouterContextProvider>
   );

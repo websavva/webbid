@@ -1,20 +1,10 @@
 import { createContext } from 'react';
 
-import { screens, type ScreenName } from './config';
-
-export type ScreenMediaQueriesContextSchema = Record<
-  ScreenName | `max-${ScreenName}`,
-  boolean
->;
-
-const defaultContextValue = Object.fromEntries(
-  Object.keys(screens)
-    .map((screenName) => [
-      [screenName, false],
-      [`max-${screenName}`, false],
-    ])
-    .flat(),
-);
+import { getDefaultMaxScreenFlags, getDefaultMinScreenFlags } from './config';
+import type { ScreenMediaQueriesContextSchema } from './types';
 
 export const ScreenMediaQueriesContext =
-  createContext<ScreenMediaQueriesContextSchema>(defaultContextValue);
+  createContext<ScreenMediaQueriesContextSchema>({
+    ...getDefaultMinScreenFlags(),
+    ...getDefaultMaxScreenFlags(),
+  });
