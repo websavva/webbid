@@ -1,7 +1,8 @@
 import type { Config } from 'tailwindcss';
 
 import plugin from 'tailwindcss/plugin';
-import defaultTheme from 'tailwindcss/defaultTheme';
+
+import { screens } from './src/contexts/screen-media-queries/config';
 
 const config = {
   darkMode: ['class'],
@@ -18,11 +19,7 @@ const config = {
         '2xl': '1400px',
       },
     },
-    screens: {
-      'xs': '475px',
-      ...defaultTheme.screens,
-      '3xl': '1600px',
-    },
+    screens,
 
     extend: {
       colors: {
@@ -100,7 +97,7 @@ const config = {
         },
         {
           type: 'any',
-        }
+        },
       );
     }),
   ],
