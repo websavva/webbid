@@ -11,6 +11,7 @@ import { DefineProps } from '@/types';
 import { Logo } from '@/components/UI/Logo';
 import { Container } from '@/components/UI/Container';
 import { cn } from '@/lib/utils/cn';
+import { useScreenMediaQueries } from '@/hooks/use-screen-media-queries';
 
 import type { ProductCategory } from '#server/cms/collections/types';
 
@@ -33,6 +34,12 @@ export function ClientNavBar({
   const { isGuest } = useAuth();
 
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
+
+  const { ['max-sm']: isMaxSm } = useScreenMediaQueries();
+
+  console.log({
+    isMaxSm
+  });
 
   useOnFullPathUpdate(() => {
     setIsMobileMenuOpened(false);
@@ -65,7 +72,10 @@ export function ClientNavBar({
 
         <div
           className={cn(
-            'flex flex-col sm:mt-0 sm:flex-row sm:items-center sm:justify-between sm:flex-1 max-h-0 sm:max-h-none pointer-events-none sm:pointer-events-auto opacity-0 sm:opacity-100 transition-all sm:transition-none',
+            'flex flex-col sm:mt-0 sm:flex-row sm:items-center sm:justify-between sm:flex-1 max-h-0 sm:max-h-none pointer-events-none sm:pointer-events-auto opacity-0 sm:opacity-100 sm:transition-none',
+            {
+              'transition-all': isMaxSm,
+            },
             {
               ['max-h-screen opacity-100 pointer-events-auto pt-3']:
                 isMobileMenuOpened,
