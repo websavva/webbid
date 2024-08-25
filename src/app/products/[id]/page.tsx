@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { CheckIcon, ShieldIcon } from 'lucide-react';
 
 import { trpcClient } from '@/lib/trpc';
@@ -27,11 +28,32 @@ const ProductReelsEmptyPlaceholder = () => (
   </div>
 );
 
+type ProductPageProps = PagePropsWithParams<{
+  id: string;
+}>;
+
+export async function generateMetadata({
+  params: { id: productId },
+}: ProductPageProps): Promise<Metadata> {
+  try {
+    const { name: title, description = '' } =
+      (await trpcClient.products.getProductById.query(+productId))!;
+
+    return {
+      title,
+      description,
+    };
+  } catch {
+    return {
+      title: 'Product',
+      description: '',
+    };
+  }
+}
+
 export default async function ProductPage({
   params: { id: rawProductId },
-}: PagePropsWithParams<{
-  id: string;
-}>) {
+}: ProductPageProps) {
   const productId = +rawProductId;
 
   // id validation
@@ -100,7 +122,10 @@ export default async function ProductPage({
           </div>
         </div>
 
-        <ImageSlider imageUrls={imageUrls} className='max-lg:row-start-1 max-lg:row-end-2 max-h-[400px] lg:max-h-[700px]' />
+        <ImageSlider
+          imageUrls={imageUrls}
+          className='max-lg:row-start-1 max-lg:row-end-2 max-h-[400px] lg:max-h-[700px]'
+        />
       </section>
 
       <section className='mt-16 lg:mt-28'>

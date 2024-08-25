@@ -37,10 +37,6 @@ export function ClientNavBar({
 
   const { ['max-sm']: isMaxSm } = useScreenMediaQueries();
 
-  console.log({
-    isMaxSm
-  });
-
   useOnFullPathUpdate(() => {
     setIsMobileMenuOpened(false);
   }, [setIsMobileMenuOpened]);

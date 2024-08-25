@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import type { PagePropsWithSearchParams } from '@/types/page-props';
 import { ProductsSearchForm } from '@/components/ProductsSearchForm';
 import { ProductReelsGrid, ProductReelsCard } from '@/components/ProductReels';
@@ -10,9 +12,44 @@ import {
   PRODUCTS_PER_PAGE,
 } from './config';
 
+type ProductsPageProps = PagePropsWithSearchParams<
+  keyof ProductsPageSearchParams
+>;
+
+export async function generateMetadata({
+  searchParams: query,
+}: ProductsPageProps): Promise<Metadata> {
+  try {
+    const { category: caregoryId } =
+      ProductsPageSearchParamsSchema.parse(query);
+
+    if (caregoryId) {
+      const { label: categoryLabel } =
+        await trpcClient.products.categories.getCategoryByName.query(
+          caregoryId,
+        );
+
+      return {
+        title: `${categoryLabel} | Products`,
+        description: `On this page you can find product which belong to the category "${categoryLabel}".`,
+      };
+    } else {
+      return {
+        title: 'All Products',
+        description: 'On this page all available products are listed.',
+      };
+    }
+  } catch {
+    return {
+      title: 'Products',
+      description: 'You can find some products on this page.',
+    };
+  }
+}
+
 export default async function ProductsPage({
   searchParams: query,
-}: PagePropsWithSearchParams<keyof ProductsPageSearchParams>) {
+}: ProductsPageProps) {
   const {
     page,
 
