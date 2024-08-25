@@ -7,7 +7,6 @@ import ProfileClientPage from './page_client';
 
 export const metadata: Metadata = {
   title: 'Your Profile',
-  description: '',
 
   robots: {
     index: false,

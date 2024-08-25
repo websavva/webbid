@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
+
 import { AuthFormFrame } from '@/components/AuthFormFrame';
 import { SignUpForm } from '@/components/Auth/SignUpForm';
+
+export const metadata: Metadata = {
+  title: 'Sign Up',
+};
 
 export default function SignUpPage() {
   return (

@@ -1,5 +1,6 @@
 'use client';
 
+import type { Metadata } from 'next';
 import { Loader2Icon, AlertCircleIcon, MailCheckIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
@@ -11,6 +12,10 @@ import { trpcClient } from '@/lib/trpc';
 import { wait } from '@/lib/utils/wait';
 import { useApi } from '@/hooks/use-api';
 import TransitionFade from '@/components/UI/TransitionFade';
+
+export const metadata: Metadata = {
+  title: 'Registration Confirmation',
+};
 
 export default function SignUpConfirmPage({
   params: { token },

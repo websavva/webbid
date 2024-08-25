@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
+
 import { toArray } from '@/lib/utils/to-array';
 import type { PagePropsWithSearchParams } from '@/types/page-props';
 import { EmailEnvelopeIcon } from '@/components/Icons/EmailEnvelope';
+
+export const metadata: Metadata = {
+  title: 'Registration Verification',
+};
 
 export default function SignUpVerifyPage({
   searchParams: { email: rawEmail },

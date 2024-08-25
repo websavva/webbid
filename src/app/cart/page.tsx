@@ -4,7 +4,6 @@ import { Cart } from '@/components/Cart';
 
 export const metadata: Metadata = {
   title: 'Your cart',
-  description: '',
 
   robots: {
     index: false,
