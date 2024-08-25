@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { trpcClient } from '@/lib/trpc';
@@ -8,9 +9,20 @@ import { OrderIntro } from '@/components/OrderIntro';
 import { applyGuards } from '@/lib/utils/guards';
 import { auth } from '@/guards/auth';
 
-export default async function ThankYoutPage({
-  params,
-}: PagePropsWithParams<{ id: string }>) {
+type OrderPageProps = PagePropsWithParams<{ id: string }>;
+
+export function generateMetadata({ params: { id } }: OrderPageProps): Metadata {
+  return {
+    title: `Order ${id}`,
+
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
+}
+
+export default async function OrderPage({ params }: OrderPageProps) {
   const orderId = params.id ? Number(params.id) : null;
 
   if (!orderId) notFound();
@@ -27,7 +39,7 @@ export default async function ThankYoutPage({
       context: {
         headers: filteredHeaders,
       },
-    }
+    },
   );
 
   return (

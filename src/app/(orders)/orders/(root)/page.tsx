@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import { Container } from '@/components/UI/Container';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
@@ -13,6 +15,15 @@ import {
 } from './config';
 import { applyGuards } from '@/lib/utils/guards';
 import { auth } from '@/guards/auth';
+
+export const metadata: Metadata = {
+  title: 'Your Orders',
+
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function OrdersPage({
   searchParams,
@@ -38,7 +49,7 @@ export default async function OrdersPage({
       context: {
         headers: requestHeaders(),
       },
-    }
+    },
   );
 
   return (

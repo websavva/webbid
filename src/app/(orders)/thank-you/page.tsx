@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 
@@ -12,7 +13,16 @@ import { Container } from '@/components/UI/Container';
 import { ArrowLink } from '@/components/UI/ArrowLink';
 import { OrderIntro } from '@/components/OrderIntro';
 
-export default async function ThankYoutPage({
+export const metadata: Metadata = {
+  title: 'Thank You For Your Order',
+
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default async function ThankYouPage({
   searchParams,
 }: PagePropsWithSearchParams<'orderId'>) {
   const orderId = Number(toArray(searchParams.orderId)[0]) || null;
@@ -31,11 +41,11 @@ export default async function ThankYoutPage({
       context: {
         headers: filteredHeaders,
       },
-    }
+    },
   );
 
   const didUserComeFromStripe = /stripe\.com/.test(
-    headers().get('referer') || ''
+    headers().get('referer') || '',
   );
 
   return (
