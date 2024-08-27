@@ -1,14 +1,12 @@
-import type { NextConfig } from 'next';
 import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import type { RemotePattern } from 'next/dist/shared/lib/image-config';
 import { defu } from 'defu';
 
+import type { DynamicNextConfig } from './src/types/next-config';
+
 const nextPublicServerUrl = new URL('/', process.env.NEXT_PUBLIC_SERVER_URL);
 
-const loadNextConfig = async (
-  phase: string,
-  { defaultConfig }: { defaultConfig: NextConfig },
-): Promise<NextConfig> => {
+const dynamicNextConfig = (async (phase: string, { defaultConfig }) => {
   const imagesRemotePatterns: RemotePattern[] = [];
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
@@ -29,6 +27,6 @@ const loadNextConfig = async (
     },
     defaultConfig,
   );
-};
+}) satisfies DynamicNextConfig;
 
-export default loadNextConfig;
+export default dynamicNextConfig;
