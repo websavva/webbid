@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const middlewares = ['auth'];
+
 export default async function OrdersPage({
   searchParams,
 }: PagePropsWithSearchParams<keyof OrdersPageSearchParams>) {

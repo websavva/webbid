@@ -3,6 +3,7 @@ import type { RemotePattern } from 'next/dist/shared/lib/image-config';
 import { defu } from 'defu';
 
 import type { DynamicNextConfig } from './src/types/next-config';
+import { withMiddlewareAggregator } from './src/modules/middleware-aggregator';
 
 const nextPublicServerUrl = new URL('/', process.env.NEXT_PUBLIC_SERVER_URL);
 
@@ -29,4 +30,4 @@ const dynamicNextConfig = (async (phase: string, { defaultConfig }) => {
   );
 }) satisfies DynamicNextConfig;
 
-export default dynamicNextConfig;
+export default withMiddlewareAggregator(dynamicNextConfig);

@@ -1,6 +1,7 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { type NextRequest } from 'next/server';
+import type { NextMiddleware } from 'next/server';
 
-import type { Middleware } from './types';
+import type { Middleware, MiddlewarePagesMap, MiddlewaresMap } from './types';
 
 export const defineMiddleware = (middleware: Middleware) => middleware;
 
@@ -15,10 +16,25 @@ export const applyMiddlewares = async (
   };
 
   for (const middleware of middlewares) {
-    await middleware(req, NextResponse, next);
+    const middlewareResult = await middleware(req, next);
+
+    if (middlewareResult) return middlewareResult;
 
     if (_shouldContinue) return false;
   }
 
   return true;
 };
+
+export const createMiddlewareAggregator = (middlewarePagesMap: MiddlewarePagesMap, middlewaresMap: MiddlewaresMap) => {
+  return (nextMiddleware: NextMiddleware) => {
+    return (req: NextRequest) => {
+      const {
+        nextUrl: {
+          pathname: currentPathname
+        }
+      } = req;
+    }
+  }
+}
+

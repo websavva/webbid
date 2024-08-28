@@ -1,3 +1,5 @@
+import type { NextMiddleware } from 'next/server';
+
 import type { Middleware } from './types';
 
 interface MiddlewarePagesMap {
@@ -8,6 +10,6 @@ interface MiddlewaresMap {
   [name: string]: Middleware;
 }
 
-export const middlewarePagesMap: MiddlewarePagesMap;
-
-export const middlewares: MiddlewaresMap;
+export const applyMiddlewareAggregator: (
+  nextMidlleware: NextMiddleware,
+) => NextMiddleware;
