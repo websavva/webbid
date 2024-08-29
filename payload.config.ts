@@ -38,7 +38,7 @@ export default buildConfig({
     },
   },
 
-  cookiePrefix: 'digital-marketplace',
+  cookiePrefix: 'webbid',
 
   editor: slateEditorAdapter({}),
 

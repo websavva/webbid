@@ -21,7 +21,10 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "#server/*": ["./src/server/*"]
+      "#server/*": ["./src/server/*"],
+      "#middleware-aggregator": [
+        "./src/modules/middleware-aggregator/alias-mock.d.ts"
+      ]
     }
   },
   "include": [

@@ -11,5 +11,5 @@ interface MiddlewaresMap {
 }
 
 export const applyMiddlewareAggregator: (
-  nextMidlleware: NextMiddleware,
+  nextMidlleware?: NextMiddleware,
 ) => NextMiddleware;
