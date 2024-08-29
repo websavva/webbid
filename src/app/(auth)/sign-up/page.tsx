@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: 'Sign Up',
 };
 
+export const middlewares = ['guest'];
+
 export default function SignUpPage() {
   return (
     <AuthFormFrame

@@ -5,11 +5,12 @@ import { useAuth } from '@/hooks/use-auth';
 import { formatDate } from '@/lib/formatters/date';
 import { ChangePasswordForm } from '@/components/ChangePasswordForm';
 
+
 export default function ProfileClientPage() {
   const { email, createdAt, updatedAt } = useAuth().user!;
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex justify-center mx-auto w-11/12 md:w-full py-16 max-w-3xl'>
       <div className='flex flex-col max-md:hidden items-center'>
         <UserAvatar email={email} className='size-36 text-6xl' />
       </div>

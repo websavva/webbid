@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: 'Registration Verification',
 };
 
+export const middlewares = ['guest'];
+
 export default function SignUpVerifyPage({
   searchParams: { email: rawEmail },
 }: PagePropsWithSearchParams<'email'>) {

@@ -1,16 +1,9 @@
 import type { Metadata } from 'next';
 
-import { applyGuards } from '@/lib/utils/guards';
-import { auth } from '@/guards/auth';
-
-import LogoutClientPage from './page_client';
-
 export const metadata: Metadata = {
   title: 'Log Out',
 };
 
-export default async function LogoutPage() {
-  await applyGuards(auth);
+export const middlewares = ['auth'];
 
-  return <LogoutClientPage />;
-}
+export { default as default } from './page_client';

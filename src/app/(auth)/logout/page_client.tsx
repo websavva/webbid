@@ -1,4 +1,5 @@
 'use client';
+import type { Metadata } from 'next';
 
 import { useEffect } from 'react';
 import { Loader2Icon } from 'lucide-react';
@@ -11,7 +12,13 @@ import { Button } from '@/components/UI/Button';
 import { wait } from '@/lib/utils/wait';
 import TransitionFade from '@/components/UI/TransitionFade';
 
-export default function LogoutClientPage() {
+export const metadata: Metadata = {
+  title: 'Log Out',
+};
+
+export const middlewares = ['auth'];
+
+export default function LogoutPage() {
   const router = useRouter();
   const { logout } = useAuth();
 
@@ -28,7 +35,7 @@ export default function LogoutClientPage() {
     },
     {
       onSuccess: () => router.push('/'),
-    }
+    },
   );
 
   useEffect(() => {

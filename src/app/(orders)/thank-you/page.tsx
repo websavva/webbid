@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { headers } from 'next/headers';
 
-import { applyGuards } from '@/lib/utils/guards';
-import { auth } from '@/guards/auth';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { toArray } from '@/lib/utils/to-array';
@@ -12,6 +10,8 @@ import { SuccessfulPaymentIcon } from '@/components/Icons/SuccessfulPaymentIcon'
 import { Container } from '@/components/UI/Container';
 import { ArrowLink } from '@/components/UI/ArrowLink';
 import { OrderIntro } from '@/components/OrderIntro';
+
+export const middlewars = ['auth'];
 
 export const metadata: Metadata = {
   title: 'Thank You For Your Order',
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const middlewares = ['auth'];
+
 export default async function ThankYouPage({
   searchParams,
 }: PagePropsWithSearchParams<'orderId'>) {
   const orderId = Number(toArray(searchParams.orderId)[0]) || null;
 
   if (!orderId) notFound();
-
-  await applyGuards(auth);
 
   const filteredHeaders = requestHeaders();
 

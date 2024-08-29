@@ -1,10 +1,5 @@
 import type { Metadata } from 'next';
 
-import { applyGuards } from '@/lib/utils/guards';
-import { auth } from '@/guards/auth';
-
-import ProfileClientPage from './page_client';
-
 export const metadata: Metadata = {
   title: 'Your Profile',
 
@@ -14,12 +9,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ProfilePage() {
-  await applyGuards(auth);
+export const middlewares = ['auth'];
 
-  return (
-    <div className='mx-auto w-11/12 md:w-full py-16 max-w-3xl'>
-      <ProfileClientPage />
-    </div>
-  );
-}
+export { default as default } from './page_client';

@@ -2,16 +2,14 @@ import type { Metadata } from 'next';
 
 import { AuthFormFrame } from '@/components/AuthFormFrame';
 import { LoginForm } from '@/components/Auth/LoginForm';
-import { guest } from '@/guards/guest';
-import { applyGuards } from '@/lib/utils/guards';
 
 export const metadata: Metadata = {
   title: 'Sign In',
 };
 
-export default async function SignUpPage() {
-  await applyGuards(guest);
+export const middlewares = ['guest'];
 
+export default function SignUpPage() {
   return (
     <AuthFormFrame
       heading='Sign In'
