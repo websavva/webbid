@@ -5,7 +5,7 @@ import { ErrorIcon } from '@/components/Icons/ErrorIcon';
 import { TRPCClientError } from '@trpc/client';
 
 interface AppErrorPageProps {
-  error: Error;
+  error: Error | { message: string };
 }
 
 export default function AppErrorPage({ error }: AppErrorPageProps) {
