@@ -1,7 +1,5 @@
-import ErrorPage from './error';
+import { ErrorFrame } from '@/components/UI/ErrorFrame';
 
 export default function NotFoundPage() {
-  const notFoundError = { message: 'Sorry, Not Found...' };
-
-  return <ErrorPage error={notFoundError} />;
+  return <ErrorFrame message='Sorry, Not Found...' />;
 }
