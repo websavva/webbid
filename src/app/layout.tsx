@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 
+import Layout from '@/components/UI/Layout';
 import { NavBar } from '@/components/NavBar';
-import { cn } from '@/lib/utils/cn';
 import { loadAppContext } from '@/contexts/app/load';
 import { AppContextProvider } from '@/contexts/app/Provider';
 import { Toaster } from '@/components/UI/Toaster';
@@ -11,8 +10,6 @@ import './globals.css';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { Footer } from '@/components/UI/Footer';
 import { publicEnv } from '#server/env/public';
-
-const intInter = Inter({ subsets: ['latin'] });
 
 const defaultMetadataFields = {
   title: `${publicEnv.COMPANY_NAME} - Digital marketplace`,
@@ -65,22 +62,18 @@ export default async function RootLayout({
   const initialAppContextValue = await loadAppContext(requestHeaders());
 
   return (
-    <html lang='en' className='text-[90%] 3xl:text-[100%]'>
-      <body className={cn('font-sans relative', intInter.className)}>
-        <div className='flex flex-col min-h-screen css-var-[--nav-bar-height=5rem]'>
-          <AppContextProvider initialValue={initialAppContextValue}>
-            <NavBar className='w-full' />
+    <Layout className='css-var-[--nav-bar-height=5rem]'>
+      <AppContextProvider initialValue={initialAppContextValue}>
+        <NavBar className='w-full' />
 
-            <main className='min-h-[calc(100vh-var(--nav-bar-height))] pt-[var(--nav-bar-height)]'>
-              {children}
-            </main>
+        <main className='min-h-[calc(100vh-var(--nav-bar-height))] pt-[var(--nav-bar-height)]'>
+          {children}
+        </main>
 
-            <Footer />
-          </AppContextProvider>
-        </div>
+        <Footer />
+      </AppContextProvider>
 
-        <Toaster />
-      </body>
-    </html>
+      <Toaster />
+    </Layout>
   );
 }
