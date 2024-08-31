@@ -4,7 +4,7 @@ import './globals.css';
 import Layout from '@/components/UI/Layout';
 import { ErrorFrame } from '@/components/UI/ErrorFrame';
 import { Logo } from '@/components/UI/Logo';
-import { publicEnv } from '@/server/env/public';
+import { publicEnv } from '#server/env/public';
 
 export default function GlobalErrorPage({
   error,

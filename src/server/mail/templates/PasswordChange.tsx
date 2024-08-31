@@ -1,6 +1,6 @@
 import { Section } from '@react-email/components';
 
-import { publicEnv } from '@/server/env/public';
+import { publicEnv } from '#server/env/public';
 
 import { defineEmailTemplate } from './utils/define-email-template';
 

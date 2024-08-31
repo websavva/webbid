@@ -7,7 +7,7 @@ import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
 import { formatDate } from '@/lib/formatters/date';
 import { formatPrice } from '@/lib/formatters';
 
-import { publicEnv } from '@/server/env/public';
+import { publicEnv } from '#server/env/public';
 
 import { defineEmailTemplate } from './utils';
 import { Layout } from './components/Layout';

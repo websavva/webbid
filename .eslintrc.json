@@ -54,6 +54,17 @@
           "unknown"
         ]
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["@/server*"], // Forbid importing from @/server
+            "message": "Please use the #server alias instead of @/server."
+          }
+        ]
+      }
     ]
   }
 }
