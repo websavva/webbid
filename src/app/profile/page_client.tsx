@@ -18,7 +18,9 @@ export default function ProfileClientPage() {
         <div>
           <div className='text-xl mb-2 text-gray-700 font-bold'>Email:</div>
 
-          <div className='text-lg'>{email}</div>
+          <div className='text-lg' data-testid='email'>
+            {email}
+          </div>
         </div>
 
         <hr className='my-8 h-[2px] bg-gray-200' />

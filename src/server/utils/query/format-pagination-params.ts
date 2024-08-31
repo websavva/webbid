@@ -1,14 +1,30 @@
 import type { PaginationQuery } from '#server/dtos/pagination';
 
+export type PaginationParams = Pick<PaginationQuery, 'page'> &
+  (
+    | {
+        pagination: false;
+      }
+    | {
+        pagination: true;
+        limit: number;
+      }
+  );
+
 export const formatPaginationParams = <Q extends PaginationQuery>({
   perPage: limit,
-  ...otherQueryParams
-}: Q) => {
-  const isPaginationEnabled = limit !== null;
-
-  return {
-    ...otherQueryParams,
-    limit: isPaginationEnabled ? limit : undefined,
-    pagination: isPaginationEnabled,
-  };
+  page,
+}: Q): PaginationParams => {
+  if (limit !== null) {
+    return {
+      page,
+      limit,
+      pagination: true,
+    };
+  } else {
+    return {
+      page,
+      pagination: false,
+    };
+  }
 };

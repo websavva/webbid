@@ -20,7 +20,9 @@
     "start": "node dist/index.js",
     "lint": "prettier --check . && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "prettier --write . && eslint . --ext ts,tsx --fix",
-    "email:dev": "jiti scripts/start-email-templates-dev-server.ts"
+    "email:dev": "jiti scripts/start-email-templates-dev-server.ts",
+    "test:units:server": "vitest -c vitest/server.config.ts run",
+    "test:units:client": "vitest -c vitest/client/client.config.ts run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -64,17 +66,21 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
     "@types/express": "^4.17.21",
     "@types/fs-extra": "^11.0.4",
     "@types/glob": "^8.1.0",
     "@types/mjml": "^4.7.4",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.14",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
     "@types/react-transition-group": "^4.4.10",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
@@ -83,11 +89,13 @@
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
     "jiti": "^1.21.0",
+    "jsdom": "^25.0.0",
     "mlly": "^1.7.1",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.3.0",
     "tsup": "^8.0.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^2.0.5"
   }
 }
