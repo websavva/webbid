@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import flatry from 'await-to-js';
 
-import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
 import { Select } from '@/components/UI/Select';
@@ -11,19 +10,18 @@ import { Select } from '@/components/UI/Select';
 import type { ProductCategory } from '#server/cms/collections/types';
 import { toast } from 'sonner';
 
-export type ProductsCategorySelectProps =
-  | Omit<
-      DefineProps<
-        {
-          disabled?: boolean;
-          category?: string;
-        },
-        HTMLButtonElement
-      >,
-      'onChange'
-    > & {
-      onChange: (category?: string) => any;
-    };
+export type ProductsCategorySelectProps = Omit<
+  DefineProps<
+    {
+      disabled?: boolean;
+      category?: string;
+    },
+    HTMLButtonElement
+  >,
+  'onChange'
+> & {
+  onChange: (category?: string) => any;
+};
 
 export const ProductsCategorySelect = ({
   category,
@@ -41,11 +39,11 @@ export const ProductsCategorySelect = ({
       const [err, { docs: allCategories = [] } = {}] = await flatry(
         trpcClient.products.categories.getCategories.query({
           perPage: null,
-        })
+        }),
       );
 
       if (err) {
-        return toast('Load of categories has failed !', {
+        return toast.error('Load of categories has failed !', {
           dismissible: true,
         });
       }

@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from 'next';
 import { Loader2Icon, AlertCircleIcon, MailCheckIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
