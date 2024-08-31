@@ -25,7 +25,7 @@ const FeaturesListSkeleton = () => {
       {[...Array(3).keys()].map((key) => {
         return (
           <div key={key}>
-            <Skeleton className='rounded-lg w-96 h-72' />
+            <Skeleton className='rounded-lg h-48' />
 
             <Skeleton className='rounded-lg h-4 w-3/4 mt-5' />
 
@@ -39,7 +39,7 @@ const FeaturesListSkeleton = () => {
 const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
   return (
     <>
-      {features.map(({ name, href, image, externalImageUrl }) => {
+      {features.map(({ name, href, image }) => {
         let derivedImageUrl: string | null = null;
 
         if (image && typeof image === 'object') {
@@ -55,7 +55,7 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
                   alt=''
                   width={500}
                   height={500}
-                  className='rounded-lg h-48 sm:h-72 object-cover'
+                  className='rounded-lg h-48 object-cover'
                 />
               )}
 
@@ -97,7 +97,7 @@ export const NavBarCategoryDropdownFeatures = ({
   }, [categoryId]);
 
   return (
-    <ul className={cn('grid sm:grid-cols-3 gap-10', className)}>
+    <ul className={cn('grid sm:grid-cols-3 gap-10 w-full', className)}>
       {isSuccess ? (
         <FeaturesList features={features} />
       ) : (
