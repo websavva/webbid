@@ -13,7 +13,6 @@ export type ProductReelsProps = DefineProps<
   {
     count?: number;
     EmptyPlaceholder?: FunctionComponent<void>;
-    isPaginationEnabled?: boolean;
   } & Partial<
     Pick<GetProductsQuery, 'category' | 'except' | 'sortBy' | 'sortDir'>
   >
@@ -100,7 +99,6 @@ export const ProductReels = ({
   sortBy,
   except,
   EmptyPlaceholder,
-  isPaginationEnabled,
   ...attrs
 }: ProductReelsProps) => {
   return (
@@ -119,7 +117,6 @@ export const ProductReels = ({
         sortDir={sortDir}
         EmptyPlaceholder={EmptyPlaceholder}
         except={except}
-        isPaginationEnabled={isPaginationEnabled}
       />
     </Suspense>
   );
