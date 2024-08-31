@@ -1,9 +1,11 @@
 'use client';
 
-import { DefineProps } from '@/types';
-import { Select } from '../UI/Select';
+import type { DefineProps } from '@/types';
+
 import { OrderStatus } from '@/consts/order-status';
 import { firstToUpperCase } from '@/lib/utils/first-to-upper-case';
+
+import { Select } from '../UI/Select';
 
 export type OrderStatusSelectProps = Omit<
   DefineProps<

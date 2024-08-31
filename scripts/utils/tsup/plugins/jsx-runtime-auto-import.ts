@@ -14,14 +14,14 @@ export const JsxRuntimAutoImportPlugin: Plugin = {
         const rawContent = await readFile(path, 'utf-8');
 
         const contents = ["import * as React from 'react';", rawContent].join(
-          '\n'
+          '\n',
         );
 
         return {
           contents,
           loader: 'tsx' as const,
         };
-      }
+      },
     );
   },
 };

@@ -1,7 +1,8 @@
 import { Img } from '@react-email/components';
 
-import { defineEmailComponent } from '../utils';
 import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
+
+import { defineEmailComponent } from '../utils';
 
 export const defaultStyle = {
   margin: '0 auto',

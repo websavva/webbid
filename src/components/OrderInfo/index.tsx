@@ -4,13 +4,14 @@ import type { Product } from '#server/cms/collections/types';
 
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
+import type { Order } from '#server/cms/collections/types';
 
 import { Separator } from '../UI/Separator';
 import { ProductCard } from '../ProductCard';
 import { OrderBill } from '../OrderBill';
 
 export type OrderInfoProps = DefineProps<{
-  order: import('#server/cms/collections/types').Order;
+  order: Order;
 }>;
 
 export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
@@ -24,7 +25,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
   } = order;
 
   const normalizedProducts = products.filter(
-    (product) => product && typeof product !== 'number'
+    (product) => product && typeof product !== 'number',
   ) as Product[];
 
   return (

@@ -5,7 +5,6 @@ import { useAuth } from '@/hooks/use-auth';
 import { formatDate } from '@/lib/formatters/date';
 import { ChangePasswordForm } from '@/components/ChangePasswordForm';
 
-
 export default function ProfileClientPage() {
   const { email, createdAt, updatedAt } = useAuth().user!;
 

@@ -92,13 +92,10 @@ export const useApi = <Args extends any[], ResponseData>(
   }: {
     onSuccess?: (data: ResponseData) => any;
     onError?: (error: Error) => any;
-  } = {}
+  } = {},
 ) => {
   const [apiState, dispatch] = useReducer(
-    (
-      prevState: UseApiState<ResponseData>,
-      action: ReducerAction<ResponseData>
-    ) => {
+    (_: UseApiState<ResponseData>, action: ReducerAction<ResponseData>) => {
       switch (action.type) {
         case UseApiStatus.Success:
           return {
@@ -133,7 +130,7 @@ export const useApi = <Args extends any[], ResponseData>(
     },
     {
       ...DEFAULT_STATE,
-    }
+    },
   );
 
   const reset = () => {
@@ -171,7 +168,7 @@ export const useApi = <Args extends any[], ResponseData>(
   const statusFlags = Object.fromEntries(
     Object.entries(UseApiStatus).map(([statusName, statusId]) => {
       return [`is${statusName}`, apiState.status === statusId];
-    })
+    }),
   );
 
   return {

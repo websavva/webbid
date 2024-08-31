@@ -5,7 +5,8 @@ import { CheckIcon, ShieldIcon } from 'lucide-react';
 import { trpcClient } from '@/lib/trpc';
 import type { PagePropsWithParams } from '@/types/page-props';
 
-import { BreadcrumbItem, Breadcrumbs } from '@/components/UI/Breadcrumbs';
+import type { BreadcrumbItem } from '@/components/UI/Breadcrumbs';
+import { Breadcrumbs } from '@/components/UI/Breadcrumbs';
 import { ImageSlider } from '@/components/ImageSlider';
 import { formatPrice } from '@/lib/formatters';
 import { ProductReels } from '@/components/ProductReels';

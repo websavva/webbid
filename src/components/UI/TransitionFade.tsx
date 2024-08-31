@@ -44,7 +44,7 @@ function TransitionFade<K extends string>({
               className={cn(
                 'transition-opacity',
                 className,
-                TRANSITION_CLASSES[state]
+                TRANSITION_CLASSES[state],
               )}
               style={{
                 ...style,

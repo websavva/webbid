@@ -7,6 +7,6 @@ export const toWhereEquals = <Q extends Record<string, any>>(query: Q) => {
         {
           equals: paramValue,
         },
-      ])
+      ]),
   );
 };

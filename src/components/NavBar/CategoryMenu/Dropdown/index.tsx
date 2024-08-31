@@ -2,7 +2,7 @@
 
 import { ChevronDownIcon, XIcon } from 'lucide-react';
 
-import { DefineProps } from '@/types';
+import type { DefineProps } from '@/types';
 import { Button } from '@/components/UI/Button';
 
 import type { ProductCategory } from '#server/cms/collections/types';

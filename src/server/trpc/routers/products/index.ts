@@ -16,7 +16,7 @@ export const productsRouter = router({
     .input(
       GetProductsQuerySchema.transform(formatPaginationParams)
         .transform(formatSortParams)
-        .default({})
+        .default({}),
     )
     .query(async ({ input: query, ctx: { req } }) => {
       const { page, limit, sort, pagination, category, except, include } =
@@ -76,7 +76,7 @@ export const productsRouter = router({
   getProductById: publicProcedure
     .input(z.number())
     .query(async ({ input: productId, ctx: { req } }) => {
-      let { docs: [product = null] = [] } = await CMS.client.find({
+      const { docs: [product = null] = [] } = await CMS.client.find({
         collection: 'products',
         where: {
           id: {

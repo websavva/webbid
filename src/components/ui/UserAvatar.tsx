@@ -10,9 +10,10 @@ export const UserAvatar = ({ email, className, ...attrs }: UserAvatarProps) => {
 
   return (
     <div
+      {...attrs}
       className={cn(
         'rounded-full bg-blue-500 text-white font-bold flex items-center justify-center',
-        className
+        className,
       )}
     >
       {avatarCharacter}

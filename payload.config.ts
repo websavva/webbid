@@ -1,4 +1,5 @@
 import path from 'path';
+
 import { defu } from 'defu';
 
 import { buildConfig } from 'payload/config';

@@ -2,9 +2,11 @@ import { type PropsWithChildren } from 'react';
 
 import { AuthContextProvider } from '../auth/Provider';
 import { CartStoreHydrationProvider } from '../cart/Provider';
-import { AppContext } from './load';
+
 import { ExtendedRouterContextProvider } from '../extended-router/Provider';
 import { ScreenMediaQueriesContextProvider } from '../screen-media-queries/Provider';
+
+import type { AppContext } from './load';
 
 export const AppContextProvider = ({
   initialValue,

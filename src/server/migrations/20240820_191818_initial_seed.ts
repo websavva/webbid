@@ -1,7 +1,8 @@
-import { rm } from 'fs-extra';
 import { join } from 'path';
 
-import { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-postgres';
+import { rm } from 'fs-extra';
+
+import type { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-postgres';
 
 import type {
   Media,
@@ -120,13 +121,13 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
 
       await payload.create({
         collection: 'products',
-        // @ts-expect-error virtual fields should be ignored
         data: {
           user: adminUser.id as number,
           name: product.name,
           description: product.description,
           category: categoryId as number,
-          approvedForSale: product.approvedForSale as any,
+          // @ts-expect-error
+          approvedForSale: product.approvedForSale,
           images: productImages.map(({ id }) => ({ image: +id })),
           productFile: productFile.id as number,
           price: product.price,

@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 
 export const useClickOutside = <T extends Element = Element>(
-  handler: (this: Element, event: PointerEvent) => any
+  handler: (this: Element, event: PointerEvent) => any,
 ) => {
   const elementRef = useRef<T | null>(null);
 

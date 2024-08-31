@@ -4,9 +4,10 @@ import { toast } from 'sonner';
 import flatry from 'await-to-js';
 import { withQuery } from 'ufo';
 
-import { trpcClient } from '@/lib/trpc';
-import { DefineProps } from '@/types';
 import { useRouter } from 'next/navigation';
+
+import { trpcClient } from '@/lib/trpc';
+import type { DefineProps } from '@/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
 
 import { AuthForm } from './AuthForm';
@@ -16,7 +17,7 @@ export function SignUpForm({ className }: DefineProps<{}>) {
 
   const onSubmit = async (userCredentials: UserCredentialsDto) => {
     const [err, { user = null } = {}] = await flatry(
-      trpcClient.auth.signUp.mutate(userCredentials)
+      trpcClient.auth.signUp.mutate(userCredentials),
     );
 
     if (err)
@@ -29,7 +30,7 @@ export function SignUpForm({ className }: DefineProps<{}>) {
     await router.push(
       withQuery('/sign-up/verify', {
         email,
-      })
+      }),
     );
   };
 

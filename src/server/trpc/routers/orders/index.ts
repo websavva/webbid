@@ -3,14 +3,15 @@ import type Stripe from 'stripe';
 import flatry from 'await-to-js';
 import { TRPCError } from '@trpc/server';
 
+import type { Where } from 'payload/types';
+
 import { CMS } from '#server/cms';
 import { stripeApi } from '#server/stripe/api';
-import { Order } from '#server/cms/collections/types';
+import type { Order } from '#server/cms/collections/types';
 import { GetOrdersQuerySchema } from '#server/dtos/orders';
 import { formatPaginationParams } from '#server/utils/query';
 
 import { privateEnv } from '#server/env/private';
-import { publicEnv } from '#server/env/public';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
 import { OrderStatus } from '@/consts/order-status';
 import { ProductStatus } from '@/consts/product-status';
@@ -18,7 +19,6 @@ import { formatPaginationMeta } from '#server/utils/format-pagination-meta';
 import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
 
 import { privateProcedure, router } from '../../helpers';
-import { Where } from 'payload/types';
 
 const cancelSessionStripeUrl = toAbsoluteUrl('/cart');
 
@@ -27,7 +27,7 @@ export const ordersRouter = router({
     .input(
       z.array(z.number()).min(1, {
         message: 'No products were provided !',
-      })
+      }),
     )
     .mutation(async ({ input: productIds, ctx: { user, req } }) => {
       const { docs: productsToBeBought } = await CMS.client.find({
@@ -104,10 +104,10 @@ export const ordersRouter = router({
           },
           expires_at: Math.round(
             Date.now() / 1e3 +
-              privateEnv.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60
+              privateEnv.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION * 60,
           ),
           cancel_url: cancelSessionStripeUrl,
-        })
+        }),
       );
 
       if (stripeErr || !stripeSession?.url) {
@@ -142,7 +142,7 @@ export const ordersRouter = router({
           .array(z.string())
           .optional()
           .transform((pick) => pick as Array<keyof Order>),
-      })
+      }),
     )
     .query(
       async ({
@@ -156,7 +156,7 @@ export const ordersRouter = router({
             id: orderId,
             depth: 2,
             req,
-          })
+          }),
         );
 
         if (err) throw new TRPCError({ code: 'NOT_FOUND' });
@@ -164,9 +164,9 @@ export const ordersRouter = router({
         if (!pick?.length) return order;
 
         return Object.fromEntries(
-          pick.map((fieldName) => [fieldName, order[fieldName]])
+          pick.map((fieldName) => [fieldName, order[fieldName]]),
         ) as unknown as Order;
-      }
+      },
     ),
 
   getOrders: privateProcedure
@@ -214,6 +214,6 @@ export const ordersRouter = router({
 
           paginationMeta: formatPaginationMeta(paginatedOrders),
         };
-      }
+      },
     ),
 });

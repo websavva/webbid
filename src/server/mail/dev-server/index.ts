@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
         <a href="${joinURL(req.baseUrl, templateName)}">
           ${templateName}
         </a>
-      </li>`
+      </li>`,
       )
       .join('\n')}
   </ul>
@@ -41,5 +41,5 @@ app.get('/:id', (req, res) => {
 });
 
 app.listen(3e3, () =>
-  console.log('Email templates dev server is up and running !')
+  console.log('Email templates dev server is up and running !'),
 );

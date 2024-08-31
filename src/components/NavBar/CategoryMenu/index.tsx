@@ -4,12 +4,11 @@ import { useState } from 'react';
 
 import { cn } from '@/lib/utils/cn';
 import { useClickOutside } from '@/hooks/use-click-outside';
-import { DefineProps } from '@/types';
+import type { DefineProps } from '@/types';
 import { useOnFullPathUpdate } from '@/hooks/use-full-path';
-import NavBarCategoryDropdown from './Dropdown';
-
 import type { ProductCategory } from '#server/cms/collections/types';
 
+import NavBarCategoryDropdown from './Dropdown';
 
 export type NavBarCategoryMenuProps = DefineProps<
   {
@@ -26,7 +25,7 @@ export function NavBarCategoryMenu({
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
 
   const { elementRef } = useClickOutside<HTMLDivElement>(
-    () => activeCategoryId && setActiveCategoryId(null)
+    () => activeCategoryId && setActiveCategoryId(null),
   );
 
   useOnFullPathUpdate(() => {
@@ -36,7 +35,10 @@ export function NavBarCategoryMenu({
   return (
     <div
       ref={elementRef}
-      className={cn('flex flex-col sm:flex-row items-start sm:items-center max-sm:space-y-1 sm:space-x-3', className)}
+      className={cn(
+        'flex flex-col sm:flex-row items-start sm:items-center max-sm:space-y-1 sm:space-x-3',
+        className,
+      )}
       {...attrs}
     >
       {categories.map((category) => {

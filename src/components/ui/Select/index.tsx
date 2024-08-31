@@ -65,10 +65,9 @@ export const Select = ({
 
   const normalizedValue = isEmptyValue ? EMPTY_VALUE_ID : value;
 
-  const activeOption =
-    isEmptyValue
-      ? emptyOption
-      : options.find(({ id }) => id === value);
+  const activeOption = isEmptyValue
+    ? emptyOption
+    : options.find(({ id }) => id === value);
 
   if (canBeEmpty)
     derivedOptions.unshift({
@@ -81,10 +80,7 @@ export const Select = ({
   };
 
   return (
-    <SelectCore
-      onValueChange={onOptionChange}
-      value={normalizedValue}
-    >
+    <SelectCore onValueChange={onOptionChange} value={normalizedValue}>
       <SelectCoreTrigger
         {...attrs}
         disabled={disabled}

@@ -23,7 +23,7 @@ export const OrderIntro = ({
   const { emptyOut: emptyOutCart } = useCartStore();
 
   const {
-    order: { id: orderId, isPaid: isOrderPaid },
+    order: { id: orderId },
   } = orderInfoProps;
 
   useEffect(() => {

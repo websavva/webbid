@@ -10,7 +10,7 @@ import { type InputProps, Input } from './Input';
 const PasswordInput = forwardRef(
   (
     { className, ...props }: InputProps,
-    ref: React.ForwardedRef<HTMLInputElement>
+    ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -31,7 +31,7 @@ const PasswordInput = forwardRef(
         className={cn('pr-10', className)}
       />
     );
-  }
+  },
 );
 
 PasswordInput.displayName = 'PasswordInput';

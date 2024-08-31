@@ -1,10 +1,11 @@
 import { ArrowDownToLine, CheckCircle, Leaf } from 'lucide-react';
 
+import Link from 'next/link';
+
 import { Container } from '@/components/UI/Container';
 import { Button } from '@/components/UI/Button';
 import { Perk, type PerkProps } from '@/components/Perk';
 import { ProductReels } from '@/components/ProductReels';
-import Link from 'next/link';
 
 const perks: PerkProps[] = [
   {
@@ -60,14 +61,20 @@ export default async function Home() {
       <section className='py-16 bg-slate-100 border-t-2 border-slate-200 flex justify-center'>
         <Container className='flex lg:justify-between flex-col lg:flex-row gap-16 sm:max-lg:max-w-[60%]'>
           {perks.map((props) => (
-            <Perk key={props.title} {...props} className='lg:text-center lg:w-3/12' />
+            <Perk
+              key={props.title}
+              {...props}
+              className='lg:text-center lg:w-3/12'
+            />
           ))}
         </Container>
       </section>
 
       <section className='py-16 border-t-2 flex justify-center'>
         <Container className='sm:max-lg:max-w-[60%] w-full'>
-          <div className='text-2xl text-gray-800 font-bold mb-14 lg:mb-8'>Brand New</div>
+          <div className='text-2xl text-gray-800 font-bold mb-14 lg:mb-8'>
+            Brand New
+          </div>
 
           <ProductReels className='gap-10 lg:gap-20 css-var-[--column-counts=1] lg:css-var-[--column-counts=3]' />
         </Container>

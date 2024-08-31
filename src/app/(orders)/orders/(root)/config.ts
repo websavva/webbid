@@ -1,5 +1,6 @@
+import type { z } from 'zod';
+
 import { GetOrdersQuerySchema } from '#server/dtos/orders';
-import { z } from 'zod';
 
 export const OrdersPageSearchParamsSchema = GetOrdersQuerySchema.pick({
   page: true,

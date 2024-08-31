@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { OrderStatus } from '@/consts/order-status';
 
 import { PaginationQuerySchema } from '../pagination';
-import { getSortQuerySchema } from '../sort';
 
 export const SORTABLE_FIELDS = ['createdAt'] as const;
 

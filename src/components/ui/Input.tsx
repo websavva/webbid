@@ -1,6 +1,7 @@
 'use client';
 
-import { forwardRef, ReactNode, useRef } from 'react';
+import type { ReactNode } from 'react';
+import { forwardRef, useRef } from 'react';
 import {
   type UseControllerProps,
   useController,
@@ -21,7 +22,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
 const Input = forwardRef(
   (
     { className, type, Icon, ...props }: InputProps,
-    ref: React.ForwardedRef<HTMLInputElement>
+    ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     const {
       field,
@@ -41,7 +42,7 @@ const Input = forwardRef(
               className,
               {
                 'border-red-500': invalid,
-              }
+              },
             )}
             disabled={isSubmitting}
             {...props}
@@ -61,7 +62,7 @@ const Input = forwardRef(
         </TransitionHeight>
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = 'Input';

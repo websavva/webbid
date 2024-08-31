@@ -1,6 +1,6 @@
 import type { CollectionBeforeChangeHook } from 'payload/types';
 
-export const addUser: CollectionBeforeChangeHook = ({ req, data, originalDoc }) => {
+export const addUser: CollectionBeforeChangeHook = ({ req, data }) => {
   if (!req.user) return data;
 
   return {

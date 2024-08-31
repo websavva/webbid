@@ -1,4 +1,4 @@
-import { Access, CollectionConfig } from 'payload/types';
+import type { Access, CollectionConfig } from 'payload/types';
 import type { AfterReadHook } from 'payload/dist/collections/config/types';
 
 import { publicEnv } from '#server/env/public';
@@ -6,6 +6,7 @@ import { OrderStatus } from '@/consts/order-status';
 
 import { isAdmin, mergeCollectionAccesses } from '../access';
 import { addUser } from '../hooks';
+
 import type { Order } from './types';
 
 const isOwner: Access = (ctx) => {

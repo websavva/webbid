@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload/types';
+import type { CollectionConfig } from 'payload/types';
 
 import { isAdmin } from '../access';
 
@@ -11,7 +11,7 @@ export const ProductCategoryFeatures: CollectionConfig = {
   },
 
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
   },
 
   fields: [

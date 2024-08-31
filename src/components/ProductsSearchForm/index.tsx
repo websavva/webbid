@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+
 import { withQuery } from 'ufo';
 
 import type { DefineProps } from '@/types';
@@ -66,7 +66,13 @@ export const ProductsSearchForm = ({
   const derivedPending = pending || isRouteUpdating;
 
   return (
-    <form {...attrs} className={cn('flex max-lg:flex-col lg:items-center max-lg:space-y-3 lg:space-x-5', className)}>
+    <form
+      {...attrs}
+      className={cn(
+        'flex max-lg:flex-col lg:items-center max-lg:space-y-3 lg:space-x-5',
+        className,
+      )}
+    >
       <ProductsSortSelect
         sortBy={form.sortBy}
         sortDir={form.sortDir}

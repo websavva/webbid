@@ -1,7 +1,7 @@
 import { createContext } from 'react';
+import type { useRouter } from 'next/navigation';
 
-export interface ExtendedRouter
-  extends ReturnType<typeof import('next/navigation').useRouter> {
+export interface ExtendedRouter extends ReturnType<typeof useRouter> {
   pushQuery: (query: Record<string, any>) => void;
 }
 
@@ -19,7 +19,7 @@ export const ExtendedRouterContext = createContext<ExtendedRouterContext>({
     back: () => {},
     forward: () => {},
     prefetch: () => {},
-    pushQuery: (query) => {},
+    pushQuery: (_) => {},
   },
 
   pending: false,

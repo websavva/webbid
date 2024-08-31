@@ -40,7 +40,7 @@ export const ImageSliderPagination = ({
               e.preventDefault();
               e.stopPropagation();
 
-              !isActive && onSlideChange(slideIndex);
+              if (!isActive) onSlideChange(slideIndex);
             }}
           />
         );

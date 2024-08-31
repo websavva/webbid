@@ -1,4 +1,5 @@
 import { Heading as BaseHeading } from '@react-email/components';
+
 import { defineEmailComponent } from '../utils';
 
 export const Heading = defineEmailComponent(BaseHeading, {

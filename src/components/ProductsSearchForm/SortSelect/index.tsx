@@ -37,7 +37,7 @@ export const ProductsSortSelect = ({
 
   const onSortChange = (id: string) => {
     const { sortBy, sortDir } = PRODUCTS_SORT_OPTIONS.find(
-      (option) => option.id === id
+      (option) => option.id === id,
     )!;
 
     onChange({

@@ -5,7 +5,7 @@ import { headers } from 'next/headers';
 import { trpcClient } from '@/lib/trpc';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { toArray } from '@/lib/utils/to-array';
-import { PagePropsWithSearchParams } from '@/types/page-props';
+import type { PagePropsWithSearchParams } from '@/types/page-props';
 import { SuccessfulPaymentIcon } from '@/components/Icons/SuccessfulPaymentIcon';
 import { Container } from '@/components/UI/Container';
 import { ArrowLink } from '@/components/UI/ArrowLink';

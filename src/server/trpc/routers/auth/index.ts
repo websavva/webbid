@@ -15,8 +15,7 @@ import {
 } from '#server/dtos/auth';
 import { CMS } from '#server/cms';
 import { privateEnv } from '#server/env/private';
-import { User } from '#server/cms/collections/types';
-import { publicEnv } from '#server/env/public';
+import type { User } from '#server/cms/collections/types';
 import { PasswordChangeTemplate } from '#server/mail/templates';
 
 export const authRouter = router({
@@ -83,7 +82,7 @@ export const authRouter = router({
     .input(
       z.object({
         email: z.string().email(),
-      })
+      }),
     )
     .mutation(
       async ({
@@ -110,7 +109,7 @@ export const authRouter = router({
         return {
           email,
         };
-      }
+      },
     ),
 
   resetPassword: publicProcedure.input(ResetPasswordDtoSchema).mutation(
@@ -158,7 +157,7 @@ export const authRouter = router({
         });
 
       return authInfo;
-    }
+    },
   ),
 
   getMe: privateProcedure.query(async ({ ctx: { user, req } }) => {
@@ -251,6 +250,6 @@ export const authRouter = router({
         return {
           user: updatedUser,
         };
-      }
+      },
     ),
 });

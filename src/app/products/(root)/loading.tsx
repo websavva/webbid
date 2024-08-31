@@ -1,4 +1,8 @@
-import { ProductReelsGrid, ProductReelsCardSkeleton } from '@/components/ProductReels';
+import {
+  ProductReelsGrid,
+  ProductReelsCardSkeleton,
+} from '@/components/ProductReels';
+
 import { PRODUCTS_PER_PAGE } from './config';
 
 export default function ProductsPageSkeleton() {

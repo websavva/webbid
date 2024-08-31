@@ -1,9 +1,10 @@
 import type { Express } from 'express';
 import payload from 'payload';
 
+import { createSMTPransport } from '#server/mail/transport';
+
 import { privateEnv } from '../env/private';
 import { publicEnv } from '../env/public';
-import { createSMTPransport } from '#server/mail/transport';
 
 export class CMS {
   public static client: Awaited<ReturnType<(typeof payload)['init']>>;

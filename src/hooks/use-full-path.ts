@@ -15,7 +15,7 @@ export const useFullPath = () => {
 
 export const useOnFullPathUpdate = (
   onUpdate: (newFullPath?: string) => any,
-  deps: any[] = []
+  deps: any[] = [],
 ) => {
   const fullPath = useFullPath();
 

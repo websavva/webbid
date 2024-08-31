@@ -1,12 +1,11 @@
 import { resolve, join, isAbsolute, basename, dirname } from 'path';
+
 import { readdir, readFile, ensureDir, writeFile } from 'fs-extra';
 import { defu } from 'defu';
 import { globSync } from 'glob';
 
-import type {
-  StaticNextConfig,
-} from '../../../types/next-config';
-import { MiddlewarePagesMap } from '../runtime/types';
+import type { StaticNextConfig } from '../../../types/next-config';
+import type { MiddlewarePagesMap } from '../runtime/types';
 
 export interface WithMiddlewareAggregatorOptions {
   middlewaresDir?: string;

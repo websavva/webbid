@@ -24,7 +24,7 @@ const setSensitiveParams = (el: HTMLElement, newVal: string) => {
 };
 
 export const useTransitionHeightListeners = (
-  nodeRef: RefObject<HTMLElement | null>
+  nodeRef: RefObject<HTMLElement | null>,
 ): Pick<
   EndListenerProps<HTMLElement>,
   'onEnter' | 'onEntering' | 'onEntered' | 'onExit' | 'onExited' | 'onExiting'

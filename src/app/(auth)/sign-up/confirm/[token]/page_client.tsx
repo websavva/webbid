@@ -28,7 +28,7 @@ export default function SignUpConfirmClientPage({
     {
       onError(err) {
         toast.error(err.message, {
-          dismissible: true
+          dismissible: true,
         });
       },
 
@@ -38,7 +38,7 @@ export default function SignUpConfirmClientPage({
 
         await router.push('/login');
       },
-    }
+    },
   );
 
   useEffect(() => {
@@ -46,7 +46,10 @@ export default function SignUpConfirmClientPage({
   }, [token]);
 
   return (
-    <TransitionFade transitionKey={status} className='w-full flex flex-col items-center'>
+    <TransitionFade
+      transitionKey={status}
+      className='w-full flex flex-col items-center'
+    >
       {(key) => {
         switch (key) {
           case 'success':

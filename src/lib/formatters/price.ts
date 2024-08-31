@@ -3,7 +3,7 @@ export function formatPrice(
   options: {
     currency?: 'USD' | 'EUR' | 'GBP' | 'BDT';
     notation?: Intl.NumberFormatOptions['notation'];
-  } = {}
+  } = {},
 ) {
   const { currency = 'USD', notation = 'compact' } = options;
 

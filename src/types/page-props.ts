@@ -8,7 +8,7 @@ export type PagePropsWithSearchParams<ParamNames extends string> = {
 };
 
 export type PagePropsWithParams<
-  Params extends Record<string, string | string[]>
+  Params extends Record<string, string | string[]>,
 > = {
   params: Params;
 };

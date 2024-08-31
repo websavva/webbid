@@ -1,3 +1,5 @@
+import { Section } from '@react-email/components';
+
 import type { Order, Product } from '#server/cms/collections/types';
 
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
@@ -5,14 +7,14 @@ import { toAbsoluteUrl } from '@/lib/utils/toAbsoluteUrl';
 import { formatDate } from '@/lib/formatters/date';
 import { formatPrice } from '@/lib/formatters';
 
+import { publicEnv } from '@/server/env/public';
+
 import { defineEmailTemplate } from './utils';
 import { Layout } from './components/Layout';
 import { Heading } from './components/Heading';
-import { Section } from '@react-email/components';
 import { Text } from './components/Text';
 import { Button } from './components/Button';
 import { Hr } from './components/Hr';
-import { publicEnv } from '@/server/env/public';
 
 export interface OrderCompletionTemplateProps {
   order: Order;
@@ -200,5 +202,5 @@ export const OrderCompletionTemplate = defineEmailTemplate(
         },
       ],
     } as Order,
-  }
+  },
 );

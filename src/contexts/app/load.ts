@@ -1,4 +1,4 @@
-import type { RequestHeaders} from 'redaxios';
+import type { RequestHeaders } from 'redaxios';
 
 import { loadAuthContext } from '../auth/load';
 

@@ -35,7 +35,7 @@ const buttonVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -61,7 +61,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const componentProps = {
       className: cn(buttonVariants({ variant, size, className })),
@@ -84,7 +84,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={loaderRef}
                 className={cn(
                   'w-0 transition-all animate-spin',
-                  PENDING_TRANSITION_CLASSES[state]
+                  PENDING_TRANSITION_CLASSES[state],
                 )}
               />
             )}
@@ -92,7 +92,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </button>
       );
     }
-  }
+  },
 );
 
 Button.displayName = 'Button';

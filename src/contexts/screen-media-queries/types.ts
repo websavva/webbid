@@ -12,5 +12,5 @@ export type ScreenMediaQueriesContextSchema = MinScreenFlags & MaxScreenFlags;
 
 export type ScreenMediaQueryCallbacks = Record<
   ScreenName,
-  { mq: MediaQueryList; callback: (event: MediaQueryListEvent) => void}
+  { mq: MediaQueryList; callback: (event: MediaQueryListEvent) => void }
 >;

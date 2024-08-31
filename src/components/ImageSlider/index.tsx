@@ -105,7 +105,7 @@ export const ImageSlider = ({
               e.preventDefault();
               e.stopPropagation();
 
-              toNextSlide()
+              toNextSlide();
             }}
             className={cn(
               'sm:opacity-0 ml-auto group-hover:opacity-100 transition-all hover:scale-110',

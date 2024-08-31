@@ -12,7 +12,7 @@ export type AuthContextValue = AuthInfo & {
   logout: (headers?: Headers) => Promise<void>;
   login: (
     userCredentials: UserCredentialsDto,
-    headers?: Headers
+    headers?: Headers,
   ) => Promise<void>;
   setAuthInfo: (authInfo: AuthInfo) => void;
 };

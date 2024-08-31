@@ -6,7 +6,7 @@ import {
   Preview,
   Section,
 } from '@react-email/components';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { publicEnv } from '#server/env/public';
 

@@ -1,8 +1,6 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 
-import {
-  GetProductsQuerySchema,
-} from '#server/dtos/products';
+import { GetProductsQuerySchema } from '#server/dtos/products';
 
 export const ProductsFormSchema = GetProductsQuerySchema.pick({
   category: true,

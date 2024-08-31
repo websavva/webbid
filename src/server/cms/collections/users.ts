@@ -25,8 +25,13 @@ export const Users: CollectionConfig = {
 
     forgotPassword: {
       generateEmailHTML(payload) {
+        if (!payload?.token)
+          throw new Error(
+            'No token was provided for Password Reset Confirmation email !',
+          );
+
         return PasswordResetConfirmation({
-          token: payload?.token!,
+          token: payload.token,
         }).html;
       },
 

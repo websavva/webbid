@@ -1,3 +1,3 @@
 'use client';
 
-export * from '@/contexts/cart/store'
+export * from '@/contexts/cart/store';

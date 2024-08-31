@@ -15,7 +15,7 @@ const hasAccessToImages: Access = ({ req: { user } }) => {
 
 const isAdminOrHasAccessToImages = mergeCollectionAccesses(
   isAdmin,
-  hasAccessToImages
+  hasAccessToImages,
 );
 
 export const Media: CollectionConfig = {

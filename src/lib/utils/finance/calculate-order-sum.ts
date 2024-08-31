@@ -7,11 +7,11 @@ export const calculatOrderSum = (products: Product[]) => {
   const subTotalPrice = roundPrice(
     products.reduce((subTotalPrice, { price }) => {
       return subTotalPrice + price;
-    }, 0)
+    }, 0),
   );
 
   const fee = roundPrice(
-    publicEnv.SERVICE_FEE_PERCENTAGE * 1e-2 * subTotalPrice
+    publicEnv.SERVICE_FEE_PERCENTAGE * 1e-2 * subTotalPrice,
   );
 
   const totalPrice = roundPrice(subTotalPrice + fee);

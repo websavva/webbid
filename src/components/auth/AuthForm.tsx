@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, ReactNode, useState } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -28,11 +28,11 @@ export function AuthForm({
   selectedFields = ['email', 'password'],
 }: AuthFormAttributes) {
   const defaultValues = Object.fromEntries(
-    selectedFields.map((fieldName) => [fieldName, ''])
+    selectedFields.map((fieldName) => [fieldName, '']),
   ) as UserCredentialsDto;
 
   const resolverPickMap = Object.fromEntries(
-    selectedFields.map((fieldName) => [fieldName, true])
+    selectedFields.map((fieldName) => [fieldName, true]),
   ) as Record<keyof UserCredentialsDto, true>;
   const {
     control,
@@ -45,8 +45,6 @@ export function AuthForm({
   });
 
   const onSubmit = handleSubmit(onSuccessValidation);
-
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const AuthInputs: Record<keyof UserCredentialsDto, () => ReactNode> = {
     email: () => <Input control={control} name='email' placeholder='Email' />,

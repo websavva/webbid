@@ -3,7 +3,7 @@ import { formatPrice } from '@/lib/formatters';
 
 import { cn } from '@/lib/utils/cn';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
-import { DefineProps } from '@/types';
+import type { DefineProps } from '@/types';
 
 export type CartSummaryProps = DefineProps<{
   items: Product[];
@@ -59,14 +59,20 @@ export const CartSummary = ({
         const isLast = length - 1 === index;
 
         return (
-          <div key={index} className={cn({
-            'border-b-gray-300 border-b-2 pb-3 mb-3 space-y-3': !isLast
-          })}>
+          <div
+            key={index}
+            className={cn({
+              'border-b-gray-300 border-b-2 pb-3 mb-3 space-y-3': !isLast,
+            })}
+          >
             {billSectionItems.map(({ title, sum, isHighlighted }) => {
               return (
-                <div key={title} className={cn('flex justify-between', {
-                  'font-bold': isHighlighted
-                })}>
+                <div
+                  key={title}
+                  className={cn('flex justify-between', {
+                    'font-bold': isHighlighted,
+                  })}
+                >
                   <span>{title}</span>
 
                   <span>{sum ? formatPrice(sum) : 'Free'}</span>

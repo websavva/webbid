@@ -16,15 +16,17 @@ export const router = t.router;
 
 export const publicProcedure = t.procedure;
 
-export const privateProcedure = publicProcedure.use(({ ctx: { req }, next }) => {
-  if (!req.user)
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-    });
+export const privateProcedure = publicProcedure.use(
+  ({ ctx: { req }, next }) => {
+    if (!req.user)
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+      });
 
-  return next({
-    ctx: {
-      user: req.user,
-    },
-  });
-});
+    return next({
+      ctx: {
+        user: req.user,
+      },
+    });
+  },
+);

@@ -2,11 +2,12 @@
 
 import { toast } from 'sonner';
 import flatry from 'await-to-js';
+
+import { useRouter } from 'next/navigation';
+
 import { useAuth } from '@/hooks/use-auth';
 
-import { trpcClient } from '@/lib/trpc';
-import { DefineProps } from '@/types';
-import { useRouter } from 'next/navigation';
+import type { DefineProps } from '@/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
 
 import { AuthForm } from './AuthForm';

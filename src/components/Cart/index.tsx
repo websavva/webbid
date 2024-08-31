@@ -54,7 +54,7 @@ export const Cart = ({
           dismissible: true,
         });
       },
-    }
+    },
   );
 
   const [isSynchronized, setIsSynchronized] = useState(false);
@@ -73,7 +73,7 @@ export const Cart = ({
         trpcClient.products.getProducts.query({
           perPage: null,
           include: items.map(({ id }) => id),
-        })
+        }),
       );
 
       if (err) return toast.error('Cart synchronization got failed !');

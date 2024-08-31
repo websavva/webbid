@@ -6,10 +6,11 @@ import { loadAppContext } from '@/contexts/app/load';
 import { AppContextProvider } from '@/contexts/app/Provider';
 import { Toaster } from '@/components/UI/Toaster';
 
-import './globals.css';
 import { requestHeaders } from '@/lib/utils/request-headers';
 import { Footer } from '@/components/UI/Footer';
 import { publicEnv } from '#server/env/public';
+
+import './globals.css';
 
 const defaultMetadataFields = {
   title: `${publicEnv.COMPANY_NAME} - Digital marketplace`,

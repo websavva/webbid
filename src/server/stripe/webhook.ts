@@ -3,14 +3,14 @@ import type { PayloadRequest } from 'payload/types';
 import type Stripe from 'stripe';
 
 import { OrderStatus } from '@/consts/order-status';
-
 import type { User } from '#server/cms/collections/types';
 import { OrderCompletionTemplate } from '#server/mail/templates';
 
-import { stripeApi } from './api';
 import { CMS } from '../cms';
 import { privateEnv } from '../env/private';
 import { publicEnv } from '../env/public';
+
+import { stripeApi } from './api';
 
 export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
   const req = _req as PayloadRequest<User>;
@@ -23,7 +23,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
     event = stripeApi.webhooks.constructEvent(
       req.body,
       stripeSignature,
-      privateEnv.STRIPE.API_KEY
+      privateEnv.STRIPE.API_KEY,
     );
   } catch (err) {
     return res.status(400).json({
@@ -59,7 +59,8 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
 
     if (!user) return res.status(404).json({ error: 'No such user exists.' });
 
-    req.user = user as any;
+    // @ts-expect-error user object of request has slightly different tyoe
+    req.user = user;
 
     const { docs: orders } = await CMS.client.find({
       collection: 'orders',
@@ -110,7 +111,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
         })
         .catch(() => {
           console.error(
-            `Receipt email was not sent to user ${user.email} for order ${order.id}`
+            `Receipt email was not sent to user ${user.email} for order ${order.id}`,
           );
         });
 
@@ -122,7 +123,7 @@ export const stripeWebhookHandler: RequestHandler = async (_req, res) => {
         orderId,
 
         error:
-          (err as any)?.message ||
+          (err as Error)?.message ||
           'Order was not paid due to issues on server !',
       });
     }

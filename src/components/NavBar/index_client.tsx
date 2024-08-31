@@ -7,7 +7,7 @@ import { MenuIcon } from 'lucide-react';
 import { publicEnv } from '#server/env/public';
 
 import { useAuth } from '@/hooks/use-auth';
-import { DefineProps } from '@/types';
+import type { DefineProps } from '@/types';
 import { Logo } from '@/components/UI/Logo';
 import { Container } from '@/components/UI/Container';
 import { cn } from '@/lib/utils/cn';
@@ -15,9 +15,10 @@ import { useScreenMediaQueries } from '@/hooks/use-screen-media-queries';
 
 import type { ProductCategory } from '#server/cms/collections/types';
 
+import { useOnFullPathUpdate } from '@/hooks/use-full-path';
+
 import { NavBarCategoryMenu } from './CategoryMenu';
 import { NavBarRightMenu } from './RightMenu';
-import { useOnFullPathUpdate } from '@/hooks/use-full-path';
 
 export type ClientNavBarProps = DefineProps<
   {

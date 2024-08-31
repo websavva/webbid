@@ -5,9 +5,10 @@ import Image from 'next/image';
 
 import type { Product } from '#server/cms/collections/types';
 import { cn } from '@/lib/utils/cn';
-import { DefineProps } from '@/types';
+import type { DefineProps } from '@/types';
 
 import { formatPrice } from '@/lib/formatters';
+
 import { Skeleton } from '../UI/Skeleton';
 
 export type ProductCardProps = DefineProps<{
@@ -61,7 +62,13 @@ export const ProductCard = ({
   } = product;
 
   return (
-    <div {...attrs} className={cn('grid gap-y-4 grid-rows-[auto_auto] sm:grid-rows-1 grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_max-content]', className)}>
+    <div
+      {...attrs}
+      className={cn(
+        'grid gap-y-4 grid-rows-[auto_auto] sm:grid-rows-1 grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_max-content]',
+        className,
+      )}
+    >
       {thumbnailUrl && (
         <Image
           src={thumbnailUrl}
@@ -73,7 +80,9 @@ export const ProductCard = ({
       )}
 
       <div className='grid'>
-        <div className='font-bold max-w-full text-ellipsis overflow-hidden whitespace-nowrap'>{name}</div>
+        <div className='font-bold max-w-full text-ellipsis overflow-hidden whitespace-nowrap'>
+          {name}
+        </div>
 
         {categoryLabel && (
           <div className='text-gray-600 text-sm mt-2 font-medium'>

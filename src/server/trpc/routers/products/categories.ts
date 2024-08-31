@@ -1,18 +1,21 @@
 import { z } from 'zod';
 
+import { TRPCError } from '@trpc/server';
+
 import { GetProductCategoriesQuerySchema } from '#server/dtos/products/categories';
-import { router, publicProcedure } from '../../helpers';
+
 import { formatPaginationParams, formatSortParams } from '#server/utils/query';
 import { CMS } from '#server/cms';
 import { GetProductCategoryFeaturesSchema } from '#server/dtos/products/categories/features';
-import { TRPCError } from '@trpc/server';
+
+import { router, publicProcedure } from '../../helpers';
 
 export const productCategoriesRouter = router({
   getCategories: publicProcedure
     .input(
       GetProductCategoriesQuerySchema.transform(formatPaginationParams)
         .transform(formatSortParams)
-        .default({})
+        .default({}),
     )
     .query(({ input: { limit, pagination, page, sort }, ctx: { req } }) => {
       return CMS.client.find({
@@ -46,7 +49,7 @@ export const productCategoriesRouter = router({
 
           req,
         });
-      }
+      },
     ),
 
   getCategoryByName: publicProcedure

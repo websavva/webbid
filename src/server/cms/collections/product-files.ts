@@ -2,7 +2,7 @@ import { join } from 'path';
 
 import type { Access, CollectionConfig } from 'payload/types';
 
-import { User } from '#server/cms/collections/types';
+import type { User } from '#server/cms/collections/types';
 
 import { addUser } from '../hooks';
 import { isAdmin, mergeCollectionAccesses } from '../access';

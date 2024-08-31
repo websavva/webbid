@@ -25,5 +25,5 @@ export const PasswordResetConfirmation = defineEmailTemplate(
   },
   {
     token: randomBytes(16).toString('hex'),
-  }
+  },
 );

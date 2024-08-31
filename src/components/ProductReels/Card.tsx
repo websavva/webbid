@@ -5,8 +5,9 @@ import type { Product } from '#server/cms/collections/types';
 import type { DefineProps } from '@/types';
 import { formatPrice } from '@/lib/formatters';
 
-import { ImageSlider } from '../ImageSlider';
 import { cn } from '@/lib/utils/cn';
+
+import { ImageSlider } from '../ImageSlider';
 import { Skeleton } from '../UI/Skeleton';
 
 export type ProductCardProps = DefineProps<

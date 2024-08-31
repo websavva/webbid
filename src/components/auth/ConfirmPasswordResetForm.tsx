@@ -9,9 +9,10 @@ import type { DefineProps } from '@/types';
 import type { UserCredentialsDto } from '#server/dtos/auth';
 import { PasswordSecurityIcon } from '@/components/Icons/PasswordSecurityIcon';
 
-import { AuthForm } from './AuthForm';
 import { useAuth } from '@/hooks/use-auth';
 import { cn } from '@/lib/utils/cn';
+
+import { AuthForm } from './AuthForm';
 
 export type ConfirmPasswordResetFormProps = DefineProps<{
   token: string;
@@ -42,7 +43,7 @@ export const ConfirmPasswordResetForm = ({
 
         router.push('/');
       },
-    }
+    },
   );
 
   return (

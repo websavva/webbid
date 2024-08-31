@@ -24,7 +24,7 @@ async function start() {
     bodyParser.raw({
       type: 'application/json',
     }),
-    stripeWebhookHandler
+    stripeWebhookHandler,
   );
 
   // initializing payload cms

@@ -2,10 +2,12 @@
 
 import { type PropsWithChildren, useState } from 'react';
 
+import { trpcClient } from '@/lib/trpc';
+
+import type { UserCredentialsDto } from '#server/dtos/auth';
+
 import { loadAuthContext } from './load';
 import { AuthContext, type AuthInfo, getDefaultAuthInfo } from './context';
-import { trpcClient } from '@/lib/trpc';
-import { UserCredentialsDto } from '#server/dtos/auth';
 
 export interface AuthContextProviderProps extends PropsWithChildren {
   initialValue?: AuthInfo;
@@ -16,7 +18,7 @@ export const AuthContextProvider = ({
   children,
 }: AuthContextProviderProps) => {
   const [authInfo, setAuthInfo] = useState<AuthInfo>(
-    initialAuthInfo || getDefaultAuthInfo()
+    initialAuthInfo || getDefaultAuthInfo(),
   );
 
   const refresh = async (headers?: Headers) => {
@@ -33,7 +35,7 @@ export const AuthContextProvider = ({
 
   const login = async (
     userCredentials: UserCredentialsDto,
-    headers?: Headers
+    headers?: Headers,
   ) => {
     const { user } = await trpcClient.auth.login.mutate(userCredentials, {
       context: {

@@ -1,11 +1,12 @@
 import { Section } from '@react-email/components';
 
+import { publicEnv } from '@/server/env/public';
+
 import { defineEmailTemplate } from './utils/define-email-template';
 
 import { Layout } from './components/Layout';
 import { Text } from './components/Text';
 import { Link } from './components/Link';
-import { publicEnv } from '@/server/env/public';
 
 export interface PasswordChangeTemplateProps {}
 

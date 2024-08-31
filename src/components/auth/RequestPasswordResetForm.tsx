@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 import { useApi } from '@/hooks/use-api';
 import { trpcClient } from '@/lib/trpc';
-import { UserCredentialsDto } from '#server/dtos/auth';
+import type { UserCredentialsDto } from '#server/dtos/auth';
 import { AuthFormFrame } from '@/components/AuthFormFrame';
 
 import TransitionFade from '../UI/TransitionFade';
@@ -16,7 +16,7 @@ import { AuthForm } from './AuthForm';
 export const RequestPasswordResetForm = () => {
   const [email, setEmail] = useState<string | null>(null);
 
-  const { isSuccess, makeApiCall, status } = useApi(
+  const { makeApiCall, status } = useApi(
     ({ email }: UserCredentialsDto) => {
       return trpcClient.auth.requestPasswordReset.mutate({ email });
     },

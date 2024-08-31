@@ -1,4 +1,5 @@
-import { CSSProperties, Suspense, FunctionComponent } from 'react';
+import type { CSSProperties, FunctionComponent } from 'react';
+import { Suspense } from 'react';
 
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';

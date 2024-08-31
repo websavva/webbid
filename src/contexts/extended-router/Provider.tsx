@@ -2,7 +2,8 @@
 
 import { withQuery } from 'ufo';
 import { usePathname, useRouter } from 'next/navigation';
-import { PropsWithChildren, useState, useTransition } from 'react';
+import type { PropsWithChildren } from 'react';
+import { useTransition } from 'react';
 
 import { type ExtendedRouter, ExtendedRouterContext } from './context';
 

@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/UI/Skeleton';
 import { trpcClient } from '@/lib/trpc';
 import type { DefineProps } from '@/types';
 import { cn } from '@/lib/utils/cn';
-import { ProductCategoryFeature } from '#server/cms/collections/types';
+import type { ProductCategoryFeature } from '#server/cms/collections/types';
 import { useApi } from '@/hooks/use-api';
 
 export type NavBarCategoryDropdownFeaturesList = DefineProps<{

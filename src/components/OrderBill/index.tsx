@@ -3,13 +3,17 @@ import { formatPrice } from '@/lib/formatters';
 
 import { cn } from '@/lib/utils/cn';
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
-import { DefineProps } from '@/types';
+import type { DefineProps } from '@/types';
 
 export type OrderBillProps = DefineProps<{
   products: Product[];
 }>;
 
-export const OrderBill = ({ products, className, ...attrs }: OrderBillProps) => {
+export const OrderBill = ({
+  products,
+  className,
+  ...attrs
+}: OrderBillProps) => {
   const { subTotalPrice, fee, totalPrice } = calculatOrderSum(products);
 
   const billSections: Array<

@@ -16,7 +16,10 @@ export function ErrorFrame({
 }: ErrorFrameProps) {
   return (
     <Container
-      className={cn('flex flex-col items-center w-full py-16 mx-auto', className)}
+      className={cn(
+        'flex flex-col items-center w-full py-16 mx-auto',
+        className,
+      )}
     >
       <ErrorIcon className='max-w-lg w-full' />
 

@@ -1,10 +1,10 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 
 import { DefaultSortQuerySchema } from '../../sort';
 import { PaginationQuerySchema } from '../../pagination';
 
 export const GetProductCategoriesQuerySchema = PaginationQuerySchema.merge(
-  DefaultSortQuerySchema
+  DefaultSortQuerySchema,
 );
 
 export type GetProductCategoriesQuerySchema = z.infer<

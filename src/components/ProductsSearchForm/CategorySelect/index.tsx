@@ -3,12 +3,13 @@
 import { useEffect, useState } from 'react';
 import flatry from 'await-to-js';
 
+import { toast } from 'sonner';
+
 import type { DefineProps } from '@/types';
 import { trpcClient } from '@/lib/trpc';
 import { Select } from '@/components/UI/Select';
 
 import type { ProductCategory } from '#server/cms/collections/types';
-import { toast } from 'sonner';
 
 export type ProductsCategorySelectProps = Omit<
   DefineProps<
@@ -67,6 +68,7 @@ export const ProductsCategorySelect = ({
 
   return (
     <Select
+      {...attrs}
       value={category}
       onChange={onCategoryChange}
       disabled={derivedDisabled}

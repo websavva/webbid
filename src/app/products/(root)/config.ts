@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 
 import { GetProductsQuerySchema } from '#server/dtos/products';
 import { ProductsFormSchema } from '@/components/ProductsSearchForm/config';
@@ -6,7 +6,7 @@ import { ProductsFormSchema } from '@/components/ProductsSearchForm/config';
 export const ProductsPageSearchParamsSchema = ProductsFormSchema.merge(
   GetProductsQuerySchema.pick({
     page: true,
-  })
+  }),
 );
 
 export type ProductsPageSearchParams = z.infer<

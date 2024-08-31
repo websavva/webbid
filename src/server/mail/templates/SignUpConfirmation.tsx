@@ -25,5 +25,5 @@ export const SignUpConfirmationTemplate = defineEmailTemplate(
   },
   {
     token: randomBytes(16).toString('hex'),
-  }
+  },
 );

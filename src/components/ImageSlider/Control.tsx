@@ -6,14 +6,12 @@ import { cn } from '@/lib/utils/cn';
 
 export type ImageSliderControl = DefineProps<
   {
-    isVisible?: boolean;
     isRight?: boolean;
   },
   HTMLButtonElement
 >;
 
 export const ImageSliderControl = ({
-  isVisible = true,
   isRight = false,
   className,
   ...attrs
@@ -26,7 +24,7 @@ export const ImageSliderControl = ({
         {
           'rotate-180': !isRight,
         },
-        className
+        className,
       )}
     >
       <ChevronRightIcon className={cn('size-1/2')} />

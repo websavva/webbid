@@ -1,20 +1,24 @@
 'use client';
 
-import type { DefineProps } from '@/types';
 import type { z } from 'zod';
+
 import { useForm } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+
+import { toast } from 'sonner';
+
+import type { DefineProps } from '@/types';
 
 import { ChangePasswordDtoSchema, passwordSchema } from '#server/dtos/auth';
 import { trpcClient } from '@/lib/trpc';
 import { useAuth } from '@/hooks/use-auth';
 import { useApi } from '@/hooks/use-api';
+import { cn } from '@/lib/utils/cn';
+import type { AuthInfo } from '@/contexts/auth/context';
 
 import { PasswordInput } from '../UI/PasswordInput';
-import { cn } from '@/lib/utils/cn';
 import { Button } from '../UI/Button';
-import { AuthInfo } from '@/contexts/auth/context';
-import { toast } from 'sonner';
 
 export type ChangePasswordFormProps = DefineProps<{}, HTMLFormElement>;
 
@@ -28,14 +32,14 @@ const ChangePasswordFormSchema = ChangePasswordDtoSchema.extend({
     {
       path: ['newPasswordConfirmation'],
       message: 'Passwords should be the same',
-    }
+    },
   )
   .refine(
     ({ password: oldPassword, newPassword }) => newPassword !== oldPassword,
     {
       path: ['newPassword'],
       message: 'New password should differ from the old one',
-    }
+    },
   );
 
 type ChangePasswordFormData = z.infer<typeof ChangePasswordFormSchema>;
@@ -83,7 +87,7 @@ export const ChangePasswordForm = ({
 
       onError: (err) =>
         toast.error(err.message || 'Password change has failed !'),
-    }
+    },
   );
 
   const pending = isSubmitting || isRequestPending;

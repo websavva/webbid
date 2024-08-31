@@ -1,6 +1,7 @@
+import Link from 'next/link';
+
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
-import Link from 'next/link';
 
 export interface BreadcrumbItem {
   href?: string | null;
