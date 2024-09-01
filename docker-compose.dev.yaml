@@ -1,5 +1,5 @@
 version: '3'
-name: Webbid Development
+name: webbid-development
 
 services:
   database:
@@ -14,8 +14,9 @@ services:
       - ${POSTGRES_PORT}:5432
 
   smtp-server:
-    image: 'maildev/maildev'
+    image: 'datydock/mailslurper'
 
     ports:
-      - 1080:1080
-      - 1025:1025
+      - 8080:8080
+      - 8085:8085
+      - 2500:2500
