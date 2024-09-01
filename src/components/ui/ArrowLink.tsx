@@ -16,7 +16,7 @@ export const ArrowLink = ({
     <Link
       {...otherProps}
       className={cn(
-        'font-semibold text-blue-700 space-x-2 flex text-sm items-center group',
+        'group flex items-center space-x-2 text-sm font-semibold text-blue-700',
         className,
       )}
     >

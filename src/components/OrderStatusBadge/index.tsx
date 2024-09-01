@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/cn';
 import { firstToUpperCase } from '@/lib/utils/first-to-upper-case';
 
 const orderStatusBadgeVariants = cva(
-  'w-max px-3 py-1 rounded-2xl leading-none text-sm font-semibold',
+  'w-max rounded-2xl px-3 py-1 text-sm font-semibold leading-none',
   {
     variants: {
       status: {

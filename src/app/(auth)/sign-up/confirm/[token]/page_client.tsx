@@ -48,38 +48,38 @@ export default function SignUpConfirmClientPage({
   return (
     <TransitionFade
       transitionKey={status}
-      className='w-full flex flex-col items-center'
+      className='flex w-full flex-col items-center'
     >
       {(key) => {
         switch (key) {
           case 'success':
             return (
               <>
-                <MailCheckIcon className='size-32 sm:size-44 stroke-1 text-primary' />
+                <MailCheckIcon className='size-32 stroke-1 text-primary sm:size-44' />
 
-                <p className='mt-6 font-light sm:text-lg xs:w-3/4 sm:w-96 text-center'>
+                <p className='mt-6 text-center font-light xs:w-3/4 sm:w-96 sm:text-lg'>
                   Congratulations ! Your account has been confirmed successfully
                   confirmed&nbsp;!
                 </p>
 
-                <p className='mt-5 flex items-center space-x-2 text-gray-500 font-light sm:text-lg'>
+                <p className='mt-5 flex items-center space-x-2 font-light text-gray-500 sm:text-lg'>
                   <span>Redirecting</span>
 
-                  <Loader2Icon className='w-[1em] mt-1 animate-spin' />
+                  <Loader2Icon className='mt-1 w-[1em] animate-spin' />
                 </p>
               </>
             );
           case 'error':
             return (
               <>
-                <AlertCircleIcon className='size-32 sm:size-44 text-red-400 stroke-1' />
+                <AlertCircleIcon className='size-32 stroke-1 text-red-400 sm:size-44' />
 
-                <p className='mt-6 font-light text-lg'>
+                <p className='mt-6 text-lg font-light'>
                   Ops, something went wrong..
                 </p>
 
                 <Button
-                  className='text-base mt-5 sm:mt-10'
+                  className='mt-5 text-base sm:mt-10'
                   variant={'secondary'}
                   onClick={() => onConfirmAccount(token)}
                 >
@@ -90,7 +90,7 @@ export default function SignUpConfirmClientPage({
           default:
             return (
               <>
-                <Loader2Icon className='size-32 sm:size-44 animate-spin stroke-1 text-slate-600' />
+                <Loader2Icon className='size-32 animate-spin stroke-1 text-slate-600 sm:size-44' />
 
                 <p className='mt-6 font-light sm:text-lg'>
                   Confirming your account...

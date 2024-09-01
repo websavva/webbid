@@ -30,7 +30,7 @@ export const ImageSliderPagination = ({
           <button
             key={slideIndex}
             className={cn(
-              'size-3 rounded-full bg-gray-500 hover:bg-blue-600 transition-all cursor-pointer',
+              'size-3 cursor-pointer rounded-full bg-gray-500 transition-all hover:bg-blue-600',
               {
                 'bg-blue-600': isActive,
               },

@@ -13,19 +13,19 @@ export function Perk({ className, Icon, title, description }: PerkProps) {
   return (
     <div
       className={cn(
-        'flex flex-col items-center max-lg:grid max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-[auto_auto] gap-x-6 gap-y-2',
+        'flex flex-col items-center gap-x-6 gap-y-2 max-lg:grid max-lg:grid-cols-[auto_1fr] max-lg:grid-rows-[auto_auto]',
         className,
       )}
     >
-      <div className='flex items-center bg-blue-200 justify-center rounded-full size-20 text-blue-800 max-lg:row-span-full'>
-        <Icon className='w-2/6 h-2/6' />
+      <div className='flex size-20 items-center justify-center rounded-full bg-blue-200 text-blue-800 max-lg:row-span-full'>
+        <Icon className='size-2/6' />
       </div>
 
-      <p className='lg:my-6 text-gray-600 font-semibold text-xl w-max'>
+      <p className='w-max text-xl font-semibold text-gray-600 lg:my-6'>
         {title}
       </p>
 
-      <p className='text-muted-foreground max-w-prose'>{description}</p>
+      <p className='max-w-prose text-muted-foreground'>{description}</p>
     </div>
   );
 }

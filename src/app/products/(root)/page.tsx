@@ -73,7 +73,7 @@ export default async function ProductsPage({
 
   return (
     <div>
-      <h1 className='mb-8 font-bold text-3xl text-gray-800'>{title}</h1>
+      <h1 className='mb-8 text-3xl font-bold text-gray-800'>{title}</h1>
 
       <ProductsSearchForm form={form} className='w-2/4' />
 
@@ -81,7 +81,7 @@ export default async function ProductsPage({
         <div className='mt-10 lg:mt-20'>
           <ProductReelsGrid
             count={3}
-            className='max-sm:css-var-[--column-counts=1] max-lg:css-var-[--column-counts=2] gap-x-10 lg:gap-x-20 gap-y-10 sm:gap-y-16'
+            className='gap-10 max-lg:css-var-[--column-counts=2] max-sm:css-var-[--column-counts=1] sm:gap-y-16 lg:gap-x-20'
           >
             {products.map((product) => (
               <ProductReelsCard key={product.id} product={product} />
@@ -97,7 +97,7 @@ export default async function ProductsPage({
           )}
         </div>
       ) : (
-        <span className='text-lg text-muted-foreground block mt-8'>
+        <span className='mt-8 block text-lg text-muted-foreground'>
           No products were found ...
         </span>
       )}

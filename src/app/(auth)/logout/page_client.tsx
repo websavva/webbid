@@ -44,7 +44,7 @@ export default function LogoutPage() {
 
   return (
     <TransitionFade
-      className='flex flex-col items-center w-full'
+      className='flex w-full flex-col items-center'
       transitionKey={status}
     >
       {(key) =>
@@ -68,9 +68,9 @@ export default function LogoutPage() {
           </>
         ) : (
           <>
-            <Loader2Icon className='size-36 sm:size-48 animate-spin text-gray-600 stroke-[1]' />
+            <Loader2Icon className='size-36 animate-spin stroke-[1] text-gray-600 sm:size-48' />
 
-            <div className='text-gray-700 text-lg sm:text-xl text-center mt-8 sm:mt-12'>
+            <div className='mt-8 text-center text-lg text-gray-700 sm:mt-12 sm:text-xl'>
               Logging out...
             </div>
           </>

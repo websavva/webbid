@@ -17,13 +17,13 @@ export function ErrorFrame({
   return (
     <Container
       className={cn(
-        'flex flex-col items-center w-full py-16 mx-auto',
+        'mx-auto flex w-full flex-col items-center py-16',
         className,
       )}
     >
-      <ErrorIcon className='max-w-lg w-full' />
+      <ErrorIcon className='w-full max-w-lg' />
 
-      <div className='mt-8 text-xl text-center font-semibold text-gray-800'>
+      <div className='mt-8 text-center text-xl font-semibold text-gray-800'>
         {message}
       </div>
 

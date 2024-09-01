@@ -20,13 +20,13 @@ export type ProductCardProps = DefineProps<
 export const ProductReelsCardSkeleton = ({ className }: DefineProps<{}>) => {
   return (
     <div className={cn(className)}>
-      <Skeleton className='h-44 mb-6 w-full' />
+      <Skeleton className='mb-6 h-44 w-full' />
 
-      <Skeleton className='w-full h-5 mb-2' />
+      <Skeleton className='mb-2 h-5 w-full' />
 
-      <Skeleton className='w-1/2 h-5 mb-2' />
+      <Skeleton className='mb-2 h-5 w-1/2' />
 
-      <Skeleton className='w-1/3 h-5' />
+      <Skeleton className='h-5 w-1/3' />
 
       <Skeleton />
     </div>
@@ -56,20 +56,20 @@ export const ProductReelsCard = ({
       {imageUrls.length && (
         <ImageSlider
           imageUrls={imageUrls}
-          className='h-72 mb-6 lg:max-w-none'
+          className='mb-6 h-72 lg:max-w-none'
         />
       )}
 
-      <div className='flex-grow lg:ml-0'>
-        <div className='mb-2 text-xl font-semibold line-clamp-1'>{name}</div>
+      <div className='grow lg:ml-0'>
+        <div className='mb-2 line-clamp-1 text-xl font-semibold'>{name}</div>
 
         {categoryLabel && (
-          <div className='mb-2 text-gray-500 font-medium text-base'>
+          <div className='mb-2 text-base font-medium text-gray-500'>
             {categoryLabel}
           </div>
         )}
 
-        <div className='sm:max-lg:text-xl text-lg font-medium'>
+        <div className='text-lg font-medium sm:max-lg:text-xl'>
           {formatPrice(price)}
         </div>
       </div>

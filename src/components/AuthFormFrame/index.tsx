@@ -21,11 +21,11 @@ export const AuthFormFrame = ({
       <div className='flex flex-col items-center'>
         <Logo className='w-20 sm:w-28' />
 
-        <h1 className='mt-10 font-semibold text-3xl sm:text-4xl'>{heading}</h1>
+        <h1 className='mt-10 text-3xl font-semibold sm:text-4xl'>{heading}</h1>
 
         <ArrowLink
           href={linkHref}
-          className='sm:text-lg mt-3 text-blue-500 flex items-center hover:underline'
+          className='mt-3 flex items-center text-blue-500 hover:underline sm:text-lg'
         >
           {linkText}
         </ArrowLink>

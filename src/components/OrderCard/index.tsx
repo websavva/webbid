@@ -42,7 +42,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
       href={`/orders/${id}`}
       {...attrs}
       className={cn(
-        'flex md:p-5 max-sm:overflow-hidden max-sm:flex-col rounded-2xl transition duration-300 border shadow-sm border-slate-300',
+        'flex rounded-2xl border border-slate-300 shadow-sm transition duration-300 max-sm:flex-col max-sm:overflow-hidden md:p-5',
         className,
       )}
     >
@@ -52,12 +52,12 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
           alt=''
           width={500}
           height={500}
-          className='object-cover sm:rounded-md max-h-44 sm:size-44 sm:mr-10'
+          className='max-h-44 object-cover sm:mr-10 sm:size-44 sm:rounded-md'
         />
       )}
 
-      <div className='max-sm:py-5 max-sm:px-3 flex-1'>
-        <div className='flex max-sm:flex-col max-sm:space-y-3 sm:items-center sm:justify-between flex-1'>
+      <div className='flex-1 max-sm:px-3 max-sm:py-5'>
+        <div className='flex flex-1 max-sm:flex-col max-sm:space-y-3 sm:items-center sm:justify-between'>
           <div className='text-xl font-semibold text-gray-800'>
             <span>ID: </span>
 
@@ -69,7 +69,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
           </span>
         </div>
 
-        <div className='text-base mt-3 text-muted-foreground'>
+        <div className='mt-3 text-base text-muted-foreground'>
           {formattedCreatedAt}
         </div>
 
@@ -78,7 +78,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
           className='mt-3 sm:mt-5'
         />
 
-        <div className='mt-5 sm:mt-8 text-primary flex items-center space-x-2'>
+        <div className='mt-5 flex items-center space-x-2 text-primary sm:mt-8'>
           <ExternalLinkIcon className='size-[1em]' />
 
           <span>View</span>

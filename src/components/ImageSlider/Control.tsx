@@ -20,7 +20,7 @@ export const ImageSliderControl = ({
     <button
       {...attrs}
       className={cn(
-        'size-9 flex justify-center items-center cursor-pointer bg-slate-200 text-gray-700 rounded-full',
+        'flex size-9 cursor-pointer items-center justify-center rounded-full bg-slate-200 text-gray-700',
         {
           'rotate-180': !isRight,
         },

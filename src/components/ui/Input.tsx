@@ -38,7 +38,7 @@ const Input = forwardRef(
           <input
             type={type}
             className={cn(
-              'flex h-10 w-full rounded-md border border-slate-300 bg-background px-3 py-6 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-100',
+              'flex h-10 w-full rounded-md border border-slate-300 bg-background px-3 py-6 ring-offset-background transition-all duration-100 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
               className,
               {
                 'border-red-500': invalid,
@@ -55,7 +55,7 @@ const Input = forwardRef(
         <TransitionHeight in={invalid} nodeRef={errorElementRef}>
           <div
             ref={errorElementRef}
-            className='text-xs text-red-500 mt-2 transition-all'
+            className='mt-2 text-xs text-red-500 transition-all'
           >
             {errorMessage}
           </div>

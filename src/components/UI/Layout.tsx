@@ -13,8 +13,8 @@ export default function Layout({
 }>) {
   return (
     <html lang='en' className={cn('text-[90%] 3xl:text-[100%]', className)}>
-      <body className={cn('font-sans relative', intInter.className)}>
-        <div className='flex flex-col min-h-screen'>{children}</div>
+      <body className={cn('relative font-sans', intInter.className)}>
+        <div className='flex min-h-screen flex-col'>{children}</div>
       </body>
     </html>
   );

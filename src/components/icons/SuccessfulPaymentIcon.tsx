@@ -204,7 +204,7 @@ export function SuccessfulPaymentIcon({
         <g>
           <path
             fill='currentColor'
-            className=' brightness-75'
+            className='brightness-75'
             d='M1555,1342.5l-484.5,98.03c-42.42,8.58-83.77-18.85-92.36-61.27l-154.48-763.5    c-8.58-42.42,18.85-83.77,61.27-92.36l484.5-98.03c42.42-8.58,83.77,18.85,92.36,61.27l154.48,763.5    C1624.85,1292.57,1597.42,1333.92,1555,1342.5z'
           />
           <path

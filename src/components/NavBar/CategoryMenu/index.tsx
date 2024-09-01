@@ -36,7 +36,7 @@ export function NavBarCategoryMenu({
     <div
       ref={elementRef}
       className={cn(
-        'flex flex-col sm:flex-row items-start sm:items-center max-sm:space-y-1 sm:space-x-3',
+        'flex flex-col items-start max-sm:space-y-1 sm:flex-row sm:items-center sm:space-x-3',
         className,
       )}
       {...attrs}

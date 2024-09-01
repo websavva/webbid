@@ -16,6 +16,6 @@ export default function PasswordResetConfirmPage({
   if (!token) notFound();
 
   return (
-    <ConfirmPasswordResetForm token={token} className='max-w-lg pt-5 w-full' />
+    <ConfirmPasswordResetForm token={token} className='w-full max-w-lg pt-5' />
   );
 }

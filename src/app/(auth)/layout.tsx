@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: PropsWithChildren) {
   return (
-    <Container className='py-10 sm:py-20 flex flex-col items-center mx-auto'>
+    <Container className='mx-auto flex flex-col items-center py-10 sm:py-20'>
       {children}
     </Container>
   );

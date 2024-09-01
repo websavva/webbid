@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function CartPage() {
   return (
-    <div className='mx-auto max-w-[90%] sm:max-w-2xl py-10 sm:py-16'>
+    <div className='mx-auto max-w-[90%] py-10 sm:max-w-2xl sm:py-16'>
       <Cart isPage />
     </div>
   );

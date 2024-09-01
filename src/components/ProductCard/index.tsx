@@ -25,13 +25,13 @@ export const ProductCardSkeleton = ({
   ...attrs
 }: DefineProps<{}>) => {
   return (
-    <div {...attrs} className={cn('w-full h-32 flex items-start', className)}>
-      <Skeleton className='size-32 mr-5' />
+    <div {...attrs} className={cn('flex h-32 w-full items-start', className)}>
+      <Skeleton className='mr-5 size-32' />
 
       <div className='flex-1'>
-        <Skeleton className='h-4 w-full mb-3' />
+        <Skeleton className='mb-3 h-4 w-full' />
 
-        <Skeleton className='h-4 w-2/4 mb-4' />
+        <Skeleton className='mb-4 h-4 w-2/4' />
 
         <Skeleton className='h-4 w-1/4' />
       </div>
@@ -65,7 +65,7 @@ export const ProductCard = ({
     <div
       {...attrs}
       className={cn(
-        'grid gap-y-4 grid-rows-[auto_auto] sm:grid-rows-1 grid-cols-[auto_1fr] sm:grid-cols-[auto_1fr_max-content]',
+        'grid grid-cols-[auto_1fr] grid-rows-[auto_auto] gap-y-4 sm:grid-cols-[auto_1fr_max-content] sm:grid-rows-1',
         className,
       )}
     >
@@ -75,29 +75,29 @@ export const ProductCard = ({
           alt=''
           width={8e2}
           height={8e2}
-          className='size-32 max-sm:row-start-1 max-sm:row-end-3 object-cover mr-5 rounded-lg'
+          className='mr-5 size-32 rounded-lg object-cover max-sm:row-start-1 max-sm:row-end-3'
         />
       )}
 
       <div className='grid'>
-        <div className='font-bold max-w-full text-ellipsis overflow-hidden whitespace-nowrap'>
+        <div className='max-w-full truncate font-bold'>
           {name}
         </div>
 
         {categoryLabel && (
-          <div className='text-gray-600 text-sm mt-2 font-medium'>
+          <div className='mt-2 text-sm font-medium text-gray-600'>
             {categoryLabel}
           </div>
         )}
 
         {canBeRemoved && (
           <button
-            className='flex items-center mt-3 text-sm font-semibold text-gray-500'
+            className='mt-3 flex items-center text-sm font-semibold text-gray-500'
             onClick={onRemove}
           >
             <span>Remove</span>
 
-            <XIcon className='size-[1em] ml-1' />
+            <XIcon className='ml-1 size-[1em]' />
           </button>
         )}
 
@@ -105,7 +105,7 @@ export const ProductCard = ({
           <a
             download={product.name}
             href={productFile.url!}
-            className='mt-3 text-sm block text-blue-600 cursor-pointer font-semibold'
+            className='mt-3 block cursor-pointer text-sm font-semibold text-blue-600'
           >
             Download Asset
           </a>

@@ -2,7 +2,8 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": ["import"],
   "parser": "@typescript-eslint/parser",

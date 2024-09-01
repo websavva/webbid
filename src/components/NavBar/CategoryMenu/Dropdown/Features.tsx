@@ -25,11 +25,11 @@ const FeaturesListSkeleton = () => {
       {[...Array(3).keys()].map((key) => {
         return (
           <div key={key}>
-            <Skeleton className='rounded-lg h-48' />
+            <Skeleton className='h-48 rounded-lg' />
 
-            <Skeleton className='rounded-lg h-4 w-3/4 mt-5' />
+            <Skeleton className='mt-5 h-4 w-3/4 rounded-lg' />
 
-            <Skeleton className='rounded-lg h-4 w-1/4 mt-3' />
+            <Skeleton className='mt-3 h-4 w-1/4 rounded-lg' />
           </div>
         );
       })}
@@ -55,14 +55,14 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
                   alt=''
                   width={500}
                   height={500}
-                  className='rounded-lg h-48 object-cover'
+                  className='h-48 rounded-lg object-cover'
                 />
               )}
 
               <div className='mt-5 flex flex-col'>
-                <p className='text-gray-800 font-bold text-lg'>{name}</p>
+                <p className='text-lg font-bold text-gray-800'>{name}</p>
 
-                <span className='inline-block mt-2 text-gray-600'>
+                <span className='mt-2 inline-block text-gray-600'>
                   Shop now
                 </span>
               </div>
@@ -97,7 +97,7 @@ export const NavBarCategoryDropdownFeatures = ({
   }, [categoryId]);
 
   return (
-    <ul className={cn('grid sm:grid-cols-3 gap-10 w-full', className)}>
+    <ul className={cn('grid w-full gap-10 sm:grid-cols-3', className)}>
       {isSuccess ? (
         <FeaturesList features={features} />
       ) : (

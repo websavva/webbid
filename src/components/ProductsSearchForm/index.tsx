@@ -69,7 +69,7 @@ export const ProductsSearchForm = ({
     <form
       {...attrs}
       className={cn(
-        'flex max-lg:flex-col lg:items-center max-lg:space-y-3 lg:space-x-5',
+        'flex max-lg:flex-col max-lg:space-y-3 lg:items-center lg:space-x-5',
         className,
       )}
     >

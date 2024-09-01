@@ -14,15 +14,15 @@ export default function GlobalErrorPage({
 }) {
   return (
     <Layout>
-      <div className='flex w-full max-sm:justify-center items-center px-16 py-5 bg-gray-100 border-b-2 border-gray-200 tracking-wider font-semibold text-gray-700 text-xl sm:text-2xl'>
-        <Logo className='size-[2em] mr-5' />
+      <div className='flex w-full items-center border-b-2 border-gray-200 bg-gray-100 px-16 py-5 text-xl font-semibold tracking-wider text-gray-700 max-sm:justify-center sm:text-2xl'>
+        <Logo className='mr-5 size-[2em]' />
 
         <span>{publicEnv.COMPANY_NAME}</span>
       </div>
 
       <ErrorFrame message={error.message}>
         <button
-          className='block mx-auto text-sm mt-5 py-2 px-5 rounded-lg bg-blue-600 text-white'
+          className='mx-auto mt-5 block rounded-lg bg-blue-600 px-5 py-2 text-sm text-white'
           onClick={() => window.location.reload()}
         >
           Reload page

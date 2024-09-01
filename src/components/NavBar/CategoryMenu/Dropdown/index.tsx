@@ -32,22 +32,22 @@ export default function NavBarCategoryDropdown({
       <Button
         variant={isActive ? 'default' : 'ghost'}
         size={'sm'}
-        className='text-base flex items-center max-sm:px-0 max-sm:hover:bg-transparent'
+        className='flex items-center text-base max-sm:px-0 max-sm:hover:bg-transparent'
         onClick={() => onToggle(!isActive)}
       >
         <span>{category.label}</span>
 
         <ChevronDownIcon
-          className={cn('ml-2 transition-transform w-4 h-4', {
+          className={cn('ml-2 h-4 w-4 transition-transform', {
             'rotate-180': isActive,
           })}
         />
       </Button>
 
       {isActive && (
-        <div className='bg-white w-full fixed overflow-auto max-sm:h-screen left-0 top-0 sm:top-[var(--nav-bar-height,5rem)] py-7 animate-in duration-500 fade-in-0 slide-in-from-bottom-8 flex justify-center shadow-sm'>
+        <div className='fixed left-0 top-0 flex w-full justify-center overflow-auto bg-white py-7 shadow-sm duration-500 animate-in fade-in-0 slide-in-from-bottom-8 max-sm:h-screen sm:top-[var(--nav-bar-height,5rem)]'>
           <button
-            className='block sm:hidden absolute right-4 top-4'
+            className='absolute right-4 top-4 block sm:hidden'
             onClick={() => onToggle(false)}
           >
             <XIcon className='size-5 text-gray-700' />

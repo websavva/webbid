@@ -41,7 +41,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
   );
 
   return (
-    <Container className='mx-auto py-10 md:py-16 md:max-w-4xl'>
+    <Container className='mx-auto py-10 md:max-w-4xl md:py-16'>
       <OrderIntro order={order} watchStatus={!order.isPaid} />
     </Container>
   );

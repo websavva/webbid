@@ -51,8 +51,8 @@ export default async function OrdersPage({
   );
 
   return (
-    <Container className='mx-auto py-10 md:py-16 md:px-16'>
-      <h1 className='text-3xl font-bold text-gray-800 mb-12'>My Orders</h1>
+    <Container className='mx-auto py-10 md:p-16'>
+      <h1 className='mb-12 text-3xl font-bold text-gray-800'>My Orders</h1>
 
       <OrdersSearchForm status={status} className='xs:w-1/2 md:w-1/4' />
 

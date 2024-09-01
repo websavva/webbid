@@ -32,7 +32,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
     <div {...attrs} className={cn('flex flex-col', className)}>
       <span className='text-muted-foreground'>Order nr.</span>
 
-      <span className='font-bold text-gray-700 text-xl mt-3'>{id}</span>
+      <span className='mt-3 text-xl font-bold text-gray-700'>{id}</span>
 
       <Separator className='my-8' />
 
@@ -52,9 +52,9 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
 
       <OrderBill products={normalizedProducts} />
 
-      <div className='mt-5 md:mt-12 flex max-md:flex-col md:justify-between max-w-[500px]'>
+      <div className='mt-5 flex max-w-[500px] max-md:flex-col md:mt-12 md:justify-between'>
         <div>
-          <div className='mb-1 font-semibold text-lg'>Order Status</div>
+          <div className='mb-1 text-lg font-semibold'>Order Status</div>
 
           <div className='font-semibold text-muted-foreground'>
             {isPaid ? 'Payment successful' : 'Pending payment'}
@@ -63,7 +63,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
 
         {user && typeof user === 'object' && (
           <div className='max-md:mt-5'>
-            <div className='mb-1 font-semibold text-lg'>Delivered To</div>
+            <div className='mb-1 text-lg font-semibold'>Delivered To</div>
 
             <div className='font-semibold text-muted-foreground'>
               {user.email}

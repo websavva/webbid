@@ -12,7 +12,7 @@ export const UserAvatar = ({ email, className, ...attrs }: UserAvatarProps) => {
     <div
       {...attrs}
       className={cn(
-        'rounded-full bg-blue-500 text-white font-bold flex items-center justify-center',
+        'flex items-center justify-center rounded-full bg-blue-500 font-bold text-white',
         className,
       )}
     >

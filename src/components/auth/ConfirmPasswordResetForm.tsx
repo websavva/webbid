@@ -48,7 +48,7 @@ export const ConfirmPasswordResetForm = ({
 
   return (
     <div {...attrs} className={cn('', className)}>
-      <PasswordSecurityIcon className='mb-10 mx-auto' />
+      <PasswordSecurityIcon className='mx-auto mb-10' />
 
       <AuthForm
         submitButtonText='Save Password'

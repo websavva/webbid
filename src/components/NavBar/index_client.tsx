@@ -45,22 +45,22 @@ export function ClientNavBar({
   return (
     <nav
       className={cn(
-        'flex justify-center max-sm:border-b-2 border-gray-100 fixed min-h-[var(--nav-bar-height,5rem)] top-0 bg-white w-full z-40',
+        'fixed top-0 z-40 flex min-h-[var(--nav-bar-height,5rem)] w-full justify-center border-gray-100 bg-white max-sm:border-b-2',
         className,
       )}
       {...attrs}
     >
-      <Container className='sm:flex flex-col sm:flex-row sm:items-center sm:border-b-2 border-gray-100 w-full relative'>
-        <div className='flex items-center justify-between h-[var(--nav-bar-height,5rem)] sm:h-auto'>
+      <Container className='relative w-full flex-col border-gray-100 sm:flex sm:flex-row sm:items-center sm:border-b-2'>
+        <div className='flex h-[var(--nav-bar-height,5rem)] items-center justify-between sm:h-auto'>
           <Link href='/' className='mr-8 flex items-center'>
-            <Logo className='w-10 h-10' />
+            <Logo className='size-10' />
 
-            <span className='block sm:hidden ml-5 font-semibold text-xl'>
+            <span className='ml-5 block text-xl font-semibold sm:hidden'>
               {publicEnv.COMPANY_NAME}
             </span>
           </Link>
 
-          <button className='flex sm:hidden ml-auto items-center'>
+          <button className='ml-auto flex items-center sm:hidden'>
             <MenuIcon
               onClick={() => setIsMobileMenuOpened((isOpened) => !isOpened)}
             />
@@ -69,23 +69,23 @@ export function ClientNavBar({
 
         <div
           className={cn(
-            'flex flex-col sm:mt-0 sm:flex-row sm:items-center sm:justify-between sm:flex-1 max-h-0 sm:max-h-none pointer-events-none sm:pointer-events-auto opacity-0 sm:opacity-100 sm:transition-none',
+            'pointer-events-none flex max-h-0 flex-col opacity-0 sm:pointer-events-auto sm:mt-0 sm:max-h-none sm:flex-1 sm:flex-row sm:items-center sm:justify-between sm:opacity-100 sm:transition-none',
             {
               'transition-all': isMaxSm,
             },
             {
-              ['max-h-screen opacity-100 pointer-events-auto pt-3']:
+              ['pointer-events-auto max-h-screen pt-3 opacity-100']:
                 isMobileMenuOpened,
             },
           )}
         >
-          <span className='text-gray-400 text-sm mb-2 sm:hidden'>
+          <span className='mb-2 text-sm text-gray-400 sm:hidden'>
             Categories
           </span>
 
           <NavBarCategoryMenu categories={categories} />
 
-          <span className='text-gray-400 text-sm mt-5 mb-4 sm:hidden'>
+          <span className='mb-4 mt-5 text-sm text-gray-400 sm:hidden'>
             {isGuest ? 'Authentication' : 'User'}
           </span>
 

@@ -9,7 +9,7 @@ export function Container({
   return (
     <div
       className={cn(
-        'max-w-[90%] w-full xl:max-w-screen-lg 3xl:max-w-screen-xl',
+        'w-full max-w-[90%] xl:max-w-screen-lg 3xl:max-w-screen-xl',
         className,
       )}
     >

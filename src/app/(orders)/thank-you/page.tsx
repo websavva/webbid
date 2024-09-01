@@ -49,13 +49,13 @@ export default async function ThankYouPage({
   );
 
   return (
-    <Container className='mx-auto py-16 flex max-md:flex-col-reverse md:items-start justify-between'>
+    <Container className='mx-auto flex justify-between py-16 max-md:flex-col-reverse md:items-start'>
       <div className='md:flex-1'>
-        <div className='text-blue-600 font-bold mb-5'>Order successful</div>
+        <div className='mb-5 font-bold text-blue-600'>Order successful</div>
 
         <h1 className='text-4xl font-bold'>Thanks for ordering</h1>
 
-        <p className='mt-5 text-base text-muted-foreground max-w-[500px] leading-relaxed'>
+        <p className='mt-5 max-w-[500px] text-base leading-relaxed text-muted-foreground'>
           {order.isPaid ? (
             <>
               Your order was processed and your assets are available to download
@@ -82,7 +82,7 @@ export default async function ThankYouPage({
           className='mt-12'
         />
 
-        <ArrowLink href='/products' className='mt-8 text-base justify-end'>
+        <ArrowLink href='/products' className='mt-8 justify-end text-base'>
           Continue Shopping
         </ArrowLink>
       </div>

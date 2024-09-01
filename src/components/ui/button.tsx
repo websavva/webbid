@@ -25,10 +25,10 @@ const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-10 px-6 py-6 rounded-lg',
+        default: 'h-10 rounded-lg p-6',
         sm: 'h-9 rounded-md px-4',
         lg: 'h-11 rounded-md px-8',
-        icon: 'h-10 w-10',
+        icon: 'size-10',
       },
     },
     defaultVariants: {
@@ -83,7 +83,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               <Loader2Icon
                 ref={loaderRef}
                 className={cn(
-                  'w-0 transition-all animate-spin',
+                  'w-0 animate-spin transition-all',
                   PENDING_TRANSITION_CLASSES[state],
                 )}
               />

@@ -17,14 +17,14 @@ export function NavBarRightMenu({ className, ...attrs }: NavBarUserMenuProps) {
   return (
     <div
       className={cn(
-        'flex flex-col sm:flex-row items-start sm:items-center',
+        'flex flex-col items-start sm:flex-row sm:items-center',
         className,
       )}
       {...attrs}
     >
       {isGuest ? <GuestMenu /> : <UserMenu className='mb-2 sm:mb-0 sm:mr-2' />}
 
-      <span className='w-[2px] h-6 bg-gray-200 mx-2 hidden sm:block' />
+      <span className='mx-2 hidden h-6 w-[2px] bg-gray-200 sm:block' />
 
       <ShoppingCart />
     </div>

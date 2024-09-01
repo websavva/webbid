@@ -36,13 +36,13 @@ export function UserMenu({ className }: { className?: string }) {
       <DropdownMenuTrigger asChild>
         <button
           className={cn(
-            'flex items-center space-x-2 sm:space-x-3 outline-none',
+            'flex items-center space-x-2 outline-none sm:space-x-3',
             className,
           )}
         >
           <UserAvatar
             email={email}
-            className='size-7 sm:size-9 text-sm sm:text-base shrink-0'
+            className='size-7 shrink-0 text-sm sm:size-9 sm:text-base'
           />
 
           <span>{login}</span>
@@ -58,9 +58,9 @@ export function UserMenu({ className }: { className?: string }) {
           <DropdownMenuItem asChild>
             <Link
               href='/profile'
-              className='flex items-center cursor-pointer w-full'
+              className='flex w-full cursor-pointer items-center'
             >
-              <User className='mr-2 h-4 w-4' />
+              <User className='mr-2 size-4' />
 
               <span>Profile</span>
             </Link>
@@ -69,9 +69,9 @@ export function UserMenu({ className }: { className?: string }) {
           <DropdownMenuItem asChild>
             <Link
               href='/orders'
-              className='flex items-center cursor-pointer w-full'
+              className='flex w-full cursor-pointer items-center'
             >
-              <ReceiptIcon className='mr-2 h-4 w-4' />
+              <ReceiptIcon className='mr-2 size-4' />
 
               <span>Orders</span>
             </Link>
@@ -81,9 +81,9 @@ export function UserMenu({ className }: { className?: string }) {
             <DropdownMenuItem asChild>
               <Link
                 href='/admin'
-                className='flex items-center cursor-pointer w-full'
+                className='flex w-full cursor-pointer items-center'
               >
-                <MenuSquare className='mr-2 h-4 w-4' />
+                <MenuSquare className='mr-2 size-4' />
 
                 <span>Admin Dashboard</span>
               </Link>
@@ -96,9 +96,9 @@ export function UserMenu({ className }: { className?: string }) {
         <DropdownMenuItem>
           <Link
             href='/logout'
-            className='flex items-center cursor-pointer w-full'
+            className='flex w-full cursor-pointer items-center'
           >
-            <LogOut className='mr-2 h-4 w-4' />
+            <LogOut className='mr-2 size-4' />
             <span>Log out</span>
           </Link>
         </DropdownMenuItem>

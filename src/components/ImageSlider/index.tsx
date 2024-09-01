@@ -58,11 +58,11 @@ export const ImageSlider = ({
     <div
       {...attrs}
       className={cn(
-        'overflow-hidden relative group rounded-2xl select-none',
+        'group relative select-none overflow-hidden rounded-2xl',
         className,
       )}
     >
-      <div className='size-full flex transition-transform' style={viewStyle}>
+      <div className='flex size-full transition-transform' style={viewStyle}>
         {imageUrls.map((imageUrl, index) => {
           return (
             <div
@@ -81,7 +81,7 @@ export const ImageSlider = ({
         })}
       </div>
 
-      <div className='flex items-center absolute w-full px-3 top-1/2 left-1/2 -translate-x-1/2'>
+      <div className='absolute left-1/2 top-1/2 flex w-full -translate-x-1/2 items-center px-3'>
         {!isFirstSlide && (
           <ImageSliderControl
             isRight={false}
@@ -92,7 +92,7 @@ export const ImageSlider = ({
               toPrevSlide();
             }}
             className={cn(
-              'sm:opacity-0 mr-auto group-hover:opacity-100 transition-all hover:scale-110',
+              'mr-auto transition-all hover:scale-110 group-hover:opacity-100 sm:opacity-0',
               controlClass,
             )}
           />
@@ -108,7 +108,7 @@ export const ImageSlider = ({
               toNextSlide();
             }}
             className={cn(
-              'sm:opacity-0 ml-auto group-hover:opacity-100 transition-all hover:scale-110',
+              'ml-auto transition-all hover:scale-110 group-hover:opacity-100 sm:opacity-0',
               controlClass,
             )}
           />
@@ -117,7 +117,7 @@ export const ImageSlider = ({
 
       <ImageSliderPagination
         className={cn(
-          'absolute bottom-4 left-1/2 justify-center -translate-x-1/2 w-full',
+          'absolute bottom-4 left-1/2 w-full -translate-x-1/2 justify-center',
           paginationClass,
         )}
         dotClass={paginationDotClass}

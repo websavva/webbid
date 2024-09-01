@@ -67,7 +67,7 @@ const PaginationPrevious = ({
 
   return (
     <PaginationItem aria-label='Go to previous page' {...props}>
-      <Icon className='h-4 w-4' />
+      <Icon className='size-4' />
     </PaginationItem>
   );
 };
@@ -81,7 +81,7 @@ const PaginationNext = ({
 
   return (
     <PaginationItem aria-label='Go to next page' {...props}>
-      <Icon className='h-4 w-4' />
+      <Icon className='size-4' />
     </PaginationItem>
   );
 };
@@ -96,7 +96,7 @@ const PaginationEllipsis = ({
     className={cn('flex h-9 w-9 items-center justify-center', className)}
     {...props}
   >
-    <MoreHorizontal className='h-4 w-4' />
+    <MoreHorizontal className='size-4' />
     <span className='sr-only'>More pages</span>
   </span>
 );

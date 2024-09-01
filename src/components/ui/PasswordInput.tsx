@@ -24,7 +24,7 @@ const PasswordInput = forwardRef(
         ref={ref}
         Icon={
           <PasswordInputIcon
-            className='cursor-pointer absolute right-4 top-1/2 -translate-y-1/2 size-[1.1em]'
+            className='absolute right-4 top-1/2 size-[1.1em] -translate-y-1/2 cursor-pointer'
             onClick={() => setIsPasswordVisible((isVisible) => !isVisible)}
           />
         }

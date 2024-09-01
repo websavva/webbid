@@ -38,7 +38,7 @@ export const RequestPasswordResetForm = () => {
             <div className='flex flex-col items-center'>
               <SentEmailIcon className='size-80 sm:size-96 lg:size-[500px]' />
 
-              <div className='mt-5 font-semibold sm:text-lg w-4/5 sm:w-3/5 leading-relaxed text-center text-gray-700'>
+              <div className='mt-5 w-4/5 text-center font-semibold leading-relaxed text-gray-700 sm:w-3/5 sm:text-lg'>
                 Letter with password reset instruction was sent{' '}
                 {email && (
                   <span>

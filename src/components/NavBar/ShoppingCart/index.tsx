@@ -38,9 +38,9 @@ export function ShoppingCart({}: ShoppingCartProps) {
         <Button
           variant='ghost'
           size='icon'
-          className='flex items-center w-max sm:px-2 max-sm:hover:bg-transparent'
+          className='flex w-max items-center max-sm:hover:bg-transparent sm:px-2'
         >
-          <ShoppingBagIcon className='w-5 h-5 cursor-pointer shrink-0 mr-2' />
+          <ShoppingBagIcon className='mr-2 size-5 shrink-0 cursor-pointer' />
 
           <span>{itemsCount}</span>
         </Button>

@@ -97,7 +97,7 @@ export const Cart = ({
 
   return (
     <div {...attrs}>
-      <div className='font-bold text-[1.2em] mb-8'>
+      <div className='mb-8 text-[1.2em] font-bold'>
         Shopping Cart {isCartLoaded && `(${itemsCount})`}
       </div>
 
@@ -128,7 +128,7 @@ export const Cart = ({
 
           <OrderBill products={items} />
 
-          <div className='flex *:w-full mt-7'>
+          <div className='mt-7 flex *:w-full'>
             {isPage && !isGuest ? (
               <Button pending={pending} onClick={onSubmit}>
                 Checkout
@@ -146,18 +146,18 @@ export const Cart = ({
 
       {isCartLoaded && itemsCount === 0 && (
         <div>
-          <div className='mt-8 mb-12 text-center flex flex-col items-center text-slate-400'>
-            <CartCompositionIcon className='w-1/2 h-auto' />
+          <div className='mb-12 mt-8 flex flex-col items-center text-center text-slate-400'>
+            <CartCompositionIcon className='h-auto w-1/2' />
           </div>
 
-          <div className='flex flex-col text-center items-center text-xl'>
-            <div className='font-semibold text-gray-600 mb-5'>
+          <div className='flex flex-col items-center text-center text-xl'>
+            <div className='mb-5 font-semibold text-gray-600'>
               Cart is empty...
             </div>
 
             <Link
               href='/products'
-              className='hover:underline text-blue-500 text-base'
+              className='text-base text-blue-500 hover:underline'
             >
               Go to catalog
             </Link>
