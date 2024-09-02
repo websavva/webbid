@@ -80,9 +80,7 @@ export const ProductCard = ({
       )}
 
       <div className='grid'>
-        <div className='max-w-full truncate font-bold'>
-          {name}
-        </div>
+        <div className='max-w-full truncate font-bold'>{name}</div>
 
         {categoryLabel && (
           <div className='mt-2 text-sm font-medium text-gray-600'>
