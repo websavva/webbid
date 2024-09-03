@@ -1,14 +1,25 @@
 'use client';
 
-import type { PropsWithChildren } from 'react';
+import { type PropsWithChildren, useRef } from 'react';
 import { useEffect } from 'react';
 
-import { useCartStore } from './store';
+import { CartStoreApiContext } from './context';
+import { createCartStore, type CartStoreApi } from './store';
 
-export const CartStoreHydrationProvider = ({ children }: PropsWithChildren) => {
+export const CartStoreApiProvider = ({ children }: PropsWithChildren) => {
+  const cartStoreApiRef = useRef<CartStoreApi>();
+
+  if (!cartStoreApiRef.current) {
+    cartStoreApiRef.current = createCartStore();
+  }
+
   useEffect(() => {
-    useCartStore.persist.rehydrate();
+    cartStoreApiRef.current!.persist.rehydrate();
   }, []);
 
-  return <>{children}</>;
+  return (
+    <CartStoreApiContext.Provider value={cartStoreApiRef.current}>
+      {children}
+    </CartStoreApiContext.Provider>
+  );
 };

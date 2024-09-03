@@ -5,6 +5,7 @@ import type { Product } from '#server/cms/collections/types';
 
 export interface CartStore {
   items: Product[];
+
   _isHydrated: boolean;
 
   setIsHydrated: (isHydrated: boolean) => void;
@@ -17,73 +18,67 @@ export interface CartStore {
   emptyOut: () => void;
 }
 
-export const getDefaultCartStore = (): CartStore => {
-  return {
-    items: [],
-    _isHydrated: false,
+export const createCartStore = () =>
+  create(
+    persist<CartStore>(
+      (set) => ({
+        items: [],
 
-    setIsHydrated: () => {},
+        _isHydrated: false,
 
-    addItem: () => {},
+        setIsHydrated: (isHydrated: boolean) => {
+          set({
+            _isHydrated: isHydrated,
+          });
+        },
 
-    removeItem: () => {},
+        addItem: (item) => {
+          set((state) => {
+            console.log({
+              addItem: state.items,
+            });
 
-    setItems: () => {},
+            return { items: [...state.items, item] };
+          });
+        },
 
-    emptyOut: () => {},
-  };
-};
+        removeItem: (id) => {
+          set((state) => {
+            return {
+              items: state.items.filter((item) => item.id !== id),
+            };
+          });
+        },
 
-export const useCartStore = create(
-  persist<CartStore>(
-    (set) => ({
-      items: [],
+        setItems: (items: Product[]) => {
+          console.log({
+            setItems: items,
+          });
 
-      _isHydrated: false,
+          set({
+            items,
+          });
+        },
 
-      setIsHydrated: (isHydrated: boolean) => {
-        set({
-          _isHydrated: isHydrated,
-        });
+        emptyOut: () => {
+          set(() => {
+            return {
+              items: [],
+            };
+          });
+        },
+      }),
+      {
+        version: 1,
+        name: 'cart-storage',
+
+        skipHydration: true,
+
+        onRehydrateStorage: () => (state) => {
+          state?.setIsHydrated(true);
+        },
       },
+    ),
+  );
 
-      addItem: (item) => {
-        set((state) => {
-          return { items: [...state.items, item] };
-        });
-      },
-
-      removeItem: (id) => {
-        set((state) => {
-          return {
-            items: state.items.filter((item) => item.id !== id),
-          };
-        });
-      },
-
-      setItems: (items: Product[]) => {
-        set({
-          items,
-        });
-      },
-
-      emptyOut: () => {
-        set(() => {
-          return {
-            items: [],
-          };
-        });
-      },
-    }),
-    {
-      version: 1,
-      name: 'cart-storage',
-
-      skipHydration: true,
-
-      onRehydrateStorage: () => (state) => {
-        state?.setIsHydrated(true);
-      },
-    },
-  ),
-);
+export type CartStoreApi = ReturnType<typeof createCartStore>;

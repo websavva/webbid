@@ -1,7 +1,7 @@
 import { type PropsWithChildren } from 'react';
 
 import { AuthContextProvider } from '../auth/Provider';
-import { CartStoreHydrationProvider } from '../cart/Provider';
+import { CartStoreApiProvider } from '../cart/Provider';
 
 import { ExtendedRouterContextProvider } from '../extended-router/Provider';
 import { ScreenMediaQueriesContextProvider } from '../screen-media-queries/Provider';
@@ -17,11 +17,11 @@ export const AppContextProvider = ({
   return (
     <ExtendedRouterContextProvider>
       <AuthContextProvider initialValue={authContextValue}>
-        <CartStoreHydrationProvider>
+        <CartStoreApiProvider>
           <ScreenMediaQueriesContextProvider>
             {children}
           </ScreenMediaQueriesContextProvider>
-        </CartStoreHydrationProvider>
+        </CartStoreApiProvider>
       </AuthContextProvider>
     </ExtendedRouterContextProvider>
   );
