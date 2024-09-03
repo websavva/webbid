@@ -22,7 +22,7 @@ export const staleOrdersRemovalJob = CronJob.from({
 
         createdAt: {
           less_than_equal: new Date(
-            Date.now() +
+            Date.now() -
               privateEnv.STRIPE.STRIPE_ORDER_SESSION_VALIDITY_DURATION *
                 60 *
                 1e3,
