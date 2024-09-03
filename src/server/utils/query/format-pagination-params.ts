@@ -1,30 +1,29 @@
 import type { PaginationQuery } from '#server/dtos/pagination';
 
-export type PaginationParams = Pick<PaginationQuery, 'page'> &
-  (
-    | {
-        pagination: false;
-      }
-    | {
-        pagination: true;
-        limit: number;
-      }
-  );
+export interface FormattedPaginationParams {
+  limit?: number;
+  pagination: boolean;
+}
 
-export const formatPaginationParams = <Q extends PaginationQuery>({
+export const formatPaginationParams = <Query extends PaginationQuery>({
   perPage: limit,
-  page,
-}: Q): PaginationParams => {
+  ...otherQueryParams
+}: Query) => {
+  let formattedPaginationParams: FormattedPaginationParams;
+
   if (limit !== null) {
-    return {
-      page,
-      limit,
+    formattedPaginationParams = {
       pagination: true,
+      limit,
     };
   } else {
-    return {
-      page,
+    formattedPaginationParams = {
       pagination: false,
     };
   }
+
+  return {
+    ...otherQueryParams,
+    ...formattedPaginationParams,
+  };
 };
