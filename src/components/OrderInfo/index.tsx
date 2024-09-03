@@ -9,6 +9,7 @@ import type { Order } from '#server/cms/collections/types';
 import { Separator } from '../UI/Separator';
 import { ProductCard } from '../ProductCard';
 import { OrderBill } from '../OrderBill';
+import { OrderStatusBadge } from '../OrderStatusBadge';
 
 export type OrderInfoProps = DefineProps<{
   order: Order;
@@ -20,7 +21,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
 
     products,
     isPaid,
-
+    status,
     user,
   } = order;
 
@@ -56,9 +57,7 @@ export const OrderInfo = ({ order, className, ...attrs }: OrderInfoProps) => {
         <div>
           <div className='mb-1 text-lg font-semibold'>Order Status</div>
 
-          <div className='font-semibold text-muted-foreground'>
-            {isPaid ? 'Payment successful' : 'Pending payment'}
-          </div>
+          <OrderStatusBadge status={status} />
         </div>
 
         {user && typeof user === 'object' && (

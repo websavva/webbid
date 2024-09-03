@@ -10,9 +10,9 @@ const orderStatusBadgeVariants = cva(
   {
     variants: {
       status: {
-        [OrderStatus.Processing]: 'bg-gray-200 text-gray-700',
-        [OrderStatus.Canceled]: 'bg-red-200 text-red-900',
-        [OrderStatus.Success]: 'bg-green-200 text-green-900',
+        [`${OrderStatus.Processing}`]: 'bg-gray-200 text-gray-700',
+        [`${OrderStatus.Canceled}`]: 'bg-red-200 text-red-900',
+        [`${OrderStatus.Success}`]: 'bg-green-200 text-green-900',
       },
     },
     defaultVariants: {
