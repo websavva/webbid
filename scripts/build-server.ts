@@ -8,7 +8,7 @@ interface BuildCommandArgs {
 }
 
 runCommand<BuildCommandArgs>(async (options) => {
-  const isWatchMode = Boolean(options.watch);
+  const isDev = Boolean(options.watch);
 
   await build({
     ...baseTsupConfig,
@@ -17,8 +17,8 @@ runCommand<BuildCommandArgs>(async (options) => {
 
     entry: ['./src/server/index.ts'],
 
-    watch: isWatchMode,
+    watch: isDev,
 
-    onSuccess: isWatchMode ? 'node dist/index.js' : undefined,
+    onSuccess: isDev ? 'node dist/index.js' : undefined,
   });
 });

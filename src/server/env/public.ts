@@ -6,4 +6,6 @@ export const publicEnv = {
   COMPANY_NAME: process.env.NEXT_PUBLIC_COMPANY_NAME!,
   SUPPORT_EMAIL: process.env.NEXT_PUBLIC_SUPPORT_EMAIL!,
   DOMAIN: process.env.NEXT_PUBLIC_DOMAIN!,
+
+  BUILD_STAGE: process.env.BUILD_STAGE || 'development',
 };

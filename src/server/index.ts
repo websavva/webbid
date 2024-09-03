@@ -10,6 +10,7 @@ import { CMS } from './cms';
 import { nextApp } from './next';
 import { appRouter, createContext } from './trpc';
 import { stripeWebhookHandler } from './stripe/webhook';
+import { healthHandler } from './health';
 import { TasksManager } from './jobs/jobs-manager';
 import { privateEnv } from './env/private';
 
@@ -46,17 +47,22 @@ async function start() {
 
   app.use('/api/trpc', trpcMiddleware);
 
+  // health check endpoint
+  app.get('/api/health', healthHandler);
+
   // starting all scheduled jobs
   TasksManager.init();
 
-  // initializing next application
-  const nextAppRequestHandler = nextApp.getRequestHandler();
+  if (!process.env.IS_CLIENT_DISABLED) {
+    // initializing next application
+    const nextAppRequestHandler = nextApp.getRequestHandler();
 
-  app.use((req, res) => nextAppRequestHandler(req, res));
+    app.use((req, res) => nextAppRequestHandler(req, res));
 
-  console.log('Preparing Next.js application...');
+    console.log('Preparing Next.js application...');
 
-  await nextApp.prepare();
+    await nextApp.prepare();
+  }
 
   // root server listening
   app.listen(privateEnv.PORT, () => {

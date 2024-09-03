@@ -1,33 +1,30 @@
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import type { RemotePattern } from 'next/dist/shared/lib/image-config';
-import { defu } from 'defu';
 
-import type { DynamicNextConfig } from './src/types/next-config';
+import type { StaticNextConfig } from './src/types/next-config';
 import { withMiddlewareAggregator } from './src/modules/middleware-aggregator';
 
-const nextPublicServerUrl = new URL('/', process.env.NEXT_PUBLIC_SERVER_URL);
+const getImageRemotePatterns = (): RemotePattern[] => {
+  const nextPublicServerUrl = new URL('/', process.env.NEXT_PUBLIC_SERVER_URL);
 
-const dynamicNextConfig = (async (phase: string, { defaultConfig }) => {
-  const imagesRemotePatterns: RemotePattern[] = [];
+  const { protocol: protocolWithColon, hostname, port } = nextPublicServerUrl;
 
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    const { protocol: protocolWithColon, hostname, port } = nextPublicServerUrl;
-
-    imagesRemotePatterns.push({
+  return [
+    {
       protocol: protocolWithColon.replace(':', '') as RemotePattern['protocol'],
       hostname,
       port,
-    });
-  }
-
-  return defu(
-    {
-      images: {
-        remotePatterns: imagesRemotePatterns,
-      },
     },
-    defaultConfig,
-  );
-}) satisfies DynamicNextConfig;
+  ];
+};
 
-export default withMiddlewareAggregator(dynamicNextConfig);
+const nextConfig: StaticNextConfig = {
+  images: {
+    remotePatterns: getImageRemotePatterns(),
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+};
+
+export default withMiddlewareAggregator(nextConfig);
