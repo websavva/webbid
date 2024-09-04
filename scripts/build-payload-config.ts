@@ -1,14 +1,9 @@
-import { build } from 'tsup';
-
-import { baseTsupConfig } from './utils/tsup/base-config';
 import { runCommand } from './utils/run-command';
 import { clearDistDir } from './utils/clear-dist-dir';
+import { Builder } from './utils/builder';
 
 runCommand(async () => {
   await clearDistDir();
 
-  await build({
-    ...baseTsupConfig,
-    entry: ['./payload.config.ts'],
-  });
+  await Builder.buildCMSConfig();
 });

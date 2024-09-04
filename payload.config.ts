@@ -23,6 +23,8 @@ export default buildConfig({
   admin: {
     bundler: webpackBundlerAdapter(),
 
+    buildPath: path.join(__dirname, './admin'),
+
     webpack(config) {
       const alias = Object.fromEntries(
         mockedPackages.map((packageName) => [

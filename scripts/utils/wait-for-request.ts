@@ -12,7 +12,7 @@ async function fetchWithTimeout(url: string | URL, timeout: number = 5e3) {
   return response;
 }
 
-export const waitForServerSetup = (
+export const waitForRequest = (
   url: string | URL,
   {
     requestTimeout = 1e3,
@@ -50,10 +50,6 @@ export const waitForServerSetup = (
             ),
           );
         } else {
-          console.log({
-            text,
-          });
-
           resolve();
         }
       }

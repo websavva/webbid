@@ -15,14 +15,15 @@
     "migrate:create": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:create",
     "migrate:status": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:status",
     "migrate:down": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:down",
-    "dev": "pnpm payload:config && jiti scripts/build-server --watch",
-    "build": "pnpm payload:config && jiti scripts/build-client && jiti scripts/build-server",
+    "dev": "jiti scripts/build --watch",
+    "build": "jiti scripts/build",
     "start": "node dist/index.js",
     "lint": "prettier --check . && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "prettier --write . && eslint . --ext ts,tsx --fix",
     "email:dev": "jiti scripts/start-email-templates-dev-server.ts",
     "test:units:server": "vitest -c vitest/server.config.ts run",
-    "test:units:client": "vitest -c vitest/client/client.config.ts run"
+    "test:units:client": "vitest -c vitest/client/client.config.ts run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -66,6 +67,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@playwright/test": "^1.46.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
@@ -87,6 +89,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-tailwindcss": "^3.17.4",
+    "execa": "^9.3.1",
     "fs-extra": "^11.2.0",
     "glob": "^11.0.0",
     "jiti": "^1.21.0",
