@@ -34,10 +34,6 @@ export const createCartStore = () =>
 
         addItem: (item) => {
           set((state) => {
-            console.log({
-              addItem: state.items,
-            });
-
             return { items: [...state.items, item] };
           });
         },
@@ -51,10 +47,6 @@ export const createCartStore = () =>
         },
 
         setItems: (items: Product[]) => {
-          console.log({
-            setItems: items,
-          });
-
           set({
             items,
           });
