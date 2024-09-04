@@ -23,7 +23,7 @@
     "email:dev": "jiti scripts/start-email-templates-dev-server.ts",
     "test:units:server": "vitest -c vitest/server.config.ts run",
     "test:units:client": "vitest -c vitest/client/client.config.ts run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test --config=playwright/config.ts "
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

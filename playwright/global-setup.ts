@@ -2,16 +2,16 @@ import { resolve } from 'path';
 
 import { execaNode } from 'execa';
 
-import '../server/load-env';
-import { publicEnv } from '../server/env/public';
+import '../src/server/load-env';
+import { publicEnv } from '../src/server/env/public';
 
-import { waitForRequest } from '../../scripts/utils/wait-for-request';
+import { waitForRequest } from '../scripts/utils/wait-for-request';
 
 async function globalSetup() {
   console.log('Global setup is running...');
 
   const serverProcess = execaNode(
-    `${resolve(__dirname, '../../dist/index.js')}`,
+    `${resolve(__dirname, '../dist/index.js')}`,
   );
 
   await Promise.all(

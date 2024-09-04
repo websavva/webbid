@@ -1,9 +1,9 @@
-import path from 'path';
+import { resolve } from 'path';
 
 import { defineConfig, devices } from '@playwright/test';
 
-import './src/server/load-env';
-import { publicEnv } from './src/server/env/public';
+import '../src/server/load-env';
+import { publicEnv } from '../src/server/env/public';
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
 const { BASE_URL: baseURL } = publicEnv;
@@ -14,11 +14,11 @@ export default defineConfig({
   timeout: 30 * 1000,
 
   // Test directory
-  testDir: path.join(__dirname, 'src/e2e'),
+  testDir: resolve(__dirname, '../src/e2e'),
 
   retries: 2,
 
-  globalSetup: './src/e2e/global-setup.cjs',
+  globalSetup: resolve(__dirname, './global-setup.cjs'),
 
   use: {
     // Use baseURL so to make navigations relative.
