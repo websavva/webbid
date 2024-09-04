@@ -20,10 +20,11 @@
     "start": "node dist/index.js",
     "lint": "prettier --check . && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "prettier --write . && eslint . --ext ts,tsx --fix",
+    "typecheck": "tsc --noEmit",
     "email:dev": "jiti scripts/start-email-templates-dev-server.ts",
     "test:units:server": "vitest -c vitest/server.config.ts run",
     "test:units:client": "vitest -c vitest/client/client.config.ts run",
-    "test:e2e": "playwright test --config=playwright/config.ts "
+    "test:e2e": "playwright test --config=playwright/config.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

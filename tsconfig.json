@@ -4,6 +4,7 @@
     "lib": ["dom", "dom.iterable", "ESNext"],
     "types": ["@testing-library/jest-dom"],
     "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": true,
     "downlevelIteration": true,
     "strict": true,
@@ -12,6 +13,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": false,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -32,8 +34,11 @@
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
+    "scripts",
+    "vitest",
+    "playwright",
     ".next/types/**/*.ts",
     "payload.config.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next"]
 }

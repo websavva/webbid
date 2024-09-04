@@ -101,7 +101,7 @@ export class MiddlewareAggregatorBuilder {
     );
 
     const middlewarePagesMap = Object.fromEntries(
-      middlewarePagesMapEntries.filter((entry) => entry !== null),
+      middlewarePagesMapEntries.filter(Boolean) as string[][],
     ) as MiddlewarePagesMap;
 
     return middlewarePagesMap;

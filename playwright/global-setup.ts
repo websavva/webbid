@@ -10,9 +10,7 @@ import { waitForRequest } from '../scripts/utils/wait-for-request';
 async function globalSetup() {
   console.log('Global setup is running...');
 
-  const serverProcess = execaNode(
-    `${resolve(__dirname, '../dist/index.js')}`,
-  );
+  const serverProcess = execaNode(`${resolve(__dirname, '../dist/index.js')}`);
 
   await Promise.all(
     ['/api/health', '/health'].map((endpointPath) =>

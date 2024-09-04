@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLinkIcon } from 'lucide-react';
 
-import type { Order } from '#server/cms/collections/types';
+import type { Order, Product } from '#server/cms/collections/types';
 
 import { calculatOrderSum } from '@/lib/utils/finance/calculate-order-sum';
 import type { DefineProps } from '@/types';
@@ -24,7 +24,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
   } = order;
   const validProducts = order.products.filter(
     (product) => typeof product !== 'number',
-  );
+  ) as Product[];
 
   const [thumbnailUrl] = validProducts
     .map((product) => product.imageUrls)

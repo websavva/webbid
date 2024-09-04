@@ -9,12 +9,12 @@ export const getSortQuerySchema = <
   fields: T,
   defaultSortBy?: T[number],
 ) => {
+  const derivedDefaultSortBy = (defaultSortBy ||
+    'createdAt') as z.util.noUndefined<z.Writeable<T>[number]>;
+
   return z.object({
     sortDir: z.nativeEnum(SortDir).optional().default(SortDir.Desc),
-    sortBy: z
-      .enum(fields)
-      .optional()
-      .default(defaultSortBy || ('createdAt' as T[number])),
+    sortBy: z.enum(fields).optional().default(derivedDefaultSortBy),
   });
 };
 
