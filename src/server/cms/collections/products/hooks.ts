@@ -1,6 +1,7 @@
 import type {
   AfterReadHook,
   BeforeChangeHook,
+  AfterDeleteHook,
 } from 'payload/dist/collections/config/types';
 
 import { stripeApi } from '#server/stripe/api';
@@ -90,4 +91,18 @@ export const addStripeData: BeforeChangeHook<Product> = async ({
     stripeId,
     priceId,
   };
+};
+
+export const archiveStripeData: AfterDeleteHook<Product> = async ({
+  doc: { stripeId, priceId },
+}) => {
+  if (!stripeId || !priceId) return;
+
+  await stripeApi.products.update(stripeId, {
+    active: false,
+  });
+
+  await stripeApi.prices.update(priceId, {
+    active: false,
+  });
 };

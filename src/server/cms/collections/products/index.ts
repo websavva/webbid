@@ -5,7 +5,12 @@ import { ProductStatus } from '@/consts/product-status';
 import { isAdmin } from '../../access';
 import { addUser } from '../../hooks';
 
-import { addImageUrls, addCategoryLabel, addStripeData } from './hooks';
+import {
+  addImageUrls,
+  addCategoryLabel,
+  addStripeData,
+  archiveStripeData,
+} from './hooks';
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -14,6 +19,8 @@ export const Products: CollectionConfig = {
     beforeChange: [addUser, addStripeData],
 
     afterRead: [addImageUrls, addCategoryLabel],
+
+    afterDelete: [archiveStripeData],
   },
 
   fields: [

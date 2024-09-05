@@ -1,16 +1,12 @@
 import { join } from 'path';
 
-import { rm } from 'fs-extra';
-
-import type { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-postgres';
-
 import type {
   Media,
   Product,
   ProductCategoryFeature,
-  ProductFile,
 } from '../cms/collections/types';
 
+import type { MigrateUpArgs, MigrateDownArgs } from './types';
 import initialProductCategories from './data/initial-seed/product-categories/product-categories.json';
 import initialProducts from './data/initial-seed/products/products.json';
 
@@ -19,7 +15,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   const adminUser = await payload.create({
     collection: 'users',
 
-    // @ts-ignore
     req,
 
     data: {
@@ -34,7 +29,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
   const categories = await Promise.all(
     initialProductCategories.map(async ({ id: name, label, features }) => {
       const category = await payload.create({
-        // @ts-ignore
         req,
         collection: 'productCategories',
         data: {
@@ -57,16 +51,14 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
               './data/initial-seed/product-categories/images',
               imageRelativePath,
             ),
-            // @ts-ignore
+
             req,
           });
 
           await payload.create({
-            // @ts-ignore
             req,
             collection: 'productCategoryFeatures',
             data: {
-              // @ts-ignore
               category: categoryId,
               name,
               href,
@@ -95,7 +87,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
               __dirname,
               `./data/initial-seed/products/images/product-${product.id}_${imageIndex + 1}.jpg`,
             ),
-            // @ts-expect-error
             req,
           });
         }),
@@ -111,7 +102,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           __dirname,
           `./data/initial-seed/products/files/product-file-${product.id}.txt`,
         ),
-        // @ts-expect-error
+
         req,
       });
 
@@ -132,7 +123,7 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
           productFile: productFile.id as number,
           price: product.price,
         },
-        // @ts-expect-error
+
         req,
       });
     }),
@@ -140,8 +131,6 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
 }
 
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
-  const filePathsToBeDeleted: string[] = [];
-
   // deletion of products
   await Promise.all(
     initialProducts.map(async (initialProduct) => {
@@ -159,7 +148,6 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
           },
         },
 
-        // @ts-expect-error
         req,
       });
 
@@ -167,7 +155,7 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
 
       const imageIds = product!.images.map(({ image }) => image as number);
 
-      await payload.db.deleteOne({
+      await payload.delete({
         collection: 'products',
         where: {
           id: {
@@ -175,11 +163,10 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
           },
         },
 
-        // @ts-expect-error
         req,
       });
 
-      const productFile = await payload.db.findOne<ProductFile>({
+      await payload.delete({
         collection: 'productFiles',
         where: {
           id: {
@@ -187,30 +174,10 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
           },
         },
 
-        // @ts-expect-error
         req,
       });
 
-      const productFileFullPath = join(
-        payload.collections.productFiles.config.upload.staticDir,
-        productFile!.filename!,
-      );
-
-      filePathsToBeDeleted.push(productFileFullPath);
-
-      await payload.db.deleteOne({
-        collection: 'productFiles',
-        where: {
-          id: {
-            equals: productFileId,
-          },
-        },
-
-        // @ts-expect-error
-        req,
-      });
-
-      const { docs: productImages } = await payload.db.find<Media>({
+      await payload.delete({
         collection: 'media',
         where: {
           id: {
@@ -218,39 +185,6 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
           },
         },
 
-        // @ts-expect-error
-        req,
-      });
-
-      productImages.forEach(({ filename, sizes }) => {
-        const imageFileNames: string[] = [];
-
-        imageFileNames.push(filename!);
-
-        if (sizes)
-          Object.values(sizes).forEach(({ filename }) =>
-            imageFileNames.push(filename!),
-          );
-
-        imageFileNames.forEach((imageFileName) => {
-          const imageFullPath = join(
-            payload.collections.media.config.upload.staticDir,
-            imageFileName,
-          );
-
-          filePathsToBeDeleted.push(imageFullPath);
-        });
-      });
-
-      await payload.db.deleteMany({
-        collection: 'media',
-        where: {
-          id: {
-            in: imageIds,
-          },
-        },
-
-        // @ts-expect-error
         req,
       });
     }),
@@ -268,7 +202,6 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
             },
           },
 
-          // @ts-expect-error
           req,
         });
 
@@ -280,26 +213,7 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
               id: imageId as number,
             })) as unknown as Media;
 
-            const allImageFileNames: string[] = [image.filename!];
-
-            if (image.sizes) {
-              const resizedImageFileNames = Object.values(image.sizes!).map(
-                ({ filename }) => filename!,
-              );
-
-              allImageFileNames.push(...resizedImageFileNames);
-            }
-
-            allImageFileNames.forEach((fileName) => {
-              const fileFullPath = join(
-                payload.collections.media.config.upload.staticDir,
-                fileName,
-              );
-
-              filePathsToBeDeleted.push(fileFullPath);
-            });
-
-            await payload.db.deleteOne({
+            await payload.delete({
               collection: 'media',
 
               where: {
@@ -308,12 +222,10 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
                 },
               },
 
-              // @ts-ignore
               req,
             });
 
             await payload.delete({
-              // @ts-ignore
               req,
               collection: 'productCategoryFeatures',
               where: {
@@ -327,7 +239,6 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
       );
 
       await payload.delete({
-        // @ts-ignore
         req,
         collection: 'productCategories',
         where: {
@@ -348,11 +259,6 @@ export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
       },
     },
 
-    // @ts-expect-error
     req,
   });
-
-  await Promise.all(
-    filePathsToBeDeleted.map((fullFilePath) => rm(fullFilePath)),
-  );
 }

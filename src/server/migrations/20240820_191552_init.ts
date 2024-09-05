@@ -1,5 +1,6 @@
-import type { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-postgres';
 import { sql } from 'drizzle-orm';
+
+import type { MigrateUpArgs, MigrateDownArgs } from './types';
 
 export async function up({ payload }: MigrateUpArgs): Promise<void> {
   await payload.db.drizzle.execute(sql`
