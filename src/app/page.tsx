@@ -28,7 +28,7 @@ const perks: PerkProps[] = [
   },
 ];
 
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <section className='flex justify-center py-14 sm:py-20'>
