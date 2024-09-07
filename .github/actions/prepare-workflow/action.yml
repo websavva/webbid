@@ -10,8 +10,8 @@ runs:
     - name: Use Node.js 18.x
       uses: actions/setup-node@v4
       with:
-        node-version: "20"
-        cache: "pnpm"
+        node-version: '20'
+        cache: 'pnpm'
 
     - name: Get pnpm store path
       id: pnpm_store_path
@@ -32,4 +32,3 @@ runs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
       shell: bash
-
