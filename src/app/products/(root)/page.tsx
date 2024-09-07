@@ -16,6 +16,8 @@ type ProductsPageProps = PagePropsWithSearchParams<
   keyof ProductsPageSearchParams
 >;
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({
   searchParams: query,
 }: ProductsPageProps): Promise<Metadata> {

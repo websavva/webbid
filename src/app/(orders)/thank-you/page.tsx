@@ -11,8 +11,6 @@ import { Container } from '@/components/UI/Container';
 import { ArrowLink } from '@/components/UI/ArrowLink';
 import { OrderIntro } from '@/components/OrderIntro';
 
-export const middlewars = ['auth'];
-
 export const metadata: Metadata = {
   title: 'Thank You For Your Order',
 
@@ -21,6 +19,8 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
+
+export const dynamic = 'force-dynamic';
 
 export const middlewares = ['auth'];
 

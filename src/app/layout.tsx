@@ -17,6 +17,8 @@ const defaultMetadataFields = {
   description: `${publicEnv.COMPANY_NAME} is one of the leading and cutting-edge digital marketplace in the whole Internet`,
 };
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.BASE_URL),
 

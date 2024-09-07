@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-dynamic';
+
 export const middlewares = ['auth'];
 
 export { default as default } from './page_client';

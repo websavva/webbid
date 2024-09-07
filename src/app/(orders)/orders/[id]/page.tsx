@@ -9,6 +9,8 @@ import { OrderIntro } from '@/components/OrderIntro';
 
 type OrderPageProps = PagePropsWithParams<{ id: string }>;
 
+export const dynamic = 'force-dynamic';
+
 export function generateMetadata({ params: { id } }: OrderPageProps): Metadata {
   return {
     title: `Order ${id}`,

@@ -22,6 +22,9 @@ export const trpcClient = createTRPCProxyClient<AppRouter>({
           ...options,
           cache: 'no-cache',
           credentials: 'include',
+          next: {
+            revalidate: 0,
+          },
         });
       },
     }),
