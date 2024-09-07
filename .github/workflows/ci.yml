@@ -14,22 +14,6 @@ on:
     branches: [master]
 
 jobs:
-  test_units:
-    name: Run unit tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Prepare workflow
-        uses: ./.github/actions/prepare-workflow
-
-      - name: Run server unit tests
-        run: pnpm run test:units:server
-
-      - name: Run client unit tests
-        run: pnpm run test:units:client
-
   lint:
     name: Run linter
     runs-on: ubuntu-latest
@@ -56,3 +40,63 @@ jobs:
 
       - name: Run typecheck
         run: pnpm run typecheck
+
+  test_units:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare workflow
+        uses: ./.github/actions/prepare-workflow
+
+      - name: Run server unit tests
+        run: pnpm run test:units:server
+
+      - name: Run client unit tests
+        run: pnpm run test:units:client
+
+  test_e2e:
+    name: Run e2e tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /tmp/.cache/ms-playwright
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Creating .env file
+        run: cp .env.test .env
+        shell: bash
+
+      - name: Run docker-compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
+        with:
+          compose-file: './docker-compose.dev.yaml'
+
+      - name: Prepare worfklow
+        uses: ./.github/actions/prepare-workflow
+
+      - name: Running database migrations
+        run: pnpm migrate:up
+        shell: bash
+
+      - name: Restore Chromium browser cache
+        uses: actions/cache@v3
+        id: e2e-tests-chromium-cache
+        with:
+          path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}/**
+          key: ${{ runner.os }}-e2e-chromium
+
+      - name: Installing Chromium with all deps
+        run: pnpm exec install --with-deps chromium
+        shell: bash
+
+      - name: Building app
+        run: pnpm build
+        shell: bash
+
+      - name: Running E2E tets
+        run: pnpm test:e2e
+        shell: bash
