@@ -33,10 +33,17 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'Desktop Chrome',
+      name: 'Desktop Chromium',
       use: {
         ...devices['Desktop Chrome'],
-        channel: 'chrome',
+        defaultBrowserType: 'chromium',
+      },
+    },
+    {
+      name: 'Mobile Chromium',
+      use: {
+        ...devices['iPhone 11'],
+        defaultBrowserType: 'chromium',
       },
     },
   ],
