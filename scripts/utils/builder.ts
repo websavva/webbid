@@ -1,16 +1,12 @@
-import { resolve, join } from 'path';
+import { resolve } from 'path';
 
 import loadCMSConfig from 'payload/dist/config/load';
-import { execaNode } from 'execa';
-import { rm } from 'fs-extra';
 import { build } from 'tsup';
 import buildNextApp from 'next/dist/build';
 
 import '../../src/server/load-env';
-import { publicEnv } from '../../src/server/env/public';
 
 import { baseTsupConfig } from './tsup/base-config';
-import { waitForRequest } from './wait-for-request';
 import { clearDistDir } from './clear-dist-dir';
 
 export class Builder {
@@ -48,28 +44,6 @@ export class Builder {
     // building client-sde app
     this.logBuildStart('client-side app');
 
-    await build({
-      ...baseTsupConfig,
-
-      publicDir: './src/server/static',
-
-      entry: {
-        'dummy-server': './src/server/index.ts',
-      },
-
-      define: {
-        'process.env.IS_CLIENT_DISABLED': 'true',
-      },
-    });
-
-    const dummyServerFilePath = join(this.fullRootPath, 'dist/dummy-server.js');
-
-    const dummyServerProcess = execaNode(dummyServerFilePath);
-
-    const healthcheckUrl = new URL('/api/health', publicEnv.BASE_URL);
-
-    await waitForRequest(healthcheckUrl);
-
     await buildNextApp(
       this.fullRootPath,
       false,
@@ -81,12 +55,6 @@ export class Builder {
       null,
       'default',
     );
-
-    dummyServerProcess.kill();
-
-    await dummyServerProcess.catch(() => {});
-
-    await rm(dummyServerFilePath);
 
     this.logBuildEnd('client-side app');
   }

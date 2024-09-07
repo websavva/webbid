@@ -53,16 +53,14 @@ async function start() {
   // starting all scheduled jobs
   TasksManager.init();
 
-  if (!process.env.IS_CLIENT_DISABLED) {
-    // initializing next application
-    const nextAppRequestHandler = nextApp.getRequestHandler();
+  // initializing next application
+  const nextAppRequestHandler = nextApp.getRequestHandler();
 
-    app.use((req, res) => nextAppRequestHandler(req, res));
+  app.use((req, res) => nextAppRequestHandler(req, res));
 
-    console.log('Preparing Next.js application...');
+  console.log('Preparing Next.js application...');
 
-    await nextApp.prepare();
-  }
+  await nextApp.prepare();
 
   // root server listening
   app.listen(privateEnv.PORT, () => {
