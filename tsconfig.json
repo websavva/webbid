@@ -3,6 +3,7 @@
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "ESNext"],
     "types": ["@testing-library/jest-dom"],
+    "baseUrl": ".",
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
@@ -23,10 +24,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "#server/*": ["./src/server/*"],
+      "@/*": ["src/*"],
+      "#server/*": ["src/server/*"],
       "#middleware-aggregator": [
-        "./src/modules/middleware-aggregator/alias-mock.d.ts"
+        "src/modules/middleware-aggregator/alias-mock.d.ts"
       ]
     }
   },
