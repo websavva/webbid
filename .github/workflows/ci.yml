@@ -28,7 +28,7 @@ jobs:
         run: pnpm run test:units:server
 
       - name: Run client unit tests
-        run: pnpm run test:units:server
+        run: pnpm run test:units:client
 
   lint:
     name: Run linter
