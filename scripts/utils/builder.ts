@@ -4,8 +4,6 @@ import loadCMSConfig from 'payload/dist/config/load';
 import { build } from 'tsup';
 import buildNextApp from 'next/dist/build';
 
-import '../../src/server/load-env';
-
 import { baseTsupConfig } from './tsup/base-config';
 import { clearDistDir } from './clear-dist-dir';
 
