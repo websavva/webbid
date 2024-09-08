@@ -20,7 +20,7 @@ runs:
 
     - name: Restore pnpm cache
       uses: actions/cache@v3
-      id: pnpm-cache
+      id: pnpm_packages_cache
       with:
         path: |
           ${{ env.PNPM_STORE_PATH }}

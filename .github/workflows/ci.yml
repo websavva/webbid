@@ -63,11 +63,12 @@ jobs:
     timeout-minutes: 20
     env:
       PLAYWRIGHT_BROWSERS_PATH: /tmp/.cache/ms-playwright
+      STRIPE_API_SECRET_KEY: ${{ secrets.STRIPE_API_SECRET_KEY }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Creating .env file
-        run: cp .env.test .env
+        run: cp .env.e2e .env
         shell: bash
 
       - name: Run docker-compose
@@ -79,6 +80,7 @@ jobs:
         uses: ./.github/actions/prepare-workflow
 
       - name: Running database migrations
+        id: db_migrate_up
         run: pnpm migrate:up
         shell: bash
 
@@ -100,3 +102,8 @@ jobs:
       - name: Running E2E tets
         run: pnpm test:e2e
         shell: bash
+
+      - name: Resetting database
+        if: always() && ( success() || ( failure() && steps.db_migrate_up.conclusion == 'success' ) )
+        run: pnpm migrate:down
+        continue-on-error: true
