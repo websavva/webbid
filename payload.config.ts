@@ -8,7 +8,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { slateEditor as slateEditorAdapter } from '@payloadcms/richtext-slate';
 import { webpackBundler as webpackBundlerAdapter } from '@payloadcms/bundler-webpack';
 
-import '#server/load-env';
+import '#server/env/load';
 import { collections } from '#server/cms/collections';
 
 // this workaround is necessary as it is built-in

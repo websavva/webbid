@@ -67,8 +67,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Creating .env file
-        run: cp .env.e2e .env
+      - name: Creating .env files
+        run: cp .env.e2e.build .env.build & cp .env.e2e .env
         shell: bash
 
       - name: Run docker-compose

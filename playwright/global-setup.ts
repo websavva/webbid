@@ -2,7 +2,7 @@ import { resolve } from 'path';
 
 import { execaNode } from 'execa';
 
-import '../src/server/load-env';
+import '../src/server/env/load';
 import { publicEnv } from '../src/server/env/public';
 
 import { waitForRequest } from '../scripts/utils/wait-for-request';

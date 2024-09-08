@@ -1,4 +1,4 @@
-import '#server/load-env';
+import '#server/env/load';
 
 import express from 'express';
 import { joinURL } from 'ufo';

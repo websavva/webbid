@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
 
-import './load-env';
+import './env/load';
 import { CMS } from './cms';
 import { nextApp } from './next';
 import { appRouter, createContext } from './trpc';

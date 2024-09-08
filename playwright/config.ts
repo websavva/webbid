@@ -2,7 +2,7 @@ import { resolve } from 'path';
 
 import { defineConfig, devices } from '@playwright/test';
 
-import '../src/server/load-env';
+import '../src/server/env/load-build';
 import { publicEnv } from '../src/server/env/public';
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
