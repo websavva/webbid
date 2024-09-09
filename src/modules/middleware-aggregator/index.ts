@@ -8,9 +8,8 @@ import type {
   DynamicNextConfig,
 } from '../../types/next-config';
 
-import {
-  MiddlewareAggregatorBuilder,
-  type MiddlewareAggregatorBuilderOptions,
+import type {
+  MiddlewareAggregatorBuilderOptions,
 } from './builder';
 
 const ALLOWED_PHASES = [PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD];
@@ -32,6 +31,10 @@ export const withMiddlewareAggregator = (
     }
 
     if (!ALLOWED_PHASES.includes(phase)) return derivedBaseNextConfig;
+
+    const {
+      MiddlewareAggregatorBuilder
+    } = await import('./builder');
 
     return MiddlewareAggregatorBuilder.run(options, derivedBaseNextConfig);
   };

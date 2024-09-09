@@ -1,0 +1,11 @@
+node_modules
+dist
+.next
+.github
+.vscode
+test-results
+media
+product_files
+.env
+.env.build
+Dockerfile
