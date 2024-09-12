@@ -1,6 +1,6 @@
 {
   "name": "@websavva/webbid",
-  "description": "WebBid, digital marketplace build with Next.js and TRPC",
+  "description": "WebBid, digital marketplace build with Next.js, tRPC and Payload CMS",
   "version": "0.1.0",
   "private": true,
   "engines": {
