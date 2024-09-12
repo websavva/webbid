@@ -104,9 +104,6 @@ importers:
       sonner:
         specifier: ^1.4.0
         version: 1.4.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      std-env:
-        specifier: ^3.7.0
-        version: 3.7.0
       stripe:
         specifier: ^15.4.0
         version: 15.4.0

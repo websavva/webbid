@@ -1,9 +1,10 @@
 import createNextApp from 'next';
-import { isProduction } from 'std-env';
 
 import { privateEnv } from '../env/private';
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 export const nextApp = createNextApp({
   port: privateEnv.PORT,
-  dev: !isProduction,
+  dev: isDev,
 });
