@@ -29,7 +29,7 @@ export default buildConfig({
       const alias = Object.fromEntries(
         mockedPackages.map((packageName) => [
           packageName,
-          path.resolve(__dirname, `../src/server/cms/mocks/${packageName}.js`),
+          path.join(process.cwd(), `src/server/cms/mocks/${packageName}.js`),
         ]),
       );
 
@@ -54,13 +54,13 @@ export default buildConfig({
       host: process.env.POSTGRES_HOST || 'localhost',
     },
 
-    migrationDir: path.resolve(__dirname, '../src/server/migrations'),
+    migrationDir: path.resolve(process.cwd(), 'src/server/migrations'),
   }),
 
   typescript: {
     outputFile: path.resolve(
-      __dirname,
-      '../src/server/cms/collections/types.ts',
+      process.cwd(),
+      'src/server/cms/collections/types.ts',
     ),
   },
 });

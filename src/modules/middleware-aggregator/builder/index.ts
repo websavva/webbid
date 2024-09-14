@@ -42,7 +42,7 @@ export class MiddlewareAggregatorBuilder {
           dirName,
           isAbsolute(dirPath)
             ? dirPath
-            : resolve(__dirname, '../../..', dirPath),
+            : resolve(join(process.cwd(), 'src'), dirPath),
         ];
       }),
     ) as Required<MiddlewareAggregatorBuilderOptions>;
@@ -111,10 +111,13 @@ export class MiddlewareAggregatorBuilder {
     const middlewarePathsMap = await this.scanMiddlewares();
     const middlewarePagesMap = await this.scanPages();
 
-    const absoluteUtilsPath = resolve(__dirname, '../runtime/utils.ts');
+    const absoluteUtilsPath = join(
+      process.cwd(),
+      'src/modules/middleware-aggregator/runtime/utils.ts',
+    );
 
     // ensuring dist directory
-    const derivedDistDirPath = resolve(__dirname, '../../../../dist');
+    const derivedDistDirPath = join(process.cwd(), 'dist');
 
     await ensureDir(derivedDistDirPath);
 

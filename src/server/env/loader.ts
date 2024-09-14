@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import { config } from 'dotenv';
+import dotenv from 'dotenv';
 
 export const loadEnv = (
   stages: Array<'runtime' | 'build'> = ['build', 'runtime'],
@@ -8,7 +8,7 @@ export const loadEnv = (
   return stages.forEach((stage) => {
     const fileSuffix = stage === 'runtime' ? '' : `.${stage}`;
 
-    config({
+    dotenv.config({
       path: join(process.cwd(), `.env${fileSuffix}`),
     });
   });

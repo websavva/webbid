@@ -4,7 +4,7 @@ import loadCMSConfig from 'payload/dist/config/load';
 import { build } from 'tsup';
 import buildNextApp from 'next/dist/build';
 
-import { baseTsupConfig } from './tsup/base-config';
+import { extendBaseTsupConfig } from './tsup/base-config';
 import { clearDistDir } from './clear-dist-dir';
 
 export class Builder {
@@ -21,12 +21,21 @@ export class Builder {
   public static async buildCMSConfig() {
     this.logBuildStart('CMS Config');
 
-    await build({
-      ...baseTsupConfig,
-      entry: ['./payload.config.ts'],
-    });
+    await build(
+      extendBaseTsupConfig({
+        entry: ['./payload.config.ts'],
+      }),
+    );
 
     this.logBuildEnd('CMS Config');
+  }
+
+  public static async builClientConfig() {
+    await build(
+      extendBaseTsupConfig({
+        entry: ['./next.config.ts'],
+      }),
+    );
   }
 
   public static async buildClient() {
@@ -60,17 +69,17 @@ export class Builder {
   public static async buildServer(isDev: boolean = false) {
     this.logBuildStart('server-side app');
 
-    await build({
-      ...baseTsupConfig,
+    await build(
+      extendBaseTsupConfig({
+        publicDir: './src/server/static',
 
-      publicDir: './src/server/static',
+        entry: ['./src/server/index.ts'],
 
-      entry: ['./src/server/index.ts'],
+        watch: isDev,
 
-      watch: isDev,
-
-      onSuccess: isDev ? 'node dist/index.js' : undefined,
-    });
+        onSuccess: isDev ? 'node dist/index.js' : undefined,
+      }),
+    );
 
     this.logBuildEnd('server-side app');
   }
@@ -79,6 +88,7 @@ export class Builder {
     await clearDistDir();
 
     await this.buildCMSConfig();
+    await this.builClientConfig();
 
     if (!isDev) await this.buildClient();
 

@@ -1,1 +1,1 @@
-module.exports = require('jiti')(__dirname)('./next.config.ts').default;
+module.exports = require('./dist/next.config.js').default;
