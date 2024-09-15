@@ -71,9 +71,6 @@ importers:
       express:
         specifier: ^4.18.2
         version: 4.18.2
-      jiti:
-        specifier: ^1.21.6
-        version: 1.21.6
       lucide-react:
         specifier: ^0.301.0
         version: 0.301.0(react@18.2.0)
@@ -204,6 +201,9 @@ importers:
       glob:
         specifier: ^11.0.0
         version: 11.0.0
+      jiti:
+        specifier: ^1.21.6
+        version: 1.21.6
       jsdom:
         specifier: ^25.0.0
         version: 25.0.0

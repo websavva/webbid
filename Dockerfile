@@ -35,7 +35,7 @@ FROM base as production
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml .npmrc next.config.js next.config.ts ./
+COPY package.json pnpm-lock.yaml .npmrc next.config.js ./
 
 # defining args for env
 ARG NODE_ENV=production
