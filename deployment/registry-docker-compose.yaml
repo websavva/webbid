@@ -1,0 +1,22 @@
+# Setting up custom Docker registry to store images of an app
+# ! It requires SSL certificates and htpasswd file generated before start up
+
+services:
+  registry:
+    image: registry:2
+    container_name: registry
+    environment:
+      REGISTRY_AUTH: htpasswd
+      REGISTRY_AUTH_HTPASSWD_REALM: Registry
+      REGISTRY_AUTH_HTPASSWD_PATH: /auth/registry.password
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+      REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+      REGISTRY_HTTP_HOST: https://registry.webbid.shop:5000
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/fullchain.pem
+      REGISTRY_HTTP_TLS_KEY: /certs/privkey.pem
+    volumes:
+      - ./data:/data
+      - ./auth:/auth
+      - ./certs:/certs
+    ports:
+      - 5000:5000
