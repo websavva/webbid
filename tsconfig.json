@@ -38,7 +38,8 @@
     "vitest",
     "playwright",
     ".next/types/**/*.ts",
-    "payload.config.ts"
+    "payload.config.ts",
+    "next.config.ts",
   ],
   "exclude": ["node_modules", ".next"]
 }
