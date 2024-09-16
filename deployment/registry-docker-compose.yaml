@@ -17,6 +17,6 @@ services:
     volumes:
       - ./data:/data
       - ./auth:/auth
-      - ./certs:/certs
+      - /ssl-certificates:/certs
     ports:
       - 5000:5000
