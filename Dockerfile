@@ -1,8 +1,10 @@
+### BASE with Node.js and pnpm pre-installned
 FROM node:20-alpine AS base
 
 RUN npm install -g pnpm@9.6.0
 
 
+### BUILD
 FROM base as build
 
 WORKDIR /app-build
@@ -21,7 +23,7 @@ ARG PAYLOAD_CONFIG_PATH=dist/payload.config.js
 ARG PORT=3000
 ARG NEXT_PUBLIC_SERVER_URL=http://localhost:${PORT}
 
-# definine env
+# defining env
 ENV NODE_ENV=${NODE_ENV}
 ENV BUILD_TARGET=${BUILD_TARGET}
 ENV PAYLOAD_CONFIG_PATH=${PAYLOAD_CONFIG_PATH}
@@ -31,6 +33,8 @@ ENV NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}
 
 RUN pnpm build
 
+
+### PRODUCTION
 FROM base as production
 
 WORKDIR /app
@@ -45,7 +49,7 @@ ARG PAYLOAD_CONFIG_PATH=dist/payload.config.js
 ARG PORT=3000
 ARG NEXT_PUBLIC_SERVER_URL=http://localhost:${PORT}
 
-# definine env
+# defining env
 ENV NODE_ENV=${NODE_ENV}
 ENV BUILD_TARGET=${BUILD_TARGET}
 ENV PAYLOAD_CONFIG_PATH=${PAYLOAD_CONFIG_PATH}
