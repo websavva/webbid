@@ -3,7 +3,6 @@
 > This file contains instructions and files simplyfying and enabling the process of
 > deployment of the given application.
 
-
 ## SSL-certificates
 
 In order to obtain all SSL-certificates, DNS A-record is required as follows:
@@ -24,4 +23,3 @@ rsync -aL /etc/letsencrypt/live/webbid.shop/ /ssl-certificates
 ```
 
 Renewal procedure should take into account resolution of symblinks too if needed.
-
