@@ -24,7 +24,6 @@ rsync -aL /etc/letsencrypt/live/webbid.shop/ /ssl-certificates
 
 Renewal procedure should take into account resolution of symblinks too if needed.
 
-
 ## Self-hosted Docker registry
 
 First of all, Apache utils should be installed as they are necessary for password files generation.
@@ -32,6 +31,7 @@ First of all, Apache utils should be installed as they are necessary for passwor
 ```bash
 sudo apt install apache2-utils -y
 ```
+
 Then in a new folder `auth`, the following command should be executed:
 
 ```bash
