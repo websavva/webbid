@@ -69,7 +69,7 @@ EXPOSE ${PORT}
 
 VOLUME [ "/app/product_files", "/app/media" ]
 
-CMD [ "node", "dist/index.js" ]
+CMD ["pnpm", "migrate:up", "&&", "pnpm", "start" ]
 
 
 

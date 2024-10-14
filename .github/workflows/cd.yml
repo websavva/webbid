@@ -1,0 +1,73 @@
+name: CD
+
+on:
+  release:
+    types: ['released']
+
+  workflow_dispatch:
+    inputs:
+      version:
+          description: 'Version of the app'
+          required: true
+          type: string
+
+jobs:
+  infer-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.set_version.outputs.version }}
+    steps:
+      - name: Infer app version
+        shell: bash
+        id: set_version
+        run: |
+          # If a release tag is present, use it; otherwise, use the input version
+          if [ -n "${{ github.event.release.tag_name }}" ]; then
+            VERSION_TAG="${{ github.event.release.tag_name }}"
+            VERSION="${VERSION_TAG:1}"
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+          echo "Inferred version: $VERSION"
+
+          # Set the output for the current step
+          echo "::set-output name=version::$VERSION"
+
+  build:
+    name: Run build and push to registry
+    needs: infer-version
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v${{ needs.infer-version.outputs.version }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to custom Docker registry
+        uses: docker/login-action@v3
+        with:
+          registry: registry.webbid.shop:5000
+          username: ${{ vars.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+
+      - name: Build and push to local registry
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
+          build-args: |
+            NODE_ENV=production
+            BUILD_TARGER=production
+            PAYLOAD_CONFIG_PATH=dist/payload.config.js
+            PORT=3000
+            NEXT_PUBLIC_SERVER_URL=https://webbid.shop
+
+      - name: Inspect
+        run: |
+          docker buildx imagetools inspect registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
