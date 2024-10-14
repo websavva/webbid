@@ -10,10 +10,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - type: bind
-        source: /apps/webbid/database
+        source: ./database
         target: /var/lib/postgresql/data
     networks:
       - webbid
+
 
   app:
     image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
@@ -22,11 +23,11 @@ services:
       - database
     volumes:
       - type: bind
-        source: /apps/webbid/media
+        source: ./media
         target: /app/media
 
       - type: bind
-        source: /apps/webbid/product_files
+        source: ./product_files
         target: /app/product_files
     networks:
       - webbid
@@ -66,7 +67,7 @@ services:
     image: nginx:alpine
     volumes:
       - type: bind
-        source: /apps/webbid/nginx.conf
+        source: ./nginx.conf
         target: /etc/nginx/nginx.conf
 
       - type: bind
