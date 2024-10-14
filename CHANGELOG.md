@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/websavva/webbid/compare/v1.2.1...v1.2.2) (2024-10-14)
+
+
+### Bug Fixes
+
+* cd was fixed to include all missing env vars ([52317fd](https://github.com/websavva/webbid/commit/52317fd06aa7dd5394d2c836a044111abb0a822b))
+
 ## [1.2.1](https://github.com/websavva/webbid/compare/v1.2.0...v1.2.1) (2024-10-14)
 
 
