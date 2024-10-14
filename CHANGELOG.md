@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.11](https://github.com/websavva/webbid/compare/v1.2.10...v1.2.11) (2024-10-14)
+
+
+### Bug Fixes
+
+* **cd:** CMD was fixed in Dockerfile ([e690484](https://github.com/websavva/webbid/commit/e69048428d6f28de9c61acb977e63402930af60b))
+
 ## [1.2.10](https://github.com/websavva/webbid/compare/v1.2.9...v1.2.10) (2024-10-14)
 
 
