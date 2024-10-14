@@ -16,7 +16,6 @@ on:
         type: boolean
         default: false
 
-
 jobs:
   infer-version:
     runs-on: ubuntu-latest
