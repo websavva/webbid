@@ -92,7 +92,7 @@ jobs:
           host: webbid.shop
           username: ${{ secrets.DEPLOY_SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "deployment/docker-compose.yaml,deployment/nginx.conf"
+          source: 'deployment/docker-compose.yaml,deployment/nginx.conf'
           target: /app/webbid
 
       - name: Set up SSH
