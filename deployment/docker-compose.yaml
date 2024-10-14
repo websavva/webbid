@@ -3,7 +3,6 @@ version: '3.8'
 services:
   database:
     image: postgres:17
-    container_name: database
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -14,11 +13,13 @@ services:
         target: /var/lib/postgresql/data
     networks:
       - webbid
-
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   app:
     image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
-    container_name: app
     depends_on:
       - database
     volumes:
