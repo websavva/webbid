@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.10](https://github.com/websavva/webbid/compare/v1.2.9...v1.2.10) (2024-10-14)
+
+
+### Bug Fixes
+
+* **cd:** Silly typo wa removed ([39d3e5f](https://github.com/websavva/webbid/commit/39d3e5f7a1761c3e9f41427e0eaf5f8380c305f2))
+
 ## [1.2.9](https://github.com/websavva/webbid/compare/v1.2.8...v1.2.9) (2024-10-14)
 
 
