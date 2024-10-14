@@ -69,7 +69,7 @@ EXPOSE ${PORT}
 
 VOLUME [ "/app/product_files", "/app/media" ]
 
-CMD ["pnpm", "migrate:up", "&&", "pnpm", "start" ]
+CMD ["sh", "-c", "pnpm migrate:up && pnpm start"]
 
 
 
