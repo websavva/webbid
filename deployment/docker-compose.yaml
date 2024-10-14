@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  databas:
+    image: postgres:17
+    container_name: database
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - /apps/webbid/database:/var/lib/postgresql/data
+    networks:
+      - webbid
+
+  app:
+    image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
+    container_name: app
+    depends_on:
+      - database
+    volumes:
+      - /apps/webbid/media:/app/media
+      - /apps/webbid/product_files:/app/product_files
+    networks:
+      - webbid
+    environment:
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      PAYLOAD_ADMIN_EMAIL: ${PAYLOAD_ADMIN_EMAIL}
+      PAYLOAD_ADMIN_PASSWORD: ${PAYLOAD_ADMIN_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION: ${AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION}
+      NEXT_PUBLIC_COMPANY_NAME: ${NEXT_PUBLIC_COMPANY_NAME}
+      NEXT_PUBLIC_SUPPORT_EMAIL: ${NEXT_PUBLIC_SUPPORT_EMAIL}
+      NEXT_PUBLIC_DOMAIN: ${NEXT_PUBLIC_DOMAIN}
+      NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE: ${NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE}
+      STRIPE_API_SECRET_KEY: ${STRIPE_API_SECRET_KEY}
+      STRIPE_ORDER_SESSION_VALIDITY_DURATION: ${STRIPE_ORDER_SESSION_VALIDITY_DURATION}
+
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 0
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  web-server:
+    image: nginx:alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl-certificates:/ssl-certificates
+    depends_on:
+      - app
+    ports:
+      - '80:80'
+    networks:
+      - webbid
+
+networks:
+  webbid:
