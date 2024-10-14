@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/websavva/webbid/compare/v1.1.0...v1.2.0) (2024-10-14)
+
+
+### Features
+
+* deployment job was added to CD workflow ([b912133](https://github.com/websavva/webbid/commit/b912133ec224252759bb0e72f520f6c1306396f0))
+
 ## [1.1.0](https://github.com/websavva/webbid/compare/v1.0.0...v1.1.0) (2024-10-14)
 
 
