@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/websavva/webbid/compare/v1.2.0...v1.2.1) (2024-10-14)
+
+
+### Bug Fixes
+
+* **ci/cd:** scp was fixed to excluded nested folders mapping ([685af78](https://github.com/websavva/webbid/commit/685af7899b87fa0af0d64e69aad887b4905efac9))
+
 ## [1.2.0](https://github.com/websavva/webbid/compare/v1.1.0...v1.2.0) (2024-10-14)
 
 
