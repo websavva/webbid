@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.8](https://github.com/websavva/webbid/compare/v1.2.7...v1.2.8) (2024-10-14)
+
+
+### Bug Fixes
+
+* **cd:** Volume mapping was fixed yet another time ([82041f7](https://github.com/websavva/webbid/commit/82041f755cb450bc15bab88a0b034e0323d75c1f))
+
 ## [1.2.7](https://github.com/websavva/webbid/compare/v1.2.6...v1.2.7) (2024-10-14)
 
 
