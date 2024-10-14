@@ -14,7 +14,7 @@ services:
       - webbid
 
   app:
-    image: "registry.webbid.shop:5000/webbid:${RELEASE_VERSION}"
+    image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
     depends_on:
       - database
     volumes:
@@ -37,7 +37,7 @@ services:
     depends_on:
       - app
     ports:
-      - "80:80"
+      - '80:80'
     networks:
       - webbid
 

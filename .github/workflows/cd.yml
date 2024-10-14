@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-          description: 'Version of the app'
-          required: true
-          type: string
+        description: 'Version of the app'
+        required: true
+        type: string
 
 jobs:
   infer-version:
