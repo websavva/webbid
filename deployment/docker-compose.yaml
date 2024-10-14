@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  databas:
+  database:
     image: postgres:17
     container_name: database
     environment:
@@ -31,7 +31,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_HOST: database
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT}
       SMTP_USER: ${SMTP_USER}
