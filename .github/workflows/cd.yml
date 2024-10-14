@@ -93,12 +93,8 @@ jobs:
           username: ${{ secrets.DEPLOY_SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: 'deployment/docker-compose.yaml,deployment/nginx.conf'
-          target: /app/webbid
-
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          target: /apps/webbid
+          strip_components: 1
 
       - name: Deploy
         uses: appleboy/ssh-action@v1.1.0
