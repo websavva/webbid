@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.5](https://github.com/websavva/webbid/compare/v1.2.4...v1.2.5) (2024-10-14)
+
+
+### Bug Fixes
+
+* **cd:** skip-build input was added to make testing easier ([ee8bf2e](https://github.com/websavva/webbid/commit/ee8bf2ea2edf0fd76725819ef012340373d0313e))
+
 ## [1.2.4](https://github.com/websavva/webbid/compare/v1.2.3...v1.2.4) (2024-10-14)
 
 
