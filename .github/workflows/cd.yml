@@ -133,5 +133,5 @@ jobs:
           script: |
             cd /apps/webbid
             docker login registry.webbid.shop:5000 -u ${{ vars.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-            docker pull image registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
+            docker image pull registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
             docker stack deploy -c docker-compose.yaml webbid
