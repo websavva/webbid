@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.7](https://github.com/websavva/webbid/compare/v1.2.6...v1.2.7) (2024-10-14)
+
+
+### Bug Fixes
+
+* **cd:** Missing server name was added to docker login ([379e9b8](https://github.com/websavva/webbid/commit/379e9b8f3574cec41815ded1e4810c25858bbfbc))
+
 ## [1.2.6](https://github.com/websavva/webbid/compare/v1.2.5...v1.2.6) (2024-10-14)
 
 
