@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.9](https://github.com/websavva/webbid/compare/v1.2.8...v1.2.9) (2024-10-14)
+
+
+### Bug Fixes
+
+* **cd:** Image is pulled explicitly ([b442571](https://github.com/websavva/webbid/commit/b4425710dfe1ae2762000eecb22f07690fb8d4df))
+
 ## [1.2.8](https://github.com/websavva/webbid/compare/v1.2.7...v1.2.8) (2024-10-14)
 
 
