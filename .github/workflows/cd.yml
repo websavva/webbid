@@ -31,7 +31,7 @@ jobs:
           echo "Inferred version: $VERSION"
 
           # Set the output for the current step
-          echo "::set-output name=version::$VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
   build:
     name: Run build and push to registry
