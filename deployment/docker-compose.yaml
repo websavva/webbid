@@ -9,9 +9,13 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - /apps/webbid/database:/var/lib/postgresql/data
+      - ./database:/var/lib/postgresql/data
     networks:
       - webbid
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
   app:
     image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
@@ -19,8 +23,8 @@ services:
     depends_on:
       - database
     volumes:
-      - /apps/webbid/media:/app/media
-      - /apps/webbid/product_files:/app/product_files
+      - ./apps/webbid/media:/app/media
+      - ./product_files:/app/product_files
     networks:
       - webbid
     environment:
@@ -51,18 +55,26 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+          - node.role == manager
 
   web-server:
     image: nginx:alpine
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./ssl-certificates:/ssl-certificates
+      - /ssl-certificates:/ssl-certificates
     depends_on:
       - app
     ports:
       - '80:80'
     networks:
       - webbid
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
 networks:
   webbid:
+    driver: overlay
