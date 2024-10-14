@@ -11,6 +11,12 @@ on:
         required: true
         type: string
 
+      skip-build:
+        description: 'Skips build stage'
+        type: boolean
+        default: false
+
+
 jobs:
   infer-version:
     runs-on: ubuntu-latest
@@ -37,7 +43,7 @@ jobs:
     name: Run build and push to registry
     needs: infer-version
     runs-on: ubuntu-latest
-
+    if: github.event_name == 'release' || inputs.skip-build == 'true'
     steps:
       - uses: actions/checkout@v4
         with:
