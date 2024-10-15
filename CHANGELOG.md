@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.14](https://github.com/websavva/webbid/compare/v1.2.13...v1.2.14) (2024-10-15)
+
+
+### Bug Fixes
+
+* pass is used instead of password for SMTP authentication ([d4f5678](https://github.com/websavva/webbid/commit/d4f56788e2a6bf2cf5864193df6932ba84283545))
+
 ## [1.2.13](https://github.com/websavva/webbid/compare/v1.2.12...v1.2.13) (2024-10-15)
 
 
