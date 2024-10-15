@@ -13,7 +13,7 @@ export const createSMTPransport = async () => {
   const authOptions = !isDev
     ? {
         user,
-        password,
+        pass: password,
       }
     : undefined;
 
