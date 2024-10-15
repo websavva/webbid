@@ -138,7 +138,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /apps/webbid
-            source .env
+            env $(cat .env | xargs)
             docker login registry.webbid.shop:5000 -u ${{ vars.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
             docker image pull registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
             docker stack deploy -c docker-compose.yaml webbid
