@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.17](https://github.com/websavva/webbid/compare/v1.2.16...v1.2.17) (2024-10-15)
+
+
+### Bug Fixes
+
+* **cd:** Env assignment was fixed with export instead of env ([17cb361](https://github.com/websavva/webbid/commit/17cb361540e5fc5b224e20b28ec265cf3440d125))
+
 ## [1.2.16](https://github.com/websavva/webbid/compare/v1.2.15...v1.2.16) (2024-10-15)
 
 
