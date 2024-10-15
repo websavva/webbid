@@ -60,7 +60,7 @@ services:
       STRIPE_ORDER_SESSION_VALIDITY_DURATION: ${STRIPE_ORDER_SESSION_VALIDITY_DURATION}
 
     healthcheck:
-      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health'] # Adjust the health check endpoint
+      test: ['CMD', 'wget', '--spider', '--quiet', 'http://localhost:3000/health']
       interval: 30s
       timeout: 10s
       retries: 3
