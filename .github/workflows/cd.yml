@@ -101,37 +101,44 @@ jobs:
           target: /apps/webbid
           strip_components: 1
 
-      - name: Deploy
+      - name: Creating .env file
         uses: appleboy/ssh-action@v1.1.0
-        env:
-          RELEASE_VERSION: ${{ needs.infer-version.outputs.version }}
-          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-          PAYLOAD_ADMIN_EMAIL: ${{ secrets.PAYLOAD_ADMIN_EMAIL }}
-          PAYLOAD_ADMIN_PASSWORD: ${{ secrets.PAYLOAD_ADMIN_PASSWORD }}
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
-          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          NODE_TLS_REJECT_UNAUTHORIZED: ${{ secrets.NODE_TLS_REJECT_UNAUTHORIZED }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION: ${{ vars.AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION }}
-          NEXT_PUBLIC_COMPANY_NAME: ${{ vars.NEXT_PUBLIC_COMPANY_NAME }}
-          NEXT_PUBLIC_SUPPORT_EMAIL: ${{ vars.NEXT_PUBLIC_SUPPORT_EMAIL }}
-          NEXT_PUBLIC_DOMAIN: ${{ vars.NEXT_PUBLIC_DOMAIN }}
-          NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE: ${{ vars.NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE }}
-          STRIPE_API_SECRET_KEY: ${{ secrets.STRIPE_API_SECRET_KEY }}
-          STRIPE_ORDER_SESSION_VALIDITY_DURATION: ${{ vars.STRIPE_ORDER_SESSION_VALIDITY_DURATION }}
         with:
           host: webbid.shop
           username: ${{ secrets.DEPLOY_SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          envs: PAYLOAD_SECRET,PAYLOAD_ADMIN_EMAIL,PAYLOAD_ADMIN_PASSWORD,POSTGRES_DB,POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_PORT,POSTGRES_HOST,NODE_TLS_REJECT_UNAUTHORIZED,SMTP_HOST,SMTP_PORT,SMTP_USER,SMTP_PASSWORD,AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION,NEXT_PUBLIC_COMPANY_NAME,NEXT_PUBLIC_SUPPORT_EMAIL,NEXT_PUBLIC_DOMAIN,NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE,STRIPE_API_SECRET_KEY,STRIPE_ORDER_SESSION_VALIDITY_DURATION,RELEASE_VERSION
+          script: |
+            echo "RELEASE_VERSION=${{ needs.infer-version.outputs.version }}
+            PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}
+            PAYLOAD_ADMIN_EMAIL=${{ secrets.PAYLOAD_ADMIN_EMAIL }}
+            PAYLOAD_ADMIN_PASSWORD=${{ secrets.PAYLOAD_ADMIN_PASSWORD }}
+            POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+            POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+            POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+            POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
+            POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}
+            NODE_TLS_REJECT_UNAUTHORIZED=${{ secrets.NODE_TLS_REJECT_UNAUTHORIZED }}
+            SMTP_HOST=${{ secrets.SMTP_HOST }}
+            SMTP_PORT=${{ secrets.SMTP_PORT }}
+            SMTP_USER=${{ secrets.SMTP_USER }}
+            SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
+            AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION=${{ vars.AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION }}
+            NEXT_PUBLIC_COMPANY_NAME=${{ vars.NEXT_PUBLIC_COMPANY_NAME }}
+            NEXT_PUBLIC_SUPPORT_EMAIL=${{ vars.NEXT_PUBLIC_SUPPORT_EMAIL }}
+            NEXT_PUBLIC_DOMAIN=${{ vars.NEXT_PUBLIC_DOMAIN }}
+            NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE=${{ vars.NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE }}
+            STRIPE_API_SECRET_KEY=${{ secrets.STRIPE_API_SECRET_KEY }}
+            STRIPE_ORDER_SESSION_VALIDITY_DURATION=${{ vars.STRIPE_ORDER_SESSION_VALIDITY_DURATION }}" > /apps/webbid/.env
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: webbid.shop
+          username: ${{ secrets.DEPLOY_SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /apps/webbid
+            source .env
             docker login registry.webbid.shop:5000 -u ${{ vars.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
             docker image pull registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
             docker stack deploy -c docker-compose.yaml webbid
