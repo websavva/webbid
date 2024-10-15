@@ -18,7 +18,7 @@ services:
         constraints:
           - node.role == manager
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB"]
+      test: ['CMD-SHELL', 'pg_isready -U $POSTGRES_USER -d $POSTGRES_DB']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -60,7 +60,7 @@ services:
       STRIPE_ORDER_SESSION_VALIDITY_DURATION: ${STRIPE_ORDER_SESSION_VALIDITY_DURATION}
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]  # Adjust the health check endpoint
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health'] # Adjust the health check endpoint
       interval: 30s
       timeout: 10s
       retries: 3
