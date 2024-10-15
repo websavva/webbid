@@ -33,10 +33,7 @@ export const Layout = ({ previewText, children }: LayoutProps) => (
           <Section
             style={{
               backgroundColor: '#252f3d',
-              display: 'flex',
               padding: '20px 0',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}
           >
             <Logo width='75' height='auto' />
