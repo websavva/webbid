@@ -68,7 +68,7 @@ jobs:
           tags: registry.webbid.shop:5000/webbid:${{ needs.infer-version.outputs.version }}
           build-args: |
             NODE_ENV=production
-            BUILD_TARGER=production
+            BUILD_TARGET=production
             PAYLOAD_CONFIG_PATH=dist/payload.config.js
             PORT=3000
             NEXT_PUBLIC_SERVER_URL=https://webbid.shop

@@ -8,7 +8,7 @@ export const createSMTPransport = async () => {
     SMTP: { PORT: port, HOST: host, USER: user, PASSWORD: password },
   } = privateEnv;
 
-  const isDev = publicEnv.BUILD_STAGE !== 'production';
+  const isDev = publicEnv.BUILD_TARGET !== 'production';
 
   const authOptions = !isDev
     ? {
