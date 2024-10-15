@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.13](https://github.com/websavva/webbid/compare/v1.2.12...v1.2.13) (2024-10-15)
+
+
+### Bug Fixes
+
+* BUILD_STAGE was replaced with BUILD_TARGET ([f1e5840](https://github.com/websavva/webbid/commit/f1e5840eba8e7be539309cf8d51476db4a28dcc3))
+
 ## [1.2.12](https://github.com/websavva/webbid/compare/v1.2.11...v1.2.12) (2024-10-14)
 
 
