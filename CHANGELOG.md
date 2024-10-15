@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.15](https://github.com/websavva/webbid/compare/v1.2.14...v1.2.15) (2024-10-15)
+
+
+### Bug Fixes
+
+* **cd:** .env file is created dynamically ([228bbfe](https://github.com/websavva/webbid/commit/228bbfe71b1d4b7c9dad743de06bafd501684004))
+* **cd:** Healthchecks were added for docker services ([500a524](https://github.com/websavva/webbid/commit/500a52430b7ab071d37a1beed194701fbb75f76b))
+* **email:** Alignment of the Logo was fixed in Email Layout ([5f31005](https://github.com/websavva/webbid/commit/5f31005f0b1640005c02e657320336e526b6ec2e))
+
 ## [1.2.14](https://github.com/websavva/webbid/compare/v1.2.13...v1.2.14) (2024-10-15)
 
 
