@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.16](https://github.com/websavva/webbid/compare/v1.2.15...v1.2.16) (2024-10-15)
+
+
+### Bug Fixes
+
+* **cd:** env assignment was fixed ([13db21b](https://github.com/websavva/webbid/commit/13db21be2fa382869e74b44fc3c5d52a63d0eabe))
+
 ## [1.2.15](https://github.com/websavva/webbid/compare/v1.2.14...v1.2.15) (2024-10-15)
 
 
