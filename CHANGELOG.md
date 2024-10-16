@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.22](https://github.com/websavva/webbid/compare/v1.2.21...v1.2.22) (2024-10-16)
+
+
+### Bug Fixes
+
+* **cd:** typo was fixed in .env creation ([8c56840](https://github.com/websavva/webbid/commit/8c5684097d5dd6a4c8b43b6defd3500e296280b4))
+
 ## [1.2.21](https://github.com/websavva/webbid/compare/v1.2.20...v1.2.21) (2024-10-16)
 
 
