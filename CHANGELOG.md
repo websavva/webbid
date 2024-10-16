@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.23](https://github.com/websavva/webbid/compare/v1.2.22...v1.2.23) (2024-10-16)
+
+
+### Bug Fixes
+
+* **cd:** deployment-manager script supports registry prune functionality to keep registry clean ([f89c916](https://github.com/websavva/webbid/commit/f89c916db8d74c71a922048544ab79074becb0aa))
+
 ## [1.2.22](https://github.com/websavva/webbid/compare/v1.2.21...v1.2.22) (2024-10-16)
 
 
