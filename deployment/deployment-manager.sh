@@ -2,6 +2,54 @@
 
 export $(cat /apps/webbid/.env | xargs)
 
+pruneRegistry() {
+  # Variables
+  local REGISTRY_URL="registry.webbid.shop:5000"  # Replace with your registry URL
+  local IMAGE_NAME="webbid"      # Replace with your image name
+  local KEEP_VERSIONS=3           # Number of versions to keep
+
+  # Get a list of all tags for the image from the registry
+  tags=$(curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD -s "https://$REGISTRY_URL/v2/$IMAGE_NAME/tags/list" | jq -r '.tags[]')
+
+  # Check if jq is installed
+  if ! [ -x "$(command -v jq)" ]; then
+    echo 'Error: jq is not installed.' >&2
+    exit 1
+  fi
+
+  # Sort tags (assuming they are semantic versions, adjust sorting logic if needed)
+  sorted_tags=$(echo "$tags" | sort -V)
+
+  # Count the total number of tags
+  total_tags=$(echo "$sorted_tags" | wc -l)
+
+  # Calculate the number of tags to delete (all tags - KEEP_VERSIONS)
+  delete_count=$((total_tags - KEEP_VERSIONS))
+  tags_to_delete=$(echo "$sorted_tags" | head -n "$delete_count")
+
+  echo $sorted_tags
+
+  # # If there are more than KEEP_VERSIONS tags, delete the older ones
+  if [ "$delete_count" -gt 0 ]; then
+    tags_to_delete=$(echo "$sorted_tags" | head -n "$delete_count")
+
+    # Loop through the tags to delete
+    for tag in $tags_to_delete; do
+      echo "Deleting image: $IMAGE_NAME:$tag"
+
+      # Delete the manifest for the tag (assuming registry v2 API)
+      digest=$(curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD -sI -H "Accept: application/vnd.oci.image.index.v1+json" \
+        "https://$REGISTRY_URL/v2/$IMAGE_NAME/manifests/$tag" | grep -i "Docker-Content-Digest" | awk '{print $2}' | tr -d '\r')
+
+      curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD  -s -X DELETE "https://$REGISTRY_URL/v2/$IMAGE_NAME/manifests/$digest"
+    done
+
+    docker exec -it $(docker ps -q -f name=registry) bin/registry garbage-collect -m /etc/docker/registry/config.yml
+    docker image rm $REGISTRY_URL/app:$tag
+  else
+    echo "No images to delete. Total images ($total_tags) <= versions to keep ($KEEP_VERSIONS)"
+  fi
+}
 getDatabaseContainerId() {
   local containerId=$(docker container ps -q -f name=webbid_database.1 -f status=running)
 
@@ -122,6 +170,9 @@ case "$1" in
     ;;
   deploy)
     deployApp
+    ;;
+  prune-registry)
+    pruneRegistry
     ;;
 
   *)
