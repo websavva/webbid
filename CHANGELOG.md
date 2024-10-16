@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.19](https://github.com/websavva/webbid/compare/v1.2.18...v1.2.19) (2024-10-16)
+
+
+### Bug Fixes
+
+* **cd:** Migration logic was fixed again ([3b3f602](https://github.com/websavva/webbid/commit/3b3f6025be643a2fb3262500b8b5f107928bb09d))
+
 ## [1.2.18](https://github.com/websavva/webbid/compare/v1.2.17...v1.2.18) (2024-10-16)
 
 
