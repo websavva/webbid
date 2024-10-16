@@ -24,42 +24,6 @@ services:
       retries: 3
       start_period: 5s
 
-  app_migrations:
-    image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
-    depends_on:
-      - database
-    volumes:
-      - type: bind
-        source: ./media
-        target: /app/media
-
-      - type: bind
-        source: ./product_files
-        target: /app/product_files
-    networks:
-      - webbid
-    environment:
-      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
-      PAYLOAD_ADMIN_EMAIL: ${PAYLOAD_ADMIN_EMAIL}
-      PAYLOAD_ADMIN_PASSWORD: ${PAYLOAD_ADMIN_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_PORT: ${POSTGRES_PORT}
-      POSTGRES_HOST: database
-      SMTP_HOST: ${SMTP_HOST}
-      SMTP_PORT: ${SMTP_PORT}
-      SMTP_USER: ${SMTP_USER}
-      SMTP_PASSWORD: ${SMTP_PASSWORD}
-      AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION: ${AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION}
-      NEXT_PUBLIC_COMPANY_NAME: ${NEXT_PUBLIC_COMPANY_NAME}
-      NEXT_PUBLIC_SUPPORT_EMAIL: ${NEXT_PUBLIC_SUPPORT_EMAIL}
-      NEXT_PUBLIC_DOMAIN: ${NEXT_PUBLIC_DOMAIN}
-      NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE: ${NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE}
-      STRIPE_API_SECRET_KEY: ${STRIPE_API_SECRET_KEY}
-      STRIPE_ORDER_SESSION_VALIDITY_DURATION: ${STRIPE_ORDER_SESSION_VALIDITY_DURATION}
-    command: ./node_modules/.bin/payload migrate
-
   app:
     image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
     depends_on:

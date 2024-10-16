@@ -30,7 +30,8 @@ backupApp() {
   # Creating database backup and copying it into current backup folder
   local databaseContainerId=$(getDatabaseContainerId)
 
-  docker exec -it $databaseContainerId pg_dump -U $POSTGRES_USER -d $POSTGRES_DB  > database_backup.sql
+  docker exec -t $databaseContainerId pg_dump -U $POSTGRES_USER -F c -b -v -f /database_backup.sql $POSTGRES_DB
+
 
 
   docker cp $databaseContainerId:/database_backup.sql $currentBackupPath
@@ -63,14 +64,19 @@ applyBackup() {
 
   # stopping app service
   docker service scale webbid_app=0
+  docker service scale webbid_app_migrations=0
 
   # restoring database
   databaseContainerId=$(getDatabaseContainerId)
 
   docker cp $fulUnzippedPath/database_backup.sql $databaseContainerId:/
 
-  docker exec -it $databaseContainerId psql -U $POSTGRES_USER -c "DROP DATABASE IF EXISTS $POSTGRES_DB;"
-  docker exec -it $databaseContainerId bash -c "psql -U $POSTGRES_USER $POSTGRES_DB < /database_backup.sql"
+  docker exec -it $databaseContainerId psql -U $POSTGRES_USER postgres -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$POSTGRES_DB' AND pid <> pg_backend_pid();"
+  docker exec -it $databaseContainerId psql -U $POSTGRES_USER postgres -c "DROP DATABASE IF EXISTS $POSTGRES_DB;"
+  docker exec -it $databaseContainerId psql -U $POSTGRES_USER postgres -c "CREATE DATABASE $POSTGRES_DB;"
+  docker exec -i $databaseContainerId psql -U $POSTGRES_USER -d $POSTGRES_DB -f /database_backup.sql
+
+
   docker exec -it $databaseContainerId rm /database_backup.sql
 
   # restarting database service
@@ -94,6 +100,15 @@ applyBackup() {
   ln -s /apps/webbid/backups/$backupFileName /apps/webbid/backups/active
 }
 
+removeApp() {
+  docker stack rm webbid
+  rm -rf /apps/webbid/database/* /apps/webbid/media/* /apps/webbid/product_files/*
+}
+
+deployApp() {
+  docker stack deploy -c /apps/webbid/docker-compose.yaml webbid
+}
+
 
 case "$1" in
   backup)
@@ -102,9 +117,15 @@ case "$1" in
   restore)
     applyBackup $2
     ;;
+  remove)
+    removeApp
+    ;;
+  deploy)
+    deployApp
+    ;;
 
   *)
-    echo "Usage: $0 {backup|restore|prune-registry}"
+    echo "Usage: $0 {backup|restore|prune-registry|deploy|remove}"
     ;;
 esac
 
