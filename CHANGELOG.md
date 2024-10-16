@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.21](https://github.com/websavva/webbid/compare/v1.2.20...v1.2.21) (2024-10-16)
+
+
+### Bug Fixes
+
+* **cd:** .env file creation was fixed ([67c0089](https://github.com/websavva/webbid/commit/67c00890b75729e62c9b29a3a2418d8277e247e0))
+
 ## [1.2.20](https://github.com/websavva/webbid/compare/v1.2.19...v1.2.20) (2024-10-16)
 
 
