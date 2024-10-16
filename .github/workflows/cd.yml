@@ -128,9 +128,9 @@ jobs:
             NEXT_PUBLIC_DOMAIN=${{ vars.NEXT_PUBLIC_DOMAIN }}
             NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE=${{ vars.NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE }}
             STRIPE_API_SECRET_KEY=${{ secrets.STRIPE_API_SECRET_KEY }}
-            STRIPE_ORDER_SESSION_VALIDITY_DURATION=${{ vars.STRIPE_ORDER_SESSION_VALIDITY_DURATION }}" > /apps/webbid/.env
+            STRIPE_ORDER_SESSION_VALIDITY_DURATION=${{ vars.STRIPE_ORDER_SESSION_VALIDITY_DURATION }}
             DOCKER_REGISTRY_USERNAME=${{ vars.DOCKER_REGISTRY_USERNAME }}
-            DOCKER_REGISTRY_PASSWORD=${{ secrets.DOCKER_REGISTRY_PASSWORD }} > /apps/webbid/.env
+            DOCKER_REGISTRY_PASSWORD=${{ secrets.DOCKER_REGISTRY_PASSWORD }}" > /apps/webbid/.env
 
       - name: Deploy
         uses: appleboy/ssh-action@v1.1.0

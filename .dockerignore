@@ -30,3 +30,7 @@ product_files
 .env
 .env.*
 
+release-please-config.json
+.release-please-maifest.json
+CHANGELOG.md
+
