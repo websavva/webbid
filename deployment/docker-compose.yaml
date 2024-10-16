@@ -60,7 +60,8 @@ services:
       STRIPE_ORDER_SESSION_VALIDITY_DURATION: ${STRIPE_ORDER_SESSION_VALIDITY_DURATION}
 
     healthcheck:
-      test: ['CMD', 'wget', '--spider', '--quiet', 'http://localhost:3000/health']
+      test:
+        ['CMD', 'wget', '--spider', '--quiet', 'http://localhost:3000/health']
       interval: 60s
       timeout: 60s
       retries: 3

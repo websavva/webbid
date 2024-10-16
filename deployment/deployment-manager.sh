@@ -64,7 +64,6 @@ applyBackup() {
 
   # stopping app service
   docker service scale webbid_app=0
-  docker service scale webbid_app_migrations=0
 
   # restoring database
   databaseContainerId=$(getDatabaseContainerId)
@@ -109,6 +108,7 @@ deployApp() {
   docker stack deploy -c /apps/webbid/docker-compose.yaml webbid
 }
 
+docker login registry.webbid.shop:5000 -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD
 
 case "$1" in
   backup)
