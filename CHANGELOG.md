@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.18](https://github.com/websavva/webbid/compare/v1.2.17...v1.2.18) (2024-10-16)
+
+
+### Bug Fixes
+
+* **cd:** Migration run is moved into standalone service ([eac0db6](https://github.com/websavva/webbid/commit/eac0db6a5345e36ef7dd740bf73a6127dee158e1))
+* **cd:** missing curl was replaced with wget in healthcheck for app service ([ebbae72](https://github.com/websavva/webbid/commit/ebbae72d5f70cfe093d0ea8a5cc3784c90eb2253))
+
 ## [1.2.17](https://github.com/websavva/webbid/compare/v1.2.16...v1.2.17) (2024-10-15)
 
 
