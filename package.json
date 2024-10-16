@@ -23,7 +23,7 @@
     "migrate:down": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:down",
     "dev": "jiti scripts/build --watch",
     "build": "jiti scripts/build",
-    "start": "PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate && node dist/index.js",
+    "start": "node dist/index.js",
     "lint": "prettier --check . && eslint . --ext ts,tsx --report-unused-disable-directives",
     "lint:fix": "prettier --write . && eslint . --ext ts,tsx --fix",
     "typecheck": "tsc --noEmit",
