@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.20](https://github.com/websavva/webbid/compare/v1.2.19...v1.2.20) (2024-10-16)
+
+
+### Bug Fixes
+
+* **cd:** Docker registry authentication was added for backup restoration ([0f721e5](https://github.com/websavva/webbid/commit/0f721e53d585bd3842f8ca9cc770206a49a039a2))
+
 ## [1.2.19](https://github.com/websavva/webbid/compare/v1.2.18...v1.2.19) (2024-10-16)
 
 
