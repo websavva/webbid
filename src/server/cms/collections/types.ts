@@ -105,7 +105,12 @@ export interface Product {
   createdAt: string;
 
   // virtual fields
-  imageUrls: string[];
+  imageUrls: {
+    thumbnail: string[];
+    tablet: string[];
+    card: string[];
+    original: string[];
+  }
   categoryLabel: string;
 }
 /**

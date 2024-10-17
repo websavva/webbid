@@ -126,8 +126,8 @@ export default async function ProductPage({
         </div>
 
         <ImageSlider
-          imageUrls={imageUrls}
-          className='max-h-[400px] max-lg:row-start-1 max-lg:row-end-2 lg:max-h-[700px]'
+          imageUrls={imageUrls.tablet}
+          className='h-[250px] max-lg:row-start-1 max-lg:row-end-2 md:h-[350px] lg:h-[700px]'
         />
       </section>
 

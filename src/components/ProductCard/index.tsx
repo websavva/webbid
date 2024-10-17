@@ -51,7 +51,9 @@ export const ProductCard = ({
   ...attrs
 }: ProductCardProps) => {
   const {
-    imageUrls: { 0: thumbnailUrl = '' },
+    imageUrls: {
+      card: { 0: thumbnailUrl = '' },
+    },
 
     categoryLabel,
 
