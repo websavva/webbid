@@ -53,9 +53,9 @@ export const ProductReelsCard = ({
       href={`/products/${id}`}
       className={cn('flex flex-col', className)}
     >
-      {imageUrls.length && (
+      {imageUrls.card.length && (
         <ImageSlider
-          imageUrls={imageUrls}
+          imageUrls={imageUrls.card}
           className='mb-6 h-72 lg:max-w-none'
         />
       )}

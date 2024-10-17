@@ -1,4 +1,4 @@
-import type { CSSProperties, FunctionComponent } from 'react';
+import type { CSSProperties } from 'react';
 import { Suspense } from 'react';
 
 import type { DefineProps } from '@/types';
@@ -13,7 +13,7 @@ export * from './Card';
 export type ProductReelsProps = DefineProps<
   {
     count?: number;
-    EmptyPlaceholder?: FunctionComponent<void>;
+    EmptyPlaceholder?: () => JSX.Element;
   } & Partial<
     Pick<GetProductsQuery, 'category' | 'except' | 'sortBy' | 'sortDir'>
   >
@@ -72,16 +72,14 @@ const ProductList = async ({
 
   if (products.length) {
     return (
-      <>
-        <ProductReelsGrid {...attrs} count={count}>
-          {products.map((product) => (
-            <ProductReelsCard key={product.id} product={product} />
-          ))}
-        </ProductReelsGrid>
-      </>
+      <ProductReelsGrid {...attrs} count={count}>
+        {products.map((product) => (
+          <ProductReelsCard key={product.id} product={product} />
+        ))}
+      </ProductReelsGrid>
     );
   } else {
-    return <>{EmptyPlaceholder()}</>;
+    return <EmptyPlaceholder />;
   }
 };
 

@@ -27,7 +27,7 @@ export const OrderCard = ({ className, order, ...attrs }: OrderCardProps) => {
   ) as Product[];
 
   const [thumbnailUrl] = validProducts
-    .map((product) => product.imageUrls)
+    .map((product) => product.imageUrls.card)
     .flat();
 
   const { totalPrice } = calculatOrderSum(validProducts);

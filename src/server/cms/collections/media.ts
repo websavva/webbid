@@ -1,6 +1,6 @@
 import { join } from 'path';
 
-import type { CollectionConfig, Access } from 'payload/types';
+import type { CollectionConfig, Access, ImageSize } from 'payload/types';
 
 import { isAdmin, isAuthenticated, mergeCollectionAccesses } from '../access';
 import { addUser } from '../hooks';
@@ -17,6 +17,27 @@ const isAdminOrHasAccessToImages = mergeCollectionAccesses(
   isAdmin,
   hasAccessToImages,
 );
+
+export const MediaImageSizes = [
+  {
+    name: 'thumbnail',
+    width: 400,
+    height: 300,
+    position: 'centre',
+  },
+  {
+    name: 'card',
+    width: 768,
+    height: 1024,
+    position: 'centre',
+  },
+  {
+    name: 'tablet',
+    width: 1024,
+    height: undefined,
+    position: 'centre',
+  },
+] as const;
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -36,26 +57,7 @@ export const Media: CollectionConfig = {
 
     staticURL: '/media',
 
-    imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 400,
-        height: 300,
-        position: 'centre',
-      },
-      {
-        name: 'card',
-        width: 768,
-        height: 1024,
-        position: 'centre',
-      },
-      {
-        name: 'tablet',
-        width: 1024,
-        height: undefined,
-        position: 'centre',
-      },
-    ],
+    imageSizes: MediaImageSizes as unknown as ImageSize[],
     mimeTypes: ['image/*'],
   },
 

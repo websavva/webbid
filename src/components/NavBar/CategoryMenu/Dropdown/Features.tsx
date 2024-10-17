@@ -42,8 +42,8 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
       {features.map(({ name, href, image }) => {
         let derivedImageUrl: string | null = null;
 
-        if (image && typeof image === 'object') {
-          derivedImageUrl = image.url!;
+        if (image && typeof image === 'object' && image.sizes?.card?.url) {
+          derivedImageUrl = image.sizes.card.url;
         }
 
         return (

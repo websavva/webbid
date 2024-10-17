@@ -6,19 +6,31 @@ import type {
 
 import { stripeApi } from '#server/stripe/api';
 
-import type { Product } from '../types';
+import type { Media, Product } from '../types';
+import { MediaImageSizes } from '../media';
+
+const imageSizeNames = [
+  ...MediaImageSizes.map(({ name }) => {
+    return name;
+  }),
+  'original',
+] as const;
 
 export const addImageUrls: AfterReadHook<Product> = ({ doc: product }) => {
-  const imageUrls = product.images
-    .map(({ image }) => {
-      if (typeof image === 'object' && image.url) {
-        return image.url!;
-      } else {
-        return null;
-      }
-    })
-    .filter(Boolean) as string[];
+  const allProductImages = product.images.map(({ image }) => image) as Media[];
 
+  const imageUrls = Object.fromEntries(
+    imageSizeNames.map((imageSizeName) => {
+      let urls: Array<string | null | undefined>;
+      if (imageSizeName === 'original') {
+        urls = allProductImages.map(({ url }) => url);
+      } else {
+        urls = allProductImages.map(({ sizes }) => sizes![imageSizeName]?.url);
+      }
+
+      return [imageSizeName, urls.filter(Boolean)];
+    }),
+  );
   return {
     ...product,
     imageUrls,
