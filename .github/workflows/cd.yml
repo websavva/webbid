@@ -19,6 +19,7 @@ on:
 jobs:
   infer-version:
     runs-on: ubuntu-latest
+    name: Infer version
     outputs:
       version: ${{ steps.set_version.outputs.version }}
     steps:
@@ -71,7 +72,11 @@ jobs:
             BUILD_TARGET=production
             PAYLOAD_CONFIG_PATH=dist/payload.config.js
             PORT=3000
-            NEXT_PUBLIC_SERVER_URL=https://webbid.shop
+            NEXT_PUBLIC_SERVER_URL=${{ vars.NEXT_PUBLIC_SERVER_URL }}
+            NEXT_PUBLIC_COMPANY_NAME=${{ vars.NEXT_PUBLIC_COMPANY_NAME }}
+            NEXT_PUBLIC_SUPPORT_EMAIL=${{ vars.NEXT_PUBLIC_SUPPORT_EMAIL }}
+            NEXT_PUBLIC_DOMAIN=${{ vars.NEXT_PUBLIC_DOMAIN }}
+            NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE=${{ vars.NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE }}
 
       - name: Inspect
         run: |
@@ -84,7 +89,7 @@ jobs:
 
     environment:
       name: Production
-      url: https://webbid.shop
+      url: ${{ vars.NEXT_PUBLIC_SERVER_URL }}
 
     steps:
       - uses: actions/checkout@v4
@@ -123,10 +128,6 @@ jobs:
             SMTP_USER=${{ secrets.SMTP_USER }}
             SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}
             AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION=${{ vars.AUTH_FORGOT_PASSWORD_TOKEN_VALIDITY_DURATION }}
-            NEXT_PUBLIC_COMPANY_NAME=${{ vars.NEXT_PUBLIC_COMPANY_NAME }}
-            NEXT_PUBLIC_SUPPORT_EMAIL=${{ vars.NEXT_PUBLIC_SUPPORT_EMAIL }}
-            NEXT_PUBLIC_DOMAIN=${{ vars.NEXT_PUBLIC_DOMAIN }}
-            NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE=${{ vars.NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE }}
             STRIPE_API_SECRET_KEY=${{ secrets.STRIPE_API_SECRET_KEY }}
             STRIPE_ORDER_SESSION_VALIDITY_DURATION=${{ vars.STRIPE_ORDER_SESSION_VALIDITY_DURATION }}
             DOCKER_REGISTRY_USERNAME=${{ vars.DOCKER_REGISTRY_USERNAME }}
