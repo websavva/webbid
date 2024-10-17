@@ -89,7 +89,7 @@ jobs:
 
     environment:
       name: Production
-      url: ${{ vars.NEXT_PUBLIC_SERVER_URL }}
+      url: https://webbid.shop
 
     steps:
       - uses: actions/checkout@v4
