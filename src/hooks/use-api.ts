@@ -89,17 +89,24 @@ export const useApi = <Args extends any[], ResponseData>(
   {
     onSuccess,
     onError,
+    initialStatus = UseApiStatus.Initial,
   }: {
     onSuccess?: (data: ResponseData) => any;
     onError?: (error: Error) => any;
+    initialStatus?: UseApiStatus;
   } = {},
 ) => {
+  const derivedDefaultState = {
+    ...DEFAULT_STATE,
+    status: initialStatus,
+  };
+
   const [apiState, dispatch] = useReducer(
     (_: UseApiState<ResponseData>, action: ReducerAction<ResponseData>) => {
       switch (action.type) {
         case UseApiStatus.Success:
           return {
-            ...DEFAULT_STATE,
+            ...derivedDefaultState,
 
             status: UseApiStatus.Success,
             data: action.payload,
@@ -107,7 +114,7 @@ export const useApi = <Args extends any[], ResponseData>(
 
         case UseApiStatus.Error:
           return {
-            ...DEFAULT_STATE,
+            ...derivedDefaultState,
 
             status: UseApiStatus.Error,
             error: action.payload,
@@ -115,7 +122,7 @@ export const useApi = <Args extends any[], ResponseData>(
 
         case UseApiStatus.Pending:
           return {
-            ...DEFAULT_STATE,
+            ...derivedDefaultState,
 
             status: UseApiStatus.Pending,
             pending: true,
@@ -124,12 +131,12 @@ export const useApi = <Args extends any[], ResponseData>(
         default:
         case UseApiStatus.Initial:
           return {
-            ...DEFAULT_STATE,
+            ...derivedDefaultState,
           };
       }
     },
     {
-      ...DEFAULT_STATE,
+      ...derivedDefaultState,
     },
   );
 

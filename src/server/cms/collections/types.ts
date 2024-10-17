@@ -110,7 +110,7 @@ export interface Product {
     tablet: string[];
     card: string[];
     original: string[];
-  }
+  };
   categoryLabel: string;
 }
 /**

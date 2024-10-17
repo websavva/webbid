@@ -6,7 +6,7 @@ import { Loader2Icon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from '@/hooks/use-auth';
-import { useApi } from '@/hooks/use-api';
+import { useApi, UseApiStatus } from '@/hooks/use-api';
 import { Alert, AlertTitle, AlertDescription } from '@/components/UI/Alert';
 import { Button } from '@/components/UI/Button';
 import { wait } from '@/lib/utils/wait';
@@ -35,6 +35,7 @@ export default function LogoutPage() {
     },
     {
       onSuccess: () => router.push('/'),
+      initialStatus: UseApiStatus.Pending,
     },
   );
 
