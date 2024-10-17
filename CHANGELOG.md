@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.24](https://github.com/websavva/webbid/compare/v1.2.23...v1.2.24) (2024-10-17)
+
+
+### Bug Fixes
+
+* **build:** All NEXT_PUBLIC env vars were moved to build env vars ([6d4b2e4](https://github.com/websavva/webbid/commit/6d4b2e4f02a5707a1af95cbc8091d461193972e6))
+
 ## [1.2.23](https://github.com/websavva/webbid/compare/v1.2.22...v1.2.23) (2024-10-16)
 
 
