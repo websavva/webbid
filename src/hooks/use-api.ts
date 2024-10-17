@@ -178,8 +178,6 @@ export const useApi = <Args extends any[], ResponseData>(
     }),
   );
 
-  window.asd;
-
   return {
     ...apiState,
 
