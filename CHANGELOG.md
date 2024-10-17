@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/websavva/webbid/compare/v1.2.24...v1.3.0) (2024-10-17)
+
+
+### Features
+
+* imageUrls are grouped by sizes for better optimization ([7644c66](https://github.com/websavva/webbid/commit/7644c66a66a89068cc8e03cdc6be8e1409c63a4b))
+
+
+### Bug Fixes
+
+* **logout:** Initial status is set to pending on /logout page to fix unnecessary transition trigger ([1982ca5](https://github.com/websavva/webbid/commit/1982ca5bd97d01c0d7c36a154d3b583fb9894314))
+* **products:** Loading skeleton grid was fixed for mobile screens ([2a3bfcb](https://github.com/websavva/webbid/commit/2a3bfcb7da1d9a45835fd48730e9ab5e359374f0))
+* Type of EmptyPlaceholder was adjusted in ProductReels ([a79fc2a](https://github.com/websavva/webbid/commit/a79fc2a6b3aafe6f2c89aa41fc1986669f61e80f))
+
 ## [1.2.24](https://github.com/websavva/webbid/compare/v1.2.23...v1.2.24) (2024-10-17)
 
 
