@@ -86,7 +86,11 @@ export function useSwipe<E extends HTMLElement>(
   const { abs } = Math;
 
   let direction: UseSwipeDirection;
-  const wasThresholdExceeded = hasThresholdExceeded(coordsStart, coordsEnd, threshold);
+  const wasThresholdExceeded = hasThresholdExceeded(
+    coordsStart,
+    coordsEnd,
+    threshold,
+  );
 
   if (!wasThresholdExceeded) {
     direction = 'none';
