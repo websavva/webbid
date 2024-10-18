@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
+import { useSwipe, type UseSwipeDirection } from '@/hooks/use-swipe';
 
 import { ImageSliderControl } from './Control';
 import { ImageSliderPagination } from './Pagination';
@@ -34,29 +35,47 @@ export const ImageSlider = ({
   const isLastSlide = currentSlideIndex === slidesCount - 1;
   const isFirstSlide = currentSlideIndex === 0;
 
-  function switchToSlide(slideIndex = 0) {
-    setCurrentSlideIndex(slideIndex);
-  }
+  const switchToSlide = useCallback(
+    (slideIndex = 0) => {
+      setCurrentSlideIndex(slideIndex);
+    },
+    [setCurrentSlideIndex],
+  );
 
-  function toNextSlide() {
+  const toNextSlide = useCallback(() => {
     if (isLastSlide) return;
 
     setCurrentSlideIndex((currentSlide) => currentSlide + 1);
-  }
+  }, [isLastSlide, setCurrentSlideIndex]);
 
-  function toPrevSlide() {
+  const toPrevSlide = useCallback(() => {
     if (isFirstSlide) return;
 
     setCurrentSlideIndex((currentSlide) => currentSlide - 1);
-  }
+  }, [isFirstSlide, setCurrentSlideIndex]);
 
   const viewStyle = {
     transform: `translateX(-${currentSlideIndex * 100}%)`,
   };
 
+  const rootElementRef = useRef<HTMLDivElement>(null);
+
+  const onSwipeEnd = useCallback(
+    (_: TouchEvent, direction: UseSwipeDirection) => {
+      if (direction == 'left') toNextSlide();
+      else if (direction == 'right') toPrevSlide();
+    },
+    [toPrevSlide, toNextSlide],
+  );
+
+  useSwipe(rootElementRef, {
+    onSwipeEnd,
+  });
+
   return (
     <div
       {...attrs}
+      ref={rootElementRef}
       className={cn(
         'group relative select-none overflow-hidden rounded-2xl',
         className,
