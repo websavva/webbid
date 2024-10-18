@@ -41,6 +41,19 @@ const getTouchEventCoords = (e: TouchEvent) => [
   e.touches[0].clientY,
 ];
 
+const hasThresholdExceeded = (
+  coordsStart: Position,
+  coordsEnd: Position,
+  threshold: number,
+) => {
+  const diffX = coordsStart.x - coordsEnd.x;
+  const diffY = coordsStart.y - coordsEnd.y;
+
+  const { max, abs } = Math;
+
+  return max(abs(diffX), abs(diffY)) >= threshold;
+};
+
 export interface UseSwipeReturn {
   isSwiping: boolean;
   direction: UseSwipeDirection;
@@ -68,21 +81,22 @@ export function useSwipe<E extends HTMLElement>(
   const diffX = coordsStart.x - coordsEnd.x;
   const diffY = coordsStart.y - coordsEnd.y;
 
-  const { max, abs } = Math;
-
-  const isThresholdExceeded = max(abs(diffX), abs(diffY)) >= threshold;
-
   const [isSwiping, setIsSwiping] = useState(false);
 
-  let direction: UseSwipeDirection;
+  const { abs } = Math;
 
-  if (!isThresholdExceeded) {
+  let direction: UseSwipeDirection;
+  const wasThresholdExceeded = hasThresholdExceeded(coordsStart, coordsEnd, threshold);
+
+  if (!wasThresholdExceeded) {
     direction = 'none';
   } else if (abs(diffX) > abs(diffY)) {
     direction = diffX > 0 ? 'left' : 'right';
   } else {
     direction = diffY > 0 ? 'up' : 'down';
   }
+
+  debugger;
 
   const updateCoordsStart = useCallback(
     (x: number, y: number) => {
@@ -112,6 +126,7 @@ export function useSwipe<E extends HTMLElement>(
   const onTouchStart = useCallback(
     (e: TouchEvent) => {
       if (e.touches.length !== 1) return;
+
       if (listenerOptions.capture && !listenerOptions.passive)
         e.preventDefault();
       const [x, y] = getTouchEventCoords(e);
@@ -126,13 +141,22 @@ export function useSwipe<E extends HTMLElement>(
     (e: TouchEvent) => {
       if (e.touches.length !== 1) return;
       const [x, y] = getTouchEventCoords(e);
+
+      const newCoordsEnd = {
+        x,
+        y,
+      };
+
       updateCoordsEnd(x, y);
 
-      if (!isSwiping && isThresholdExceeded) setIsSwiping(true);
-
-      if (isSwiping) onSwipe?.(e);
+      if (isSwiping) {
+        onSwipe?.(e);
+      } else if (hasThresholdExceeded(coordsStart, newCoordsEnd, threshold)) {
+        setIsSwiping(true);
+        onSwipe?.(e);
+      }
     },
-    [updateCoordsEnd, setIsSwiping, isSwiping, isThresholdExceeded, onSwipe],
+    [updateCoordsEnd, setIsSwiping, isSwiping, coordsStart, threshold, onSwipe],
   );
 
   const onTouchEnd = useCallback(
