@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/websavva/webbid/compare/v1.3.0...v1.4.0) (2024-10-18)
+
+
+### Features
+
+* **hooks:** useSwipe hook was implemented to enable swiping on mobile screens for ImageSlider ([b27c7dc](https://github.com/websavva/webbid/commit/b27c7dc5dc6e5cf6fa016155280c7fde0d9af5bd))
+
+
+### Bug Fixes
+
+* **collections:** imageUrls are generated safely with respect to types ([4159139](https://github.com/websavva/webbid/commit/4159139dc62658d1f50e871a63979ebddf52c500))
+
 ## [1.3.0](https://github.com/websavva/webbid/compare/v1.2.24...v1.3.0) (2024-10-17)
 
 
