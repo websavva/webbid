@@ -17,15 +17,24 @@ const imageSizeNames = [
 ] as const;
 
 export const addImageUrls: AfterReadHook<Product> = ({ doc: product }) => {
-  const allProductImages = product.images.map(({ image }) => image) as Media[];
+  const allProductImages = product.images.map(({ image }) => image);
+
+  const areImagesNumeric = allProductImages.some(
+    (image) => typeof image === 'number',
+  );
 
   const imageUrls = Object.fromEntries(
     imageSizeNames.map((imageSizeName) => {
-      let urls: Array<string | null | undefined>;
-      if (imageSizeName === 'original') {
-        urls = allProductImages.map(({ url }) => url);
-      } else {
-        urls = allProductImages.map(({ sizes }) => sizes![imageSizeName]?.url);
+      let urls: Array<string | null | undefined> = [];
+
+      if (!areImagesNumeric) {
+        if (imageSizeName === 'original') {
+          urls = (allProductImages as Media[]).map(({ url }) => url);
+        } else {
+          urls = (allProductImages as Media[]).map(
+            ({ sizes }) => sizes![imageSizeName]?.url,
+          );
+        }
       }
 
       return [imageSizeName, urls.filter(Boolean)];
