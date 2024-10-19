@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/websavva/webbid/compare/v1.4.0...v1.5.0) (2024-10-19)
+
+
+### Features
+
+* **cd:** Rollback script was implemented ([c404795](https://github.com/websavva/webbid/commit/c40479536bb8b7e3475083dcfe889bfeeb2cfe7a))
+
+
+### Bug Fixes
+
+* Image removal was fixed in deployment-manager ([035ce37](https://github.com/websavva/webbid/commit/035ce37f20f78846cdcf6754c33ea38f734ea578))
+
 ## [1.4.0](https://github.com/websavva/webbid/compare/v1.3.0...v1.4.0) (2024-10-18)
 
 
