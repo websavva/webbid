@@ -45,7 +45,7 @@ pruneRegistry() {
     done
 
     docker exec -it $(docker ps -q -f name=registry) bin/registry garbage-collect -m /etc/docker/registry/config.yml
-    docker image rm $REGISTRY_URL/app:$tag
+    docker image rm $REGISTRY_URL/webbid:$tag
   else
     echo "No images to delete. Total images ($total_tags) <= versions to keep ($KEEP_VERSIONS)"
   fi
