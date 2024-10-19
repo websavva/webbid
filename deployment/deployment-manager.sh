@@ -2,14 +2,15 @@
 
 export $(cat /apps/webbid/.env | xargs)
 
+DOCKER_REGISTRY_URL="registry.webbid.shop:5000"
+
 pruneRegistry() {
   # Variables
-  local REGISTRY_URL="registry.webbid.shop:5000"  # Replace with your registry URL
-  local IMAGE_NAME="webbid"      # Replace with your image name
-  local KEEP_VERSIONS=3           # Number of versions to keep
+  local IMAGE_NAME="webbid"
+  local KEEP_VERSIONS=3 # Number of versions to keep
 
   # Get a list of all tags for the image from the registry
-  tags=$(curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD -s "https://$REGISTRY_URL/v2/$IMAGE_NAME/tags/list" | jq -r '.tags[]')
+  tags=$(curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD -s "https://$DOCKER_REGISTRY_URL/v2/$IMAGE_NAME/tags/list" | jq -r '.tags[]')
 
   # Check if jq is installed
   if ! [ -x "$(command -v jq)" ]; then
@@ -39,17 +40,18 @@ pruneRegistry() {
 
       # Delete the manifest for the tag (assuming registry v2 API)
       digest=$(curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD -sI -H "Accept: application/vnd.oci.image.index.v1+json" \
-        "https://$REGISTRY_URL/v2/$IMAGE_NAME/manifests/$tag" | grep -i "Docker-Content-Digest" | awk '{print $2}' | tr -d '\r')
+        "https://$DOCKER_REGISTRY_URL/v2/$IMAGE_NAME/manifests/$tag" | grep -i "Docker-Content-Digest" | awk '{print $2}' | tr -d '\r')
 
-      curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD  -s -X DELETE "https://$REGISTRY_URL/v2/$IMAGE_NAME/manifests/$digest"
+      curl -u $DOCKER_REGISTRY_USERNAME:$DOCKER_REGISTRY_PASSWORD  -s -X DELETE "https://$DOCKER_REGISTRY_URL/v2/$IMAGE_NAME/manifests/$digest"
     done
 
     docker exec -it $(docker ps -q -f name=registry) bin/registry garbage-collect -m /etc/docker/registry/config.yml
-    docker image rm $REGISTRY_URL/webbid:$tag
+    docker image rm $DOCKER_REGISTRY_URL/webbid:$tag
   else
     echo "No images to delete. Total images ($total_tags) <= versions to keep ($KEEP_VERSIONS)"
   fi
 }
+
 getDatabaseContainerId() {
   local containerId=$(docker container ps -q -f name=webbid_database.1 -f status=running)
 
@@ -60,7 +62,7 @@ getAppActiveVersion() {
   echo $RELEASE_VERSION
 }
 
-backupApp() {
+backup() {
   if [[ ! -d /apps/webbid/backups ]]; then
     mkdir -p /apps/webbid/backups
   fi;
@@ -148,34 +150,52 @@ applyBackup() {
   ln -s /apps/webbid/backups/$backupFileName /apps/webbid/backups/active
 }
 
-removeApp() {
+remove() {
   docker stack rm webbid
   rm -rf /apps/webbid/database/* /apps/webbid/media/* /apps/webbid/product_files/*
 }
 
-deployApp() {
+rollback() {
+  docker service scale webbid_app=0
+
+  previousReleaseVersion=$RELEASE_VERSION
+  newReleaseVersion=$1
+
+
+  docker service update --image $DOCKER_REGISTRY_URL/app:$newReleaseVersion --args "pnpm migrate:rollback-versions $previousReleaseVersion $newReleaseVersion && pnpm start"
+
+  sed -i 's/^RELEASE_VERSION=.*/RELEASE_VERSION=$newReleaseVersion/' /app/webbid/.env
+
+  export RELEASE_VERSION=$newReleaseVersion
+
+  docker service scale webbid_app=2
+}
+
+deploy() {
   docker stack deploy -c /apps/webbid/docker-compose.yaml webbid
 }
 
-docker login registry.webbid.shop:5000 -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD
+docker login $DOCKER_REGISTRY_URL -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD
 
 case "$1" in
   backup)
-    backupApp
+    backup
     ;;
   restore)
     applyBackup $2
     ;;
   remove)
-    removeApp
+    remove
     ;;
   deploy)
-    deployApp
+    deploy
+    ;;
+  rollack)
+    rollback $1
     ;;
   prune-registry)
     pruneRegistry
     ;;
-
   *)
     echo "Usage: $0 {backup|restore|prune-registry|deploy|remove}"
     ;;
