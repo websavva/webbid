@@ -84,6 +84,7 @@ ENV NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE=${NEXT_PUBLIC_SERVICE_FEE_PERCENTAGE}
 RUN pnpm install --prod --frozen-lockfile
 
 COPY src/ ./src
+COPY tsconfig.json .
 COPY --from=build /app-build/.next/ ./.next
 COPY --from=build /app-build/dist/ ./dist
 

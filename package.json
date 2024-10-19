@@ -21,6 +21,7 @@
     "migrate:create": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:create",
     "migrate:status": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:status",
     "migrate:down": "pnpm payload:config && PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate:down",
+    "migrate:rollback-versions": "node scripts/rollback-version-migrations.js",
     "dev": "jiti scripts/build --watch",
     "build": "jiti scripts/build",
     "start": "PAYLOAD_CONFIG_PATH=dist/payload.config.js payload migrate && node dist/index.js",
