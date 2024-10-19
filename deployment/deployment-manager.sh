@@ -139,6 +139,7 @@ applyBackup() {
 
   # starting back app service
   docker service scale webbid_app=2
+  docker service update --force webbid_app
 
   # cleaning unarchived backup
   rm -rf $fulUnzippedPath
