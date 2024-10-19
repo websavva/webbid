@@ -156,19 +156,14 @@ remove() {
 }
 
 rollback() {
-  docker service scale webbid_app=0
-
   previousReleaseVersion=$RELEASE_VERSION
   newReleaseVersion=$1
 
-
-  docker service update --image $DOCKER_REGISTRY_URL/app:$newReleaseVersion --args "pnpm migrate:rollback-versions $previousReleaseVersion $newReleaseVersion && pnpm start"
-
-  sed -i 's/^RELEASE_VERSION=.*/RELEASE_VERSION=$newReleaseVersion/' /app/webbid/.env
+  sed -i "s/^RELEASE_VERSION=.*/RELEASE_VERSION=${newReleaseVersion}/" /apps/webbid/.env
 
   export RELEASE_VERSION=$newReleaseVersion
 
-  docker service scale webbid_app=2
+  docker service update --image $DOCKER_REGISTRY_URL/webbid:$newReleaseVersion --args "bash -c 'pnpm migrate:rollback-versions $previousReleaseVersion $newReleaseVersion && pnpm start'"
 }
 
 deploy() {
@@ -190,8 +185,8 @@ case "$1" in
   deploy)
     deploy
     ;;
-  rollack)
-    rollback $1
+  rollback)
+    rollback $2
     ;;
   prune-registry)
     pruneRegistry
