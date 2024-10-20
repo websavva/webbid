@@ -35,14 +35,14 @@ Stripe payment system. Alongside public interface, there is also admin panel bas
 - Custom Middleware Module
 
 
-# 👨🏼‍💻 Utilitites
+### 👨🏼‍💻 Utilitites
 - Tsup (Build)
 - Playwright (E2E Tests)
 - Vitest (Unit Tests)
 - Eslint (Lint)
 - Typescript (Typecheck)
 
-# 🏎️ CD
+### 🏎️ CD
 - Powered by Github Actions
 - Custom Docker Registry
 - Custom Docker image (Dockerfile)
