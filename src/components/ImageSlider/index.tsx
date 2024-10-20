@@ -70,6 +70,7 @@ export const ImageSlider = ({
 
   useSwipe(rootElementRef, {
     onSwipeEnd,
+    passive: false,
   });
 
   return (
