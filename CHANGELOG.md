@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/websavva/webbid/compare/v1.5.0...v1.5.1) (2024-10-20)
+
+
+### Bug Fixes
+
+* **ImageSlider:** passive is set to false for useSwipe in ImageSlider ([9e537dd](https://github.com/websavva/webbid/commit/9e537ddc368da9b444d8036d257747797581db68))
+
 ## [1.5.0](https://github.com/websavva/webbid/compare/v1.4.0...v1.5.0) (2024-10-19)
 
 
