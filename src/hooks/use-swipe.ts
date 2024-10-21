@@ -100,8 +100,6 @@ export function useSwipe<E extends HTMLElement>(
     direction = diffY > 0 ? 'up' : 'down';
   }
 
-  debugger;
-
   const updateCoordsStart = useCallback(
     (x: number, y: number) => {
       setCoordsStart({

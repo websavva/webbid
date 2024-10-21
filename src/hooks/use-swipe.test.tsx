@@ -64,9 +64,7 @@ describe('useSwipe', () => {
   let onSwipeEnd: any;
 
   beforeEach(() => {
-    onSwipe = vi.fn((_e: TouchEvent) => {
-      debugger;
-    });
+    onSwipe = vi.fn((_e: TouchEvent) => {});
     onSwipeEnd = vi.fn((_e: TouchEvent, _direction: string) => {});
     vi.resetAllMocks();
   });

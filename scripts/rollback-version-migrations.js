@@ -206,9 +206,7 @@ class MigrationRollbackManager {
           });
         }
 
-        debugger;
         await commitTransaction(req);
-        debugger;
       } catch (err) {
         await killTransaction(req);
 
