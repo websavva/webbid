@@ -27,7 +27,7 @@ services:
   app:
     image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
     depends_on:
-      - app_migrations
+      - database
     volumes:
       - type: bind
         source: ./media
