@@ -78,7 +78,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <button {...componentProps}>
           {children}
-          <Transition nodeRef={loaderRef} in={pending} timeout={200}>
+          <Transition
+            nodeRef={loaderRef}
+            in={pending}
+            timeout={200}
+            mountOnEnter
+            unmountOnExit
+          >
             {(state) => (
               <Loader2Icon
                 ref={loaderRef}
