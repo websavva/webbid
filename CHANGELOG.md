@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.3](https://github.com/websavva/webbid/compare/v1.5.2...v1.5.3) (2024-10-21)
+
+
+### Bug Fixes
+
+* **cd:** database was added to app service in docker-compose.yaml ([ecbe496](https://github.com/websavva/webbid/commit/ecbe4968e1d382e95f94054b2e66081371c51917))
+
 ## [1.5.2](https://github.com/websavva/webbid/compare/v1.5.1...v1.5.2) (2024-10-20)
 
 
