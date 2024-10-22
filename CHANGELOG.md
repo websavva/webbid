@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.5.4](https://github.com/websavva/webbid/compare/v1.5.3...v1.5.4) (2024-10-22)
+
+
+### Bug Fixes
+
+* **Button:** Hidden LoaderIcon is not rendered in Button ([f683fc0](https://github.com/websavva/webbid/commit/f683fc093a651be88ae3ec31166927ab1cd748f4))
+* **ImageSlider:** passive parameter is set to false to enable scrolling ([9ea8740](https://github.com/websavva/webbid/commit/9ea8740869d7e573c56fc203c86a1feab664b22b))
+* Typo was gixed on Home page ([a521f9c](https://github.com/websavva/webbid/commit/a521f9cfb93f08495410b7c88c26089b28ec386c))
+* Unused debugger calls were removed ([433aec3](https://github.com/websavva/webbid/commit/433aec3e312ab8fbe9294f40ec4c3ea9ab7151c2))
+
 ## [1.5.3](https://github.com/websavva/webbid/compare/v1.5.2...v1.5.3) (2024-10-21)
 
 
