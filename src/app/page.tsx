@@ -44,8 +44,8 @@ export default function Home() {
           </h1>
 
           <p className='mt-8 w-2/3 text-lg leading-normal text-gray-500 lg:text-xl'>
-            Welcome to WebBid. Every asset on our platform is verified by
-            our team to ensure our highest quality standards
+            Welcome to WebBid. Every asset on our platform is verified by our
+            team to ensure our highest quality standards
           </p>
 
           <div className='mt-12 flex flex-col items-center gap-5 lg:flex-row'>
