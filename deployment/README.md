@@ -13,7 +13,7 @@ Next, the following command needs to be run and all steps should be taken
 according to the instructions given by command:
 
 ```bash
-certbot ceronly --manual --preferred-challenges=dns -d webbid.shop -d *.webbid.shop
+certbot certonly --manual --preferred-challenges=dns -d webbid.shop -d *.webbid.shop
 ```
 
 Afterwards, generated folder with certificates needs to be copied without symbolic links:
