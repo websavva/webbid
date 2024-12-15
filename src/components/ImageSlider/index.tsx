@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import Image from 'next/image';
 
 import { cn } from '@/lib/utils/cn';
 import type { DefineProps } from '@/types';
 import { useSwipe, type UseSwipeDirection } from '@/hooks/use-swipe';
+
+import { LoadableImage } from '../UI/LoadableImage';
 
 import { ImageSliderControl } from './Control';
 import { ImageSliderPagination } from './Pagination';
@@ -81,21 +82,21 @@ export const ImageSlider = ({
         className,
       )}
     >
-      <div className='flex size-full transition-transform' style={viewStyle}>
+      <div
+        className='flex h-[inherit] w-full transition-transform'
+        style={viewStyle}
+      >
         {imageUrls.map((imageUrl, index) => {
           return (
-            <div
+            <LoadableImage
+              src={imageUrl}
+              alt=''
+              width={1e3}
+              height={1e3}
               key={`${imageUrl}${index}`}
-              className='size-full flex-[0_0_100%]'
-            >
-              <Image
-                src={imageUrl}
-                alt=''
-                width={1e3}
-                height={1e3}
-                className='size-full object-cover'
-              />
-            </div>
+              className='h-[inherit] w-full flex-[0_0_100%] bg-slate-200 text-gray-500'
+              imageClassName='h-[inherit] object-cover'
+            />
           );
         })}
       </div>
