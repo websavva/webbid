@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { Skeleton } from '@/components/UI/Skeleton';
 import { trpcClient } from '@/lib/trpc';
@@ -10,6 +9,7 @@ import type { DefineProps } from '@/types';
 import { cn } from '@/lib/utils/cn';
 import type { ProductCategoryFeature } from '#server/cms/collections/types';
 import { useApi } from '@/hooks/use-api';
+import { LoadableImage } from '@/components/UI/LoadableImage';
 
 export type NavBarCategoryDropdownFeaturesList = DefineProps<{
   features: ProductCategoryFeature[];
@@ -50,12 +50,13 @@ const FeaturesList = ({ features }: NavBarCategoryDropdownFeaturesList) => {
           <li key={name} className='animate-in fade-in-0'>
             <Link href={href}>
               {derivedImageUrl && (
-                <Image
+                <LoadableImage
                   src={derivedImageUrl}
                   alt=''
                   width={500}
                   height={500}
-                  className='h-48 rounded-lg object-cover'
+                  className='h-48 rounded-lg'
+                  imageClassName='object-cover'
                 />
               )}
 
