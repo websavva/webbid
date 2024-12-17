@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/websavva/webbid/compare/v1.5.4...v1.6.0) (2024-12-16)
+
+
+### Features
+
+* **UI:** LoadableImage was implemented ([0b6857b](https://github.com/websavva/webbid/commit/0b6857b8fe36be5aef15d07d41dbd8d5f6054cd5))
+
 ## [1.5.4](https://github.com/websavva/webbid/compare/v1.5.3...v1.5.4) (2024-10-22)
 
 
