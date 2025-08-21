@@ -1,8 +1,8 @@
-[![Webbid Banner](./src/server/static/public/og.png)](https://webbid.shop)
+[![Webbid Banner](./src/server/static/public/og.png)](https://webbid.store)
 
 # Webbid | Digital Marketplace
 
-## [Check out ➡️](https://webbid.shop)
+## [Check out ➡️](https://webbid.store)
 
 > Fairly simple digital marketplace, which sells digital products (e.g icon sets, wallpapers etc.) via
 > Stripe payment system. Alongside public interface, there is also admin panel based on Payload CMS.

@@ -11,7 +11,7 @@ services:
       REGISTRY_AUTH_HTPASSWD_PATH: /auth/registry.password
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
       REGISTRY_HTTP_ADDR: 0.0.0.0:5000
-      REGISTRY_HTTP_HOST: https://registry.webbid.shop:5000
+      REGISTRY_HTTP_HOST: https://registry.webbid.store:5000
       REGISTRY_HTTP_TLS_CERTIFICATE: /certs/fullchain.pem
       REGISTRY_HTTP_TLS_KEY: /certs/privkey.pem
     volumes:
