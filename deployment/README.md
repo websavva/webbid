@@ -7,19 +7,19 @@
 
 In order to obtain all SSL-certificates, DNS A-record is required as follows:
 
-`A *.webbid.shop VPS_IP_ADDRESS`
+`A *.webbid.store VPS_IP_ADDRESS`
 
 Next, the following command needs to be run and all steps should be taken
 according to the instructions given by command:
 
 ```bash
-certbot certonly --manual --preferred-challenges=dns -d webbid.shop -d *.webbid.shop
+certbot certonly --manual --preferred-challenges=dns -d webbid.store -d *.webbid.store
 ```
 
 Afterwards, generated folder with certificates needs to be copied without symbolic links:
 
 ```bash
-rsync -aL /etc/letsencrypt/live/webbid.shop/ /ssl-certificates
+rsync -aL /etc/letsencrypt/live/webbid.store/ /ssl-certificates
 ```
 
 Renewal procedure should take into account resolution of symblinks too if needed.
@@ -41,13 +41,13 @@ htpasswd -Bc registry.password <username>
 At the end of this command, password file will be written with a name like `<username>.password`
 
 Prior to running docker container for registry with registry-docker-compose.yaml, corresponding
-SSL-certificates are required: either for all subdomains `*.webbid.shop` or for a particular subdomain
-`registry.webbid.shop`.
+SSL-certificates are required: either for all subdomains `*.webbid.store` or for a particular subdomain
+`registry.webbid.store`.
 
 In order to connect to the given registry and then push images into it, the followinf commands can be used:
 
 ```bash
-docker login registry.webbid.shop
+docker login registry.webbid.store
 ```
 
 Afterwards, you will be prompted with username and password to be used for authentication.
@@ -56,11 +56,11 @@ To push an existing image to the self-hosted registry, an image
 should be given a label pointing to the specific registry:
 
 ```bash
-docker label webbid:0.0.1 registry.webbid.shop/webbid:0.0.1
+docker label webbid:0.0.1 registry.webbid.store/webbid:0.0.1
 ```
 
 Next, pushing is handled by the command:
 
 ```bash
-docker push registry.webbid.shop/webbid:0.0.1
+docker push registry.webbid.store/webbid:0.0.1
 ```

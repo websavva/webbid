@@ -25,7 +25,7 @@ services:
       start_period: 5s
 
   app:
-    image: 'registry.webbid.shop:5000/webbid:${RELEASE_VERSION}'
+    image: 'registry.webbid.store:5000/webbid:${RELEASE_VERSION}'
     depends_on:
       - database
     volumes:

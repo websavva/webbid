@@ -2,7 +2,7 @@
 
 export $(cat /apps/webbid/.env | xargs)
 
-DOCKER_REGISTRY_URL="registry.webbid.shop:5000"
+DOCKER_REGISTRY_URL="registry.webbid.store:5000"
 
 pruneRegistry() {
   # Variables

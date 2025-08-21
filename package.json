@@ -4,10 +4,13 @@
   "version": "1.6.0",
   "private": true,
   "engines": {
-    "node": "20.x.x",
-    "pnpm": "9.6.0"
+    "node": "22.x.x",
+    "pnpm": "10.10.0"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@10.10.0",
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "files": [
     ".next",
     "next.config.js",
