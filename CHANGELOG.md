@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.1](https://github.com/websavva/webbid/compare/v1.7.0...v1.7.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **cd:** Node was upgraded for Docker and CD as well ([8958f89](https://github.com/websavva/webbid/commit/8958f89daab585773260b71ea37a8d6f76b55e98))
+* **cd:** Node was upgraded for Docker and CD as well ([d9b13f2](https://github.com/websavva/webbid/commit/d9b13f2f9b4442cd76b3542b8c3566f8bb22619c))
+
 ## [1.7.0](https://github.com/websavva/webbid/compare/v1.6.0...v1.7.0) (2025-08-21)
 
 
