@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/websavva/webbid/compare/v1.6.0...v1.7.0) (2025-08-21)
+
+
+### Features
+
+* Node was upgraded as well as domain was changed ([d7de905](https://github.com/websavva/webbid/commit/d7de90552a6f708e3971c9b0a8ee70fc31c926e0))
+* Node was upgraded as well as domain was changed ([a259542](https://github.com/websavva/webbid/commit/a259542105e5c588864f1451196c2f5b8af4fb54))
+
 ## [1.6.0](https://github.com/websavva/webbid/compare/v1.5.4...v1.6.0) (2024-12-16)
 
 
