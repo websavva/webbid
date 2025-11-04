@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0](https://github.com/websavva/webbid/compare/v1.7.1...v2.0.0) (2025-11-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **store:** Zustand was replaced with Redux
+
+### Features
+
+* **store:** Zustand was replaced with Redux ([e2ae6e7](https://github.com/websavva/webbid/commit/e2ae6e7dd600f84c8edc23fe212ecb6a6bb4d986))
+
+
+### Bug Fixes
+
+* README.md was updated ([82b16cb](https://github.com/websavva/webbid/commit/82b16cb0664a216a5f9fe41cfd0b516c09d5bfd9))
+
 ## [1.7.1](https://github.com/websavva/webbid/compare/v1.7.0...v1.7.1) (2025-08-21)
 
 
