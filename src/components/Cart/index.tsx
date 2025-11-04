@@ -38,7 +38,12 @@ export const Cart = ({
     items: { length: itemsCount },
 
     _isHydrated: isCartStoreLoaded,
-  } = useCartStore();
+  } = useCartStore(({ setItems, removeItem, items, _isHydrated }) => ({
+    setItems,
+    removeItem,
+    items,
+    _isHydrated,
+  }));
 
   const { pending, makeApiCall: createOrder } = useApi(
     () => {

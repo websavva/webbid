@@ -1,76 +1,106 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import {
+  createSlice,
+  configureStore,
+  type PayloadAction,
+} from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 
 import type { Product } from '#server/cms/collections/types';
 
-export interface CartStore {
+const createNoopStorage = () => {
+  return {
+    getItem() {
+      return Promise.resolve(null);
+    },
+    setItem(_key: string, value: number) {
+      return Promise.resolve(value);
+    },
+    removeItem() {
+      return Promise.resolve();
+    },
+  };
+};
+
+const storage =
+  typeof window !== 'undefined'
+    ? createWebStorage('local')
+    : createNoopStorage();
+
+export interface CartState {
   items: Product[];
-
   _isHydrated: boolean;
-
-  setIsHydrated: (isHydrated: boolean) => void;
-
-  addItem: (item: Product) => void;
-  removeItem: (id: Product['id']) => void;
-
-  setItems: (id: Product[]) => void;
-
-  emptyOut: () => void;
 }
 
-export const createCartStore = () =>
-  create(
-    persist<CartStore>(
-      (set) => ({
-        items: [],
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: (): CartState => ({
+    items: [],
+    _isHydrated: false,
+  }),
+  reducers: {
+    setIsHydrated: (state, action: PayloadAction<boolean>) => {
+      state._isHydrated = action.payload;
+    },
+    addItem: (state, action: PayloadAction<Product>) => {
+      state.items.push(action.payload);
+    },
+    removeItem: (state, action: PayloadAction<Product['id']>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+    setItems: (state, action: PayloadAction<Product[]>) => {
+      state.items = action.payload;
+    },
+    emptyOut: (state) => {
+      state.items = [];
+    },
+  },
+});
 
-        _isHydrated: false,
+export const { setIsHydrated, addItem, removeItem, setItems, emptyOut } =
+  cartSlice.actions;
 
-        setIsHydrated: (isHydrated: boolean) => {
-          set({
-            _isHydrated: isHydrated,
-          });
-        },
-
-        addItem: (item) => {
-          set((state) => {
-            return { items: [...state.items, item] };
-          });
-        },
-
-        removeItem: (id) => {
-          set((state) => {
-            return {
-              items: state.items.filter((item) => item.id !== id),
-            };
-          });
-        },
-
-        setItems: (items: Product[]) => {
-          set({
-            items,
-          });
-        },
-
-        emptyOut: () => {
-          set(() => {
-            return {
-              items: [],
-            };
-          });
-        },
-      }),
-      {
-        version: 1,
-        name: 'cart-storage',
-
-        skipHydration: true,
-
-        onRehydrateStorage: () => (state) => {
-          state?.setIsHydrated(true);
-        },
-      },
-    ),
+export const createCartStore = () => {
+  const persistedReducer = persistReducer(
+    {
+      key: 'cart-storage',
+      version: 1,
+      storage,
+      whitelist: ['items'],
+    },
+    cartSlice.reducer,
   );
 
-export type CartStoreApi = ReturnType<typeof createCartStore>;
+  const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
+  });
+
+  const persistor = persistStore(
+    store,
+    {
+      // @ts-expect-error - manualPersist is not in the official types but is supported
+      manualPersist: true,
+    },
+    () => {
+      store.dispatch(setIsHydrated(true));
+    },
+  );
+
+  return {
+    store,
+    persistor,
+  };
+};
+
+export type CartStore = ReturnType<typeof createCartStore>['store'];
+export type CartStoreApi = CartStore;
+export type RootState = ReturnType<CartStore['getState']>;
+
+export const ROOT_STATE_PROP_NAMES: (keyof RootState)[] = [
+  'items',
+  '_isHydrated',
+];

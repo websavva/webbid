@@ -32,7 +32,7 @@
 - Tailwind CSS
 - Zod
 - React Transition
-- Zustand
+- Redux
 - React Hook Form
 - Custom Middleware Module
 
