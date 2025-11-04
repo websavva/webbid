@@ -1,25 +1,20 @@
 'use client';
 
-import { type PropsWithChildren, useRef } from 'react';
-import { useEffect } from 'react';
+import { type PropsWithChildren, useRef, useEffect } from 'react';
+import { Provider } from 'react-redux';
 
-import { CartStoreApiContext } from './context';
-import { createCartStore, type CartStoreApi } from './store';
+import { createCartStore } from './store';
 
 export const CartStoreApiProvider = ({ children }: PropsWithChildren) => {
-  const cartStoreApiRef = useRef<CartStoreApi>();
+  const storeRef = useRef<ReturnType<typeof createCartStore>>();
 
-  if (!cartStoreApiRef.current) {
-    cartStoreApiRef.current = createCartStore();
+  if (!storeRef.current) {
+    storeRef.current = createCartStore();
   }
 
   useEffect(() => {
-    cartStoreApiRef.current!.persist.rehydrate();
+    storeRef.current?.persistor.persist();
   }, []);
 
-  return (
-    <CartStoreApiContext.Provider value={cartStoreApiRef.current}>
-      {children}
-    </CartStoreApiContext.Provider>
-  );
+  return <Provider store={storeRef.current.store}>{children}</Provider>;
 };

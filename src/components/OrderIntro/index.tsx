@@ -20,7 +20,9 @@ export const OrderIntro = ({
 }: OrderIntroProps) => {
   const router = useRouter();
 
-  const { emptyOut: emptyOutCart } = useCartStore();
+  const { emptyOut: emptyOutCart } = useCartStore(({ emptyOut }) => ({
+    emptyOut,
+  }));
 
   const {
     order: { id: orderId },

@@ -21,7 +21,11 @@ export const CartButton = ({
     addItem,
 
     removeItem,
-  } = useCartStore();
+  } = useCartStore(({ addItem, removeItem, items }) => ({
+    addItem,
+    removeItem,
+    items,
+  }));
 
   const isProductAdded = items.some(({ id }) => product.id === id);
 
